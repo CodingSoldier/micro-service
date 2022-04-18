@@ -1,0 +1,28 @@
+## nacos config 的配置必须写在bootstrap.yaml中，暂时没有其他办法
+## nacos 命名空间 namespace-example-dev 上新建 cloud-web ，拓展名为 cloud-web
+spring:
+#  application:
+#    name: cloud-app
+  cloud:
+    nacos:
+      config:
+        enabled: false
+#        server-addr: nacos-dev.vanrui.com:80
+#        namespace: namespace-example-dev
+#        file-extension: yaml
+#
+### 日志配置也要放到bootstrap.yaml中，不然无法使用占位符
+### starter-log4j2 配置
+##logging:
+##  # log4j2-spring.xml 已在 starter-log4j2 中配置好了，无需新建
+##  config: classpath:log4j2-spring.xml
+##  file:
+##    # 日志根目录
+##    path: /logs
+##    # log4j2-spring.xml 使用 logging.file.name 作为日志子目录、日志文件名前缀
+##    #    name: ${spring.application.name}
+##    name: cloud-web
+##  level:
+##    com:
+##      github:
+##        codingsoldier: DEBUG

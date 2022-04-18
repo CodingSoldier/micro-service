@@ -1,0 +1,31 @@
+[
+    {
+        "id": "cloud-web-01",
+        "predicates": [
+            {
+                "args": {
+                    "pattern": "/cloud-web-01/**"
+                },
+                "name": "Path"
+            }
+        ],
+        "uri": "lb://cloud-web-01"
+    },
+    {
+        "id": "cloud-web-02",
+        "predicates": [
+            {
+                "args": {
+                    "pattern": "/cloud-web-02/**"
+                },
+                "name": "Path"
+            }
+        ],
+        "uri": "lb://cloud-web-02",
+        "filters": [
+            {
+                "name": "Part01"
+            }
+        ]
+    }
+]

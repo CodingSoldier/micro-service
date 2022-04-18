@@ -1,0 +1,132 @@
+server:
+  # 服务端口
+  port: 8001
+  servlet:
+    context-path: /cloud-web-01
+
+spring:
+  cloud:
+    nacos:
+      # 服务注册发现
+      discovery:
+        # server-addr: nacos-dev.vanrui.com:80
+        server-addr: 192.168.1.121:8848
+        namespace: namespace-example-dev
+        # 指定actuator端点的访问路径，因为我们上面配置了服务的前缀 context-path ，所以我们需要将它拼接上，不然路径不对会报错
+        # spring-boot-admin配置
+        metadata:
+          management:
+            context-path: ${server.servlet.context-path}/actuator
+
+  datasource:
+    username: root
+    password: cpq..123
+    url: jdbc:mysql://localhost:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      # 连接池最大连接数
+      maximum-pool-size: 200
+      # 空闲时保持最小连接数
+      minimum-idle: 20
+      # 空闲连接存活时间
+      idle-timeout: 300000
+      # 连接超时时间
+      connection-timeout: 20000
+      # 测试sql
+      connection-test-query: select 1
+  redis:
+    # Redis数据库索引（默认为0）
+    database: 0
+    # Redis服务器地址
+    host: 127.0.0.1
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password:
+    # 连接超时时间 单位 ms（毫秒）
+    timeout: 3000
+    lettuce:
+      pool:
+        # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
+        max-wait: 3000
+        # 连接池中的最大空闲连接 默认 8
+        max-idle: 100
+        # 连接池中的最小空闲连接 默认 0
+        min-idle: 20
+
+  # sleuth + zipkin 分布式链路追踪
+  sleuth:
+    sampler:
+      # ProbabilityBasedSampler 抽样策略
+      probability: 1.0  # 采样比例, 1.0 表示 100%, 默认是 0.1
+      # RateLimitingSampler 抽样策略, 设置了限速采集, spring.sleuth.sampler.probability 属性值无效
+      rate: 100  # 每秒间隔接受的 trace 量
+  zipkin:
+    sender:
+      # 指定通过什么类型发送消息 默认是 web
+      type: WEB
+    # 指定 zipkin 的地址
+    base-url: http://localhost:9411/
+
+# 暴露 actuator 端点
+# 还需要在拦截器中排除 /actuator/**
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+# mybatis-plus 配置
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: flag # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+
+ribbon:
+  ConnectTimeout: 5000
+  ReadTimeout: 50000
+  eager-load:
+    enabled: true
+    clients: cloud-web
+
+# Feign 的相关配置
+feign:
+  # feign 开启 gzip 压缩
+  compression:
+    # 对请求进行压缩
+    request:
+      enabled: true
+      # 针对以下类型的数据进行压缩
+      mime-types: text/xml,application/xml,application/json
+      # 大于1M的数据才进行压缩
+      min-request-size: 1024
+    # 响应时进行压缩
+    response:
+      enabled: true
+  # 禁用默认的 http
+  httpclient:
+    enabled: false
+  # 启用 okhttp
+  okhttp:
+    enabled: true
+
+
+#starter:
+framework:
+  starter:
+    mybatis-plus:
+      enabled: false
+#    enabled: false
