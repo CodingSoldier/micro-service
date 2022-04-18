@@ -1,0 +1,12 @@
+{
+  "groups": [],
+  "properties": [
+    {
+      "name": "framework.starter.mybatis-plus.enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否启用 starter-mybatis-plus",
+      "defaultValue": true
+    }
+  ],
+  "hints": []
+}

@@ -1,0 +1,12 @@
+{
+  "groups": [],
+  "properties": [
+    {
+      "name": "framework.starter.redis.enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否启用 starter-redis",
+      "defaultValue": true
+    }
+  ],
+  "hints": []
+}
