@@ -11,7 +11,7 @@
     <relativePath>../micro-service-dependencies/pom.xml</relativePath>
   </parent>
 
-  <artifactId>common</artifactId>
+  <artifactId>micro-service-common</artifactId>
 
   <properties>
     <java.version>1.8</java.version>
