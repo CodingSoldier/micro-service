@@ -101,3 +101,24 @@ feign:
 
 表明 okhttp 生效
 
+## hystrix
+1、导入依赖包
+```xml
+    <!-- 集成 hystrix -->
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+    </dependency>
+```
+2、添加配置
+```yxml
+# Feign + hystrix 的相关配置
+feign:
+  # OpenFeign 集成 Hystrix
+  hystrix:
+    enabled: true
+```
+3、启动类添加 @EnableCircuitBreaker
+
+4、新增 HystrixClient、HystrixClientFallbackFactory ，即可实现熔断。
+    

@@ -122,7 +122,9 @@ feign:
   # 启用 okhttp
   okhttp:
     enabled: true
-
+  # OpenFeign 集成 Hystrix
+  hystrix:
+    enabled: true
 
 #starter:
 framework:

@@ -37,6 +37,12 @@
 <!--            <artifactId>spring-cloud-starter-zipkin</artifactId>-->
 <!--        </dependency>-->
 
+        <!-- 集成 hystrix -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.github.codingsoldier</groupId>
             <artifactId>starter-web</artifactId>
