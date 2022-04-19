@@ -27,3 +27,5 @@ https://repo1.maven.org/maven2/io/zipkin/java/zipkin-server/2.12.9/zipkin-server
 
     java -jar zipkin-server-2.12.9-exec.jar --STORAGE_TYPE=mysql --MYSQL_HOST=127.0.0.1 --MYSQL_TCP_PORT=3306 --MYSQL_USER=root --MYSQL_PASS=密码 --MYSQL_DB=zipkin
 
+## hystrix-dashboard
+[更多说明](./middlewares-server-parent/hystrix-dashboard/README.md)
