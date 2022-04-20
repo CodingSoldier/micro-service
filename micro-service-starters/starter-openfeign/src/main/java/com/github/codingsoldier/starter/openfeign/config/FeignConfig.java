@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.cloudweb02.controller;
+package com.github.codingsoldier.starter.openfeign.config;
 
 import feign.Logger;
 import feign.RequestInterceptor;
@@ -6,28 +6,32 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * <h1>OpenFeign 配置类</h1>
+ * OpenFeign 配置类
  */
 @Configuration(proxyBeanMethods=false)
 public class FeignConfig {
 
     private static final String FEIGN_REQUEST = "feign-request";
 
-
     /**
-     * <h2>开启 OpenFeign 日志</h2>
+     * 拦截器，feign请求加上请求头
+     *
+     * @return FEIGN_REQUEST
      */
-    @Bean
-    public Logger.Level feignLogger() {
-        //  需要注意, 日志级别需要修改成 debug
-        return Logger.Level.FULL;
-    }
-
     @Bean
     public RequestInterceptor requestInterceptor() {
         return requestTemplate -> {
             requestTemplate.header(FEIGN_REQUEST, Boolean.TRUE.toString());
         };
+    }
+
+    /**
+     * 开启 OpenFeign 日志
+     */
+    @Bean
+    public Logger.Level feignLogger() {
+        //  需要注意, 日志级别需要修改成 debug
+        return Logger.Level.FULL;
     }
 
     //

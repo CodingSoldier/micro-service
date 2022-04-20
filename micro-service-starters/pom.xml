@@ -26,6 +26,7 @@
     <module>starter-mybatis-plus</module>
     <module>starter-redis</module>
     <module>starter-web</module>
+    <module>starter-openfeign</module>
   </modules>
 
   <dependencies>

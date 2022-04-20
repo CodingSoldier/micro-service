@@ -20,6 +20,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 @RestControllerAdvice(value = "com.github.codingsoldier")
 public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
 
+    private static final String FEIGN_REQUEST = "feign-request";
+
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
         // 类上使用了 @NoWrapper
@@ -49,7 +51,7 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
             ServerHttpResponse response) {
 
         //Feign请求时通过拦截器设置请求头，如果是Feign请求则直接返回实体对象
-        boolean isFeignRequest = request.getHeaders().containsKey("feign-request");
+        boolean isFeignRequest = request.getHeaders().containsKey(FEIGN_REQUEST);
         if(isFeignRequest){
             log.debug("feign请求，不对返回结果进行包装。");
             return body;

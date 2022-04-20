@@ -99,6 +99,11 @@
                 <artifactId>starter-web</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <dependency>
+                <groupId>com.github.codingsoldier</groupId>
+                <artifactId>starter-openfeign</artifactId>
+                <version>${revision}</version>
+            </dependency>
 
 
             <!-- springfox -->
