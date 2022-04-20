@@ -1,21 +1,35 @@
 package com.github.codingsoldier.example.cloudweb02.controller;
 
+import feign.Logger;
+import feign.RequestInterceptor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
  * <h1>OpenFeign 配置类</h1>
  */
-@Configuration
+@Configuration(proxyBeanMethods=false)
 public class FeignConfig {
 
-    // /**
-    //  * <h2>开启 OpenFeign 日志</h2>
-    //  */
-    // @Bean
-    // public Logger.Level feignLogger() {
-    //     //  需要注意, 日志级别需要修改成 debug
-    //     return Logger.Level.FULL;
-    // }
+    private static final String FEIGN_REQUEST = "feign-request";
+
+
+    /**
+     * <h2>开启 OpenFeign 日志</h2>
+     */
+    @Bean
+    public Logger.Level feignLogger() {
+        //  需要注意, 日志级别需要修改成 debug
+        return Logger.Level.FULL;
+    }
+
+    @Bean
+    public RequestInterceptor requestInterceptor() {
+        return requestTemplate -> {
+            requestTemplate.header(FEIGN_REQUEST, Boolean.TRUE.toString());
+        };
+    }
+
     //
     // /**
     //  * <h2>OpenFeign 开启重试</h2>

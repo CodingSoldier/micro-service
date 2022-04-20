@@ -48,17 +48,24 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
             ServerHttpRequest request,
             ServerHttpResponse response) {
 
-        Object respData;
+        //Feign请求时通过拦截器设置请求头，如果是Feign请求则直接返回实体对象
+        boolean isFeignRequest = request.getHeaders().containsKey("feign-request");
+        if(isFeignRequest){
+            log.debug("feign请求，不对返回结果进行包装。");
+            return body;
+        }
+
         if (body instanceof Result) {
-            respData = body;
-        } else if (body instanceof String || body == null) {
+            return body;
+        }
+
+        if (body instanceof String || body == null) {
             // 因为StringHttpMessageConverter会直接把字符串写入body, 所以字符串特殊处理
             // body == null ，返回值将被StringHttpMessageConverter处理
-            respData = ObjectMapperUtil.writeValueAsString(Result.success(body));
-        } else {
-            // 其他类型进行统一包装
-            respData = Result.success(body);
+            return ObjectMapperUtil.writeValueAsString(Result.success(body));
         }
-        return respData;
+
+        // 其他类型进行统一包装
+        return Result.success(body);
     }
 }
