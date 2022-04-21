@@ -23,6 +23,7 @@ logging:
     #    name: ${spring.application.name}
     name: ${spring.application.name}
   level:
+    org: debug
     com:
       github:
         codingsoldier: DEBUG

@@ -68,12 +68,7 @@ public class Web02Controller implements CloudWeb02Client {
         log.info("#######pageSize ", pageSize);
         return pageNum + "" + pageSize;
     }
-    //
-    // @GetMapping("/get/2")
-    // public String getTestVal(String msg){
-    //     log.info("############{}", msg);
-    //     return msg;
-    // }
+
 
 
 }
