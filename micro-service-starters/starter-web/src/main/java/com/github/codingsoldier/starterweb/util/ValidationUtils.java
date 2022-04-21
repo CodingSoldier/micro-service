@@ -1,7 +1,7 @@
 package com.github.codingsoldier.starterweb.util;
 
 
-import com.github.codingsoldier.common.enums.RespCodeEnum;
+import com.github.codingsoldier.common.enums.ResponseCodeEnum;
 import com.github.codingsoldier.common.exception.AppException;
 import com.github.codingsoldier.common.util.StringUtils;
 
@@ -42,7 +42,7 @@ public class ValidationUtils {
                 message = isMatch ? message : String.format("%s。", message);
                 sb.append(message);
             }
-            throw new AppException(RespCodeEnum.PRECONDITION_FAILED.getCode(), sb.toString());
+            throw new AppException(ResponseCodeEnum.PRECONDITION_FAILED.getCode(), sb.toString());
         }
     }
 
@@ -71,7 +71,7 @@ public class ValidationUtils {
             }
             //有message抛出异常
             if (sb.length() != 0){
-                throw new AppException(RespCodeEnum.PRECONDITION_FAILED.getCode(), sb.toString());
+                throw new AppException(ResponseCodeEnum.PRECONDITION_FAILED.getCode(), sb.toString());
             }
         }
     }

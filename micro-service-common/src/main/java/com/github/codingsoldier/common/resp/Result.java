@@ -1,6 +1,6 @@
-package com.github.codingsoldier.starterweb.resp;
+package com.github.codingsoldier.common.resp;
 
-import com.github.codingsoldier.common.enums.RespCodeEnum;
+import com.github.codingsoldier.common.enums.ResponseCodeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -14,7 +14,10 @@ public class Result<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "code=0处理成功，code>0处理失败，code<0处理请求时发生异常")
+    @ApiModelProperty(value = "1、code为具体的业务编码，code / 100 = http status \n" +
+            "2、code = 20000，http status = 20000/100 = 200 表示请求处理成功 \n" +
+            "3、40000 <= code <= 49999 , http status = code/100 表示客户端错误，例如：参数错误 \n" +
+            "5、50000 <= code <= 59999 , http status = code/100 表示服务端错误，例如：空指针异常 \n")
     private int code;
 
     @ApiModelProperty(value = "提示信息")
@@ -62,15 +65,15 @@ public class Result<T> implements Serializable {
      */
 
     public static <T> Result<T> success() {
-        return new Result(RespCodeEnum.SUCCESS.getCode(), RespCodeEnum.SUCCESS.getMessage(), null);
+        return new Result(ResponseCodeEnum.SUCCESS.getCode(), ResponseCodeEnum.SUCCESS.getMessage(), null);
     }
 
     public static <T> Result<T> success(T data) {
-        return new Result(RespCodeEnum.SUCCESS.getCode(), RespCodeEnum.SUCCESS.getMessage(), data);
+        return new Result(ResponseCodeEnum.SUCCESS.getCode(), ResponseCodeEnum.SUCCESS.getMessage(), data);
     }
 
     public static Result fail(String message) {
-        return new Result(RespCodeEnum.FAIl.getCode(), message, null);
+        return new Result(ResponseCodeEnum.BAD_REQUEST.getCode(), message, null);
     }
 
     public static Result fail(int code, String message) {

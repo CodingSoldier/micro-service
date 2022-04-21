@@ -5,22 +5,26 @@ package com.github.codingsoldier.common.enums;
  * @since 2022/2/8 14:19
  * @author chenpq
  */
-public enum RespCodeEnum {
+public enum ResponseCodeEnum {
 
     /**
      * http状态码大全 https://seo.juziseo.com/doc/http_code/
+     * 约定：
+     * 1、code为具体的业务编码，code / 100 = http status
+     * 2、code = 20000，http status = 20000/100 = 200 表示请求处理成功
+     * 3、40000 <= code <= 49999 , http status = code/100 表示客户端错误，例如：参数错误
+     * 5、50000 <= code <= 59999 , http status = code/100 表示服务端错误，例如：空指针异常
      */
-    SUCCESS(0, "成功"),
-    FAIl(1, "失败"),
-    ERROR(-1, "发生错误"),
-    // 412 请求条件错误
+    SUCCESS(20000, "成功"),
+    BAD_REQUEST(40000, "失败"),
+    SERVER_ERROR(50000, "发生错误"),
     PRECONDITION_FAILED(41200, "请求条件错误"),
     ;
 
     private int code;
     private String message;
 
-    RespCodeEnum(int code, String message) {
+    ResponseCodeEnum(int code, String message) {
         this.code = code;
         this.message = message;
     }

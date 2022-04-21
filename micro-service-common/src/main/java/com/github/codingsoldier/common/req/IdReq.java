@@ -1,4 +1,4 @@
-package com.github.codingsoldier.starterweb.req;
+package com.github.codingsoldier.common.req;
 
 import io.swagger.annotations.ApiModelProperty;
 

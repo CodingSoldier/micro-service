@@ -1,7 +1,9 @@
 package com.github.codingsoldier.starter.openfeign.config;
 
+import com.github.codingsoldier.starter.openfeign.FeignErrorDecoder;
 import feign.Logger;
 import feign.RequestInterceptor;
+import feign.codec.ErrorDecoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -25,6 +27,11 @@ public class FeignConfig {
         };
     }
 
+    @Bean
+    public ErrorDecoder errorDecoder() {
+        return new FeignErrorDecoder();
+    }
+
     /**
      * 开启 OpenFeign 日志
      */
@@ -33,6 +40,7 @@ public class FeignConfig {
         //  需要注意, 日志级别需要修改成 debug
         return Logger.Level.FULL;
     }
+
 
     //
     // /**

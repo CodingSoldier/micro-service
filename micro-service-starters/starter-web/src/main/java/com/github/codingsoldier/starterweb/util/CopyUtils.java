@@ -1,7 +1,7 @@
 package com.github.codingsoldier.starterweb.util;
 
 import com.github.codingsoldier.common.exception.AppException;
-import com.github.codingsoldier.common.enums.RespCodeEnum;
+import com.github.codingsoldier.common.enums.ResponseCodeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 
@@ -34,7 +34,7 @@ public class CopyUtils {
         result.add(t);
       } catch (InstantiationException | IllegalAccessException e){
         log.error("异常", e);
-        throw new AppException(RespCodeEnum.ERROR.getCode(), "集合转换异常。");
+        throw new AppException(ResponseCodeEnum.SERVER_ERROR.getCode(), "集合转换异常。");
       }
     }
     return result;

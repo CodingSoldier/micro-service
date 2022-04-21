@@ -1,7 +1,7 @@
 package com.github.codingsoldier.common.exception;
 
 
-import com.github.codingsoldier.common.enums.RespCodeEnum;
+import com.github.codingsoldier.common.enums.ResponseCodeEnum;
 
 public class AppException extends RuntimeException {
 
@@ -10,7 +10,7 @@ public class AppException extends RuntimeException {
 
     public AppException(String message) {
         super(message);
-        this.code = RespCodeEnum.FAIl.getCode();
+        this.code = ResponseCodeEnum.BAD_REQUEST.getCode();
         this.message = message;
     }
 
@@ -20,15 +20,15 @@ public class AppException extends RuntimeException {
         this.message = message;
     }
 
-    public AppException(RespCodeEnum respCodeEnum) {
-        super(respCodeEnum.getMessage());
-        this.code = respCodeEnum.getCode();
-        this.message = respCodeEnum.getMessage();
+    public AppException(ResponseCodeEnum responseCodeEnum) {
+        super(responseCodeEnum.getMessage());
+        this.code = responseCodeEnum.getCode();
+        this.message = responseCodeEnum.getMessage();
     }
 
-    public AppException(RespCodeEnum respCodeEnum, String message) {
+    public AppException(ResponseCodeEnum responseCodeEnum, String message) {
         super(message);
-        this.code = respCodeEnum.getCode();
+        this.code = responseCodeEnum.getCode();
         this.message = message;
     }
 

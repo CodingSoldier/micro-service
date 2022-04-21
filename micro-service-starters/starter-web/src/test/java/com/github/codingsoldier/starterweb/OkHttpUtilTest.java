@@ -1,7 +1,7 @@
 package com.github.codingsoldier.starterweb;
 
 import com.github.codingsoldier.common.util.OkHttpUtil;
-import com.github.codingsoldier.starterweb.resp.Result;
+import com.github.codingsoldier.common.resp.Result;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 

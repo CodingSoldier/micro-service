@@ -13,7 +13,7 @@ import com.github.codingsoldier.bootweb.dto.PageDto;
 import com.github.codingsoldier.bootweb.dto.UserAddDto;
 import com.github.codingsoldier.bootweb.dto.UserUpdateDto;
 import com.github.codingsoldier.startermybatisplus.resp.PageResult;
-import com.github.codingsoldier.starterweb.resp.Result;
+import com.github.codingsoldier.common.resp.Result;
 import com.github.codingsoldier.starterweb.util.CopyUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
