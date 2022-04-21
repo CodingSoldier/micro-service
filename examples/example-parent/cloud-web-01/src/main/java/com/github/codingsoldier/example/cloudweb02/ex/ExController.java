@@ -23,4 +23,11 @@ public class ExController {
         return "aaaa"+s;
     }
 
+    @GetMapping("/appex")
+    public String appex(String msg){
+        String s = exceptionClient.appEx(msg);
+        log.info("############{}", s);
+        return "aaaa"+s;
+    }
+
 }

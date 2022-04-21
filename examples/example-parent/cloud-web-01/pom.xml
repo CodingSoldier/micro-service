@@ -54,6 +54,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.github.codingsoldier</groupId>
+            <artifactId>starter-openfeign</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.github.codingsoldier.example</groupId>
             <artifactId>cloud-web-api</artifactId>
         </dependency>

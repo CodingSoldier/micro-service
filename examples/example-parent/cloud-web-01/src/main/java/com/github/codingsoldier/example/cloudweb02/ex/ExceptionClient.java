@@ -17,4 +17,7 @@ public interface ExceptionClient {
     @GetMapping("/test01")
     String test01(@RequestParam(value = "name", required = false) String name);
 
+    @GetMapping("/appex")
+    String appEx(@RequestParam(value = "name", required = false) String name);
+
 }

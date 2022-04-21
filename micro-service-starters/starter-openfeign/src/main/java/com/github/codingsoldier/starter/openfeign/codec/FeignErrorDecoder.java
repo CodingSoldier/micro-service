@@ -1,4 +1,4 @@
-package com.github.codingsoldier.starter.openfeign;
+package com.github.codingsoldier.starter.openfeign.codec;
 
 import com.github.codingsoldier.common.exception.AppException;
 import com.github.codingsoldier.common.resp.Result;

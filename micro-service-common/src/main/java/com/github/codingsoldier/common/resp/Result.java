@@ -14,10 +14,10 @@ public class Result<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "1、code为具体的业务编码，code / 100 = http status \n" +
-            "2、code = 20000，http status = 20000/100 = 200 表示请求处理成功 \n" +
-            "3、40000 <= code <= 49999 , http status = code/100 表示客户端错误，例如：参数错误 \n" +
-            "5、50000 <= code <= 59999 , http status = code/100 表示服务端错误，例如：空指针异常 \n")
+    @ApiModelProperty(value = "1、code为具体的业务编码，code/100 = http status \n" +
+            "2、code = 20000，http status = 200 表示请求处理成功 \n" +
+            "3、40000 <= code <= 49999 , 400 <= http status <= 499 表示客户端错误，例如：参数错误 \n" +
+            "5、50000 <= code <= 59999 , 500 <= http status <= 599 表示服务端错误，例如：空指针异常 \n")
     private int code;
 
     @ApiModelProperty(value = "提示信息")

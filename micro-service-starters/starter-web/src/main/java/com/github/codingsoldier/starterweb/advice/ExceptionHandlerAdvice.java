@@ -6,6 +6,8 @@ import com.github.codingsoldier.common.exception.AppException;
 import com.github.codingsoldier.common.resp.Result;
 import com.github.codingsoldier.common.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.validation.BindingResult;
@@ -27,6 +29,7 @@ import java.io.IOException;
  */
 @Slf4j
 @RestControllerAdvice(value = "com.github.codingsoldier")
+@Order(Ordered.LOWEST_PRECEDENCE)
 public class ExceptionHandlerAdvice {
 
 	/**
@@ -37,7 +40,7 @@ public class ExceptionHandlerAdvice {
 	@ExceptionHandler(AppException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public Result appExceptionHandler(final AppException ex) {
-		log.error("AppException", ex);
+		log.error("捕获AppException", ex);
 		return Result.fail(ex.getCode(), ex.getMessage());
 	}
 
@@ -49,8 +52,8 @@ public class ExceptionHandlerAdvice {
 	 */
 	@ExceptionHandler({MethodArgumentNotValidException.class, ConstraintViolationException.class})
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public Result handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
-		log.error("参数校验异常", ex);
+	public Result validExceptionHandler(MethodArgumentNotValidException ex) {
+		log.error("捕获参数校验异常", ex);
 		StringBuilder sb = new StringBuilder();
 		BindingResult bindingResult = ex.getBindingResult();
 		for (FieldError fieldError : bindingResult.getFieldErrors()) {
@@ -70,7 +73,7 @@ public class ExceptionHandlerAdvice {
 	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public Result httpRequestMethodNotSupportedExceptionHandler(final HttpRequestMethodNotSupportedException ex) {
-		log.error("请求方法错误", ex);
+		log.error("捕获请求方法错误", ex);
 		return Result.fail(ResponseCodeEnum.SERVER_ERROR.getCode(), "请求方法错误。");
 	}
 
@@ -79,8 +82,8 @@ public class ExceptionHandlerAdvice {
 	 */
 	@ExceptionHandler({MethodArgumentTypeMismatchException.class, HttpMessageConversionException.class})
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	public Result methodArgumentTypeMismatchException(final MethodArgumentTypeMismatchException ex) {
-		log.error("参数类型错误", ex);
+	public Result methodArgumentTypeMismatchExceptionHandler(final MethodArgumentTypeMismatchException ex) {
+		log.error("捕获参数类型错误", ex);
 		return Result.fail(ResponseCodeEnum.SERVER_ERROR.getCode(),"参数类型错误。");
 	}
 
@@ -92,35 +95,35 @@ public class ExceptionHandlerAdvice {
 	@ExceptionHandler(MissingServletRequestParameterException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public Result missingParameterExceptionHandle(MissingServletRequestParameterException ex) {
-		log.error("缺少请求参数", ex);
+		log.error("捕获缺少请求参数异常", ex);
 		return Result.fail("缺少请求参数。");
 	}
 
 	@ExceptionHandler(NoHandlerFoundException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public Result noHandlerFoundExceptionHandle(NoHandlerFoundException ex) {
-		log.error("404异常", ex);
+		log.error("捕获404异常", ex);
 		return Result.fail("404未找到资源。");
 	}
 
 	@ExceptionHandler(value = IOException.class)
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	public Result nullPointerExceptionHandler(final IOException ex){
-		log.error("IO异常", ex);
+		log.error("捕获IO异常", ex);
 		return Result.fail(ResponseCodeEnum.SERVER_ERROR.getCode(), "IO异常。");
 	}
 
 	@ExceptionHandler(value =NullPointerException.class)
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	public Result nullPointerExceptionHandler(final NullPointerException ex){
-		log.error("空指针异常", ex);
+		log.error("捕获空指针异常", ex);
 		return Result.fail(ResponseCodeEnum.SERVER_ERROR.getCode(), "空指针异常。");
 	}
 
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	public Result exception(final Exception ex) {
-		log.error("异常", ex);
+	public Result exceptionHandler(final Exception ex) {
+		log.error("捕获异常", ex);
 		return Result.fail(ResponseCodeEnum.SERVER_ERROR.getCode(),"处理请求失败。");
 	}
 

@@ -22,7 +22,7 @@ logging:
     # log4j2-spring.xml 使用 logging.file.name 作为日志子目录、日志文件名前缀
     name: ${spring.application.name}
   level:
-    org: debug
+#    org: debug
     com:
       github:
         codingsoldier: DEBUG
