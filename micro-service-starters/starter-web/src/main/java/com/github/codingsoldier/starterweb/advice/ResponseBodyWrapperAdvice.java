@@ -2,8 +2,10 @@ package com.github.codingsoldier.starterweb.advice;
 
 import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
 import com.github.codingsoldier.starterweb.annotation.NoWrapper;
+import com.github.codingsoldier.starterweb.constant.FeignConstant;
 import com.github.codingsoldier.starterweb.resp.Result;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -21,11 +23,6 @@ import java.util.List;
 @Slf4j
 @RestControllerAdvice(value = "com.github.codingsoldier")
 public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
-
-    /**
-     * 与 com.github.codingsoldier.starter.openfeign.config.FeignConfig#FEIGN_REQUEST 保持一致
-     */
-    private static final String FEIGN_REQUEST = "feign-request";
 
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
@@ -57,12 +54,15 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
 
 
         // 如果是Feign请求则直接返回实体对象
-        List<String> valList = request.getHeaders().get(FEIGN_REQUEST);
-        boolean isFeignRequest =  valList.contains(Boolean.TRUE.toString());
-        if(isFeignRequest){
-            log.debug("feign请求，不对返回结果进行包装。");
-            return body;
+        List<String> valList = request.getHeaders().get(FeignConstant.FEIGN_REQUEST);
+        if (CollectionUtils.isNotEmpty(valList)){
+            boolean isFeignRequest = valList.contains(Boolean.TRUE.toString());
+            if(isFeignRequest){
+                log.debug("feign请求，不对返回结果进行包装。");
+                return body;
+            }
         }
+
 
         if (body instanceof Result) {
             return body;

@@ -29,7 +29,7 @@
 
         <dependency>
             <groupId>com.github.codingsoldier</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>micro-service-common</artifactId>
         </dependency>
 
         <dependency>
