@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.codingsoldier.starterswagger.annotation;
+package com.github.codingsoldier.starterzipkin.annotation;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE, ElementType.METHOD })
-@ConditionalOnProperty(value = "framework.starter.swagger.enabled", matchIfMissing = true)
-public @interface ConditionalOnStarterSwaggerEnabled {
+@ConditionalOnProperty(value = "framework.starter.zipkin.enabled", matchIfMissing = true)
+public @interface ConditionalOnStarterZipkinEnabled {
 
 }

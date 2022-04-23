@@ -31,6 +31,6 @@ public interface CloudWeb02Client {
                     @RequestParam(value = "pageSize", required = false) Integer pageSize);
 
     @GetMapping("/testThreadPoolTraceId")
-    String testThreadPoolTraceId(String name);
+    String testThreadPoolTraceId(@RequestParam(value = "name", required = false) String name);
 
 }

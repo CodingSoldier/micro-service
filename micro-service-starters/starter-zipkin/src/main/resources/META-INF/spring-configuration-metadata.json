@@ -2,9 +2,9 @@
   "groups": [],
   "properties": [
     {
-      "name": "framework.starter.swagger.enabled",
+      "name": "framework.starter.zipkin.enabled",
       "type": "java.lang.Boolean",
-      "description": "是否启用 starter-swagger",
+      "description": "是否启用 starter-zipkin",
       "defaultValue": true
     }
   ],
