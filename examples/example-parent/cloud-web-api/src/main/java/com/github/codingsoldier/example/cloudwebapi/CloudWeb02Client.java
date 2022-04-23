@@ -1,9 +1,11 @@
 package com.github.codingsoldier.example.cloudwebapi;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.lang.Nullable;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
@@ -27,5 +29,8 @@ public interface CloudWeb02Client {
     String bodyAndParam(@RequestBody Map map,
                     @RequestParam(value = "pageNum", required = false) Integer pageNum,
                     @RequestParam(value = "pageSize", required = false) Integer pageSize);
+
+    @GetMapping("/testThreadPoolTraceId")
+    String testThreadPoolTraceId(String name);
 
 }

@@ -38,9 +38,8 @@ public class Web02Controller implements CloudWeb02Client {
         // } catch (Exception e){
         //     e.printStackTrace();
         // }
-        web02Service.getTestVal("sdd");
-        log.info("############{}", testVal);
         log.info("############{}", name);
+        String testVal = web02Service.getTestVal(name + "web222");
         return testVal;
     }
 
@@ -67,6 +66,12 @@ public class Web02Controller implements CloudWeb02Client {
         log.info("#######pageNum ", pageNum);
         log.info("#######pageSize ", pageSize);
         return pageNum + "" + pageSize;
+    }
+
+    @Override
+    public String testThreadPoolTraceId(String name) {
+        String s = web02Service.testThreadPoolTraceId(name);
+        return s;
     }
 
 

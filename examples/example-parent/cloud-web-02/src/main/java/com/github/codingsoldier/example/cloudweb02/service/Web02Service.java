@@ -4,4 +4,6 @@ public interface Web02Service {
 
     String getTestVal(String name);
 
+    String testThreadPoolTraceId(String name);
+
 }

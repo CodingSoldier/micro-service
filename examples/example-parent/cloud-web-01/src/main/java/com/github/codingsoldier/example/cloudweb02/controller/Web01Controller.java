@@ -44,7 +44,7 @@ public class Web01Controller {
         String result = cloudWeb02Client.getTestVal(msg
         );
         // String testVal = appApi.getTestVal(msg);
-        log.info("############{}", result);
+        log.info("############得到结果{}", result);
         return result;
     }
 
@@ -94,6 +94,13 @@ public class Web01Controller {
     public String getTestVal(HttpServletRequest request){
         log.info("############{}", testVal);
         return testVal;
+    }
+
+    @GetMapping("/testThreadPoolTraceId")
+    public String testThreadPoolTraceId(String name){
+        log.info("############testThreadPoolTraceId");
+        String s = cloudWeb02Client.testThreadPoolTraceId(name);
+        return s;
     }
 
 
