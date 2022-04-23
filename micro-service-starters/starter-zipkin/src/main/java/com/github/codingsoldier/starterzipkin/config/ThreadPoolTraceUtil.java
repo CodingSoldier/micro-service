@@ -6,33 +6,34 @@ import org.springframework.cloud.sleuth.instrument.async.LazyTraceExecutor;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
-import java.util.concurrent.Executor;
 
 /**
  * 配置线程池，使线程池中执行的任务也有TraceId
  */
 @Configuration(proxyBeanMethods = false)
-public class ThreadPoolTrace {
+public class ThreadPoolTraceUtil {
 
-    private static Executor traceExecutor;
+    private static LazyTraceExecutor traceExecutor;
 
     private BeanFactory beanFactory;
 
-    public ThreadPoolTrace(BeanFactory beanFactory) {
+    public ThreadPoolTraceUtil(BeanFactory beanFactory) {
         this.beanFactory = beanFactory;
     }
 
-    /**
-     * 获取 Executor
-     * @return Executor
-     */
-    public static Executor getExecutor() {
-        return traceExecutor;
-    }
 
     @PostConstruct
     private void init(){
         traceExecutor = new LazyTraceExecutor(beanFactory, ThreadUtil.getExecutor());
+    }
+
+    /**
+     * 在公共线程池中执行任务
+     *
+     * @param runnable 可运行对象
+     */
+    public static void execute(Runnable runnable) {
+        traceExecutor.execute(runnable);
     }
 
 }
