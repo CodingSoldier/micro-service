@@ -24,7 +24,7 @@ https://repo1.maven.org/maven2/io/zipkin/java/zipkin-server/2.12.9/zipkin-server
 
 3、启动 zipkin-server-2.12.9-exec.jar 。服务访问地址：http://localhost:9411/zipkin
 
-    java -jar zipkin-server-2.12.9-exec.jar --STORAGE_TYPE=mysql --MYSQL_HOST=127.0.0.1 --MYSQL_TCP_PORT=3306 --MYSQL_USER=root --MYSQL_PASS=密码 --MYSQL_DB=zipkin
+    java -Xmx512m -Xms512m -jar zipkin-server-2.12.9-exec.jar --STORAGE_TYPE=mysql --MYSQL_HOST=127.0.0.1 --MYSQL_TCP_PORT=3306 --MYSQL_USER=root --MYSQL_PASS=cpq..123 --MYSQL_DB=zipkin --QUERY_PORT=10103
 
 4、工程添加依赖
 ```xml
@@ -49,7 +49,7 @@ spring:
       # 指定通过什么类型发送消息 默认是 web
       type: WEB
     # 指定 zipkin 的地址
-    base-url: http://localhost:9411/
+    base-url: http://localhost:10103/
 ```
 6、配置日志的xml添加 [%X{traceId},%X{spanId}]
 

@@ -17,7 +17,12 @@ spring:
         metadata:
           management:
             context-path: ${server.servlet.context-path}/actuator
-
+    sentinel:
+      transport:
+        # 配置 sentinel dashboard 地址
+        dashboard: 127.0.0.1:10102
+        # 配置端口，启动一个 Http Server, 该 Server 会与 Sentinel 控制台做交互
+        port: 10112
   datasource:
     username: root
     password: cpq..123
@@ -61,12 +66,12 @@ spring:
       probability: 1.0  # 采样比例, 1.0 表示 100%, 默认是 0.1
       # RateLimitingSampler 抽样策略, 设置了限速采集, spring.sleuth.sampler.probability 属性值无效
       rate: 100  # 每秒间隔接受的 trace 量
-#  zipkin:
-#    sender:
-#      # 指定通过什么类型发送消息 默认是 web
-#      type: WEB
-#    # 指定 zipkin 的地址
-#    base-url: http://localhost:9411/
+  zipkin:
+    sender:
+      # 指定通过什么类型发送消息 默认是 web
+      type: WEB
+    # 指定 zipkin 的地址
+    base-url: http://localhost:10103/
 
 # 暴露 actuator 端点
 # 还需要在拦截器中排除 /actuator/**
