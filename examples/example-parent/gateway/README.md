@@ -49,3 +49,66 @@ public class Global01Filter implements GlobalFilter {
 }
 ```
 
+## gateway 整合 sentinel、nacos
+1、导入依赖
+```xml
+        <!-- 集成 Sentinel, 在网关层面实现限流 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
+        </dependency>
+        <!-- Sentinel 使用 Nacos 存储规则 -->
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-datasource-nacos</artifactId>
+        </dependency>
+```
+2、配置文件
+```yaml
+spring:
+  cloud:
+    sentinel:
+      eager: true
+      transport:
+        port: 10112
+        dashboard: 127.0.0.1:10102
+      datasource:
+        # 集成 Nacos
+        ds1:
+          nacos:
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+            namespace: ${spring.cloud.nacos.discovery.namespace}
+            data-id: gateway-flow-rule-sentinel
+            group-id: DEFAULT_GROUP
+            data-type: json
+            rule-type: gw-flow
+        ds2:
+          nacos:
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+            namespace: ${spring.cloud.nacos.discovery.namespace}
+            data-id: gateway-flow-rule-api-sentinel
+            group-id: DEFAULT_GROUP
+            data-type: json
+            rule-type: gw-api-group
+```
+3、nacos 新建json配置
+
+dataId = gateway-flow-rule-sentinel
+
+[json内容](./gateway-flow-rule-sentinel.json)
+
+dataId = gateway-flow-rule-api-sentinel
+
+[json内容](./gateway-flow-rule-api-sentinel.json)
+
+4、新建 com.github.codingsoldier.example.gateway.sentinel.SentinelGatewayConfiguration
+
+5、sentinel-server 启动参数多加 -Dcsp.sentinel.app.type=1
+
+    java -Dserver.port=10102 -Dcsp.sentinel.app.type=1 -Dcsp.sentinel.dashboard.server=localhost:10102 -Dproject.name=sentinel-dashboard -jar sentinel-dashboard-1.8.4.jar
+
+6、有 bug ,网关限流后会导致微服务的sentinel规则失效。

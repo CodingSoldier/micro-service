@@ -121,4 +121,110 @@ feign:
 3、启动类添加 @EnableCircuitBreaker
 
 4、新增 HystrixClient、HystrixClientFallbackFactory ，即可实现熔断。
-    
+
+
+## sentinel
+### sentinel 控制台 sentinel-dashboard
+1、下载 sentinel-dashboard ，下载地址：https://github.com/alibaba/Sentinel/releases
+
+2、启动 sentinel-dashboard ，启动命令：
+
+    java -Dserver.port=10102 -Dcsp.sentinel.dashboard.server=localhost:10102 -Dproject.name=sentinel-dashboard -jar sentinel-dashboard-1.8.4.jar
+
+3、访问地址：http://localhost:10102/#/dashboard/home
+
+4、更多 sentinel-dashboard 文档：https://github.com/alibaba/Sentinel/wiki/%E6%96%B0%E6%89%8B%E6%8C%87%E5%8D%97#%E5%85%AC%E7%BD%91-demo
+
+### 客户端使用 sentinel
+1、导入依赖
+```xml
+        <!-- spring-cloud-sentinel 和 sentinel-nacos -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-datasource-nacos</artifactId>
+        </dependency>
+```
+
+2、添加配置文件
+```yaml
+spring:
+  cloud:
+    sentinel:
+      transport:
+        # 配置 sentinel dashboard 地址
+        dashboard: 127.0.0.1:10102
+        # 配置端口，启动一个 Http Server, 该 Server 会与 Sentinel 控制台做交互
+        port: 10112
+```
+3、新建 RateLimitController 、SimpleBlockHandler ，发送一次请求。
+
+刷新 sentinel-dashboard ，即可看到多了一个服务
+
+4、在 dashboard 中 "流控规则" 中新增流控规则。资源名为“byResource”
+![](./sentinel-by-resource.jpg)
+
+5、快速发送多次请求：http://localhost:8001/cloud-web-01/sentinel/dashboard/by-resource
+
+触发熔断
+
+6、也可以通过“簇点链路”中通过url建立“流控规则”
+![](./sentinel-通过url建立流控规则.jpg)
+
+7、客户端规则默认存储在内存中，重启客户端，规则会消失
+
+### sentinel 与 nacos 整合，实现规则持久化
+1、导入依赖
+```xml
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-datasource-nacos</artifactId>
+        </dependency>
+```
+
+2、添加配置文件
+```yaml
+spring:
+  cloud:
+    sentinel:
+      transport:
+        # 配置 sentinel dashboard 地址
+        dashboard: 127.0.0.1:10102
+        # 配置端口，启动一个 Http Server, 该 Server 会与 Sentinel 控制台做交互
+        port: 10112
+      datasource:
+        # 名称任意, 代表数据源
+        ds:
+          nacos:
+            # sentinel 整合 nacos 实现规则持久化
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+            username: nacos
+            password: nacos
+            dataId: ${spring.application.name}-sentinel
+            namespace: ${spring.cloud.nacos.discovery.namespace}
+            groupId: DEFAULT_GROUP
+            data-type: json
+            # 规则类型: com.alibaba.cloud.sentinel.datasource.RuleType
+            # FlowRule 就是限流规则
+            rule-type: flow
+```
+3、nacos 新建dataId=${spring.application.name}-sentinel，类型是json，添加如下配置
+```json
+[
+    {
+        "resource": "fromNacos",
+        "limitApp": "default",
+        "grade": 1,
+        "count": 1,
+        "strategy": 0,
+        "controlBehavior": 0,
+        "clusterMode": false
+    }
+]
+```
+![](./sentinel配置信息.jpg)
+
+4、添加方法：com.github.codingsoldier.example.cloudweb02.sentinel.RateLimitController.fromNacos

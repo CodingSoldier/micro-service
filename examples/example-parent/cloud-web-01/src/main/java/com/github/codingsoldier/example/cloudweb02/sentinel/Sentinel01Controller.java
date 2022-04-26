@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequestMapping("/sentinel/dashboard")
-public class RateLimitController {
+public class Sentinel01Controller {
     /**
      * 1、在 dashboard 中 "流控规则" 中新增流控规则
      * 2、资源名为“byResource”
@@ -47,4 +47,32 @@ public class RateLimitController {
         log.info("coming in rate limit controller by url");
         return new Result<>(0, "", "byUrl");
     }
+
+    /**
+     * 从 nacos 获取规则
+     * @return
+     */
+    @GetMapping("/from-nacos")
+    @SentinelResource(
+            value = "fromNacos",
+            blockHandlerClass = SimpleBlockHandler.class,
+            blockHandler = "blockExceptionSimpleHandler"
+    )
+    public Result<String> fromNacos() {
+        log.info("coming in rate limit controller by fromNacos");
+        return new Result<>(0, "", "fromNacos");
+    }
+
+    @GetMapping("/gateway01")
+    public Result<String> gateway01(String msg) {
+        log.info("##########gateway01 msg={}", msg);
+        return new Result<>(0, "", "gateway01 "+msg);
+    }
+
+    @GetMapping("/gateway02")
+    public Result<String> gateway02(String msg) {
+        log.info("##########gateway02 msg={}", msg);
+        return new Result<>(0, "", "gateway02 "+msg);
+    }
+
 }
