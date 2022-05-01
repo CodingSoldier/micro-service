@@ -28,7 +28,7 @@ import java.io.IOException;
  * 统一异常处理
  */
 @Slf4j
-@RestControllerAdvice(value = "com.github.codingsoldier")
+@RestControllerAdvice
 @Order(Ordered.LOWEST_PRECEDENCE)
 public class ExceptionHandlerAdvice {
 

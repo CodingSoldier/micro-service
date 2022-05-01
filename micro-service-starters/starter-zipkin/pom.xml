@@ -26,7 +26,7 @@
         <!-- zipkin = spring-cloud-starter-sleuth + spring-cloud-sleuth-zipkin-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-zipkin</artifactId>
+            <artifactId>spring-cloud-starter-sleuth</artifactId>
         </dependency>
 
     </dependencies>

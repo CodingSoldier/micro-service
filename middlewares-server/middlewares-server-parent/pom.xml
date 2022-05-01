@@ -20,7 +20,6 @@
 
     <modules>
         <module>spring-boot-admin-server</module>
-        <module>hystrix-dashboard</module>
     </modules>
 
     <dependencies>

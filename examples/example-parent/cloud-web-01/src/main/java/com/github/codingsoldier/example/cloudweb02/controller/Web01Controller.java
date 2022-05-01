@@ -96,12 +96,4 @@ public class Web01Controller {
         return testVal;
     }
 
-    @GetMapping("/testThreadPoolTraceId")
-    public String testThreadPoolTraceId(String name){
-        log.info("############testThreadPoolTraceId");
-        String s = cloudWeb02Client.testThreadPoolTraceId(name);
-        return s;
-    }
-
-
 }

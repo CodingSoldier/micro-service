@@ -35,16 +35,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-openfeign</artifactId>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; feign 替换 JDK 默认的 URLConnection 为 okhttp &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>io.github.openfeign</groupId>-->
-<!--            <artifactId>feign-okhttp</artifactId>-->
-<!--        </dependency>-->
-
     </dependencies>
 
     <build>

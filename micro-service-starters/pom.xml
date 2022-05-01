@@ -25,8 +25,9 @@
     <module>starter-swagger</module>
     <module>starter-mybatis-plus</module>
     <module>starter-redis</module>
-    <module>starter-web</module>
     <module>starter-openfeign</module>
+    <module>starter-zipkin</module>
+    <module>starter-web</module>
   </modules>
 
   <dependencies>

@@ -21,7 +21,7 @@ import java.util.List;
  * @RestControllerAdvice 加上路径，避免对其他包进行包装
  */
 @Slf4j
-@RestControllerAdvice(value = "com.github.codingsoldier")
+@RestControllerAdvice
 public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
 
     @Override

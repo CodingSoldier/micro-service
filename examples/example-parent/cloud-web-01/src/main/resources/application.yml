@@ -40,6 +40,10 @@ spring:
             # 规则类型: com.alibaba.cloud.sentinel.datasource.RuleType
             # FlowRule 就是限流规则
             rule-type: flow
+    # 禁用ribbon。 Spring Cloud Loadbalancer 将替代 ribbon
+    loadbalancer:
+      ribbon:
+        enable: false
   datasource:
     username: root
     password: cpq..123
@@ -90,6 +94,8 @@ spring:
     # 指定 zipkin 的地址
     base-url: http://localhost:10103/
 
+
+
 # 暴露 actuator 端点
 # 还需要在拦截器中排除 /actuator/**
 management:
@@ -109,20 +115,20 @@ mybatis-plus:
       logic-delete-value: 1 # 逻辑已删除值(默认为 1)
       logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
 
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 60000
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 60000
 
-ribbon:
-  ConnectTimeout: 5000
-  ReadTimeout: 50000
-  eager-load:
-    enabled: true
-    clients: cloud-web
+#ribbon:
+#  ConnectTimeout: 5000
+#  ReadTimeout: 50000
+#  eager-load:
+#    enabled: true
+#    clients: cloud-web
 
 # Feign 的相关配置
 feign:
@@ -144,9 +150,9 @@ feign:
   # 启用 okhttp
   okhttp:
     enabled: true
-  # OpenFeign 集成 Hystrix
-  hystrix:
-    enabled: true
+#  # OpenFeign 集成 Hystrix
+#  hystrix:
+#    enabled: true
 
 #starter:
 framework:
