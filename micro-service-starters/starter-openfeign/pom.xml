@@ -23,6 +23,12 @@
             <artifactId>micro-service-common</artifactId>
         </dependency>
 
+        <!-- loadbalancer 将替换 ribbon -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>

@@ -3,7 +3,23 @@ spring-cloud工程使用例子
 
 使用步骤：
 
-1、添加 nacos-config、 nacos-discovery 依赖
+1、添加依赖
+```xml
+        <!--  SpringCloud2020版本默认不启用bootstrap配置，
+        需要加入依赖 spring-cloud-starter-bootstrap -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+```
 
 2、nacos-config 、logging 配置必须写在 bootstrap.yaml 中
 
@@ -22,16 +38,19 @@ https://repo1.maven.org/maven2/io/zipkin/java/zipkin-server/2.12.9/zipkin-server
 
     执行初始化 SQL，地址：https://github.com/openzipkin/zipkin/blob/master/zipkin-storage/mysql-v1/src/main/resources/mysql.sql 
 
-3、启动 zipkin-server-2.12.9-exec.jar 。服务访问地址：http://localhost:9411/zipkin
+3、启动 zipkin-server-2.12.9-exec.jar 。服务访问地址：http://localhost:10103/zipkin
 
     java -Xmx512m -Xms512m -jar zipkin-server-2.12.9-exec.jar --STORAGE_TYPE=mysql --MYSQL_HOST=127.0.0.1 --MYSQL_TCP_PORT=3306 --MYSQL_USER=root --MYSQL_PASS=cpq..123 --MYSQL_DB=zipkin --QUERY_PORT=10103
 
 4、工程添加依赖
 ```xml
-    <!-- zipkin = spring-cloud-starter-sleuth + spring-cloud-sleuth-zipkin-->
     <dependency>
         <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-starter-zipkin</artifactId>
+        <artifactId>spring-cloud-starter-sleuth</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-sleuth-zipkin</artifactId>
     </dependency>
 ```
 5、修改配置文件
@@ -49,15 +68,24 @@ spring:
       # 指定通过什么类型发送消息 默认是 web
       type: WEB
     # 指定 zipkin 的地址
-    base-url: http://localhost:10103/
+    base-url: http://localhost:10103
 ```
 6、配置日志的xml添加 [%X{traceId},%X{spanId}]
 
 7、运行项目，发送请求。
 
+8、升级到 spring cloud 2020 后，服务端没接收到数据
+
+
 ## openfeign
 1、导入依赖包
 ```xml
+    <!-- loadbalancer 将替换 ribbon -->
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+    </dependency>
+
     <dependency>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-starter-openfeign</artifactId>
@@ -100,28 +128,6 @@ feign:
     Sending a request via tracing feign client [org.springframework.cloud.sleuth.instrument.web.client.feign.TracingFeignClient@16a13a30] and the delegate [feign.okhttp.OkHttpClient@742d5808]
 
 表明 okhttp 生效
-
-## hystrix
-1、导入依赖包
-```xml
-    <!-- 集成 hystrix -->
-    <dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-    </dependency>
-```
-2、添加配置
-```yxml
-# Feign + hystrix 的相关配置
-feign:
-  # OpenFeign 集成 Hystrix
-  hystrix:
-    enabled: true
-```
-3、启动类添加 @EnableCircuitBreaker
-
-4、新增 HystrixClient、HystrixClientFallbackFactory ，即可实现熔断。
-
 
 ## sentinel
 ### sentinel 控制台 sentinel-dashboard
@@ -201,8 +207,8 @@ spring:
           nacos:
             # sentinel 整合 nacos 实现规则持久化
             server-addr: ${spring.cloud.nacos.discovery.server-addr}
-            username: nacos
-            password: nacos
+
+.            password: nacos
             dataId: ${spring.application.name}-sentinel
             namespace: ${spring.cloud.nacos.discovery.namespace}
             groupId: DEFAULT_GROUP
