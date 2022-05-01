@@ -47,7 +47,12 @@
 
         <dependency>
             <groupId>com.github.codingsoldier</groupId>
-            <artifactId>starter-zipkin</artifactId>
+            <artifactId>starter-sleuth-zipkin</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.codingsoldier</groupId>
+            <artifactId>starter-openfeign</artifactId>
         </dependency>
 
         <dependency>

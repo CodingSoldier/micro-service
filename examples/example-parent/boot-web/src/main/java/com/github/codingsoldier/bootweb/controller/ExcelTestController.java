@@ -2,7 +2,7 @@ package com.github.codingsoldier.bootweb.controller;
 
 
 import com.github.codingsoldier.bootweb.dto.ExcelDemoDto;
-import com.github.codingsoldier.starterweb.util.ExcelUtil;
+import com.github.codingsoldier.starter.web.util.ExcelUtil;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;

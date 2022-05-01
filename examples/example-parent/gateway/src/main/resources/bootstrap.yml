@@ -52,7 +52,7 @@ spring:
       # 指定通过什么类型发送消息 默认是 web
       type: WEB
     # 指定 zipkin 的地址
-    base-url: http://localhost:10103/
+    base-url: http://localhost:10103
 
 # 单独配置路由json的 data-id、group，使用NacosGatewayConfig承载配置
 nacos:

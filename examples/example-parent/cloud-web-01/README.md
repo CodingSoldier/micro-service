@@ -234,3 +234,17 @@ spring:
 ![](./sentinel配置信息.jpg)
 
 4、添加方法：com.github.codingsoldier.example.cloudweb02.sentinel.RateLimitController.fromNacos
+
+## openfeign 与 sentinel 整合
+1、配置文件
+```yaml
+feign:
+  # 打开 Sentinel 对 Feign 的支持
+  sentinel:
+    enabled: true
+```
+2、新增 Sentinel02Fallback 实现 Web02Feign02Client。配置 Web02Feign02Client 的 fallback= Sentinel02Fallback.class
+
+或者
+
+新增 Sentinel02FallbackFactory。配置 Web02Feign02Client 的 fallbackFactory= Sentinel02FallbackFactory.class

@@ -1,0 +1,1 @@
+package com.github.codingsoldier.starter.log4j2;

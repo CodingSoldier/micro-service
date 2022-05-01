@@ -24,6 +24,15 @@
             <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
 
+        <!--  Alibaba在2021版本nacos中删除了Ribbon的jar包，需要引入springcloud loadbalancer包 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
@@ -59,7 +68,7 @@
 
         <dependency>
             <groupId>com.github.codingsoldier</groupId>
-            <artifactId>starter-zipkin</artifactId>
+            <artifactId>starter-sleuth-zipkin</artifactId>
         </dependency>
 
         <!--        <dependency>-->

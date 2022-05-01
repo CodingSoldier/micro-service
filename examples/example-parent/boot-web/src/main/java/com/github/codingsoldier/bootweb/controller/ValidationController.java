@@ -2,7 +2,7 @@ package com.github.codingsoldier.bootweb.controller;
 
 
 import com.github.codingsoldier.bootweb.dto.ValidationDto;
-import com.github.codingsoldier.starterweb.util.ValidationUtils;
+import com.github.codingsoldier.starter.web.util.ValidationUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;

@@ -1,6 +1,6 @@
 package com.github.codingsoldier.bootweb.controller;
 
-import com.github.codingsoldier.starterredis.RedisUtil;
+import com.github.codingsoldier.starter.redis.RedisUtil;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.HashOperations;

@@ -1,4 +1,4 @@
-# spring-cloud 2020 版本已经移除 hystrix 
+# spring-cloud 2020 已经移除 hystrix 
 
 # hystrix-dashboard 
 实时监控Hystrix的各项指标信息

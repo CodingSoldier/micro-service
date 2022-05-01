@@ -150,6 +150,9 @@ feign:
   # 启用 okhttp
   okhttp:
     enabled: true
+  # 打开 Sentinel 对 Feign 的支持
+  sentinel:
+    enabled: true
 #  # OpenFeign 集成 Hystrix
 #  hystrix:
 #    enabled: true
