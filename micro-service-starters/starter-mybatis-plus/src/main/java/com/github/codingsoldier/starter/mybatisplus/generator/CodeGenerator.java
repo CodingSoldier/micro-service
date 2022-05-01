@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.fill.Column;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.HashMap;
@@ -17,6 +19,8 @@ import java.util.Map;
  * https://baomidou.com/pages/981406/#mapper-%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE
  */
 public class CodeGenerator {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CodeGenerator.class);
 
     public static String dbUrl;
     public static String dbUsername;
@@ -90,7 +94,8 @@ public class CodeGenerator {
                     .enableRestStyle()
                     .build();
 
-        String tableJavaName = tableName;
+        String tableJavaName = CodeGeneratorUtil.tableJavaName(tableName);
+        String templateDir = "/templates/v1";
 
         Map<String, Object> map = new HashMap<>();
         Map<String, String> files = new HashMap<>();
@@ -100,26 +105,28 @@ public class CodeGenerator {
 
         String addDtoClassName = tableJavaName + "AddDto";
         map.put("addDtoClassName", addDtoClassName);
-        files.put(addDtoClassName, "/templates/AddDto.java.ftl");
+        files.put(addDtoClassName, templateDir + "/AddDto.java.ftl");
 
         String updateDtoClassName = tableJavaName + "UpdateDto";
         map.put("updateDtoClassName", updateDtoClassName);
-        files.put(updateDtoClassName, "/templates/UpdateDto.java.ftl");
+        files.put(updateDtoClassName, templateDir + "/UpdateDto.java.ftl");
 
         String pageQueryDtoClassName = tableJavaName + "PageQueryDto";
         map.put("pageQueryDtoClassName", pageQueryDtoClassName);
-        files.put(pageQueryDtoClassName, "/templates/PageQueryDto.java.ftl");
+        files.put(pageQueryDtoClassName, templateDir + "/PageQueryDto.java.ftl");
 
         String detailVoClassName = tableJavaName + "DetailVo";
         map.put("detailVoClassName", detailVoClassName);
-        files.put(detailVoClassName, "/templates/DetailVo.java.ftl");
+        files.put(detailVoClassName, templateDir + "/DetailVo.java.ftl");
 
         String pageVoClassName = tableJavaName + "PageVo";
         map.put("pageVoClassName", pageVoClassName);
-        files.put(pageVoClassName, "/templates/PageVo.java.ftl");
+        files.put(pageVoClassName, templateDir + "/PageVo.java.ftl");
 
         InjectionConfig injectionConfig = new InjectionConfig.Builder()
                 .beforeOutputFile((tableInfo, objectMap) -> {
+                    LOGGER.debug("tableInfo = {}", tableInfo.toString());
+                    LOGGER.debug("objectMap = {}", objectMap.toString());
                 })
                 .customMap(map)
                 .customFile(files)
@@ -127,12 +134,12 @@ public class CodeGenerator {
 
         TemplateConfig templateConfig = new TemplateConfig.Builder()
                 .disable(TemplateType.ENTITY)
-                .entity("/templates/v1/entity.java")
-                .service("/templates/v1/service.java")
-                .serviceImpl("/templates/v1/serviceImpl.java")
-                .mapper("/templates/v1/mapper.java")
-                .mapperXml("/templates/v1/mapper.xml")
-                .controller("/templates/v1/controller.java")
+                .entity(templateDir + "/entity.java")
+                .service(templateDir + "/service.java")
+                .serviceImpl(templateDir + "/serviceImpl.java")
+                .mapper(templateDir + "/mapper.java")
+                .mapperXml(templateDir + "/mapper.xml")
+                .controller(templateDir + "/controller.java")
                 .build();
 
         AutoGenerator generator = new AutoGenerator(dataSource);
@@ -142,6 +149,8 @@ public class CodeGenerator {
         generator.injection(injectionConfig);
         generator.template(templateConfig);
         generator.execute(new CustomFreemarkerTemplateEngine());
+
+        LOGGER.info("##### 代码生成完毕 #####");
 
     }
 

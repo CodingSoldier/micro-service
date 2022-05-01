@@ -16,7 +16,7 @@ import com.github.codingsoldier.starter.mybatisplus.resp.PageResult;
  * </p>
  *
  * @author cpq
- * @since 2022-05-02 04:50:06
+ * @since 2022-05-02 05:20:42
  */
 public interface DemoService extends IService<Demo> {
 

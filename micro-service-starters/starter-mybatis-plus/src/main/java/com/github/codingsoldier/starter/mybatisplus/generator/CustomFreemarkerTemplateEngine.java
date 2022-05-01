@@ -18,6 +18,8 @@ package com.github.codingsoldier.starter.mybatisplus.generator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.Map;
@@ -28,12 +30,17 @@ import java.util.Map;
  * @author nieqiurong
  * @since 2018-01-11
  */
+
 public class CustomFreemarkerTemplateEngine extends FreemarkerTemplateEngine {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CustomFreemarkerTemplateEngine.class);
 
     @Override
     protected void outputCustomFile(Map<String, String> customFile, TableInfo tableInfo, Map<String, Object> objectMap) {
         String otherPath = getPathInfo(OutputFile.other);
         customFile.forEach((key, value) -> {
+            LOGGER.debug("key = {}", key);
+            LOGGER.debug("value = {}", value);
             String path = otherPath;
             if (value.endsWith("Dto.java.ftl")){
                 // dto的输出目录
