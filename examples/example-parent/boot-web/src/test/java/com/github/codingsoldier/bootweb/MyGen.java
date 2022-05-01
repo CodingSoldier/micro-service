@@ -1,6 +1,7 @@
 package com.github.codingsoldier.bootweb;
 
 
+import java.util.Arrays;
 
 public class MyGen {
 
@@ -9,19 +10,19 @@ public class MyGen {
      * 注意，旧文件不会被覆盖
      * @param args
      */
-    // public static void main(String[] args) {
-    //
-    //     MybatisPlusCodeUtil.dbUrl = "jdbc:mysql://127.0.0.1:3306/cpq";
-    //     MybatisPlusCodeUtil.dbUsername = "root";
-    //     MybatisPlusCodeUtil.dbPassword = "cpq..123";
-    //
-    //     MybatisPlusCodeUtil.srcMainAbsolutePath = "E:\\github\\example-parent\\example-starter-web\\src\\main";
-    //     MybatisPlusCodeUtil.parent = "com.github.codingsoldier.examplestarterweb";
-    //
-    //     MybatisPlusCodeUtil.author = "cpq";
-    //     MybatisPlusCodeUtil.tableNames = Arrays.asList("user");
-    //
-    //     MybatisPlusCodeUtil.generate();
-    //
-    // }
+    public static void main(String[] args) {
+
+        MybatisPlusGenerator.dbUrl = "jdbc:mysql://127.0.0.1:3306/cpq";
+        MybatisPlusGenerator.dbUsername = "root";
+        MybatisPlusGenerator.dbPassword = "cpq..123";
+
+        MybatisPlusGenerator.srcMainAbsolutePath = "E:\\github\\micro-service\\examples\\example-parent\\boot-web\\src\\main";
+        MybatisPlusGenerator.parent = "com.github.codingsoldier.bootweb.temp";
+
+        MybatisPlusGenerator.author = "cpq";
+        MybatisPlusGenerator.tableNames = Arrays.asList("demo");
+
+        MybatisPlusGenerator.generate();
+
+    }
 }

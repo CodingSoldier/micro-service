@@ -1,6 +1,10 @@
 package com.github.codingsoldier.starter.mybatisplus.req;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 
@@ -8,7 +12,10 @@ import java.io.Serializable;
  * @since 2022/2/8 14:19
  * @author chenpq
  */
-
+@Data
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
 public class PageReq implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -19,27 +26,4 @@ public class PageReq implements Serializable {
     @ApiModelProperty(value = "每页多少条", example = "10")
     private Integer size = 10;
 
-    public PageReq() {
-    }
-
-    public PageReq(Integer current, Integer size) {
-        this.current = current;
-        this.size = size;
-    }
-
-    public Integer getCurrent() {
-        return current;
-    }
-
-    public void setCurrent(Integer current) {
-        this.current = current;
-    }
-
-    public Integer getSize() {
-        return size;
-    }
-
-    public void setSize(Integer size) {
-        this.size = size;
-    }
 }

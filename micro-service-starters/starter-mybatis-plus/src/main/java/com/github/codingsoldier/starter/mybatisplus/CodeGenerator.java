@@ -64,7 +64,6 @@ public class CodeGenerator {
                             .entityBuilder()
                             .enableChainModel()
                             .enableLombok()
-                            // .enableTableFieldAnnotation()
                             .logicDeleteColumnName("deleted")
                             .logicDeletePropertyName("deleted")
                             .naming(NamingStrategy.underline_to_camel)

@@ -1,4 +1,4 @@
-package ${packageVo};
+package ${packageDto};
 
 <#list table.importPackages as pkg>
 import ${pkg};
@@ -18,10 +18,10 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "${table.comment!}-详情")
-public class ${detailVoClassName} implements Serializable {
+@ApiModel(value = "${table.comment!}-修改")
+public class ${updateDtoClassName} implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>
 

@@ -18,10 +18,10 @@ public class CustomMetaObjectHandler implements MetaObjectHandler {
     @Autowired
     private TokenInterface tokenInterface;
 
-    private static final String CREATE_TIME = "createTime";
-    private static final String CREATE_ID = "createId";
-    private static final String UPDATE_TIME = "updateTime";
-    private static final String UPDATE_ID = "updateId";
+    private static final String CREATE_TIME = "createdTime";
+    private static final String CREATE_ID = "createdBy";
+    private static final String UPDATE_TIME = "updatedTime";
+    private static final String UPDATE_ID = "updatedBy";
 
     @Override
     public void insertFill(MetaObject metaObject) {

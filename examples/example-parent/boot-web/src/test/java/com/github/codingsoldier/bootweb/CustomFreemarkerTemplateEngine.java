@@ -18,6 +18,8 @@ package com.github.codingsoldier.bootweb;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.Map;
@@ -30,17 +32,28 @@ import java.util.Map;
  */
 public class CustomFreemarkerTemplateEngine extends FreemarkerTemplateEngine {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CustomFreemarkerTemplateEngine.class);
+
     @Override
     protected void outputCustomFile(Map<String, String> customFile, TableInfo tableInfo, Map<String, Object> objectMap) {
         String otherPath = getPathInfo(OutputFile.other);
         customFile.forEach((key, value) -> {
+            System.out.println("@@@ key=" + key);
+            System.out.println("@@@ value=" + value);
             String path = otherPath;
             if (value.endsWith("Dto.java.ftl")){
+                // dto的输出目录
                 path = path + File.separator + "dto";
             } else if (value.endsWith("Vo.java.ftl")) {
+                // vo的输出目录
                 path = path + File.separator + "vo";
+            } else if (value.endsWith("Ao.java.ftl")) {
+                // ao的输出目录
+                path = path + File.separator + "ao";
             }
-            String fileName = String.format((path + File.separator + "%s"), key);
+            // 目录 + 文件名
+            String fileName = String.format((path + File.separator + "%s%s"), key, ".java");
+            // 生成java文件
             outputFile(new File(fileName), objectMap, value);
         });
     }

@@ -37,8 +37,6 @@ public class MybatisPlusGenerator {
      */
     public static void generate() {
 
-        String xmlOutPutDir = srcMainAbsolutePath + File.separator + "resources/mapper";
-
         DataSourceConfig dataSource = new DataSourceConfig
                 .Builder(dbUrl, dbUsername, dbPassword)
                 .build();
@@ -53,14 +51,13 @@ public class MybatisPlusGenerator {
                 .build();
 
         Map<OutputFile, String> pathInfo = new HashMap<>();
-        pathInfo.put(OutputFile.mapperXml, xmlOutPutDir);
         PackageConfig packageConfig = new PackageConfig.Builder()
                 .parent(parent)
-                // .moduleName("modelName")
+                // .moduleName("多加一层目录，例如表名，生成的代码放在表名目录下")
                 .service("service")
                 .serviceImpl("service.impl")
                 .mapper("mapper")
-                // .xml("mapper")
+                .xml("mapper")
                 .controller("controller")
                 .other("")
                 .pathInfo(pathInfo)
@@ -71,17 +68,16 @@ public class MybatisPlusGenerator {
                 .addTablePrefix(TABLE_PREFIX)
                 .entityBuilder()
                     .idType(IdType.AUTO)
-                    .formatFileName("%sEntity")
+                    // .formatFileName("%sEntity")
                     .enableChainModel()
                     .enableLombok()
-                    // .enableTableFieldAnnotation()
                     .logicDeleteColumnName("deleted")
                     .logicDeletePropertyName("deleted")
                     .naming(NamingStrategy.underline_to_camel)
-                    .addTableFills(new Column("create_id", FieldFill.INSERT),
-                        new Column("create_time", FieldFill.INSERT),
-                        new Column("update_id", FieldFill.INSERT_UPDATE),
-                        new Column("update_time", FieldFill.INSERT_UPDATE))
+                    .addTableFills(new Column("created_by", FieldFill.INSERT),
+                        new Column("created_time", FieldFill.INSERT),
+                        new Column("updated_by", FieldFill.INSERT_UPDATE),
+                        new Column("updated_time", FieldFill.INSERT_UPDATE))
                     .build()
                 .mapperBuilder()
                     .enableMapperAnnotation()
@@ -98,33 +94,54 @@ public class MybatisPlusGenerator {
 
         String tableJavaName = MybatisPlusUtil.tableJavaName(tableNames.get(0));
 
-        Map<String, Object> customMap = new HashMap<>();
-        customMap.put("packageDetailVo", parent + ".vo");
-        customMap.put("DetailVo", tableJavaName + "DetailVo");
+        Map<String, Object> map = new HashMap<>();
+        Map<String, String> files = new HashMap<>();
+        map.put("packageDto", parent + ".dto");
+        map.put("packageVo", parent + ".vo");
+        map.put("packageAo", parent + ".ao");
 
-        customMap.put("packageAddDto", parent + ".dto");
-        customMap.put("AddDto", tableJavaName + "AddDto");
 
-        Map<String, String> customFile = new HashMap<>();
-        customFile.put(tableJavaName + "DetailVo.java", "/templates/DetailVo.java.ftl");
+        String addDtoClassName = tableJavaName + "AddDto";
+        map.put("addDtoClassName", addDtoClassName);
+        files.put(addDtoClassName, "/templates/AddDto.java.ftl");
 
-        customFile.put(tableJavaName + "AddDto.java", "/templates/AddDto.java.ftl");
+        String updateDtoClassName = tableJavaName + "UpdateDto";
+        map.put("updateDtoClassName", updateDtoClassName);
+        files.put(updateDtoClassName, "/templates/UpdateDto.java.ftl");
+
+        String detailVoClassName = tableJavaName + "DetailVo";
+        map.put("detailVoClassName", detailVoClassName);
+        files.put(detailVoClassName, "/templates/DetailVo.java.ftl");
+
+        String aoClassName = tableJavaName + "Ao";
+        map.put("aoClassName", aoClassName);
+        files.put(aoClassName, "/templates/Ao.java.ftl");
 
         InjectionConfig injectionConfig = new InjectionConfig.Builder()
                 .beforeOutputFile((tableInfo, objectMap) -> {
-                    System.out.println("#######" + tableInfo);
-                    System.out.println("#######" + objectMap);
+                    System.out.println("$$ tableInfo $$$ " + tableInfo);
+                    System.out.println("### tableInfo ####" + objectMap);
                 })
-                .customMap(customMap)
-                .customFile(customFile)
+                .customMap(map)
+                .customFile(files)
                 .build();
 
+        TemplateConfig templateConfig = new TemplateConfig.Builder()
+                .disable(TemplateType.ENTITY)
+                .entity("/templates/entity.java")
+                .service("/templates/service.java")
+                .serviceImpl("/templates/serviceImpl.java")
+                .mapper("/templates/mapper.java")
+                .mapperXml("/templates/mapper.xml")
+                .controller("/templates/controller.java")
+                .build();
 
         AutoGenerator generator = new AutoGenerator(dataSource);
         generator.global(globalConfig);
         generator.packageInfo(packageConfig);
         generator.strategy(strategyConfig);
         generator.injection(injectionConfig);
+        generator.template(templateConfig);
         generator.execute(new CustomFreemarkerTemplateEngine());
 
     }
