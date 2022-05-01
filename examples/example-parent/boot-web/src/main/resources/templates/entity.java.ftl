@@ -7,12 +7,10 @@ import ${pkg};
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 </#if>
-<#if entityLombokModel>
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-</#if>
 
 /**
  * <p>
@@ -22,12 +20,10 @@ import lombok.experimental.SuperBuilder;
  * @author ${author}
  * @since ${date}
  */
-<#if entityLombokModel>
 @Data
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-</#if>
 <#if table.convert>
 @TableName("${schemaName}${table.name}")
 </#if>
@@ -55,7 +51,7 @@ public class ${entity} {
 
     <#if field.comment!?length gt 0>
         <#if swagger>
-    @ApiModelProperty(value = "${field.comment}")
+    @ApiModelProperty("${field.comment}")
         <#else>
     /**
      * ${field.comment}

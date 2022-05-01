@@ -36,4 +36,16 @@
     </sql>
 
 </#if>
+
+    <select id="pageQuery" resultType="${packageVo}.${pageVoClassName}">
+        SELECT *
+        FROM ${table.name}
+        <where>
+            deleted = 0
+            <if test="pageQueryVo != null">
+            </if>
+            ORDER BY id DESC
+        </where>
+    </select>
+
 </mapper>

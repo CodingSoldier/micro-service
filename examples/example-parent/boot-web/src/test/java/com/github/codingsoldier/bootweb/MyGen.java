@@ -17,7 +17,7 @@ public class MyGen {
         MybatisPlusGenerator.dbPassword = "cpq..123";
 
         MybatisPlusGenerator.srcMainAbsolutePath = "E:\\github\\micro-service\\examples\\example-parent\\boot-web\\src\\main";
-        MybatisPlusGenerator.parent = "com.github.codingsoldier.bootweb.temp";
+        MybatisPlusGenerator.parent = "com.github.codingsoldier.bootweb.temp222";
 
         MybatisPlusGenerator.author = "cpq";
         MybatisPlusGenerator.tableNames = Arrays.asList("demo");

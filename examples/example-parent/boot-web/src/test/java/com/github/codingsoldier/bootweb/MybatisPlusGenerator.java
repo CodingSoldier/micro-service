@@ -98,7 +98,6 @@ public class MybatisPlusGenerator {
         Map<String, String> files = new HashMap<>();
         map.put("packageDto", parent + ".dto");
         map.put("packageVo", parent + ".vo");
-        map.put("packageAo", parent + ".ao");
 
 
         String addDtoClassName = tableJavaName + "AddDto";
@@ -109,13 +108,17 @@ public class MybatisPlusGenerator {
         map.put("updateDtoClassName", updateDtoClassName);
         files.put(updateDtoClassName, "/templates/UpdateDto.java.ftl");
 
+        String pageQueryDtoClassName = tableJavaName + "PageQueryDto";
+        map.put("pageQueryDtoClassName", pageQueryDtoClassName);
+        files.put(pageQueryDtoClassName, "/templates/PageQueryDto.java.ftl");
+
         String detailVoClassName = tableJavaName + "DetailVo";
         map.put("detailVoClassName", detailVoClassName);
         files.put(detailVoClassName, "/templates/DetailVo.java.ftl");
 
-        String aoClassName = tableJavaName + "Ao";
-        map.put("aoClassName", aoClassName);
-        files.put(aoClassName, "/templates/Ao.java.ftl");
+        String pageVoClassName = tableJavaName + "PageVo";
+        map.put("pageVoClassName", pageVoClassName);
+        files.put(pageVoClassName, "/templates/PageVo.java.ftl");
 
         InjectionConfig injectionConfig = new InjectionConfig.Builder()
                 .beforeOutputFile((tableInfo, objectMap) -> {

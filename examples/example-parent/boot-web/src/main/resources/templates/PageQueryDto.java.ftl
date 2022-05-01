@@ -1,4 +1,4 @@
-package ${packageAo};
+package ${packageDto};
 
 <#list table.importPackages as pkg>
 import ${pkg};
@@ -10,6 +10,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import com.github.codingsoldier.starter.mybatisplus.req.PageReq;
+
 /**
  * @author ${author}
  * @since ${date}
@@ -18,12 +20,15 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "${table.comment!}-ao")
-public class ${aoClassName} implements Serializable {
-    
+@ApiModel(value = "${table.comment!}-分页查询参数")
+public class ${pageQueryDtoClassName} extends PageReq {
+
     private static final long serialVersionUID = 1L;
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>
+    <#if field.propertyName == "id">
+        <#continue>
+    </#if>
 
     <#if field.comment!?length gt 0>
     @ApiModelProperty(value = "${field.comment}")

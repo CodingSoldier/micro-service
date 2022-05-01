@@ -57,11 +57,11 @@ public interface DemoService extends IService<Demo> {
 
     /**
      * 是否重复
-     * @param id
-     * @param columnValue
-     * @return
+     * @param id id
+     * @param func 列函数
+     * @param value 列值
+     * @return 是否重复
      */
-    boolean isRepeat(Long id, SFunction<Demo,?> columnFunction, String columnValue);
-
+    boolean isRepeat(Long id, SFunction<Demo,?> func, String value);
 
 }

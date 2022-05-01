@@ -14,8 +14,6 @@ import com.github.codingsoldier.bootweb.temp.mapper.DemoMapper;
 import com.github.codingsoldier.bootweb.temp.service.DemoService;
 import com.github.codingsoldier.bootweb.temp.vo.DemoDetailVo;
 import com.github.codingsoldier.bootweb.temp.vo.DemoPageVo;
-import com.github.codingsoldier.common.enums.ResponseCodeEnum;
-import com.github.codingsoldier.common.exception.AppException;
 import com.github.codingsoldier.starter.mybatisplus.resp.PageResult;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +41,9 @@ public class DemoServiceImpl extends ServiceImpl<DemoMapper, Demo> implements De
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Long add(DemoAddDto addDto) {
-        if (isRepeat(null, Demo::getName, addDto.getName())){
-            throw new AppException(ResponseCodeEnum.PRECONDITION_FAILED, "新增失败，XX已存在。请修改XX。");
-        }
+        // if (isRepeat(null, Demo::getName, addDto.getName())){
+        //     throw new AppException(ResponseCodeEnum.PRECONDITION_FAILED, "新增失败，XX已存在。请修改XX。");
+        // }
         Demo demo = new Demo();
         BeanUtils.copyProperties(addDto, demo);
         /**
@@ -58,9 +56,9 @@ public class DemoServiceImpl extends ServiceImpl<DemoMapper, Demo> implements De
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Long update(DemoUpdateDto updateDto) {
-        if (isRepeat(updateDto.getId(), Demo::getName, updateDto.getName())){
-            throw new AppException(ResponseCodeEnum.PRECONDITION_FAILED, "修改失败，XX已存在。请修改XX。");
-        }
+        // if (isRepeat(updateDto.getId(), Demo::getName, updateDto.getName())){
+        //     throw new AppException(ResponseCodeEnum.PRECONDITION_FAILED, "修改失败，XX已存在。请修改XX。");
+        // }
         Demo demo = new Demo();
         BeanUtils.copyProperties(updateDto, demo);
         /**
@@ -97,13 +95,14 @@ public class DemoServiceImpl extends ServiceImpl<DemoMapper, Demo> implements De
     }
 
     @Override
-    public boolean isRepeat(Long id, SFunction<Demo,?> columnFunction, String columnValue) {
+    public boolean isRepeat(Long id, SFunction<Demo,?> func, String value) {
         LambdaQueryWrapper<Demo> lqw = Wrappers.lambdaQuery();
         lqw.eq(Demo::getDeleted, 0);
-        lqw.eq(columnFunction, columnValue);
+        lqw.eq(func, value);
         if (Objects.nonNull(id)) {
             lqw.ne(Demo::getId, id);
         }
         return super.count(lqw) > 0;
     }
+
 }

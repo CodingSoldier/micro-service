@@ -1,4 +1,4 @@
-package ${packageDto};
+package ${packageVo};
 
 <#list table.importPackages as pkg>
 import ${pkg};
@@ -11,22 +11,19 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 /**
- * @author ${author}
- * @since ${date}
- */
+* @author ${author}
+* @since ${date}
+*/
 @Data
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "${table.comment!}-新增")
-public class ${addDtoClassName} implements Serializable {
+@ApiModel(value = "${table.comment!}-分页-返回值")
+public class ${pageVoClassName} implements Serializable {
 
     private static final long serialVersionUID = 1L;
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>
-    <#if field.propertyName == "id">
-        <#continue>
-    </#if>
 
     <#if field.comment!?length gt 0>
     @ApiModelProperty(value = "${field.comment}")
