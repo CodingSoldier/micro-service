@@ -3,25 +3,30 @@ package com.github.codingsoldier.bootweb;
 
 import com.github.codingsoldier.starter.mybatisplus.generator.CodeGenerator;
 
-public class MyGen {
+public class MybatisPlusCodeGenerator {
 
     /**
-     * 修改 OUTPUT_DIR、PARENT、AUTHOR、TABLE_NAME 后运行main方法
      * 注意，旧文件不会被覆盖
-     * @param args
      */
     public static void main(String[] args) {
-
-        CodeGenerator.dbUrl = "jdbc:mysql://127.0.0.1:3306/cpq";
+        // 数据库url
+        CodeGenerator.dbUrl = "jdbc:mysql://localhost:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true";
+        // 数据库账号
         CodeGenerator.dbUsername = "root";
+        // 数据库密码
         CodeGenerator.dbPassword = "cpq..123";
 
+        // 项目 main 目录的绝对路径
         CodeGenerator.srcMainAbsolutePath = "E:\\github\\micro-service\\examples\\example-parent\\boot-web\\src\\main";
-        CodeGenerator.parent = "com.github.codingsoldier.bootweb.temp222";
+        // 项目包名
+        CodeGenerator.parent = "com.github.codingsoldier.bootweb.temp";
 
+        // 作者
         CodeGenerator.author = "cpq";
+        // 表名
         CodeGenerator.tableName = "demo";
 
+        // 生成代码
         CodeGenerator.generate();
 
     }
