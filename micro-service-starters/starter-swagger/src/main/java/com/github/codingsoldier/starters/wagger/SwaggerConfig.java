@@ -47,13 +47,14 @@ public class SwaggerConfig {
     @Bean
     @ConditionalOnMissingBean(Docket.class)
     public Docket createRestApi() {
-        if (logger.isDebugEnabled()) {
-            logger.debug("创建 IOC Bean Docket");
-        }
         String basePackage = starterSwaggerProperties.getBasePackage();
         if (BASE_PACKAGE.equals(basePackage)){
             String msg = String.format("警告：swagger扫描目录为%s，请通过 framework.starter.swagger.base-package 修改扫描目录", basePackage);
             logger.warn(msg);
+        }
+
+        if (logger.isDebugEnabled()) {
+            logger.debug("starter-swagger 创建 Swagger Docket，详细配置请查看 com.github.codingsoldier.starters.wagger.SwaggerConfig");
         }
         return new Docket(DocumentationType.OAS_30)
             .apiInfo(apiInfo())//文档信息
