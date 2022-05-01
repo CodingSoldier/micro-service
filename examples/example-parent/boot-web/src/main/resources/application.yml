@@ -90,8 +90,9 @@ framework:
   starter:
 #    mybatis-plus:
 #      enabled: false
-#    swagger:
+    swagger:
 #      enabled: false
+      base-package: com.github.codingsoldier.bootweb
 #    web:
 #      enabled: false
 #    redis:

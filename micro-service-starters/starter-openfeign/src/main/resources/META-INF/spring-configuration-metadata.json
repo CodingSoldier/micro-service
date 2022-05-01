@@ -20,42 +20,42 @@
       "defaultValue": true
     },
     {
-      "name": "framework.starter.openfeign.okhttp.connectTimeoutSeconds",
+      "name": "framework.starter.openfeign.okhttp.connect-timeout-seconds",
       "type": "java.lang.Long",
       "description": "连接超时.",
       "sourceType": "com.github.codingsoldier.starter.openfeign.properties.OkHttpClientProperties",
       "defaultValue": 3
     },
     {
-      "name": "framework.starter.openfeign.okhttp.readTimeoutSeconds",
+      "name": "framework.starter.openfeign.okhttp.read-timeout-seconds",
       "type": "java.lang.Long",
       "description": "读超时",
       "sourceType": "com.github.codingsoldier.starter.openfeign.properties.OkHttpClientProperties",
       "defaultValue": 30
     },
     {
-      "name": "framework.starter.openfeign.okhttp.writeTimeoutSeconds",
+      "name": "framework.starter.openfeign.okhttp.write-timeout-seconds",
       "type": "java.lang.Long",
       "description": "写超时",
       "sourceType": "com.github.codingsoldier.starter.openfeign.properties.OkHttpClientProperties",
       "defaultValue": 30
     },
     {
-      "name": "framework.starter.openfeign.okhttp.retryOnConnectionFailure",
+      "name": "framework.starter.openfeign.okhttp.retry-on-connection-failure",
       "type": "java.lang.Boolean",
       "description": "是否自动重连",
       "sourceType": "com.github.codingsoldier.starter.openfeign.properties.OkHttpClientProperties",
       "defaultValue": true
     },
     {
-      "name": "framework.starter.openfeign.okhttp.pool.maxIdleConnections",
+      "name": "framework.starter.openfeign.okhttp.pool.max-idle-connections",
       "type": "java.lang.Integer",
       "description": "连接池中的最大空闲线程个数",
       "sourceType": "com.github.codingsoldier.starter.openfeign.properties.OkHttpClientProperties$Pool",
       "defaultValue": 50
     },
     {
-      "name": "framework.starter.openfeign.okhttp.pool.keepAliveDurationSeconds",
+      "name": "framework.starter.openfeign.okhttp.pool.keep-alive-duration-seconds",
       "type": "java.lang.Long",
       "description": "Long",
       "sourceType": "com.github.codingsoldier.starter.openfeign.properties.OkHttpClientProperties$Pool",

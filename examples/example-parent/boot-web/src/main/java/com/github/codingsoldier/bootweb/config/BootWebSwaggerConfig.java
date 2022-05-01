@@ -1,6 +1,6 @@
 // package com.github.codingsoldier.bootweb.config;
 //
-// import com.github.codingsoldier.starterswagger.SwaggerConfig;
+// import com.github.codingsoldier.starters.wagger.SwaggerConfig;
 // import lombok.extern.slf4j.Slf4j;
 // import org.springframework.context.annotation.Bean;
 // import org.springframework.context.annotation.Configuration;
