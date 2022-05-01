@@ -1,13 +1,13 @@
-package com.github.codingsoldier.bootweb.temp.controller;
+package com.github.codingsoldier.bootweb.temp222.controller;
 
-
-import com.github.codingsoldier.bootweb.temp.dto.DemoAddDto;
-import com.github.codingsoldier.bootweb.temp.dto.DemoPageQueryDto;
-import com.github.codingsoldier.bootweb.temp.dto.DemoUpdateDto;
-import com.github.codingsoldier.bootweb.temp.service.impl.DemoServiceImpl;
-import com.github.codingsoldier.bootweb.temp.vo.DemoDetailVo;
-import com.github.codingsoldier.bootweb.temp.vo.DemoPageVo;
+import com.github.codingsoldier.bootweb.temp222.service.DemoService;
+import com.github.codingsoldier.bootweb.temp222.dto.DemoAddDto;
+import com.github.codingsoldier.bootweb.temp222.dto.DemoUpdateDto;
+import com.github.codingsoldier.bootweb.temp222.dto.DemoPageQueryDto;
+import com.github.codingsoldier.bootweb.temp222.vo.DemoDetailVo;
+import com.github.codingsoldier.bootweb.temp222.vo.DemoPageVo;
 import com.github.codingsoldier.starter.mybatisplus.resp.PageResult;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import javax.validation.Valid;
  * </p>
  *
  * @author cpq
- * @since 2022-05-02 01:18:08
+ * @since 2022-05-02 04:50:06
  */
 @RestController
 @RequestMapping("/demo")
@@ -29,41 +29,36 @@ import javax.validation.Valid;
 public class DemoController {
 
     @Autowired
-    private DemoServiceImpl demoService;
+    private DemoService demoService;
 
     @PostMapping("/add")
     @ApiOperation(value = "新增")
     public Long add(@RequestBody @Valid DemoAddDto addDto) {
-        Long id = demoService.add(addDto);
-        return id;
+        return demoService.add(addDto);
     }
 
     @PutMapping("/update")
     @ApiOperation(value = "修改")
     public Long update(@RequestBody @Valid DemoUpdateDto updateDto) {
-        Long id = demoService.update(updateDto);
-        return id;
+        return demoService.update(updateDto);
     }
 
     @DeleteMapping("/delete/{id}")
     @ApiOperation(value = "删除")
     public boolean delete(@PathVariable("id") Long id) {
-        boolean r = demoService.delete(id);
-        return r;
+        return demoService.delete(id);
     }
 
     @GetMapping("/detail/{id}")
     @ApiOperation(value = "详情")
     public DemoDetailVo detail(@PathVariable("id") Long id) {
-        DemoDetailVo detail = demoService.detail(id);
-        return detail;
+        return demoService.detail(id);
     }
 
     @GetMapping("/page")
     @ApiOperation(value = "分页")
     public PageResult<DemoPageVo> pageQuery(@ModelAttribute DemoPageQueryDto queryDto) {
-        PageResult<DemoPageVo> pageResult = demoService.pageQuery(queryDto);
-        return pageResult;
+        return demoService.pageQuery(queryDto);
     }
 
 }

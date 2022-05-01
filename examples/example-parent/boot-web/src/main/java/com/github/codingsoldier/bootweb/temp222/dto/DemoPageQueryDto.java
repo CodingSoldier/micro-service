@@ -1,34 +1,29 @@
-package com.github.codingsoldier.bootweb.temp.dto;
+package com.github.codingsoldier.bootweb.temp222.dto;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import com.github.codingsoldier.starter.mybatisplus.req.PageReq;
+
 /**
-* @author cpq
-* @since 2022-05-02 01:18:08
-*/
+ * @author cpq
+ * @since 2022-05-02 04:50:06
+ */
 @Data
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "demo表修改")
-public class DemoUpdateDto implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+@ApiModel(value = "demo表-分页查询参数")
+public class DemoPageQueryDto extends PageReq {
 
-private static final long serialVersionUID = 1L;
-
-    @ApiModelProperty(value = "id")
-    private Long id;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "姓名")
     private String name;
@@ -56,4 +51,5 @@ private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "是否已删除，0-未删除，1-删除")
     private Integer deleted;
+
 }

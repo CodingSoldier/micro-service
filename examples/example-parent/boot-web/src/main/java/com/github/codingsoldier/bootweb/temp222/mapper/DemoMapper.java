@@ -1,20 +1,19 @@
-package com.github.codingsoldier.bootweb.temp.mapper;
+package com.github.codingsoldier.bootweb.temp222.mapper;
 
+import com.github.codingsoldier.bootweb.temp222.entity.Demo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.github.codingsoldier.bootweb.temp222.vo.DemoPageVo;
+import com.github.codingsoldier.bootweb.temp222.dto.DemoPageQueryDto;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.github.codingsoldier.bootweb.temp.dto.DemoPageQueryDto;
-import com.github.codingsoldier.bootweb.temp.entity.Demo;
-import com.github.codingsoldier.bootweb.temp.vo.DemoPageVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
 /**
  * <p>
  * demo表 Mapper 接口
  * </p>
  *
  * @author cpq
- * @since 2022-05-02 01:18:08
+ * @since 2022-05-02 04:50:06
  */
 @Mapper
 public interface DemoMapper extends BaseMapper<Demo> {

@@ -1,13 +1,13 @@
-package com.github.codingsoldier.bootweb.temp.service;
+package com.github.codingsoldier.bootweb.temp222.service;
 
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
+import com.github.codingsoldier.bootweb.temp222.entity.Demo;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.github.codingsoldier.bootweb.temp.dto.DemoAddDto;
-import com.github.codingsoldier.bootweb.temp.dto.DemoPageQueryDto;
-import com.github.codingsoldier.bootweb.temp.dto.DemoUpdateDto;
-import com.github.codingsoldier.bootweb.temp.entity.Demo;
-import com.github.codingsoldier.bootweb.temp.vo.DemoDetailVo;
-import com.github.codingsoldier.bootweb.temp.vo.DemoPageVo;
+import com.github.codingsoldier.bootweb.temp222.dto.DemoAddDto;
+import com.github.codingsoldier.bootweb.temp222.dto.DemoUpdateDto;
+import com.github.codingsoldier.bootweb.temp222.dto.DemoPageQueryDto;
+import com.github.codingsoldier.bootweb.temp222.vo.DemoDetailVo;
+import com.github.codingsoldier.bootweb.temp222.vo.DemoPageVo;
 import com.github.codingsoldier.starter.mybatisplus.resp.PageResult;
 
 /**
@@ -16,7 +16,7 @@ import com.github.codingsoldier.starter.mybatisplus.resp.PageResult;
  * </p>
  *
  * @author cpq
- * @since 2022-05-02 01:18:08
+ * @since 2022-05-02 04:50:06
  */
 public interface DemoService extends IService<Demo> {
 

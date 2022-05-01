@@ -38,7 +38,6 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
 }
 <#else>
 public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${table.serviceName} {
-
 	<#assign uncapFirstEntity="${entity}"? uncap_first/>
 	<#assign uncapFirstMapper="${table.mapperName}"? uncap_first/>
 
@@ -53,11 +52,9 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
         // }
         ${entity} ${uncapFirstEntity} = new ${entity}();
         BeanUtils.copyProperties(addDto, ${uncapFirstEntity});
-        /**
-         * 新增
-         */
-        super.save(demo);
-        return demo.getId();
+        // 新增
+        super.save(${uncapFirstEntity});
+        return ${uncapFirstEntity}.getId();
     }
 
     @Override
@@ -68,19 +65,15 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
         // }
         ${entity} ${uncapFirstEntity} = new ${entity}();
         BeanUtils.copyProperties(updateDto, ${uncapFirstEntity});
-        /**
-         * 修改
-         */
-        super.updateById(demo);
-        return demo.getId();
+        // 修改
+        super.updateById(${uncapFirstEntity});
+        return ${uncapFirstEntity}.getId();
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean delete(Long id) {
-        /**
-         * 删除
-         */
+        // 删除
         boolean r = super.removeById(id);
         return r;
     }

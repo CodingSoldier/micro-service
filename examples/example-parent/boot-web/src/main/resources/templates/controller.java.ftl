@@ -41,7 +41,6 @@ public class ${table.controllerName} extends ${superControllerClass} {
 <#else>
 public class ${table.controllerName} {
 </#if>
-
 	<#assign uncapFirstServerName="${table.serviceName}"? uncap_first/>
 
     @Autowired
@@ -50,36 +49,31 @@ public class ${table.controllerName} {
     @PostMapping("/add")
     @ApiOperation(value = "新增")
     public Long add(@RequestBody @Valid ${addDtoClassName} addDto) {
-        Long id = ${uncapFirstServerName}.add(addDto);
-        return id;
+        return ${uncapFirstServerName}.add(addDto);
     }
 
     @PutMapping("/update")
     @ApiOperation(value = "修改")
     public Long update(@RequestBody @Valid ${updateDtoClassName} updateDto) {
-        Long id = ${uncapFirstServerName}.update(updateDto);
-        return id;
+        return ${uncapFirstServerName}.update(updateDto);
     }
 
     @DeleteMapping("/delete/{id}")
     @ApiOperation(value = "删除")
     public boolean delete(@PathVariable("id") Long id) {
-        boolean r = ${uncapFirstServerName}.delete(id);
-        return r;
+        return ${uncapFirstServerName}.delete(id);
     }
 
     @GetMapping("/detail/{id}")
     @ApiOperation(value = "详情")
     public ${detailVoClassName} detail(@PathVariable("id") Long id) {
-        ${detailVoClassName} detail = ${uncapFirstServerName}.detail(id);
-        return detail;
+        return ${uncapFirstServerName}.detail(id);
     }
 
     @GetMapping("/page")
     @ApiOperation(value = "分页")
     public PageResult<${pageVoClassName}> pageQuery(@ModelAttribute ${pageQueryDtoClassName} queryDto) {
-        PageResult<${pageVoClassName}> pageResult = ${uncapFirstServerName}.pageQuery(queryDto);
-        return pageResult;
+        return ${uncapFirstServerName}.pageQuery(queryDto);
     }
 
 }

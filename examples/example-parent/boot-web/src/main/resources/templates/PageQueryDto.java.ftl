@@ -1,12 +1,19 @@
 package ${packageDto};
 
 <#list table.importPackages as pkg>
+    <#if pkg ? starts_with("com.baomidou.mybatisplus.annotation")>
+        <#continue>
+    </#if>
+    <#if pkg ? starts_with("java.io.Serializable")>
+        <#continue>
+    </#if>
 import ${pkg};
 </#list>
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -20,6 +27,7 @@ import com.github.codingsoldier.starter.mybatisplus.req.PageReq;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @ApiModel(value = "${table.comment!}-分页查询参数")
 public class ${pageQueryDtoClassName} extends PageReq {
 

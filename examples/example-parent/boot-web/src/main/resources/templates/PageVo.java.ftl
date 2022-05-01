@@ -1,6 +1,9 @@
 package ${packageVo};
 
 <#list table.importPackages as pkg>
+    <#if pkg ? starts_with("com.baomidou.mybatisplus.annotation")>
+        <#continue>
+    </#if>
 import ${pkg};
 </#list>
 import io.swagger.annotations.ApiModel;

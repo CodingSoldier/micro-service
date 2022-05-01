@@ -1,27 +1,29 @@
-package com.github.codingsoldier.bootweb.temp.dto;
+package com.github.codingsoldier.bootweb.temp222.vo;
 
-import com.github.codingsoldier.starter.mybatisplus.req.PageReq;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.time.LocalDateTime;
-
 /**
- * @author cpq
- * @since 2022-05-02 01:18:08
- */
+* @author cpq
+* @since 2022-05-02 04:50:06
+*/
 @Data
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-@ApiModel(value = "demo表-分页查询")
-public class DemoPageQueryDto extends PageReq {
+@ApiModel(value = "demo表-分页-返回值")
+public class DemoPageVo implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @ApiModelProperty(value = "id")
+    private Long id;
 
     @ApiModelProperty(value = "姓名")
     private String name;
@@ -49,4 +51,5 @@ public class DemoPageQueryDto extends PageReq {
 
     @ApiModelProperty(value = "是否已删除，0-未删除，1-删除")
     private Integer deleted;
+
 }

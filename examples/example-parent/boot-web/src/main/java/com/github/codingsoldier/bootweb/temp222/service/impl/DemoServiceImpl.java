@@ -1,19 +1,19 @@
-package com.github.codingsoldier.bootweb.temp.service.impl;
+package com.github.codingsoldier.bootweb.temp222.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.codingsoldier.bootweb.temp222.entity.Demo;
+import com.github.codingsoldier.bootweb.temp222.mapper.DemoMapper;
+import com.github.codingsoldier.bootweb.temp222.service.DemoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.github.codingsoldier.bootweb.temp.dto.DemoAddDto;
-import com.github.codingsoldier.bootweb.temp.dto.DemoPageQueryDto;
-import com.github.codingsoldier.bootweb.temp.dto.DemoUpdateDto;
-import com.github.codingsoldier.bootweb.temp.entity.Demo;
-import com.github.codingsoldier.bootweb.temp.mapper.DemoMapper;
-import com.github.codingsoldier.bootweb.temp.service.DemoService;
-import com.github.codingsoldier.bootweb.temp.vo.DemoDetailVo;
-import com.github.codingsoldier.bootweb.temp.vo.DemoPageVo;
+import com.github.codingsoldier.bootweb.temp222.dto.DemoAddDto;
+import com.github.codingsoldier.bootweb.temp222.dto.DemoUpdateDto;
+import com.github.codingsoldier.bootweb.temp222.dto.DemoPageQueryDto;
+import com.github.codingsoldier.bootweb.temp222.vo.DemoDetailVo;
+import com.github.codingsoldier.bootweb.temp222.vo.DemoPageVo;
 import com.github.codingsoldier.starter.mybatisplus.resp.PageResult;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +29,13 @@ import java.util.Objects;
  * </p>
  *
  * @author cpq
- * @since 2022-05-02 01:18:08
+ * @since 2022-05-02 04:50:06
  */
 @Service
 public class DemoServiceImpl extends ServiceImpl<DemoMapper, Demo> implements DemoService {
 
     @Autowired
     private DemoMapper demoMapper;
-
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -46,9 +45,7 @@ public class DemoServiceImpl extends ServiceImpl<DemoMapper, Demo> implements De
         // }
         Demo demo = new Demo();
         BeanUtils.copyProperties(addDto, demo);
-        /**
-         * 新增
-         */
+        // 新增
         super.save(demo);
         return demo.getId();
     }
@@ -61,9 +58,7 @@ public class DemoServiceImpl extends ServiceImpl<DemoMapper, Demo> implements De
         // }
         Demo demo = new Demo();
         BeanUtils.copyProperties(updateDto, demo);
-        /**
-         * 修改
-         */
+        // 修改
         super.updateById(demo);
         return demo.getId();
     }
@@ -71,9 +66,7 @@ public class DemoServiceImpl extends ServiceImpl<DemoMapper, Demo> implements De
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean delete(Long id) {
-        /**
-         * 删除
-         */
+        // 删除
         boolean r = super.removeById(id);
         return r;
     }

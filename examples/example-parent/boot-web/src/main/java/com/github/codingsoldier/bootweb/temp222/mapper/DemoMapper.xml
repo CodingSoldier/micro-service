@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.github.codingsoldier.bootweb.temp.mapper.DemoMapper">
+<mapper namespace="com.github.codingsoldier.bootweb.temp222.mapper.DemoMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.github.codingsoldier.bootweb.temp.entity.Demo">
+    <resultMap id="BaseResultMap" type="com.github.codingsoldier.bootweb.temp222.entity.Demo">
         <id column="id" property="id" />
         <result column="name" property="name" />
         <result column="age" property="age" />
@@ -21,7 +21,8 @@
         id, name, age, phone, date_of_birth, created_by, updated_by, created_time, updated_time, deleted
     </sql>
 
-    <select id="pageQuery" resultType="com.github.codingsoldier.bootweb.temp.vo.DemoPageVo">
+
+    <select id="pageQuery" resultType="com.github.codingsoldier.bootweb.temp222.vo.DemoPageVo">
         SELECT *
         FROM demo
         <where>
