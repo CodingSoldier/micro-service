@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * https://baomidou.com/pages/981406/#mapper-%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE
@@ -29,6 +30,8 @@ public class CodeGenerator {
     public static String parent;
     public static String author;
     public static String tableName;
+    
+    public static String templatesDir="/templates/v2";
 
 
     public static final String TABLE_PREFIX = "t_";
@@ -95,39 +98,40 @@ public class CodeGenerator {
                     .build();
 
         String tableJavaName = CodeGeneratorUtil.tableJavaName(tableName);
-        String templateDir = "/templates/v2";
 
         Map<String, Object> map = new HashMap<>();
         Map<String, String> files = new HashMap<>();
         map.put("packageDto", parent + ".dto");
-        map.put("packageAo", parent + ".ao");
         map.put("packageVo", parent + ".vo");
-
 
         String addDtoClassName = tableJavaName + "AddDto";
         map.put("addDtoClassName", addDtoClassName);
-        files.put(addDtoClassName, templateDir + "/AddDto.java.ftl");
+        files.put(addDtoClassName, templatesDir + "/AddDto.java.ftl");
 
         String updateDtoClassName = tableJavaName + "UpdateDto";
         map.put("updateDtoClassName", updateDtoClassName);
-        files.put(updateDtoClassName, templateDir + "/UpdateDto.java.ftl");
+        files.put(updateDtoClassName, templatesDir + "/UpdateDto.java.ftl");
 
         String pageQueryDtoClassName = tableJavaName + "PageQueryDto";
         map.put("pageQueryDtoClassName", pageQueryDtoClassName);
-        files.put(pageQueryDtoClassName, templateDir + "/PageQueryDto.java.ftl");
+        files.put(pageQueryDtoClassName, templatesDir + "/PageQueryDto.java.ftl");
 
-        String addUpdateAoClassName = tableJavaName + "AddUpdateAo";
-        map.put("addUpdateAoClassName", addUpdateAoClassName);
-        files.put(addUpdateAoClassName, templateDir + "/AddUpdateAo.java.ftl");
 
         String detailVoClassName = tableJavaName + "DetailVo";
         map.put("detailVoClassName", detailVoClassName);
-        files.put(detailVoClassName, templateDir + "/DetailVo.java.ftl");
+        files.put(detailVoClassName, templatesDir + "/DetailVo.java.ftl");
 
         String pageVoClassName = tableJavaName + "PageVo";
         map.put("pageVoClassName", pageVoClassName);
-        files.put(pageVoClassName, templateDir + "/PageVo.java.ftl");
+        files.put(pageVoClassName, templatesDir + "/PageVo.java.ftl");
 
+        if (Objects.equals(templatesDir, "/templates/v2")){
+            map.put("packageAo", parent + ".ao");
+
+            String addUpdateAoClassName = tableJavaName + "AddUpdateAo";
+            map.put("addUpdateAoClassName", addUpdateAoClassName);
+            files.put(addUpdateAoClassName, templatesDir + "/AddUpdateAo.java.ftl");
+        }
 
         InjectionConfig injectionConfig = new InjectionConfig.Builder()
                 .beforeOutputFile((tableInfo, objectMap) -> {
@@ -140,12 +144,12 @@ public class CodeGenerator {
 
         TemplateConfig templateConfig = new TemplateConfig.Builder()
                 .disable(TemplateType.ENTITY)
-                .entity(templateDir + "/entity.java")
-                .service(templateDir + "/service.java")
-                .serviceImpl(templateDir + "/serviceImpl.java")
-                .mapper(templateDir + "/mapper.java")
-                .mapperXml(templateDir + "/mapper.xml")
-                .controller(templateDir + "/controller.java")
+                .entity(templatesDir + "/entity.java")
+                .service(templatesDir + "/service.java")
+                .serviceImpl(templatesDir + "/serviceImpl.java")
+                .mapper(templatesDir + "/mapper.java")
+                .mapperXml(templatesDir + "/mapper.xml")
+                .controller(templatesDir + "/controller.java")
                 .build();
 
         AutoGenerator generator = new AutoGenerator(dataSource);
