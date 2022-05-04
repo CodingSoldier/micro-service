@@ -33,3 +33,10 @@ public class MybatisPlusCodeGenerator {
 }
 
 ```
+
+### templates/v1 模板
+service层 新增、修改 分两个接口
+
+### templates/v2 模板
+service层 新增、修改 合并为一个接口
+

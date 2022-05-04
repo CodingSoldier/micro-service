@@ -95,11 +95,12 @@ public class CodeGenerator {
                     .build();
 
         String tableJavaName = CodeGeneratorUtil.tableJavaName(tableName);
-        String templateDir = "/templates/v1";
+        String templateDir = "/templates/v2";
 
         Map<String, Object> map = new HashMap<>();
         Map<String, String> files = new HashMap<>();
         map.put("packageDto", parent + ".dto");
+        map.put("packageAo", parent + ".ao");
         map.put("packageVo", parent + ".vo");
 
 
@@ -115,6 +116,10 @@ public class CodeGenerator {
         map.put("pageQueryDtoClassName", pageQueryDtoClassName);
         files.put(pageQueryDtoClassName, templateDir + "/PageQueryDto.java.ftl");
 
+        String addUpdateAoClassName = tableJavaName + "AddUpdateAo";
+        map.put("addUpdateAoClassName", addUpdateAoClassName);
+        files.put(addUpdateAoClassName, templateDir + "/AddUpdateAo.java.ftl");
+
         String detailVoClassName = tableJavaName + "DetailVo";
         map.put("detailVoClassName", detailVoClassName);
         files.put(detailVoClassName, templateDir + "/DetailVo.java.ftl");
@@ -122,6 +127,7 @@ public class CodeGenerator {
         String pageVoClassName = tableJavaName + "PageVo";
         map.put("pageVoClassName", pageVoClassName);
         files.put(pageVoClassName, templateDir + "/PageVo.java.ftl");
+
 
         InjectionConfig injectionConfig = new InjectionConfig.Builder()
                 .beforeOutputFile((tableInfo, objectMap) -> {
@@ -172,7 +178,7 @@ public class CodeGenerator {
         // 作者
         CodeGenerator.author = "cpq";
         // 表名
-        CodeGenerator.tableName = "demo";
+        CodeGenerator.tableName = "user";
 
         // 生成代码
         CodeGenerator.generate();
