@@ -15,6 +15,8 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * redis配置类
+ * @author cpq
+ * @since 2022-03-17 11:28:55
  */
 @Configuration
 @EnableCaching
@@ -44,6 +46,7 @@ public class RedisConfig {
 
     /**
      * 设置RedisTemplate规则
+     *
      * @param redisConnectionFactory
      * @return
      */

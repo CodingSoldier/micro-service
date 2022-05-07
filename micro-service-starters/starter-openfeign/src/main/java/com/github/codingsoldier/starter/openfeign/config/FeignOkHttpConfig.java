@@ -15,8 +15,10 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * OpenFeign 使用 OkHttp 配置类
+ * @author cpq
+ * @since 2022-03-17 11:28:55
  */
-@Configuration(proxyBeanMethods=false)
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(Feign.class)
 @AutoConfigureBefore(FeignAutoConfiguration.class)
 @EnableConfigurationProperties(OkHttpClientProperties.class)

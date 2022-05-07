@@ -22,7 +22,7 @@ import java.util.HashMap;
 public class RedisTestController {
 
     @GetMapping("/test")
-    public String test(HttpServletRequest request){
+    public String test(HttpServletRequest request) {
 
         RedisUtil.opsForValue().set("for-value:aa", "aaa");
         ValueOperations<String, String> opsForValue = RedisUtil.opsForValue();
@@ -46,7 +46,6 @@ public class RedisTestController {
         HashOperations<String, String, Integer> opsForHash = RedisUtil.opsForHash();
         Integer hashVal = opsForHash.get("hashkey", "22");
         log.info("hashVal {}", hashVal);
-
 
 
         ArrayList<String> list = new ArrayList<>();

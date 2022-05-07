@@ -15,7 +15,6 @@ import java.util.List;
 
 /**
  * 监听事件推送，动态更新路由网关 Service
- *
  */
 @Slf4j
 @Service

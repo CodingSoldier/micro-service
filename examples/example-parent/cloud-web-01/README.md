@@ -1,9 +1,11 @@
 # cloud-web-01
+
 spring-cloud工程使用例子
 
 使用步骤：
 
 1、添加依赖
+
 ```xml
         <!--  SpringCloud2020版本默认不启用bootstrap配置，
         需要加入依赖 spring-cloud-starter-bootstrap -->
@@ -28,7 +30,8 @@ spring-cloud工程使用例子
 4、启动类添加 @EnableDiscoveryClient
 
 ## Sleuth + Zipkin 分布式日志追踪
-1、下载 zipkin-server 
+
+1、下载 zipkin-server
 
 https://repo1.maven.org/maven2/io/zipkin/java/zipkin-server/2.12.9/zipkin-server-2.12.9-exec.jar
 
@@ -43,6 +46,7 @@ https://repo1.maven.org/maven2/io/zipkin/java/zipkin-server/2.12.9/zipkin-server
     java -Xmx512m -Xms512m -jar zipkin-server-2.12.9-exec.jar --STORAGE_TYPE=mysql --MYSQL_HOST=127.0.0.1 --MYSQL_TCP_PORT=3306 --MYSQL_USER=root --MYSQL_PASS=cpq..123 --MYSQL_DB=zipkin --QUERY_PORT=10103
 
 4、工程添加依赖
+
 ```xml
     <dependency>
         <groupId>org.springframework.cloud</groupId>
@@ -53,7 +57,9 @@ https://repo1.maven.org/maven2/io/zipkin/java/zipkin-server/2.12.9/zipkin-server
         <artifactId>spring-cloud-sleuth-zipkin</artifactId>
     </dependency>
 ```
+
 5、修改配置文件
+
 ```yaml
 spring:
   # sleuth + zipkin 分布式链路追踪
@@ -70,15 +76,17 @@ spring:
     # 指定 zipkin 的地址
     base-url: http://localhost:10103
 ```
+
 6、配置日志的xml添加 [%X{traceId},%X{spanId}]
 
 7、运行项目，发送请求。
 
 8、升级到 spring cloud 2020 后，服务端没接收到数据
 
-
 ## openfeign
+
 1、导入依赖包
+
 ```xml
     <!-- loadbalancer 将替换 ribbon -->
     <dependency>
@@ -96,7 +104,9 @@ spring:
         <artifactId>feign-okhttp</artifactId>
     </dependency>
 ```
+
 2、添加配置
+
 ```yxml
 # Feign 的相关配置
 feign:
@@ -119,6 +129,7 @@ feign:
   okhttp:
     enabled: true
 ```
+
 3、启动类添加 @EnableFeignClients("com.github.codingsoldier.example")
 
 4、添加配置类 FeignConfig、FeignOkHttpConfig
@@ -130,7 +141,9 @@ feign:
 表明 okhttp 生效
 
 ## sentinel
+
 ### sentinel 控制台 sentinel-dashboard
+
 1、下载 sentinel-dashboard ，下载地址：https://github.com/alibaba/Sentinel/releases
 
 2、启动 sentinel-dashboard ，启动命令：
@@ -139,10 +152,13 @@ feign:
 
 3、访问地址：http://localhost:10102/#/dashboard/home
 
-4、更多 sentinel-dashboard 文档：https://github.com/alibaba/Sentinel/wiki/%E6%96%B0%E6%89%8B%E6%8C%87%E5%8D%97#%E5%85%AC%E7%BD%91-demo
+4、更多 sentinel-dashboard
+文档：https://github.com/alibaba/Sentinel/wiki/%E6%96%B0%E6%89%8B%E6%8C%87%E5%8D%97#%E5%85%AC%E7%BD%91-demo
 
 ### 客户端使用 sentinel
+
 1、导入依赖
+
 ```xml
         <!-- spring-cloud-sentinel 和 sentinel-nacos -->
         <dependency>
@@ -156,6 +172,7 @@ feign:
 ```
 
 2、添加配置文件
+
 ```yaml
 spring:
   cloud:
@@ -166,6 +183,7 @@ spring:
         # 配置端口，启动一个 Http Server, 该 Server 会与 Sentinel 控制台做交互
         port: 10112
 ```
+
 3、新建 RateLimitController 、SimpleBlockHandler ，发送一次请求。
 
 刷新 sentinel-dashboard ，即可看到多了一个服务
@@ -183,7 +201,9 @@ spring:
 7、客户端规则默认存储在内存中，重启客户端，规则会消失
 
 ### sentinel 与 nacos 整合，实现规则持久化
+
 1、导入依赖
+
 ```xml
         <dependency>
             <groupId>com.alibaba.csp</groupId>
@@ -192,6 +212,7 @@ spring:
 ```
 
 2、添加配置文件
+
 ```yaml
 spring:
   cloud:
@@ -217,7 +238,9 @@ spring:
             # FlowRule 就是限流规则
             rule-type: flow
 ```
+
 3、nacos 新建dataId=${spring.application.name}-sentinel，类型是json，添加如下配置
+
 ```json
 [
     {
@@ -231,18 +254,22 @@ spring:
     }
 ]
 ```
+
 ![](./sentinel配置信息.jpg)
 
 4、添加方法：com.github.codingsoldier.example.cloudweb02.sentinel.RateLimitController.fromNacos
 
 ## openfeign 与 sentinel 整合
+
 1、配置文件
+
 ```yaml
 feign:
   # 打开 Sentinel 对 Feign 的支持
   sentinel:
     enabled: true
 ```
+
 2、新增 Sentinel02Fallback 实现 Web02Feign02Client。配置 Web02Feign02Client 的 fallback= Sentinel02Fallback.class
 
 或者

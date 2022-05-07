@@ -19,18 +19,17 @@ import java.util.concurrent.Executor;
 
 /**
  * <h1>通过 nacos 下发动态路由配置, 监听 Nacos 中路由配置变更</h1>
- *
  */
 @Slf4j
 @Component
 @DependsOn({"nacosGatewayConfig"})
 public class NacosListener {
 
+    private final RouteEventServiceImpl dynamicRouteService;
     /**
      * Nacos 配置服务
      */
     private ConfigService configService;
-    private final RouteEventServiceImpl dynamicRouteService;
 
     public NacosListener(RouteEventServiceImpl dynamicRouteService) {
         this.dynamicRouteService = dynamicRouteService;

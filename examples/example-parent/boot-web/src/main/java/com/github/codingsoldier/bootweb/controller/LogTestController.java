@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LogTestController {
 
     @GetMapping("/test")
-    public String getTestMsg(String str){
+    public String getTestMsg(String str) {
         log.debug("***** debug *****", str);
         log.info("***** info *****", str);
         log.warn("***** warn *****", str);

@@ -12,6 +12,11 @@ import java.time.OffsetDateTime;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * DateTime序列化
+ * @author cpq
+ * @since 2022-03-17 11:28:55
+ */
 public class DateTimeSerializer extends JsonSerializer<Object> {
 
     // @Override

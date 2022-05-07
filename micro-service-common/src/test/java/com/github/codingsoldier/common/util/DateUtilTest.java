@@ -13,15 +13,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class DateUtilTest {
 
     @Test
-    public void testDateTime(){
+    public void testDateTime() {
 
-        assertEquals(DateUtil.toLocalDate(1647187261000L),"2022-03-14");
-        assertEquals(DateUtil.toLocalDateTime(1647187261000L),"2022-03-14T00:01:01");
-        assertEquals(DateUtil.toOffsetDateTime(1647187261000L),"2022-03-14T00:01:01+08:00");
+        assertEquals(DateUtil.toLocalDate(1647187261000L), "2022-03-14");
+        assertEquals(DateUtil.toLocalDateTime(1647187261000L), "2022-03-14T00:01:01");
+        assertEquals(DateUtil.toOffsetDateTime(1647187261000L), "2022-03-14T00:01:01+08:00");
 
-        assertEquals(DateUtil.toLocalDate(1647187261000L),"2022-03-14");
-        assertEquals(DateUtil.toLocalDateTime(1647273541000L),"2022-03-14T23:59:01");
-        assertEquals(DateUtil.toOffsetDateTime(1647273541000L),"2022-03-14T23:59:01+08:00");
+        assertEquals(DateUtil.toLocalDate(1647187261000L), "2022-03-14");
+        assertEquals(DateUtil.toLocalDateTime(1647273541000L), "2022-03-14T23:59:01");
+        assertEquals(DateUtil.toOffsetDateTime(1647273541000L), "2022-03-14T23:59:01+08:00");
 
         long currentTimeMillis = System.currentTimeMillis();
         LocalDateTime localDateTime = LocalDateTime.now();

@@ -7,8 +7,8 @@ server:
 spring:
   cloud:
     nacos:
-##      server-addr: http://nacos-dev.vanrui.com
-#      # 服务注册发现
+      ##      server-addr: http://nacos-dev.vanrui.com
+      #      # 服务注册发现
       discovery:
         enabled: false
 #        server-addr: nacos-dev.vanrui.com:80

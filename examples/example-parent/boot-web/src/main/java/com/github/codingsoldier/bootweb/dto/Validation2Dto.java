@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
- *
  * @author cpq
  * @since 2022-03-17 04:10:40
  */

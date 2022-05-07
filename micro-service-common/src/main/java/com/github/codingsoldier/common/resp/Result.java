@@ -8,6 +8,8 @@ import java.io.Serializable;
 
 /**
  * 返回统一的数据结构
+ * @author chenpq05
+ * @since 2022/2/23 14:14
  */
 @ApiModel(value = "HTTP响应体数据")
 public class Result<T> implements Serializable {
@@ -35,31 +37,6 @@ public class Result<T> implements Serializable {
         this.data = data;
     }
 
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
-
-
     /**
      * 自定义方法
      */
@@ -82,6 +59,30 @@ public class Result<T> implements Serializable {
 
     public static <T> Result<T> fail(int code, String message, T data) {
         return new Result(code, message, data);
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
     }
 
 }

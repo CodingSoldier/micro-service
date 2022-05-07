@@ -21,6 +21,7 @@ public class Web01Controller {
 
     /**
      * 要使用动态刷新功能，必须在类上添加 @RefreshScope
+     *
      * @NacosValue 注解竟然无法获取值
      */
     @Value("${test.val}")
@@ -31,7 +32,7 @@ public class Web01Controller {
     private CloudWeb02Client cloudWeb02Client;
 
     @GetMapping("/test/get")
-    public String testGet(String msg){
+    public String testGet(String msg) {
         log.info("############aaaaaa");
         // String testVal = appApi.getTestVal(msg);
         // log.info("############{}", testVal);
@@ -39,7 +40,7 @@ public class Web01Controller {
     }
 
     @GetMapping("/test/local/fegin")
-    public String testLocalFein(String msg){
+    public String testLocalFein(String msg) {
         log.info("############{}  ", testVal);
         String result = cloudWeb02Client.getTestVal(msg
         );
@@ -50,7 +51,7 @@ public class Web01Controller {
 
 
     @GetMapping("/testvoid")
-    public String testvoid(String msg){
+    public String testvoid(String msg) {
         cloudWeb02Client.testvoid(msg);
         // String testVal = appApi.getTestVal(msg);
         log.info("############{}", msg);
@@ -58,14 +59,14 @@ public class Web01Controller {
     }
 
     @PostMapping("/test/namelist")
-    public String namelist(@RequestBody(required = false) List<String> nameList){
+    public String namelist(@RequestBody(required = false) List<String> nameList) {
         String testVal = cloudWeb02Client.nameList(nameList);
         log.info("############{}", testVal);
         return testVal;
     }
 
     @PostMapping("/test/map")
-    public String namelist(@RequestBody(required = false) Map map){
+    public String namelist(@RequestBody(required = false) Map map) {
         String testVal = cloudWeb02Client.map(map);
         log.info("############{}", testVal);
         return testVal;
@@ -74,7 +75,7 @@ public class Web01Controller {
     @PostMapping("/test/bodyparam")
     public String bo(@RequestBody() Map map,
                      @RequestParam(value = "pageNum", required = false) Integer pageNum,
-                     @RequestParam(value = "pageSize", required = false) Integer pageSize){
+                     @RequestParam(value = "pageSize", required = false) Integer pageSize) {
 
         String testVal = cloudWeb02Client.bodyAndParam(map, pageNum, pageSize);
         log.info("############{}", testVal);
@@ -83,7 +84,7 @@ public class Web01Controller {
 
     @DeleteMapping("/del")
     public String del(@RequestParam(value = "pageNum", required = false) Integer pageNum,
-                      @RequestParam(value = "pageSize", required = false) Integer pageSize){
+                      @RequestParam(value = "pageSize", required = false) Integer pageSize) {
         log.info("############{}", pageNum);
         log.info("############{}", pageSize);
         return pageSize.toString();
@@ -91,7 +92,7 @@ public class Web01Controller {
 
 
     @GetMapping("/test/val")
-    public String getTestVal(HttpServletRequest request){
+    public String getTestVal(HttpServletRequest request) {
         log.info("############{}", testVal);
         return testVal;
     }

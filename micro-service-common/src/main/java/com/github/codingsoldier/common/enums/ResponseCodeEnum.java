@@ -2,8 +2,9 @@ package com.github.codingsoldier.common.enums;
 
 /**
  * 响应code类
- * @since 2022/2/8 14:19
+ *
  * @author chenpq
+ * @since 2022/2/8 14:19
  */
 public enum ResponseCodeEnum {
 

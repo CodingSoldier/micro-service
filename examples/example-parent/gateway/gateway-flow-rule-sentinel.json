@@ -1,8 +1,8 @@
 [
-  {
-    "resource": "cloud-web-01",
-    "resourceMode": 1,
-    "count": 1,
-    "intervalSec": 60
-  }
+    {
+        "resource": "cloud-web-01",
+        "resourceMode": 1,
+        "count": 1,
+        "intervalSec": 60
+    }
 ]

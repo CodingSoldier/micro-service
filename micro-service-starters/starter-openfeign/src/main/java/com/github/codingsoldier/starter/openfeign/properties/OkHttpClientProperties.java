@@ -1,7 +1,11 @@
 package com.github.codingsoldier.starter.openfeign.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-
+/**
+ * feign okhttp配置
+ * @author cpq
+ * @since 2022-03-17 11:28:55
+ */
 @ConfigurationProperties(prefix = "framework.starter.openfeign.okhttp")
 public class OkHttpClientProperties {
 
@@ -80,7 +84,7 @@ public class OkHttpClientProperties {
         /**
          * 空间持续时间
          */
-        private Long keepAliveDurationSeconds = 5*60L;
+        private Long keepAliveDurationSeconds = 5 * 60L;
 
         public Integer getMaxIdleConnections() {
             return maxIdleConnections;

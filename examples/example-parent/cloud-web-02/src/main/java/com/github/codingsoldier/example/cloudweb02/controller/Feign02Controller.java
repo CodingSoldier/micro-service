@@ -19,13 +19,12 @@ public class Feign02Controller {
     public String test01(@RequestParam(value = "name", required = false) String name) {
         try {
             TimeUnit.MINUTES.sleep(5L);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         log.info("############{}", name);
-        return name+name;
+        return name + name;
     }
-
 
 
 }

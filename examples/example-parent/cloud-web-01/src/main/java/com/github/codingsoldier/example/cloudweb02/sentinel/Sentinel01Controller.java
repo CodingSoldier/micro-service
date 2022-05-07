@@ -50,6 +50,7 @@ public class Sentinel01Controller {
 
     /**
      * 从 nacos 获取规则
+     *
      * @return
      */
     @GetMapping("/from-nacos")
@@ -66,13 +67,13 @@ public class Sentinel01Controller {
     @GetMapping("/gateway01")
     public Result<String> gateway01(String msg) {
         log.info("##########gateway01 msg={}", msg);
-        return new Result<>(0, "", "gateway01 "+msg);
+        return new Result<>(0, "", "gateway01 " + msg);
     }
 
     @GetMapping("/gateway02")
     public Result<String> gateway02(String msg) {
         log.info("##########gateway02 msg={}", msg);
-        return new Result<>(0, "", "gateway02 "+msg);
+        return new Result<>(0, "", "gateway02 " + msg);
     }
 
 }

@@ -11,17 +11,18 @@ import java.time.LocalDateTime;
 /**
  * 自动填充
  * https://baomidou.com/pages/4c6bcf/
+ * @author cpq
+ * @since 2022-03-17 11:28:55
  */
 public class CustomMetaObjectHandler implements MetaObjectHandler {
-
-    @Lazy
-    @Autowired
-    private TokenInterface tokenInterface;
 
     private static final String CREATE_TIME = "createdTime";
     private static final String CREATE_ID = "createdBy";
     private static final String UPDATE_TIME = "updatedTime";
     private static final String UPDATE_ID = "updatedBy";
+    @Lazy
+    @Autowired
+    private TokenInterface tokenInterface;
 
     @Override
     public void insertFill(MetaObject metaObject) {
@@ -47,8 +48,8 @@ public class CustomMetaObjectHandler implements MetaObjectHandler {
         }
     }
 
-    private boolean isFieldValueNull(MetaObject metaObject, String field){
-        return metaObject.hasSetter(field)  && this.getFieldValByName(field, metaObject) == null;
+    private boolean isFieldValueNull(MetaObject metaObject, String field) {
+        return metaObject.hasSetter(field) && this.getFieldValByName(field, metaObject) == null;
     }
 
 }

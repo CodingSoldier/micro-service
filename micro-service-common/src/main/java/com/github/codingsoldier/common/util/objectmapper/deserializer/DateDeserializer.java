@@ -11,6 +11,11 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+/**
+ * Date反序列化
+ * @author cpq
+ * @since 2022-03-17 11:28:55
+ */
 public class DateDeserializer extends JsonDeserializer<Date> {
 
     @Override

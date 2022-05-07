@@ -15,10 +15,10 @@ public class FeignTestController {
     private Web02Feign02Client web02Feign02Client;
 
     @GetMapping("/test01")
-    public String test01(String msg){
-        log.info("############ {}" , msg);
+    public String test01(String msg) {
+        log.info("############ {}", msg);
         String s = web02Feign02Client.test01(msg);
-        log.info("@@@@@@@@@@@  {}" , s);
+        log.info("@@@@@@@@@@@  {}", s);
         return s;
     }
 

@@ -1,14 +1,14 @@
 [
-  {
-    "apiName": "cloud-web-01",
-    "predicateItems": [
-      {
-        "pattern": "/cloud-web-01/sentinel/dashboard/gateway**"
-      },
-      {
-        "pattern": "/cloud-web-01/sentinel/dashboard/gateway01",
-        "matchStrategy": 1
-      }
-    ]
-  }
+    {
+        "apiName": "cloud-web-01",
+        "predicateItems": [
+            {
+                "pattern": "/cloud-web-01/sentinel/dashboard/gateway**"
+            },
+            {
+                "pattern": "/cloud-web-01/sentinel/dashboard/gateway01",
+                "matchStrategy": 1
+            }
+        ]
+    }
 ]

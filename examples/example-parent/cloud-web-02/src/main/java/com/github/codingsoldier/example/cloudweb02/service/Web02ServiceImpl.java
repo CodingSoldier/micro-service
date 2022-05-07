@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class Web02ServiceImpl implements Web02Service{
+public class Web02ServiceImpl implements Web02Service {
 
     @Override
-    public String getTestVal(String name){
+    public String getTestVal(String name) {
         ThreadUtil.execute(() -> {
             log.info("线程池中打印日志");
         });

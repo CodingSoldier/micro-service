@@ -1,8 +1,8 @@
 package com.github.codingsoldier.bootweb.controller;
 
-import com.github.codingsoldier.common.exception.AppException;
-import com.github.codingsoldier.bootweb.vo.WebTestVo;
 import com.github.codingsoldier.bootweb.dto.WebTestDto;
+import com.github.codingsoldier.bootweb.vo.WebTestVo;
+import com.github.codingsoldier.common.exception.AppException;
 import com.github.codingsoldier.starter.web.annotation.NoWrapper;
 import com.github.codingsoldier.starter.web.context.ApplicationContextHolder;
 import io.swagger.annotations.Api;
@@ -19,14 +19,14 @@ import javax.servlet.http.HttpServletRequest;
 public class WebTestController {
 
     @GetMapping("/test/msg")
-    public String getTestMsg(HttpServletRequest request){
+    public String getTestMsg(HttpServletRequest request) {
         String property = ApplicationContextHolder.getApplicationContext().getEnvironment()
                 .getProperty("test.msg");
         return property;
     }
 
     @PostMapping("/test/time")
-    public WebTestVo testTime(@RequestBody WebTestDto webTestDto){
+    public WebTestVo testTime(@RequestBody WebTestDto webTestDto) {
         log.info("请求参数：{}", webTestDto);
         WebTestVo resp = new WebTestVo();
         BeanUtils.copyProperties(webTestDto, resp);
@@ -34,18 +34,18 @@ public class WebTestController {
     }
 
     @GetMapping("/test/app/exception")
-    public String testAppException(){
+    public String testAppException() {
         throw new AppException("测试APP异常");
     }
 
     @GetMapping("/test/exception")
-    public String testException() throws Exception{
+    public String testException() throws Exception {
         throw new Exception("测试Exception");
     }
 
     @GetMapping("/test/no-wrapper")
     @NoWrapper
-    public WebTestVo noWrapper(){
+    public WebTestVo noWrapper() {
         return WebTestVo.builder().id(1L).build();
     }
 

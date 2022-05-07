@@ -5,6 +5,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
+/**
+ * @author chenpq05
+ * @since 2022/2/23 14:14
+ */
 @EnableAdminServer
 @EnableDiscoveryClient
 @SpringBootApplication

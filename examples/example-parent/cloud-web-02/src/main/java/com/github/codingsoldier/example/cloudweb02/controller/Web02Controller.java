@@ -21,18 +21,18 @@ import java.util.Map;
 @RequestMapping("/web02")
 public class Web02Controller implements CloudWeb02Client {
 
+    @Autowired
+    Web02Service web02Service;
     /**
      * 要使用动态刷新功能，必须在类上添加 @RefreshScope
+     *
      * @NacosValue 注解竟然无法获取值
      */
     @Value("${test.val:0000}")
     private String testVal;
 
-    @Autowired
-    Web02Service web02Service;
-
     @Override
-    public String getTestVal(String name){
+    public String getTestVal(String name) {
         // try {
         //     TimeUnit.SECONDS.sleep(10L);
         // } catch (Exception e){
@@ -51,7 +51,7 @@ public class Web02Controller implements CloudWeb02Client {
 
     @Override
     public void testvoid(String name) {
-        log.info("########### {} " , name);
+        log.info("########### {} ", name);
     }
 
     @Override
@@ -73,7 +73,6 @@ public class Web02Controller implements CloudWeb02Client {
         String s = web02Service.testThreadPoolTraceId(name);
         return s;
     }
-
 
 
 }

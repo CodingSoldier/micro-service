@@ -4,7 +4,7 @@ package ${packageDto};
     <#if pkg ? starts_with("com.baomidou.mybatisplus.annotation")>
         <#continue>
     </#if>
-import ${pkg};
+    import ${pkg};
 </#list>
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 /**
- * @author ${author}
- * @since ${date}
- */
+* @author ${author}
+* @since ${date}
+*/
 @Data
 @SuperBuilder
 @AllArgsConstructor
@@ -24,7 +24,7 @@ import lombok.experimental.SuperBuilder;
 @ApiModel(value = "${table.comment!}-新增")
 public class ${addDtoClassName} implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>
     <#if field.propertyName == "id">
@@ -32,7 +32,7 @@ public class ${addDtoClassName} implements Serializable {
     </#if>
 
     <#if field.comment!?length gt 0>
-    @ApiModelProperty(value = "${field.comment}")
+        @ApiModelProperty(value = "${field.comment}")
     </#if>
     private ${field.propertyType} ${field.propertyName};
 </#list>

@@ -1,8 +1,8 @@
 ## nacos config 的配置必须写在bootstrap.yaml中，暂时没有其他办法
 ## nacos 命名空间 namespace-example-dev 上新建 cloud-web ，拓展名为 cloud-web
 spring:
-#  application:
-#    name: cloud-app
+  #  application:
+  #    name: cloud-app
   cloud:
     nacos:
       config:

@@ -1,5 +1,9 @@
 package com.github.codingsoldier.starter.web.constant;
 
+/**
+ * @author cpq
+ * @since 2022-03-17 11:28:55
+ */
 public class FeignConstant {
 
     /**

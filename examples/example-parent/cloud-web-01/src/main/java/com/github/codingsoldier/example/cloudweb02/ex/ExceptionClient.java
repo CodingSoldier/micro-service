@@ -7,11 +7,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * fallbackFactory：可以获取 feign 调用异常
  * fallback：无法获取 feign 调用异常
+ *
  * @FeignClient 不能同时使用 fallbackFactory、fallback 两种属性
  */
 // @FeignClient(value = "cloud-web-02", contextId= "ex", path = "/cloud-web-02/exception"
 // , fallbackFactory = HystrixClientFallbackFactory.class)
-@FeignClient(value = "cloud-web-02", contextId= "ex", path = "/cloud-web-02/exception")
+@FeignClient(value = "cloud-web-02", contextId = "ex", path = "/cloud-web-02/exception")
 public interface ExceptionClient {
 
     @GetMapping("/test01")

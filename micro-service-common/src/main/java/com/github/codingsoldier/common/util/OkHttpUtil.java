@@ -9,9 +9,13 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * OkHttp工具类
+ * @author cpq
+ * @since 2022-03-17 11:28:55
+ */
 @Slf4j
 public class OkHttpUtil {
 
@@ -22,7 +26,7 @@ public class OkHttpUtil {
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private static OkHttpClient okHttpClient;
 
-    static  {
+    static {
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
         //读取超时
         clientBuilder.readTimeout(READ_TIMEOUT, TimeUnit.SECONDS);
@@ -38,6 +42,7 @@ public class OkHttpUtil {
 
     /**
      * 执行请求
+     *
      * @param request
      * @return
      */
@@ -47,12 +52,12 @@ public class OkHttpUtil {
             response = okHttpClient.newCall(request).execute();
             byte[] bytes = response.body().bytes();
             return new String(bytes, UTF8);
-        }catch (IOException e){
+        } catch (IOException e) {
             log.error("OkHttp异常", e);
-            if (response != null){
+            if (response != null) {
                 log.error("OkHttp Response", response.toString());
             }
-        }finally {
+        } finally {
             if (response != null) {
                 response.close();
             }
@@ -63,19 +68,19 @@ public class OkHttpUtil {
     /**
      * get请求
      *
-     * @param url url
-     * @param params 请求参数
+     * @param url     url
+     * @param params  请求参数
      * @param headers 请求头
-     * @param clazz 返回结果类型
-     * @param <T> 泛型
-     * @param <V> 泛型
+     * @param clazz   返回结果类型
+     * @param <T>     泛型
+     * @param <V>     泛型
      * @return 返回clazz类型实体
      */
     public static <T, V> T get(String url, Map<String, V> params, Map<String, String> headers, Class<T> clazz) {
         // 创建builder
         Request.Builder builder = new Request.Builder();
         // 设置请求头
-        if (headers != null && headers.size() > 0){
+        if (headers != null && headers.size() > 0) {
             headers.forEach((String key, String value) -> builder.header(key, value));
         }
         // 拼接请求参数
@@ -95,7 +100,7 @@ public class OkHttpUtil {
         Request request = builder.get().url(url).build();
         // 执行请求
         String data = execute(request);
-        if (StringUtils.isEmpty(data)){
+        if (StringUtils.isEmpty(data)) {
             return null;
         }
         // 返回结果
@@ -105,23 +110,23 @@ public class OkHttpUtil {
     /**
      * get请求
      *
-     * @param url url
+     * @param url    url
      * @param params 请求参数
-     * @param clazz 返回结果类型
-     * @param <T> 泛型
-     * @param <V> 泛型
+     * @param clazz  返回结果类型
+     * @param <T>    泛型
+     * @param <V>    泛型
      * @return 返回clazz类型实体
      */
-    public static <T,V> T get(String url, Map<String, V> params, Class<T> clazz) {
+    public static <T, V> T get(String url, Map<String, V> params, Class<T> clazz) {
         return get(url, params, null, clazz);
     }
 
     /**
      * get请求
      *
-     * @param url url
+     * @param url   url
      * @param clazz 返回结果类型
-     * @param <T> 泛型方法
+     * @param <T>   泛型方法
      * @return 返回clazz类型实体
      */
     public static <T> T get(String url, Class<T> clazz) {
@@ -131,18 +136,18 @@ public class OkHttpUtil {
     /**
      * post请求
      *
-     * @param url url
+     * @param url      url
      * @param jsonBody 请求body
-     * @param headers 请求头
-     * @param clazz 返回结果类型
-     * @param <T> 泛型方法
+     * @param headers  请求头
+     * @param clazz    返回结果类型
+     * @param <T>      泛型方法
      * @return 返回clazz类型实体
      */
     public static <T> T post(String url, String jsonBody, Map<String, String> headers, Class<T> clazz) {
         // 创建builder
         Request.Builder builder = new Request.Builder();
         // 设置请求头
-        if (headers != null && headers.size() > 0){
+        if (headers != null && headers.size() > 0) {
             headers.forEach((String key, String value) -> builder.header(key, value));
         }
         // 创建body
@@ -151,7 +156,7 @@ public class OkHttpUtil {
         Request request = builder.post(requestBody).url(url).build();
         // 执行请求
         String data = execute(request);
-        if (StringUtils.isEmpty(data)){
+        if (StringUtils.isEmpty(data)) {
             return null;
         }
         // 返回结果
@@ -161,10 +166,10 @@ public class OkHttpUtil {
     /**
      * post请求
      *
-     * @param url url
+     * @param url      url
      * @param jsonBody 请求body
-     * @param clazz 返回结果类型
-     * @param <T> 泛型方法
+     * @param clazz    返回结果类型
+     * @param <T>      泛型方法
      * @return 返回clazz类型实体
      */
     public static <T> T post(String url, String jsonBody, Class<T> clazz) {
@@ -174,11 +179,11 @@ public class OkHttpUtil {
     /**
      * post请求
      *
-     * @param url url
-     * @param body 请求body
+     * @param url   url
+     * @param body  请求body
      * @param clazz 返回结果类型
-     * @param <T> 泛型
-     * @param <V> 泛型
+     * @param <T>   泛型
+     * @param <V>   泛型
      * @return 返回clazz类型实体
      */
     public static <T, V> T post(String url, Map<String, V> body, Class<T> clazz) {
@@ -190,13 +195,13 @@ public class OkHttpUtil {
         Map result = get("http://localhost:8080/example/validations/account?userId=1&account", Map.class);
         System.out.println(result);
 
-        HashMap<String, Object> params = new HashMap<>();
+        HashMap<String, Object> params = new HashMap<>(16);
         params.put("userId", 1);
         params.put("account", "账号");
         result = get("http://localhost:8080/example/validations/account", params, Map.class);
         System.out.println(result);
 
-        HashMap<String, Object> body = new HashMap<>();
+        HashMap<String, Object> body = new HashMap<>(16);
         HashMap<String, Object> vo = new HashMap<>();
         body.put("userId", 1);
         body.put("userName", "sdsdff");

@@ -33,18 +33,19 @@ public class ValidationController {
 
     @ApiOperation(value = "新增-校验")
     @PostMapping("/add")
-    public ValidationDto addUser(@RequestBody @Validated ValidationDto validationDto){
+    public ValidationDto addUser(@RequestBody @Validated ValidationDto validationDto) {
         log.info("请求参数：{}", validationDto);
         return validationDto;
     }
 
     /**
      * 使用方法校验bean
+     *
      * @param validationDto
      * @return
      */
     @PostMapping("/add-method")
-    public String addMethod(@RequestBody ValidationDto validationDto){
+    public String addMethod(@RequestBody ValidationDto validationDto) {
         ValidationUtils.validateEntity(validationDto);
         log.info("请求参数：{}", validationDto);
         return "";
@@ -56,7 +57,7 @@ public class ValidationController {
     @GetMapping("/account")
     public void getByAccount(@Min(value = 10L, message = "用户id必须大于10") Long userId,
                              @Length(min = 6, max = 20, message = "账号长度必须是6~20位。")
-                             @NotEmpty(message = "账号不能为空。") String  account) {
+                             @NotEmpty(message = "账号不能为空。") String account) {
         log.info("请求参数：{}", userId);
         log.info("请求参数：{}", account);
     }

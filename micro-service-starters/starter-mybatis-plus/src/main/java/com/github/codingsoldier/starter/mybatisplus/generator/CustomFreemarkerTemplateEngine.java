@@ -35,6 +35,10 @@ public class CustomFreemarkerTemplateEngine extends FreemarkerTemplateEngine {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomFreemarkerTemplateEngine.class);
 
+    private String dtoFtl = "Dto.java.ftl";
+    private String voFtl = "Vo.java.ftl";
+    private String aoFtl = "Ao.java.ftl";
+
     @Override
     protected void outputCustomFile(Map<String, String> customFile, TableInfo tableInfo, Map<String, Object> objectMap) {
         String otherPath = getPathInfo(OutputFile.other);
@@ -42,15 +46,19 @@ public class CustomFreemarkerTemplateEngine extends FreemarkerTemplateEngine {
             LOGGER.debug("key = {}", key);
             LOGGER.debug("value = {}", value);
             String path = otherPath;
-            if (value.endsWith("Dto.java.ftl")){
+            if (value.endsWith(dtoFtl)) {
                 // dto的输出目录
                 path = path + File.separator + "dto";
-            } else if (value.endsWith("Vo.java.ftl")) {
-                // vo的输出目录
-                path = path + File.separator + "vo";
-            } else if (value.endsWith("Ao.java.ftl")) {
-                // ao的输出目录
-                path = path + File.separator + "ao";
+            } else {
+                if (value.endsWith(voFtl)) {
+                    // vo的输出目录
+                    path = path + File.separator + "vo";
+                } else {
+                    if (value.endsWith(aoFtl)) {
+                        // ao的输出目录
+                        path = path + File.separator + "ao";
+                    }
+                }
             }
             // 目录 + 文件名
             String fileName = String.format((path + File.separator + "%s%s"), key, ".java");

@@ -2,9 +2,9 @@ package com.github.codingsoldier.bootweb.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.github.codingsoldier.bootweb.vo.UserDetailVo;
-import com.github.codingsoldier.bootweb.entity.UserEntity;
 import com.github.codingsoldier.bootweb.dto.PageDto;
+import com.github.codingsoldier.bootweb.entity.UserEntity;
+import com.github.codingsoldier.bootweb.vo.UserDetailVo;
 
 /**
  * <p>
@@ -18,6 +18,7 @@ public interface UserService extends IService<UserEntity> {
 
     /**
      * 分页
+     *
      * @param pageDto 查询参数
      * @return 分页结果
      */

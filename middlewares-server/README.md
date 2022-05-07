@@ -1,16 +1,21 @@
 # middlewares-server
+
 middlewares-server 放置常用中间件服务，可以启动运行。
 
 # 常用中间件服务
+
 ## nacos
+
 安装 nacos
 
 https://nacos.io/zh-cn/docs/quick-start.html
 
-## spring-boot-admin-server 
+## spring-boot-admin-server
+
 [更多说明](./middlewares-server-parent/spring-boot-admin-server/README.md)
 
 ## zipkin-server
+
 1、下载 zipkin-server
 
 https://repo1.maven.org/maven2/io/zipkin/java/zipkin-server/2.12.9/zipkin-server-2.12.9-exec.jar
@@ -26,4 +31,5 @@ https://repo1.maven.org/maven2/io/zipkin/java/zipkin-server/2.12.9/zipkin-server
     java -Xmx512m -Xms512m -jar zipkin-server-2.12.9-exec.jar --STORAGE_TYPE=mysql --MYSQL_HOST=127.0.0.1 --MYSQL_TCP_PORT=3306 --MYSQL_USER=root --MYSQL_PASS=cpq..123 --MYSQL_DB=zipkin --QUERY_PORT=10103
 
 ## hystrix-dashboard
+
 [更多说明](./middlewares-server-parent/hystrix-dashboard/README.md)

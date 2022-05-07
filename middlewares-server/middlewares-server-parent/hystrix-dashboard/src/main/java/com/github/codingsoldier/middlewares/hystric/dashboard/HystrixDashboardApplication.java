@@ -9,7 +9,7 @@ import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboar
  * <h1>hystrix dashboard 入口</h1>
  * 注解：@EnableHystrixDashboard 开启 Hystrix Dashboard
  * Hystrix Dashboard页面地址：127.0.0.1:10101/hystrix-dashboard/hystrix/
- *
+ * <p>
  * 输入：http://localhost:8001/cloud-web-01/actuator/hystrix.stream
  */
 @EnableDiscoveryClient

@@ -16,22 +16,21 @@ public class ExceptionController {
 
     @GetMapping("/test01")
     public String test01(@RequestParam(value = "name", required = false) String name) {
-        if ("ex".equals(name)){
+        if ("ex".equals(name)) {
             throw new RuntimeException("抛出异常");
         }
         log.info("############{}", name);
-        return name+name;
+        return name + name;
     }
 
     @GetMapping("/appex")
     public String appEx(@RequestParam(value = "name", required = false) String name) {
-        if ("ex".equals(name)){
+        if ("ex".equals(name)) {
             throw new AppException("name不对");
         }
         log.info("############{}", name);
-        return name+name;
+        return name + name;
     }
-
 
 
 }

@@ -20,6 +20,10 @@ import springfox.documentation.spring.web.plugins.Docket;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author cpq
+ * @since 2022-03-17 11:28:55
+ */
 @EnableConfigurationProperties(StarterSwaggerProperties.class)
 @Configuration
 @EnableOpenApi
@@ -39,41 +43,16 @@ public class SwaggerConfig {
     /**
      * 需要swagger每次调接口前携带的头信息的key
      */
-    private final static String headerName = "x-token";
+    private final static String HEADER_NAME = "x-token";
 
     @Autowired
     private StarterSwaggerProperties starterSwaggerProperties;
 
-    @Bean
-    @ConditionalOnMissingBean(Docket.class)
-    public Docket createRestApi() {
-        String basePackage = starterSwaggerProperties.getBasePackage();
-        if (BASE_PACKAGE.equals(basePackage)){
-            String msg = String.format("警告：swagger扫描目录为%s，请通过 framework.starter.swagger.base-package 修改扫描目录", basePackage);
-            logger.warn(msg);
-        }
-
-        if (logger.isDebugEnabled()) {
-            logger.debug("starter-swagger 创建 Swagger Docket，详细配置请查看 com.github.codingsoldier.starters.wagger.SwaggerConfig");
-        }
-        return new Docket(DocumentationType.OAS_30)
-            .apiInfo(apiInfo())//文档信息
-            // .groupName(groupName)//组群名称
-            .select()
-            //需要扫描的api所在目录
-            .apis(RequestHandlerSelectors.basePackage(basePackage))
-            .paths(PathSelectors.any())//匹配全部地址路径
-            .build()
-            .securitySchemes(securitySchemes())//配置安全方案
-            .securityContexts(securityContexts())//配置安全方案所实现的上下文
-            ;
-    }
-
     public static List<SecurityScheme> securitySchemes() {
         List<SecurityScheme> apiKeyList = new ArrayList<>();
         //配置header头1
-        ApiKey token_access = new ApiKey(headerName, headerName, "header");
-        apiKeyList.add(token_access);
+        ApiKey tokenAccess = new ApiKey(HEADER_NAME, HEADER_NAME, "header");
+        apiKeyList.add(tokenAccess);
         return apiKeyList;
     }
 
@@ -83,7 +62,7 @@ public class SwaggerConfig {
         //作用域为全局
         AuthorizationScope[] authorizationScopes = {new AuthorizationScope("global", "描述")};
         //为每个api添加请求头
-        securityReferenceList.add(new SecurityReference(headerName, authorizationScopes));
+        securityReferenceList.add(new SecurityReference(HEADER_NAME, authorizationScopes));
         //以此类推
         //securityReferenceList.add(new SecurityReference(headerName2, scopes()));
         securityContextList.add(SecurityContext
@@ -96,12 +75,42 @@ public class SwaggerConfig {
 
     public static ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .title("Api文档")
-            .description("文档描述")
-            // .termsOfServiceUrl("")
-            .contact(new Contact("CodingSoldier", "https://github.com/CodingSoldier", ""))
-            .version("1.0")
-            .build();
+                .title("Api文档")
+                .description("文档描述")
+                // .termsOfServiceUrl("")
+                .contact(new Contact("CodingSoldier", "https://github.com/CodingSoldier", ""))
+                .version("1.0")
+                .build();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(Docket.class)
+    public Docket createRestApi() {
+        String basePackage = starterSwaggerProperties.getBasePackage();
+        if (BASE_PACKAGE.equals(basePackage)) {
+            String msg = String.format("警告：swagger扫描目录为%s，请通过 framework.starter.swagger.base-package 修改扫描目录", basePackage);
+            logger.warn(msg);
+        }
+
+        if (logger.isDebugEnabled()) {
+            logger.debug("starter-swagger 创建 Swagger Docket，详细配置请查看 com.github.codingsoldier.starters.wagger.SwaggerConfig");
+        }
+        return new Docket(DocumentationType.OAS_30)
+                //文档信息
+                .apiInfo(apiInfo())
+                //组群名称
+                // .groupName(groupName)
+                .select()
+                //需要扫描的api所在目录
+                .apis(RequestHandlerSelectors.basePackage(basePackage))
+                //匹配全部地址路径
+                .paths(PathSelectors.any())
+                .build()
+                //配置安全方案
+                .securitySchemes(securitySchemes())
+                //配置安全方案所实现的上下文
+                .securityContexts(securityContexts())
+                ;
     }
 
 }

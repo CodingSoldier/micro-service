@@ -17,17 +17,17 @@ public class ExController {
     private ExceptionClient exceptionClient;
 
     @GetMapping("/test01")
-    public String testGet(String msg){
+    public String testGet(String msg) {
         String s = exceptionClient.test01(msg);
         log.info("############{}", s);
-        return "aaaa"+s;
+        return "aaaa" + s;
     }
 
     @GetMapping("/appex")
-    public String appex(String msg){
+    public String appex(String msg) {
         String s = exceptionClient.appEx(msg);
         log.info("############{}", s);
-        return "aaaa"+s;
+        return "aaaa" + s;
     }
 
 }

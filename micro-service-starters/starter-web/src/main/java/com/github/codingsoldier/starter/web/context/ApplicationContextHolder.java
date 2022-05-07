@@ -6,6 +6,11 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+/**
+ *
+ * @author cpq
+ * @since 2022-03-17 11:28:55
+ */
 @Service
 @Lazy(false)
 public class ApplicationContextHolder implements ApplicationContextAware, DisposableBean {
@@ -13,27 +18,18 @@ public class ApplicationContextHolder implements ApplicationContextAware, Dispos
     private static ApplicationContext applicationContext = null;
 
     /**
+     * 取得存储在静态变量中的ApplicationContext.
+     */
+    public static ApplicationContext getApplicationContext() {
+        return applicationContext;
+    }
+
+    /**
      * 实现ApplicationContextAware接口, 注入Context到静态变量中.
      */
     @Override
     public void setApplicationContext(ApplicationContext appContext) {
         applicationContext = appContext;
-    }
-
-    /**
-     * 实现DisposableBean接口, 在Context关闭时清理静态变量.
-     */
-    @Override
-    public void destroy() {
-        ApplicationContextHolder.clearHolder();
-    }
-
-
-    /**
-     * 取得存储在静态变量中的ApplicationContext.
-     */
-    public static ApplicationContext getApplicationContext() {
-        return applicationContext;
     }
 
     /**
@@ -56,6 +52,14 @@ public class ApplicationContextHolder implements ApplicationContextAware, Dispos
      */
     public static void clearHolder() {
         applicationContext = null;
+    }
+
+    /**
+     * 实现DisposableBean接口, 在Context关闭时清理静态变量.
+     */
+    @Override
+    public void destroy() {
+        ApplicationContextHolder.clearHolder();
     }
 
     // /**

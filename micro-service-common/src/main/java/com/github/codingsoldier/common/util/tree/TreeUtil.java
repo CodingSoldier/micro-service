@@ -14,56 +14,56 @@ import java.util.List;
  */
 public class TreeUtil {
 
-  /**
-   * 获取树结构集合
-   *
-   * @param parentId   最外层级的parentId
-   * @param entityList
-   * @return
-   */
-  public static <E extends TreeChildrenEntity<E>> List<E> treeWithDel(Object parentId,
-      List<E> entityList) {
-    List<E> treeList = new ArrayList<>();
-    Iterator it = entityList.iterator();
-    while (it.hasNext()) {
-      E elem = (E) it.next();
-      if (CommonUtil.objToStr(parentId)
-          .equals(CommonUtil.objToStr(elem.getParentId()))) {
-        treeList.add(elem);
-        /**
-         * 使用Iterator，以便在迭代时把entityList中已经添加到treeList的数据删除，减少迭代次数
-         */
-        it.remove();
-      }
+    /**
+     * 获取树结构集合
+     *
+     * @param parentId   最外层级的parentId
+     * @param entityList
+     * @return
+     */
+    public static <E extends TreeChildrenEntity<E>> List<E> treeWithDel(Object parentId,
+                                                                        List<E> entityList) {
+        List<E> treeList = new ArrayList<>();
+        Iterator it = entityList.iterator();
+        while (it.hasNext()) {
+            E elem = (E) it.next();
+            if (CommonUtil.objToStr(parentId)
+                    .equals(CommonUtil.objToStr(elem.getParentId()))) {
+                treeList.add(elem);
+                /**
+                 * 使用Iterator，以便在迭代时把entityList中已经添加到treeList的数据删除，减少迭代次数
+                 */
+                it.remove();
+            }
+        }
+        for (E elem : treeList) {
+            elem.setChildren(treeWithDel(elem.getId(), entityList));
+        }
+        return treeList;
     }
-    for (E elem : treeList) {
-      elem.setChildren(treeWithDel(elem.getId(), entityList));
-    }
-    return treeList;
-  }
 
-  /**
-   * 获取树结构集合
-   *
-   * @param parentId   最外层级的parentId
-   * @param entityList
-   * @return
-   */
-  public static <E extends TreeChildrenEntity<E>> List<E> tree(Object parentId,
-      List<E> entityList) {
-    List<E> treeList = new ArrayList<>();
-    Iterator it = entityList.iterator();
-    while (it.hasNext()) {
-      E elem = (E) it.next();
-      if (CommonUtil.objToStr(parentId)
-          .equals(CommonUtil.objToStr(elem.getParentId()))) {
-        treeList.add(elem);
-      }
+    /**
+     * 获取树结构集合
+     *
+     * @param parentId   最外层级的parentId
+     * @param entityList
+     * @return
+     */
+    public static <E extends TreeChildrenEntity<E>> List<E> tree(Object parentId,
+                                                                 List<E> entityList) {
+        List<E> treeList = new ArrayList<>();
+        Iterator it = entityList.iterator();
+        while (it.hasNext()) {
+            E elem = (E) it.next();
+            if (CommonUtil.objToStr(parentId)
+                    .equals(CommonUtil.objToStr(elem.getParentId()))) {
+                treeList.add(elem);
+            }
+        }
+        for (E elem : treeList) {
+            elem.setChildren(tree(elem.getId(), entityList));
+        }
+        return treeList;
     }
-    for (E elem : treeList) {
-      elem.setChildren(tree(elem.getId(), entityList));
-    }
-    return treeList;
-  }
 
 }

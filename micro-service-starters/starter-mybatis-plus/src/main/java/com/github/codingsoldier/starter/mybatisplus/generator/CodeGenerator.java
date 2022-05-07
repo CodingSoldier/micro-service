@@ -18,11 +18,13 @@ import java.util.Objects;
 
 /**
  * https://baomidou.com/pages/981406/#mapper-%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE
+ * @author cpq
+ * @since 2022-03-17 11:28:55
  */
 public class CodeGenerator {
 
+    public static final String TABLE_PREFIX = "t_";
     private static final Logger LOGGER = LoggerFactory.getLogger(CodeGenerator.class);
-
     public static String dbUrl;
     public static String dbUsername;
     public static String dbPassword;
@@ -30,23 +32,10 @@ public class CodeGenerator {
     public static String parent;
     public static String author;
     public static String tableName;
-    
-    public static String templatesDir="/templates/v2";
+    public static String templatesDir = "/templates/v2";
 
-
-    public static final String TABLE_PREFIX = "t_";
-
-    /**
-     * 生成文件
-     * 注意：旧文件不会被覆盖
-     */
-    public static void generate() {
-
-        DataSourceConfig dataSource = new DataSourceConfig
-                .Builder(dbUrl, dbUsername, dbPassword)
-                .build();
-
-        GlobalConfig globalConfig = new GlobalConfig.Builder()
+    private static GlobalConfig buildGlobalConfig() {
+        return new GlobalConfig.Builder()
                 .disableOpenDir()
                 .outputDir(srcMainAbsolutePath + File.separator + "java")
                 .author(author)
@@ -54,8 +43,10 @@ public class CodeGenerator {
                 .dateType(DateType.TIME_PACK)
                 .commentDate("yyyy-MM-dd HH:mm:ss")
                 .build();
+    }
 
-        Map<OutputFile, String> pathInfo = new HashMap<>();
+    private static PackageConfig buildPackageConfig() {
+        Map<OutputFile, String> pathInfo = new HashMap<>(16);
         PackageConfig packageConfig = new PackageConfig.Builder()
                 .parent(parent)
                 // .moduleName("多加一层目录，例如表名，生成的代码放在表名目录下")
@@ -67,40 +58,51 @@ public class CodeGenerator {
                 .other("")
                 .pathInfo(pathInfo)
                 .build();
+        return packageConfig;
+    }
 
+    private static StrategyConfig buildStrategyConfig() {
         StrategyConfig strategyConfig = new StrategyConfig.Builder()
                 .addInclude(tableName)
                 .addTablePrefix(TABLE_PREFIX)
                 .entityBuilder()
-                    .idType(IdType.AUTO)
-                    // .formatFileName("%sEntity")
-                    .enableChainModel()
-                    .enableLombok()
-                    .logicDeleteColumnName("deleted")
-                    .logicDeletePropertyName("deleted")
-                    .naming(NamingStrategy.underline_to_camel)
-                    .addTableFills(new Column("created_by", FieldFill.INSERT),
+                .idType(IdType.AUTO)
+                // .formatFileName("%sEntity")
+                .enableChainModel()
+                .enableLombok()
+                .logicDeleteColumnName("deleted")
+                .logicDeletePropertyName("deleted")
+                .naming(NamingStrategy.underline_to_camel)
+                .addTableFills(new Column("created_by", FieldFill.INSERT),
                         new Column("created_time", FieldFill.INSERT),
                         new Column("updated_by", FieldFill.INSERT_UPDATE),
                         new Column("updated_time", FieldFill.INSERT_UPDATE))
-                    .build()
+                .build()
                 .mapperBuilder()
-                    .enableMapperAnnotation()
-                    .enableBaseResultMap()
-                    .enableBaseColumnList()
-                    .build()
+                .enableMapperAnnotation()
+                .enableBaseResultMap()
+                .enableBaseColumnList()
+                .build()
                 .serviceBuilder()
-                    .formatServiceFileName("%sService")
-                    .build()
+                .formatServiceFileName("%sService")
+                .build()
                 .controllerBuilder()
-                    .enableHyphenStyle()
-                    .enableRestStyle()
-                    .build();
+                .enableHyphenStyle()
+                .enableRestStyle()
+                .build();
+        return strategyConfig;
+    }
 
-        String tableJavaName = CodeGeneratorUtil.tableJavaName(tableName);
+    /**
+     * 生成文件
+     * 注意：旧文件不会被覆盖
+     */
+    public static void generate() {
 
-        Map<String, Object> map = new HashMap<>();
-        Map<String, String> files = new HashMap<>();
+        String tableJavaName = GeneratorUtil.tableJavaName(tableName);
+
+        Map<String, Object> map = new HashMap<>(128);
+        Map<String, String> files = new HashMap<>(128);
         map.put("packageDto", parent + ".dto");
         map.put("packageVo", parent + ".vo");
 
@@ -125,7 +127,8 @@ public class CodeGenerator {
         map.put("pageVoClassName", pageVoClassName);
         files.put(pageVoClassName, templatesDir + "/PageVo.java.ftl");
 
-        if (Objects.equals(templatesDir, "/templates/v2")){
+        String v2 = "/templates/v2";
+        if (Objects.equals(templatesDir, v2)) {
             map.put("packageAo", parent + ".ao");
 
             String addUpdateAoClassName = tableJavaName + "AddUpdateAo";
@@ -151,6 +154,17 @@ public class CodeGenerator {
                 .mapperXml(templatesDir + "/mapper.xml")
                 .controller(templatesDir + "/controller.java")
                 .build();
+
+
+        DataSourceConfig dataSource = new DataSourceConfig
+                .Builder(dbUrl, dbUsername, dbPassword)
+                .build();
+
+        GlobalConfig globalConfig = buildGlobalConfig();
+
+        PackageConfig packageConfig = buildPackageConfig();
+
+        StrategyConfig strategyConfig = buildStrategyConfig();
 
         AutoGenerator generator = new AutoGenerator(dataSource);
         generator.global(globalConfig);

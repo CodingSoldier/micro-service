@@ -18,7 +18,7 @@ public class TraceIdController {
     private CloudWeb02Client cloudWeb02Client;
 
     @GetMapping("/testThreadPoolTraceId")
-    public String testThreadPoolTraceId(String name){
+    public String testThreadPoolTraceId(String name) {
         log.info("############testThreadPoolTraceId");
         String s = cloudWeb02Client.testThreadPoolTraceId(name);
         return s;

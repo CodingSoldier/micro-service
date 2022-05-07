@@ -34,7 +34,7 @@ public class UserAddDto implements Serializable {
     @ApiModelProperty(value = "电话", example = "18952145124")
     private String phone;
 
-    @ApiModelProperty(value = "生日", dataType="long", example = "1647445294184")
+    @ApiModelProperty(value = "生日", dataType = "long", example = "1647445294184")
     private LocalDateTime dateOfBirth;
 
 }

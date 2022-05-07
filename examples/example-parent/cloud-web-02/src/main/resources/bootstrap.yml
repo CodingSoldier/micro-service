@@ -7,7 +7,7 @@ spring:
     nacos:
       config:
         server-addr: 192.168.1.121:8848
-#        server-addr: nacos-dev.vanrui.com:80
+        #        server-addr: nacos-dev.vanrui.com:80
         namespace: namespace-example-dev
         file-extension: yaml
 
@@ -15,7 +15,7 @@ spring:
 # starter-log4j2 配置
 logging:
   # log4j2-spring.xml 已在 starter-log4j2 中配置好了，无需新建
-#  config: classpath:log4j2-spring.xml
+  #  config: classpath:log4j2-spring.xml
   file:
     # 日志根目录
     path: /logs
@@ -23,7 +23,7 @@ logging:
     #    name: ${spring.application.name}
     name: ${spring.application.name}
   level:
-#    org: debug
+    #    org: debug
     com:
       github:
         codingsoldier: DEBUG

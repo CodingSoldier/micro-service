@@ -28,128 +28,134 @@ import java.util.Objects;
 @Slf4j
 public class ObjectMapperUtil {
 
-  private final static ObjectMapper objectMapper = newObjectMapper();
+    private final static ObjectMapper OBJECT_MAPPER = newObjectMapper();
 
-  /**
-   * 创建一个新的ObjectMapper
-   * @return
-   */
-  public static ObjectMapper newObjectMapper() {
+    /**
+     * 创建一个新的ObjectMapper
+     *
+     * @return
+     */
+    public static ObjectMapper newObjectMapper() {
 
-    ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper();
 
-    //序列化的时候序列对象的所有属性
-    objectMapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);
-    //反序列化的时候如果多了其他属性,不抛出异常
-    objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-    //如果是空对象的时候,不抛异常
-    objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        //序列化的时候序列对象的所有属性
+        objectMapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);
+        //反序列化的时候如果多了其他属性,不抛出异常
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        //如果是空对象的时候,不抛异常
+        objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 
-    // 时间转换为时间戳。
-    JavaTimeModule javaTimeModule = new JavaTimeModule();
-    DateTimeSerializer dateTimeSerializer = new DateTimeSerializer();
-    javaTimeModule.addSerializer(Date.class, dateTimeSerializer);
-    javaTimeModule.addSerializer(LocalDate.class, dateTimeSerializer);
-    javaTimeModule.addSerializer(LocalDateTime.class, dateTimeSerializer);
-    javaTimeModule.addSerializer(OffsetDateTime.class, dateTimeSerializer);
-    javaTimeModule.addDeserializer(Date.class, new DateDeserializer());
-    javaTimeModule.addDeserializer(LocalDate.class, new LocalDateDeserializer());
-    javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer());
-    javaTimeModule.addDeserializer(OffsetDateTime.class, new OffsetDateTimeDeserializer());
-    objectMapper.registerModule(javaTimeModule);
+        // 时间转换为时间戳。
+        JavaTimeModule javaTimeModule = new JavaTimeModule();
+        DateTimeSerializer dateTimeSerializer = new DateTimeSerializer();
+        javaTimeModule.addSerializer(Date.class, dateTimeSerializer);
+        javaTimeModule.addSerializer(LocalDate.class, dateTimeSerializer);
+        javaTimeModule.addSerializer(LocalDateTime.class, dateTimeSerializer);
+        javaTimeModule.addSerializer(OffsetDateTime.class, dateTimeSerializer);
+        javaTimeModule.addDeserializer(Date.class, new DateDeserializer());
+        javaTimeModule.addDeserializer(LocalDate.class, new LocalDateDeserializer());
+        javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer());
+        javaTimeModule.addDeserializer(OffsetDateTime.class, new OffsetDateTimeDeserializer());
+        objectMapper.registerModule(javaTimeModule);
 
-    objectMapper.registerModule(new Jdk8Module());
-    return objectMapper;
-  }
-
-  /**
-   * 获取ObjectMapper
-   * @return
-   */
-  public static ObjectMapper getObjectMapper(){
-    return objectMapper;
-  }
-
-  /**
-   * 字符串转对象
-   * @param content content
-   * @param valueType valueType
-   * @param <T> T
-   * @return T
-   */
-  public static <T> T readValue(String content, Class<T> valueType) {
-    if (StringUtils.isBlank(content)){
-      return null;
+        objectMapper.registerModule(new Jdk8Module());
+        return objectMapper;
     }
-    if (content instanceof String){
-      return (T)content;
-    }
-    try {
-      return objectMapper.readValue(content, valueType);
-    }catch (Exception e){
-      log.error("异常", e);
-    }
-    return null;
-  }
 
-  /**
-   * 字节数组转对象
-   * @param src
-   * @param valueType
-   * @param <T>
-   * @return
-   */
-  public static <T> T readValue(byte[] src, Class<T> valueType){
-    if (Objects.isNull(src)){
-      return null;
+    /**
+     * 获取ObjectMapper
+     *
+     * @return
+     */
+    public static ObjectMapper getObjectMapper() {
+        return OBJECT_MAPPER;
     }
-    try {
-      return objectMapper.readValue(src, valueType);
-    }catch (Exception e){
-      log.error("异常", e);
-    }
-    return null;
-  }
 
-  /**
-   * 字符串转对象
-   * @param content content
-   * @param valueTypeRef valueTypeRef
-   * @param <T> T
-   * @return T
-   */
-  public static <T> T readValue(String content, TypeReference<T> valueTypeRef) {
-    if (StringUtils.isBlank(content)){
-      return null;
+    /**
+     * 字符串转对象
+     *
+     * @param content   content
+     * @param valueType valueType
+     * @param <T>       T
+     * @return T
+     */
+    public static <T> T readValue(String content, Class<T> valueType) {
+        if (StringUtils.isBlank(content)) {
+            return null;
+        }
+        if (content instanceof String) {
+            return (T) content;
+        }
+        try {
+            return OBJECT_MAPPER.readValue(content, valueType);
+        } catch (Exception e) {
+            log.error("异常", e);
+        }
+        return null;
     }
-    try {
-      return objectMapper.readValue(content, valueTypeRef);
-    }catch (Exception e){
-      log.error("异常", e);
-    }
-    return null;
-  }
 
-  /**
-   * 对象转string
-   * @param value value
-   * @return String
-   */
-  public static String writeValueAsString(Object value) {
-    if (Objects.isNull(value)){
-      return null;
+    /**
+     * 字节数组转对象
+     *
+     * @param src
+     * @param valueType
+     * @param <T>
+     * @return
+     */
+    public static <T> T readValue(byte[] src, Class<T> valueType) {
+        if (Objects.isNull(src)) {
+            return null;
+        }
+        try {
+            return OBJECT_MAPPER.readValue(src, valueType);
+        } catch (Exception e) {
+            log.error("异常", e);
+        }
+        return null;
     }
-    try {
-      return objectMapper.writeValueAsString(value);
-    }catch (Exception e){
-      log.error("异常", e);
+
+    /**
+     * 字符串转对象
+     *
+     * @param content      content
+     * @param valueTypeRef valueTypeRef
+     * @param <T>          T
+     * @return T
+     */
+    public static <T> T readValue(String content, TypeReference<T> valueTypeRef) {
+        if (StringUtils.isBlank(content)) {
+            return null;
+        }
+        try {
+            return OBJECT_MAPPER.readValue(content, valueTypeRef);
+        } catch (Exception e) {
+            log.error("异常", e);
+        }
+        return null;
     }
-    return "";
-  }
 
-  public static void main(String[] args) {
+    /**
+     * 对象转string
+     *
+     * @param value value
+     * @return String
+     */
+    public static String writeValueAsString(Object value) {
+        if (Objects.isNull(value)) {
+            return null;
+        }
+        try {
+            return OBJECT_MAPPER.writeValueAsString(value);
+        } catch (Exception e) {
+            log.error("异常", e);
+        }
+        return "";
+    }
 
-  }
+    public static void main(String[] args) {
+
+    }
 
 
 }

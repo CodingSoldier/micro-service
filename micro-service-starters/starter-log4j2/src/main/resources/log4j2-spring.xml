@@ -25,8 +25,13 @@ log4j2.xml 比 application-log4j2.yaml 更早加载，需将日志配置文件�
         <Property name="LOG_DATEFORMAT_PATTERN">yyyy-MM-dd HH:mm:ss.SSS</Property>
         <!-- 格式化输出-->
         <!-- [%X{traceId}/%X{spanId}] 支持输出 sleuth + zipkin 的 traceId、spanId -->
-        <Property name="CONSOLE_LOG_PATTERN">%clr{%d{${sys:LOG_DATEFORMAT_PATTERN}}}{faint} %clr{${sys:LOG_LEVEL_PATTERN}} %clr{%pid}{magenta} %clr{---}{faint} [%X{traceId}/%X{spanId}] %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n${sys:LOG_EXCEPTION_CONVERSION_WORD}</Property>
-        <Property name="FILE_LOG_PATTERN">%d{${sys:LOG_DATEFORMAT_PATTERN}} ${sys:LOG_LEVEL_PATTERN} %pid --- [%X{traceId}/%X{spanId}] [%t] %-40.40c{1.} : %m%n${sys:LOG_EXCEPTION_CONVERSION_WORD}</Property>
+        <Property name="CONSOLE_LOG_PATTERN">%clr{%d{${sys:LOG_DATEFORMAT_PATTERN}}}{faint}
+            %clr{${sys:LOG_LEVEL_PATTERN}} %clr{%pid}{magenta} %clr{---}{faint} [%X{traceId}/%X{spanId}]
+            %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n${sys:LOG_EXCEPTION_CONVERSION_WORD}
+        </Property>
+        <Property name="FILE_LOG_PATTERN">%d{${sys:LOG_DATEFORMAT_PATTERN}} ${sys:LOG_LEVEL_PATTERN} %pid ---
+            [%X{traceId}/%X{spanId}] [%t] %-40.40c{1.} : %m%n${sys:LOG_EXCEPTION_CONVERSION_WORD}
+        </Property>
 
         <!-- 定义日志存储的路径 -->
         <Property name="FILE_PATH">${spring:logging.file.path}</Property>
@@ -39,9 +44,9 @@ log4j2.xml 比 application-log4j2.yaml 更早加载，需将日志配置文件�
 
         <!-- ConsoleAppender 将其输出写入控制台 -->
         <Console name="consoleAppender" target="SYSTEM_OUT" follow="true">
-            <PatternLayout pattern="${sys:CONSOLE_LOG_PATTERN}" />
+            <PatternLayout pattern="${sys:CONSOLE_LOG_PATTERN}"/>
             <!--控制台只输出level及其以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
-<!--            <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>-->
+            <!--            <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>-->
         </Console>
 
         <!--*********************文件日志***********************-->
@@ -52,7 +57,7 @@ log4j2.xml 比 application-log4j2.yaml 更早加载，需将日志配置文件�
                      fileName="${FILE_PATH}/${FILE_NAME}.log"
                      filePattern="${FILE_PATH}/${FILE_NAME}/${FILE_NAME}-%d{yyyy-MM-dd}_%i.log.gz">
             <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
-<!--            <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>-->
+            <!--            <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>-->
             <PatternLayout pattern="${FILE_LOG_PATTERN}"/>
             <Policies>
                 <!-- 应用重启时归档日志

@@ -88,10 +88,10 @@ test:
 
 framework:
   starter:
-#    mybatis-plus:
-#      enabled: false
+    #    mybatis-plus:
+    #      enabled: false
     swagger:
-#      enabled: false
+      #      enabled: false
       base-package: com.github.codingsoldier.bootweb
 #    web:
 #      enabled: false

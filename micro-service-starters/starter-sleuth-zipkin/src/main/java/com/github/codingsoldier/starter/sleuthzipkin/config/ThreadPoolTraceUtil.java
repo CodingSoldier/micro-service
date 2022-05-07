@@ -9,6 +9,8 @@ import javax.annotation.PostConstruct;
 
 /**
  * 配置线程池，使线程池中执行的任务也有TraceId
+ * @author cpq
+ * @since 2022-03-17 11:28:55
  */
 @Configuration(proxyBeanMethods = false)
 public class ThreadPoolTraceUtil {
@@ -21,12 +23,6 @@ public class ThreadPoolTraceUtil {
         this.beanFactory = beanFactory;
     }
 
-
-    @PostConstruct
-    private void init(){
-        traceExecutor = new LazyTraceExecutor(beanFactory, ThreadUtil.getExecutor());
-    }
-
     /**
      * 在公共线程池中执行任务
      *
@@ -34,6 +30,11 @@ public class ThreadPoolTraceUtil {
      */
     public static void execute(Runnable runnable) {
         traceExecutor.execute(runnable);
+    }
+
+    @PostConstruct
+    private void init() {
+        traceExecutor = new LazyTraceExecutor(beanFactory, ThreadUtil.getExecutor());
     }
 
 }
