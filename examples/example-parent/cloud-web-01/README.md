@@ -189,14 +189,14 @@ spring:
 刷新 sentinel-dashboard ，即可看到多了一个服务
 
 4、在 dashboard 中 "流控规则" 中新增流控规则。资源名为“byResource”
-![](./sentinel-by-resource.jpg)
+![](sentinel-by-resource.jpg)
 
 5、快速发送多次请求：http://localhost:8001/cloud-web-01/sentinel/dashboard/by-resource
 
 触发熔断
 
 6、也可以通过“簇点链路”中通过url建立“流控规则”
-![](./sentinel-通过url建立流控规则.jpg)
+![](sentinel-通过url建立流控规则.jpg)
 
 7、客户端规则默认存储在内存中，重启客户端，规则会消失
 
@@ -255,7 +255,7 @@ spring:
 ]
 ```
 
-![](./sentinel配置信息.jpg)
+![](sentinel配置信息.jpg)
 
 4、添加方法：com.github.codingsoldier.example.cloudweb02.sentinel.RateLimitController.fromNacos
 

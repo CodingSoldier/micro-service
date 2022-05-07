@@ -62,9 +62,9 @@ public class Web02Controller implements CloudWeb02Client {
 
     @Override
     public String bodyAndParam(Map map, Integer pageNum, Integer pageSize) {
-        log.info("#######map ", map.toString());
-        log.info("#######pageNum ", pageNum);
-        log.info("#######pageSize ", pageSize);
+        log.info("#######map = {}", map.toString());
+        log.info("#######pageNum = {}", pageNum);
+        log.info("#######pageSize = {}", pageSize);
         return pageNum + "" + pageSize;
     }
 

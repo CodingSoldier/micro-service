@@ -13,8 +13,8 @@ import java.util.Set;
 
 
 /**
- * @author chenpiqian
- * @date: 2019-03-04
+ * @author cpq
+ * @since 2022-03-17 11:28:55
  */
 public class ValidationUtils {
 
@@ -23,7 +23,6 @@ public class ValidationUtils {
     private ValidationUtils() {
         throw new IllegalStateException("不允许创建ValidatorUtils实例");
     }
-    ;
 
     /**
      * 校验Bean，拼接提示信息

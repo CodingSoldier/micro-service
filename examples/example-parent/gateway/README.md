@@ -6,11 +6,11 @@
 
 2、nacos新建动态路由配置 gateway-dynamic-router-json ，类型为json
 
-[gateway-dynamic-router-json配置](./src/main/resources/nacos配置/gateway-dynamic-router-json.json)
+[gateway-dynamic-router-json配置](src/main/resources/nacos配置/gateway-dynamic-router-json.json)
 
 指定动态路由配置json
 
-```json
+```yaml
 nacos:
   gateway:
     route:
@@ -112,11 +112,11 @@ spring:
 
 dataId = gateway-flow-rule-sentinel
 
-[json内容](./gateway-flow-rule-sentinel.json)
+[json内容](gateway-flow-rule-sentinel.json)
 
 dataId = gateway-flow-rule-api-sentinel
 
-[json内容](./gateway-flow-rule-api-sentinel.json)
+[json内容](gateway-flow-rule-api-sentinel.json)
 
 4、新建 com.github.codingsoldier.example.gateway.sentinel.SentinelGatewayConfiguration
 

@@ -30,9 +30,7 @@ public class TreeUtil {
             if (CommonUtil.objToStr(parentId)
                     .equals(CommonUtil.objToStr(elem.getParentId()))) {
                 treeList.add(elem);
-                /**
-                 * 使用Iterator，以便在迭代时把entityList中已经添加到treeList的数据删除，减少迭代次数
-                 */
+                // 使用Iterator，以便在迭代时把entityList中已经添加到treeList的数据删除，减少迭代次数
                 it.remove();
             }
         }

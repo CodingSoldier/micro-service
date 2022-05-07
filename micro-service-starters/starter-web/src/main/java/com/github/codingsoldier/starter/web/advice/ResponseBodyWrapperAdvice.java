@@ -14,6 +14,7 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 /**
@@ -33,7 +34,9 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
             return false;
         }
         // 方法上使用了 @NoWrapper
-        if (returnType.getMethod().isAnnotationPresent(NoWrapper.class)) {
+        Method method = returnType.getMethod();
+
+        if (method == null || (method != null && method.isAnnotationPresent(NoWrapper.class))) {
             return false;
         }
 

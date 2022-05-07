@@ -23,16 +23,22 @@ public class ThreadUtil {
     private ThreadUtil() {
     }
 
+    public static void main(String[] args) {
+        int max = Math.max(1, 5);
+        System.out.println(max);
+        System.out.println(Math.max(5, 3));
+    }
+
     /**
      * 初始化
      */
     private static void initExecutor() {
         int cpuCores = Runtime.getRuntime().availableProcessors();
-        cpuCores = cpuCores < 5 ? 5 : cpuCores;
+        cpuCores = Math.max(cpuCores, 5);
 
         int temp = cpuCores + 2;
         int maxPool = ioMaximumPoolSize();
-        maxPool = maxPool < temp ? temp : maxPool;
+        maxPool = Math.max(maxPool, temp);
 
         log.info("初始化线程池 corePoolSize:{} , maximumPoolSize:{}", cpuCores, maxPool);
 

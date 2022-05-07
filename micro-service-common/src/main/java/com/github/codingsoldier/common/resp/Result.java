@@ -41,7 +41,7 @@ public class Result<T> implements Serializable {
      * 自定义方法
      */
 
-    public static <T> Result<T> success() {
+    public static Result success() {
         return new Result(ResponseCodeEnum.SUCCESS.getCode(), ResponseCodeEnum.SUCCESS.getMessage(), null);
     }
 

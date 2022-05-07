@@ -23,12 +23,12 @@ public class DatePatternUtil {
     /**
      * 格式化
      */
-    private static final Map<Pattern, String> PATTERN_MAP = new HashMap<Pattern, String>();
-    private static final List<Pattern> PATTERN_LIST = new ArrayList<Pattern>(5);
+    private static final Map<Pattern, String> PATTERN_MAP = new HashMap<>();
+    private static final List<Pattern> PATTERN_LIST = new ArrayList<>(5);
     private static final Pattern PATTERN1 = Pattern.compile("\\d{4}");
     private static final Pattern PATTERN2 = Pattern.compile("\\d{4}-\\d{1,2}");
-    private static final Pattern PATTERN3 = Pattern.compile("(\\d{4}\\-\\d{1,2}\\-\\d{1,2})");
-    private static final Pattern PATTERN4 = Pattern.compile("(\\d{4}\\-\\d{1,2}\\-\\d{1,2} \\d{1,2}:\\d{1,2})");
+    private static final Pattern PATTERN3 = Pattern.compile("(\\d{4}-\\d{1,2}-\\d{1,2})");
+    private static final Pattern PATTERN4 = Pattern.compile("(\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{1,2})");
     private static final Pattern PATTERN5 = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{1,2}:\\d{1,2}:\\d{1,2}");
     private static final Pattern PATTERN6 = Pattern
             .compile("\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{1,2}:\\d{1,2}:\\d{1,2}\\.\\d+");
@@ -91,7 +91,7 @@ public class DatePatternUtil {
             try {
                 strDateValue = URLDecoder.decode(strDateValue, "UTF-8");
             } catch (UnsupportedEncodingException e) {
-                log.error("时间转换编码异常", strDateValue);
+                log.error("时间转换编码异常", e);
             }
         }
 
@@ -138,7 +138,7 @@ public class DatePatternUtil {
      * @return 格式
      */
     private static String getMatchFormat(final String value) {
-        Pattern pattern = null;
+        Pattern pattern;
         for (Iterator<Pattern> iterator = PATTERN_LIST.iterator(); iterator.hasNext(); ) {
             pattern = iterator.next();
             Matcher matcher = pattern.matcher(value);

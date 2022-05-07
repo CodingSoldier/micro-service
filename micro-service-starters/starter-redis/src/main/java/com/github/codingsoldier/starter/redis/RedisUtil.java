@@ -21,7 +21,7 @@ public class RedisUtil<K, V> {
     /**
      * 获取RedisTemplate
      *
-     * @return
+     * @return RedisTemplate<K, V>
      */
     public static <K, V> RedisTemplate<K, V> template() {
         return redisTemplate;
@@ -32,7 +32,7 @@ public class RedisUtil<K, V> {
      *
      * @param <K>
      * @param <V>
-     * @return
+     * @return ValueOperations<K, V>
      */
     public static <K, V> ValueOperations<K, V> opsForValue() {
         return redisTemplate.opsForValue();

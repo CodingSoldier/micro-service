@@ -18,19 +18,22 @@ public class PageResult<T> implements Serializable {
     private static final long serialVersionUID = 8545996863226528111L;
 
     @ApiModelProperty(value = "当前页")
-    protected long current = 1;
+    private long current = 1L;
 
     @ApiModelProperty(value = "每页显示条数")
-    protected long size = 10;
+    private long size = 10L;
 
     @ApiModelProperty(value = "总数")
-    protected long total = 0;
+    private long total = 0L;
 
     @ApiModelProperty(value = "当前分页总页数")
-    protected long pages = 0;
+    private long pages = 0L;
 
     @ApiModelProperty(value = "数据列表")
-    protected List<T> records = Collections.emptyList();
+    private List<T> records = Collections.emptyList();
+
+    public PageResult() {
+    }
 
     public PageResult(long current, long size, long total, long pages, List<T> records) {
         this.current = current;
@@ -38,10 +41,6 @@ public class PageResult<T> implements Serializable {
         this.total = total;
         this.pages = pages;
         this.records = records;
-    }
-
-    public static <T> PageResult<T> create(IPage page, List<T> records) {
-        return new PageResult(page.getCurrent(), page.getSize(), page.getTotal(), page.getPages(), records);
     }
 
     public long getCurrent() {
@@ -82,6 +81,11 @@ public class PageResult<T> implements Serializable {
 
     public void setRecords(List<T> records) {
         this.records = records;
+    }
+
+
+    public static <T> PageResult<T> create(IPage page, List<T> records) {
+        return new PageResult(page.getCurrent(), page.getSize(), page.getTotal(), page.getPages(), records);
     }
 
 }

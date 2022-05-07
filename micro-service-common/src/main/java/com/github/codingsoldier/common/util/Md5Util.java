@@ -36,7 +36,7 @@ public class Md5Util {
      * 将字节数组里每个字节转成2个16进制位的字符串后拼接起来
      */
     private static String byteArrayToHexString(byte[] b) {
-        StringBuffer resultSb = new StringBuffer();
+        StringBuilder resultSb = new StringBuilder();
         for (int i = 0; i < b.length; i++) {
             resultSb.append(byteToHexString(b[i]));
         }

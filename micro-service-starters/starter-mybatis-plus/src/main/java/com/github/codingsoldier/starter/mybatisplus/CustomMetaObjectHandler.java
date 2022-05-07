@@ -28,7 +28,7 @@ public class CustomMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         if (isFieldValueNull(metaObject, CREATE_TIME)) {
             // 填充创建时间
-            this.strictInsertFill(metaObject, CREATE_TIME, () -> LocalDateTime.now(), LocalDateTime.class);
+            this.strictInsertFill(metaObject, CREATE_TIME, LocalDateTime::now, LocalDateTime.class);
         }
         if (tokenInterface != null && isFieldValueNull(metaObject, CREATE_ID)) {
             // 填充创建者id
@@ -40,7 +40,7 @@ public class CustomMetaObjectHandler implements MetaObjectHandler {
     public void updateFill(MetaObject metaObject) {
         if (isFieldValueNull(metaObject, UPDATE_TIME)) {
             // 填充更新时间
-            this.strictInsertFill(metaObject, UPDATE_TIME, () -> LocalDateTime.now(), LocalDateTime.class);
+            this.strictInsertFill(metaObject, UPDATE_TIME, LocalDateTime::now, LocalDateTime.class);
         }
         if (tokenInterface != null && isFieldValueNull(metaObject, UPDATE_ID)) {
             // 填充更新者id

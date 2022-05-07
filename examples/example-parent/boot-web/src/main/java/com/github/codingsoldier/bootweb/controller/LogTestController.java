@@ -14,10 +14,10 @@ public class LogTestController {
 
     @GetMapping("/test")
     public String getTestMsg(String str) {
-        log.debug("***** debug *****", str);
-        log.info("***** info *****", str);
-        log.warn("***** warn *****", str);
-        log.error("***** error *****", str);
+        log.debug("***** debug ***** {}", str);
+        log.info("***** info ***** {}", str);
+        log.warn("***** warn ***** {}", str);
+        log.error("***** error ***** {}", str);
 
 
         log.error("异常", new RuntimeException(str));
