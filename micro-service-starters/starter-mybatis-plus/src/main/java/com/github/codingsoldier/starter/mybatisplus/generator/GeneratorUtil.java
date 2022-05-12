@@ -66,7 +66,7 @@ public class GeneratorUtil {
     }
 
     public static String tableJavaName(String tableName) {
-        String notPrefixTableName = delPrefix(tableName, CodeGenerator.TABLE_PREFIX);
+        String notPrefixTableName = delPrefix(tableName, MybatisPlusCodeGenerator.TABLE_PREFIX);
         String tableJavaName = underline2Camel(notPrefixTableName, true);
         return tableJavaName;
     }
@@ -74,8 +74,8 @@ public class GeneratorUtil {
 
     public static void main(String[] args) {
         String tableName = "t_user_copy1";
-        if (tableName.startsWith(CodeGenerator.TABLE_PREFIX)) {
-            tableName = StringUtils.replaceOnce(tableName, CodeGenerator.TABLE_PREFIX, "");
+        if (tableName.startsWith(MybatisPlusCodeGenerator.TABLE_PREFIX)) {
+            tableName = StringUtils.replaceOnce(tableName, MybatisPlusCodeGenerator.TABLE_PREFIX, "");
         }
         System.out.println(tableName);
         String userCopy1 = underline2Camel(tableName, true);

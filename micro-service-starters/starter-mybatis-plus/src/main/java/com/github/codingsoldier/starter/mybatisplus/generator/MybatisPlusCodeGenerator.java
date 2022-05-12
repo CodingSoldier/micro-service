@@ -21,10 +21,10 @@ import java.util.Objects;
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
-public class CodeGenerator {
+public class MybatisPlusCodeGenerator {
 
     public static final String TABLE_PREFIX = "t_";
-    private static final Logger LOGGER = LoggerFactory.getLogger(CodeGenerator.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MybatisPlusCodeGenerator.class);
     public static String dbUrl;
     public static String dbUsername;
     public static String dbPassword;
@@ -182,24 +182,24 @@ public class CodeGenerator {
     public static void main(String[] args) {
 
         // 数据库url
-        CodeGenerator.dbUrl = "jdbc:mysql://localhost:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true";
+        MybatisPlusCodeGenerator.dbUrl = "jdbc:mysql://localhost:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true";
         // 数据库账号
-        CodeGenerator.dbUsername = "root";
+        MybatisPlusCodeGenerator.dbUsername = "root";
         // 数据库密码
-        CodeGenerator.dbPassword = "cpq..123";
+        MybatisPlusCodeGenerator.dbPassword = "cpq..123";
 
         // 项目 main 目录的绝对路径
-        CodeGenerator.srcMainAbsolutePath = "E:\\github\\micro-service\\examples\\example-parent\\boot-web\\src\\main";
+        MybatisPlusCodeGenerator.srcMainAbsolutePath = "E:\\github\\micro-service\\examples\\example-parent\\boot-web\\src\\main";
         // 项目包名
-        CodeGenerator.parent = "com.github.codingsoldier.bootweb.temp";
+        MybatisPlusCodeGenerator.parent = "com.github.codingsoldier.bootweb.temp";
 
         // 作者
-        CodeGenerator.author = "cpq";
+        MybatisPlusCodeGenerator.author = "cpq";
         // 表名
-        CodeGenerator.tableName = "user";
+        MybatisPlusCodeGenerator.tableName = "user";
 
         // 生成代码
-        CodeGenerator.generate();
+        MybatisPlusCodeGenerator.generate();
 
 
     }
