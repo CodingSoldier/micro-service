@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.cloudweb02.feign.type;
+package com.github.codingsoldier.example.cloudweb01.feign.type;
 
 import com.github.codingsoldier.common.resp.Result;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -21,6 +21,9 @@ public interface Web02ResultTypeClient {
 
     @GetMapping("/string")
     String string(@RequestParam(value = "name", required = false) String name);
+
+    @GetMapping("/demo-vo")
+    DemoVo demoVo(@RequestParam(value = "name", required = false) String name);
 
     @GetMapping("/result")
     Result<Map<String, String>> resultMap(@RequestParam(value = "name") String name);

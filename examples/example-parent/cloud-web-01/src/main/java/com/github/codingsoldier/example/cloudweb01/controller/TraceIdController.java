@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.cloudweb02.controller;
+package com.github.codingsoldier.example.cloudweb01.controller;
 
 import com.github.codingsoldier.example.cloudwebapi.CloudWeb02Client;
 import lombok.extern.slf4j.Slf4j;

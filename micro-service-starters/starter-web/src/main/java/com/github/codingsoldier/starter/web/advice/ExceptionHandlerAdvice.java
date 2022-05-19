@@ -3,6 +3,7 @@ package com.github.codingsoldier.starter.web.advice;
 
 import com.github.codingsoldier.common.enums.ResponseCodeEnum;
 import com.github.codingsoldier.common.exception.AppException;
+import com.github.codingsoldier.common.exception.ResultNotSuccessFeignException;
 import com.github.codingsoldier.common.resp.Result;
 import com.github.codingsoldier.common.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -32,8 +33,8 @@ public class ExceptionHandlerAdvice {
     /**
      * AppException
      *
-     * @param ex
-     * @return
+     * @param ex ex
+     * @return result
      */
     @ExceptionHandler(AppException.class)
     public Result appExceptionHandler(final AppException ex) {
@@ -42,11 +43,24 @@ public class ExceptionHandlerAdvice {
     }
 
     /**
+     * ResultNotSuccessFeignException
+     *
+     * @param ex ex
+     * @return result
+     */
+    @ExceptionHandler(ResultNotSuccessFeignException.class)
+    public Result appExceptionHandler(final ResultNotSuccessFeignException ex) {
+        log.error("捕获ResultNotSuccessFeignException", ex);
+        return Result.fail(ex.getCode(), ex.getMessage());
+    }
+
+
+    /**
      * 转换对象类Request的校验失败结果
      * 转换单一属性Request的校验失败结果，如string，int等
      *
-     * @param ex
-     * @return
+     * @param ex ex
+     * @return result
      */
     @ExceptionHandler({MethodArgumentNotValidException.class, ConstraintViolationException.class})
     public Result validExceptionHandler(MethodArgumentNotValidException ex) {

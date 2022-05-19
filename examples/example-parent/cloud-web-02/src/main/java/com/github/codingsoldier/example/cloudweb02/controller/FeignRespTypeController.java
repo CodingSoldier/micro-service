@@ -49,11 +49,6 @@ public class FeignRespTypeController {
 
     @GetMapping("/string")
     public String string(@RequestParam(value = "name", required = false) String name) {
-        return "string" + name;
-    }
-
-    @GetMapping("/string/error")
-    public String stringError(@RequestParam(value = "name", required = false) String name) {
         if (StringUtils.equals("NullPointerException", name)) {
             int a = 0;
             int i = 1 / a;
@@ -63,9 +58,12 @@ public class FeignRespTypeController {
 
     @GetMapping("/demo-vo")
     public DemoVo demoVo(@RequestParam(value = "name", required = false) String name) {
-        if (StringUtils.equals("NullPointerException", name)) {
+        if (StringUtils.equals("ArithmeticException", name)) {
             int a = 0;
             int i = 1 / a;
+        }
+        if (StringUtils.equals("AppException", name)) {
+            throw new AppException(ResponseCodeEnum.BAD_REQUEST, "传参测试抛出AppException");
         }
         DemoVo demoVo = new DemoVo();
         demoVo.setName(name);

@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.cloudweb02.sentinel;
+package com.github.codingsoldier.example.cloudweb01.sentinel;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.github.codingsoldier.common.resp.Result;

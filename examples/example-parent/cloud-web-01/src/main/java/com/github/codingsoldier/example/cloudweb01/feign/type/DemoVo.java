@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.cloudweb02.feign.type;
+package com.github.codingsoldier.example.cloudweb01.feign.type;
 
 import lombok.Data;
 

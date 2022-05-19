@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.cloudweb02.feign.timeout;
+package com.github.codingsoldier.example.cloudweb01.feign.timeout;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

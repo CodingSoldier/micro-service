@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.cloudweb02.ex;
+package com.github.codingsoldier.example.cloudweb01.ex;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

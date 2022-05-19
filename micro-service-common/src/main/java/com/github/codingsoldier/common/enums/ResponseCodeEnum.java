@@ -10,17 +10,21 @@ public enum ResponseCodeEnum {
 
     /**
      * http状态码大全 https://seo.juziseo.com/doc/http_code/
-     * 约定：
-     * 1、code为具体的业务编码，code / 100 = http status
-     * 2、code = 20000，http status = 20000/100 = 200 表示请求处理成功
-     * 3、40000 <= code <= 49999 , http status = code/100 表示客户端错误，例如：参数错误
-     * 5、50000 <= code <= 59999 , http status = code/100 表示服务端错误，例如：空指针异常
+     * <p>
+     * 规范：
+     * 1、0表示成功，其他表示失败
+     * 2、如果失败，code统一为5位，前3位为 HTTP 状态码，后2位表示具体业务状态
+     * 3、客户端错误，以4开头。例如：
+     * http status = 429 表示“并发请求过多”，则使用 42901 - 42999 表示“并发请求过多” 这类的异常，
+     * 使用 42901 表示“系统忙，您发送的请求被限流了。”
+     * 4、服务端错误，以5开头
+     * http status = 500 表示“服务器端程序错误”，则使用 50001 - 50099 表示“并服务器端程序错误” 这类的异常
      */
-    SUCCESS(20000, "成功"),
+    SUCCESS(0, "成功"),
     BAD_REQUEST(40000, "失败"),
     TOO_MANY_REQUESTS(42901, "系统忙，您发送的请求被限流了。"),
-    SERVER_ERROR(50000, "发生错误"),
     PRECONDITION_FAILED(41200, "请求条件错误"),
+    SERVER_ERROR(50000, "发生错误"),
     ;
 
     private int code;

@@ -1,12 +1,14 @@
 package com.github.codingsoldier.starter.web.advice;
 
+import com.github.codingsoldier.common.enums.ResponseCodeEnum;
+import com.github.codingsoldier.common.feign.FeignConstant;
 import com.github.codingsoldier.common.resp.Result;
 import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
 import com.github.codingsoldier.starter.web.annotation.NoWrapper;
-import com.github.codingsoldier.starter.web.constant.FeignConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.core.MethodParameter;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
@@ -16,6 +18,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * 将controller返回值包装为Result对象
@@ -59,14 +63,26 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
             ServerHttpResponse response) {
 
 
-        // 如果是Feign请求则直接返回实体对象
+        // 如果是Feign请求不包装返回结果
         List<String> valList = request.getHeaders().get(FeignConstant.FEIGN_REQUEST);
-        if (CollectionUtils.isNotEmpty(valList)) {
-            boolean isFeignRequest = valList.contains(Boolean.TRUE.toString());
-            if (isFeignRequest) {
-                log.debug("feign请求，不对返回结果进行包装。");
-                return body;
+        boolean isFeignRequest = CollectionUtils.isNotEmpty(valList)
+                && valList.contains(Boolean.TRUE.toString());
+        if (isFeignRequest) {
+            if (body instanceof Result) {
+                Result result = (Result) body;
+                Set<Integer> notChangeCodes = FeignConstant.NOT_CHANGE_RESPONSE_STATUS_CODE_SET
+                        .stream()
+                        .map(ResponseCodeEnum::getCode)
+                        .collect(Collectors.toSet());
+                if (!notChangeCodes.contains(result.getCode())) {
+                    log.error("feign调用，返回结果code不是成功ResponseCodeEnum.SUCCESS.getCode()，" +
+                            "设置Response.StatusCode=HttpStatus.INTERNAL_SERVER_ERROR");
+
+                    response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
+                }
             }
+            log.debug("feign请求，不对返回结果进行包装。");
+            return body;
         }
 
 

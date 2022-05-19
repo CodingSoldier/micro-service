@@ -16,11 +16,10 @@ public class Result<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "1、code为具体的业务编码，code/100 = http status \n" +
-            "2、code = 20000，http status = 200 表示请求处理成功 \n" +
-            "3、40000 <= code <= 49999 , 400 <= http status <= 499 表示客户端错误，例如：参数错误 \n" +
-            "5、50000 <= code <= 59999 , 500 <= http status <= 599 表示服务端错误，例如：空指针异常 \n")
-    private int code;
+    @ApiModelProperty(value = "1、code为具体的业务编码，code = 0 表示成功\n"
+            + "2、40000 <= code <= 49999，表示客户端错误，例如：参数错误\n"
+            + "3、50000 <= code <= 59999 , 表示服务端错误，例如：空指针异常\n")
+    private Integer code;
 
     @ApiModelProperty(value = "提示信息")
     private String message;
@@ -31,15 +30,12 @@ public class Result<T> implements Serializable {
     public Result() {
     }
 
-    public Result(int code, String message, T data) {
+    public Result(Integer code, String message, T data) {
         this.code = code;
         this.message = message;
         this.data = data;
     }
 
-    /**
-     * 自定义方法
-     */
 
     public static Result success() {
         return new Result(ResponseCodeEnum.SUCCESS.getCode(), ResponseCodeEnum.SUCCESS.getMessage(), null);
@@ -53,19 +49,19 @@ public class Result<T> implements Serializable {
         return new Result(ResponseCodeEnum.BAD_REQUEST.getCode(), message, null);
     }
 
-    public static Result fail(int code, String message) {
+    public static Result fail(Integer code, String message) {
         return new Result(code, message, null);
     }
 
-    public static <T> Result<T> fail(int code, String message, T data) {
+    public static <T> Result<T> fail(Integer code, String message, T data) {
         return new Result(code, message, data);
     }
 
-    public int getCode() {
+    public Integer getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(Integer code) {
         this.code = code;
     }
 

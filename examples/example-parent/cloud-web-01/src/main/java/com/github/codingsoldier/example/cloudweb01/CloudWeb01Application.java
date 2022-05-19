@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.cloudweb02;
+package com.github.codingsoldier.example.cloudweb01;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

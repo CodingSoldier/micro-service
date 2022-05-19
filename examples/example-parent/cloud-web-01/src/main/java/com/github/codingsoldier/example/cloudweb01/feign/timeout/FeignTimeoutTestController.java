@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.cloudweb02.feign.timeout;
+package com.github.codingsoldier.example.cloudweb01.feign.timeout;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

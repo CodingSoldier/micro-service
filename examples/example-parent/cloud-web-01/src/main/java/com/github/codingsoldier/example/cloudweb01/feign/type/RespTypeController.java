@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.cloudweb02.feign.type;
+package com.github.codingsoldier.example.cloudweb01.feign.type;
 
 import com.github.codingsoldier.common.resp.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -47,6 +47,18 @@ public class RespTypeController {
     public String string(@RequestParam(value = "name", required = false) String name) {
         String string = web02ResultTypeClient.string(name);
         return string;
+    }
+
+    @GetMapping("/demo-vo")
+    public DemoVo demoVo(@RequestParam(value = "name", required = false) String name) {
+        DemoVo demoVo = null;
+        demoVo = web02ResultTypeClient.demoVo(name);
+        // try {
+        //     demoVo = web02ResultTypeClient.demoVo(name);
+        // } catch (Exception e) {
+        //     log.error("远程调用异常", e);
+        // }
+        return demoVo;
     }
 
     @GetMapping("/result")
