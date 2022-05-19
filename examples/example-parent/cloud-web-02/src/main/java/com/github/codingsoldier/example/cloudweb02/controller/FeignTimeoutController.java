@@ -13,9 +13,9 @@ import java.util.concurrent.TimeUnit;
 @RefreshScope
 @RestController
 @RequestMapping("/feign02")
-public class Feign02Controller {
+public class FeignTimeoutController {
 
-    @GetMapping("/test01")
+    @GetMapping("/timeout")
     public String test01(@RequestParam(value = "name", required = false) String name) {
         try {
             TimeUnit.MINUTES.sleep(5L);

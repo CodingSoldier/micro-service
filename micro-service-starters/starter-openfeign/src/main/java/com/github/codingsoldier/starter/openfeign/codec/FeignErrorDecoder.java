@@ -6,6 +6,7 @@ import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
 import feign.Response;
 import feign.codec.ErrorDecoder;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
@@ -15,6 +16,7 @@ import java.io.IOException;
  * @since 2022-03-17 11:28:55
  */
 @Slf4j
+@Component
 public class FeignErrorDecoder implements ErrorDecoder {
 
     @Override

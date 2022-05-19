@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.cloudweb02.feign;
+package com.github.codingsoldier.example.cloudweb02.feign.timeout;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.openfeign.FallbackFactory;
@@ -11,12 +11,12 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class Sentinel02FallbackFactory implements FallbackFactory<Web02Feign02Client> {
+public class Sentinel02TimeoutFallbackFactory implements FallbackFactory<Web02FeignTimeoutClient> {
 
     @Override
-    public Web02Feign02Client create(Throwable throwable) {
+    public Web02FeignTimeoutClient create(Throwable throwable) {
         log.error("feign调用异常，", throwable);
-        return new Web02Feign02Client() {
+        return new Web02FeignTimeoutClient() {
             @Override
             public String test01(String name) {
                 return "调用服务2出错，降级处理。";

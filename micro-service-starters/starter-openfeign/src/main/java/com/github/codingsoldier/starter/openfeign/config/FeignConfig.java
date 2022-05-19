@@ -1,9 +1,14 @@
 package com.github.codingsoldier.starter.openfeign.config;
 
-import com.github.codingsoldier.starter.openfeign.codec.FeignErrorDecoder;
+import com.github.codingsoldier.starter.openfeign.codec.ResponseResultDecoder;
 import feign.Logger;
 import feign.RequestInterceptor;
-import feign.codec.ErrorDecoder;
+import feign.codec.Decoder;
+import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
+import org.springframework.cloud.openfeign.support.ResponseEntityDecoder;
+import org.springframework.cloud.openfeign.support.SpringDecoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,6 +22,9 @@ public class FeignConfig {
 
     private static final String FEIGN_REQUEST = "feign-request";
 
+    @Autowired
+    private ObjectFactory<HttpMessageConverters> messageConverters;
+
     /**
      * 拦截器，feign请求加上请求头
      *
@@ -29,9 +37,14 @@ public class FeignConfig {
         };
     }
 
+    /**
+     * 重新定义 feignDecoder
+     * @see org.springframework.cloud.openfeign.FeignClientsConfiguration#feignDecoder()
+     * @return
+     */
     @Bean
-    public ErrorDecoder errorDecoder() {
-        return new FeignErrorDecoder();
+    public Decoder feignDecoder() {
+        return new ResponseResultDecoder(new ResponseEntityDecoder(new SpringDecoder(this.messageConverters)));
     }
 
     /**

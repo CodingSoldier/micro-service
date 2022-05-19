@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.cloudweb02.feign;
+package com.github.codingsoldier.example.cloudweb02.feign.timeout;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 // @FeignClient(value = "cloud-web-02", contextId= "web02Feign02Client", path = "/cloud-web-02/feign02", fallback= Sentinel02Fallback.class)
 
-@FeignClient(value = "cloud-web-02", contextId = "web02Feign02Client", path = "/cloud-web-02/feign02", fallbackFactory = Sentinel02FallbackFactory.class)
-public interface Web02Feign02Client {
+@FeignClient(value = "cloud-web-02", contextId = "web02FeignTimeoutClient", path = "/cloud-web-02/feign02", fallbackFactory = Sentinel02TimeoutFallbackFactory.class)
+public interface Web02FeignTimeoutClient {
 
-    @GetMapping("/test01")
+    @GetMapping("/timeout")
     String test01(@RequestParam(value = "name", required = false) String name);
 
 }
