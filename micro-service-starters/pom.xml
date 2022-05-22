@@ -27,6 +27,7 @@
     <module>starter-redis</module>
     <module>starter-web</module>
     <module>starter-openfeign</module>
+    <module>starter-zipkin</module>
   </modules>
 
   <dependencies>
