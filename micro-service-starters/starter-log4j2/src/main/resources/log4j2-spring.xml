@@ -49,7 +49,7 @@ log4j2.xml 比 application-log4j2.yaml 更早加载，需将日志配置文件�
         <!--在文件中输出日志-->
         <RollingFile name="fileRollingFile"
                      fileName="${FILE_PATH}/${FILE_NAME}.log"
-                     filePattern="${FILE_PATH}/${FILE_NAME}/${FILE_NAME}-%d{yyyy-MM-dd}_%i.log.gz">
+                     filePattern="${FILE_PATH}/${FILE_NAME}/${FILE_NAME}-%d{yyyy-MM-dd}.%i.log.gz">
             <PatternLayout pattern="${FILE_LOG_PATTERN}"/>
             <Policies>
                 <!-- 应用重启时归档日志
@@ -67,8 +67,8 @@ log4j2.xml 比 application-log4j2.yaml 更早加载，需将日志配置文件�
         <!--error级别日志-->
         <RollingFile name="errorRollingFile"
                      fileName="${FILE_PATH}/${FILE_NAME}-error.log"
-                     filePattern="${FILE_PATH}/${FILE_NAME}/${FILE_NAME}-error-%d{yyyy-MM-dd}_%i.log.gz">
-            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+                     filePattern="${FILE_PATH}/${FILE_NAME}/${FILE_NAME}-error-%d{yyyy-MM-dd}.%i.log.gz">
+            <!--只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
             <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="${FILE_LOG_PATTERN}"/>
             <Policies>
@@ -89,7 +89,7 @@ log4j2.xml 比 application-log4j2.yaml 更早加载，需将日志配置文件�
     <!--Logger节点用来单独指定日志的形式，比如要为指定包下的class指定不同的日志级别等。-->
     <!--然后定义loggers，只有定义了logger并引入的appender，appender才会生效-->
     <loggers>
-        <root level="info">
+        <root level="INFO">
             <appender-ref ref="consoleAppender"/>
             <appender-ref ref="fileRollingFile"/>
             <appender-ref ref="errorRollingFile"/>

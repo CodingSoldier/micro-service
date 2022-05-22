@@ -53,13 +53,14 @@
 
         <dependency>
             <groupId>com.github.codingsoldier</groupId>
-            <artifactId>starter-sleuth-zipkin</artifactId>
+            <artifactId>starter-logback</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.github.codingsoldier</groupId>
-            <artifactId>starter-log4j2</artifactId>
+            <artifactId>starter-sleuth-zipkin</artifactId>
         </dependency>
+
 
         <dependency>
             <groupId>com.github.codingsoldier</groupId>

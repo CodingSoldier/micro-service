@@ -15,14 +15,14 @@ spring:
 # starter-log4j2 配置
 logging:
   # log4j2-spring.xml 已在 starter-log4j2 中配置好了，无需新建
-  config: classpath:log4j2-spring.xml
+  # logback-spring.xml 已在 starter-logback 中配置好了，无需新建
+  config: classpath:logback-spring.xml
   file:
     # 日志根目录
     path: /logs
     # log4j2-spring.xml 使用 logging.file.name 作为日志子目录、日志文件名前缀
     name: ${spring.application.name}
   level:
-    #    org: debug
     com:
       github:
         codingsoldier: DEBUG
