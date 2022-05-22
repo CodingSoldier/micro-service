@@ -157,6 +157,18 @@ feign:
 #  hystrix:
 #    enabled: true
 
+logging:
+  # logback-spring.xml 已在 starter-logback 中配置好了，无需新建
+  config: classpath:logback-spring.xml
+  file:
+    # 日志根目录
+    path: /logs
+    name: ${spring.application.name}
+  level:
+    com:
+      github:
+        codingsoldier: DEBUG
+
 #starter:
 framework:
   starter:
