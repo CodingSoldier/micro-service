@@ -80,6 +80,11 @@
             </dependency>
             <dependency>
                 <groupId>com.github.codingsoldier</groupId>
+                <artifactId>starter-logback</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.codingsoldier</groupId>
                 <artifactId>starter-mybatis-plus</artifactId>
                 <version>${revision}</version>
             </dependency>

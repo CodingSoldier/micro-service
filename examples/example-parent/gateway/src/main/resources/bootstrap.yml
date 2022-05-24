@@ -47,6 +47,10 @@ spring:
       probability: 1.0  # 采样比例, 1.0 表示 100%, 默认是 0.1
       # RateLimitingSampler 抽样策略, 设置了限速采集, spring.sleuth.sampler.probability 属性值无效
       rate: 100  # 每秒间隔接受的 trace 量
+      # 在2020.0.0中，已将默认网关反应器检测模式更改为manual,
+      # MANUAL-以最小侵入性的方式包装每个Reactor，而无需通过跟踪上下文。由用户决定
+      # 使用 SleuthLog.log 打印日志
+      instrumentation-type: MANUAL
   zipkin:
     sender:
       # 指定通过什么类型发送消息 默认是 web
@@ -72,8 +76,10 @@ management:
       show-details: ALWAYS
 
 logging:
-  config: classpath:log4j2-spring.xml
+  # logback-spring.xml 已在 starter-logback 中配置好了，无需新建
+  config: classpath:logback-spring.xml
   file:
+    # 日志根目录
     path: /logs
     name: ${spring.application.name}
   level:

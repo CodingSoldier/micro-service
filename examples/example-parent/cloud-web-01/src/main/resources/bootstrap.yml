@@ -11,18 +11,17 @@ spring:
         namespace: namespace-example-dev
         file-extension: yaml
 
-# 日志配置也要放到bootstrap.yaml中，不然无法使用占位符
-# starter-log4j2 配置
-logging:
-  # log4j2-spring.xml 已在 starter-log4j2 中配置好了，无需新建
-  config: classpath:log4j2-spring.xml
-  file:
-    # 日志根目录
-    path: /logs
-    # log4j2-spring.xml 使用 logging.file.name 作为日志子目录、日志文件名前缀
-    name: ${spring.application.name}
-  level:
-    #    org: debug
-    com:
-      github:
-        codingsoldier: DEBUG
+## 日志配置也要放到bootstrap.yaml中，不然无法使用占位符
+## starter-log4j2 配置
+#logging:
+#  # log4j2-spring.xml 已在 starter-log4j2 中配置好了，无需新建
+#  config: classpath:log4j2-spring.xml
+#  file:
+#    # 日志根目录
+#    path: /logs
+#    # log4j2-spring.xml 使用 logging.file.name 作为日志子目录、日志文件名前缀
+#    name: ${spring.application.name}
+#  level:
+#    com:
+#      github:
+#        codingsoldier: DEBUG

@@ -257,7 +257,7 @@ spring:
 
 ![](sentinel配置信息.jpg)
 
-4、添加方法：com.github.codingsoldier.example.cloudweb02.sentinel.RateLimitController.fromNacos
+4、添加方法：com.github.codingsoldier.example.cloudweb01.sentinel.RateLimitController.fromNacos
 
 ## openfeign 与 sentinel 整合
 
