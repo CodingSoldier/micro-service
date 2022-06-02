@@ -4,11 +4,14 @@ import com.github.codingsoldier.example.gateway.context.ApplicationContextHolder
 import org.springframework.cloud.sleuth.CurrentTraceContext;
 import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.cloud.sleuth.instrument.web.WebFluxSleuthOperators;
-import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 
-@Component
 public class SleuthLog {
+
+    private SleuthLog() {
+        // sonar检测
+        throw new IllegalStateException("sonar检测，不允许实例化");
+    }
 
     /**
      * sleuth打印日志

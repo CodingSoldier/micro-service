@@ -86,7 +86,8 @@ public class NacosListener {
             Properties properties = new Properties();
             properties.setProperty("serverAddr", NacosGatewayConfig.NACOS_SERVER_ADDR);
             properties.setProperty("namespace", NacosGatewayConfig.NACOS_NAMESPACE);
-            return configService = NacosFactory.createConfigService(properties);
+            configService = NacosFactory.createConfigService(properties);
+            return configService;
         } catch (Exception ex) {
             log.error("init gateway nacos config error。", ex);
             return null;

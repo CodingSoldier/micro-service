@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 承载nacos配置信息
  */
+@SuppressWarnings("squid:S2696")
 @Configuration(proxyBeanMethods = false)
 public class NacosGatewayConfig {
     /**
