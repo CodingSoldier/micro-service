@@ -1,6 +1,7 @@
 package com.github.codingsoldier.common.util.tree;
 
 import com.github.codingsoldier.common.util.CommonUtil;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,6 +15,11 @@ import java.util.List;
  */
 public class TreeUtil {
 
+    private TreeUtil() {
+        // sonar检测
+        throw new IllegalStateException("不允许实例化");
+    }
+
     /**
      * 获取树结构集合
      *
@@ -21,12 +27,11 @@ public class TreeUtil {
      * @param entityList
      * @return
      */
-    public static <E extends TreeChildrenEntity<E>> List<E> treeWithDel(Object parentId,
-                                                                        List<E> entityList) {
+    public static <E extends TreeEntity<E>> List<E> treeWithDel(Object parentId, List<E> entityList) {
         List<E> treeList = new ArrayList<>();
-        Iterator it = entityList.iterator();
+        Iterator<E> it = entityList.iterator();
         while (it.hasNext()) {
-            E elem = (E) it.next();
+            E elem = it.next();
             if (CommonUtil.objToStr(parentId)
                     .equals(CommonUtil.objToStr(elem.getParentId()))) {
                 treeList.add(elem);
@@ -47,14 +52,13 @@ public class TreeUtil {
      * @param entityList
      * @return
      */
-    public static <E extends TreeChildrenEntity<E>> List<E> tree(Object parentId,
-                                                                 List<E> entityList) {
+    public static <E extends TreeEntity<E>> List<E> tree(Object parentId, List<E> entityList) {
+        if (CollectionUtils.isEmpty(entityList)) {
+            return new ArrayList<>();
+        }
         List<E> treeList = new ArrayList<>();
-        Iterator it = entityList.iterator();
-        while (it.hasNext()) {
-            E elem = (E) it.next();
-            if (CommonUtil.objToStr(parentId)
-                    .equals(CommonUtil.objToStr(elem.getParentId()))) {
+        for (E elem : entityList) {
+            if (CommonUtil.objToStr(parentId).equals(CommonUtil.objToStr(elem.getParentId()))) {
                 treeList.add(elem);
             }
         }

@@ -3,7 +3,7 @@ package com.github.codingsoldier.starter.web.util;
 
 import com.github.codingsoldier.common.enums.ResponseCodeEnum;
 import com.github.codingsoldier.common.exception.AppException;
-import com.github.codingsoldier.common.util.StringUtils;
+import com.github.codingsoldier.common.util.StringUtil;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -36,7 +36,7 @@ public class ValidationUtils {
             StringBuilder sb = new StringBuilder();
             for (ConstraintViolation<Object> constraint : constraintViolations) {
                 String message = constraint.getMessage();
-                boolean isMatch = StringUtils.isEndWith(message, com.github.codingsoldier.common.util.StringUtils.END_CHAR);
+                boolean isMatch = StringUtil.isEndWith(message, StringUtil.END_CHAR);
                 // 没有结尾符号，添加句号
                 message = isMatch ? message : String.format("%s。", message);
                 sb.append(message);
@@ -63,7 +63,7 @@ public class ValidationUtils {
                     continue;
                 }
                 String message = constraint.getMessage();
-                boolean isMatch = StringUtils.isEndWith(message, com.github.codingsoldier.common.util.StringUtils.END_CHAR);
+                boolean isMatch = StringUtil.isEndWith(message, StringUtil.END_CHAR);
                 // 没有结尾符号，添加句号
                 message = isMatch ? message : String.format("%s。", message);
                 sb.append(message);

@@ -11,8 +11,8 @@ import com.github.codingsoldier.common.enums.ResponseCodeEnum;
  */
 public class AppException extends RuntimeException {
 
-    private Integer code;
-    private String message;
+    private final Integer code;
+    private final String message;
 
     public AppException(String message) {
         super(message);
@@ -42,16 +42,9 @@ public class AppException extends RuntimeException {
         return code;
     }
 
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
     @Override
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }

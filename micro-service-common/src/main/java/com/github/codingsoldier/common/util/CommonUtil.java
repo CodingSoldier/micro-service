@@ -16,6 +16,11 @@ import java.util.UUID;
 @Slf4j
 public class CommonUtil {
 
+    private CommonUtil() {
+        // sonar检测
+        throw new IllegalStateException("不允许实例化");
+    }
+
     /**
      * 返回32位UUID
      *
@@ -118,18 +123,6 @@ public class CommonUtil {
         return result;
     }
 
-    public static void main(String[] args) {
-        List<String> split = split("sdfsdf123sdfsadf", ",", String.class);
-        System.out.println(split);
-        //split = split("", ",", String.class);
-        //System.out.println(split);
-        //split = split("  ", ",", String.class);
-        //System.out.println(split);
-        //List<Integer> split = split("12323243", ",", Integer.class);
-        //System.out.println(split);
-        //List<Long> s = split("12323243", ",", Long.class);
-        //System.out.println(s);
-    }
 
 }
 

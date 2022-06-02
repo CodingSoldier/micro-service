@@ -14,10 +14,10 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Slf4j
-public class ObjectMapperUtilTest {
+class ObjectMapperUtilTest {
 
     @Test
-    public void testDateTime() {
+    void testDateTime() {
         Date date = new Date();
         LocalDate localDate = LocalDate.now();
         LocalDateTime localDateTime = LocalDateTime.now();

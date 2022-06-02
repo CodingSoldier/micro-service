@@ -1,6 +1,7 @@
 package com.github.codingsoldier.starter.mybatisplus.generator;
 
-import com.github.codingsoldier.common.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
+
 /**
  *
  * @author cpq

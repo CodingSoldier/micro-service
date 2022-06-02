@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 
 /**
  * LocalDateTime反序列
+ *
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
@@ -18,7 +19,6 @@ public class LocalDateTimeDeserializer extends JsonDeserializer<LocalDateTime> {
     public LocalDateTime deserialize(JsonParser p, DeserializationContext ctxt)
             throws IOException {
         String timestamp = p.getValueAsString();
-        LocalDateTime localDateTime = DatePatternUtil.getPatternDate(timestamp);
-        return localDateTime;
+        return DatePatternUtil.getPatternDate(timestamp);
     }
 }

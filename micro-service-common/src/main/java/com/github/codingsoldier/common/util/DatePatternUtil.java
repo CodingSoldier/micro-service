@@ -1,6 +1,7 @@
 package com.github.codingsoldier.common.util;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -14,6 +15,7 @@ import java.util.regex.Pattern;
 
 /**
  * 时间字符串转时间
+ *
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
@@ -25,8 +27,6 @@ public class DatePatternUtil {
      */
     private static final Map<Pattern, String> PATTERN_MAP = new HashMap<>();
     private static final List<Pattern> PATTERN_LIST = new ArrayList<>(5);
-    private static final Pattern PATTERN1 = Pattern.compile("\\d{4}");
-    private static final Pattern PATTERN2 = Pattern.compile("\\d{4}-\\d{1,2}");
     private static final Pattern PATTERN3 = Pattern.compile("(\\d{4}-\\d{1,2}-\\d{1,2})");
     private static final Pattern PATTERN4 = Pattern.compile("(\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{1,2})");
     private static final Pattern PATTERN5 = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{1,2}:\\d{1,2}:\\d{1,2}");
@@ -34,45 +34,27 @@ public class DatePatternUtil {
             .compile("\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{1,2}:\\d{1,2}:\\d{1,2}\\.\\d+");
     private static final Pattern PATTERN7 = Pattern.compile("\\d{4}/\\d{1,2}/\\d{1,2}");
     private static final Pattern PATTERN71 = Pattern.compile("\\d{4}/\\d{1,2}/\\d{1,2}\\s\\d{1,2}:\\d{1,2}:\\d{1,2}");
-    private static final Pattern PATTERN8 = Pattern
-            .compile("\\w{3}\\s\\w{3}\\s\\d{1,2}\\s\\d{4}\\s\\d{1,2}:\\d{1,2}:\\d{1,2}\\sGMT\\+0800");
-    private static final Pattern PATTERN9 = Pattern.compile("\\d{4}\\d{1,2}");
-    private static final Pattern PATTERN10 = Pattern.compile("(\\d{4}\\d{1,2}\\d{1,2})");
 
     static {
-        // patternMap.put(PATTERN1, "yyyy");
-        // patternMap.put(PATTERN2, "yyyy-MM");
         PATTERN_MAP.put(PATTERN3, "yyyy-MM-dd");
         PATTERN_MAP.put(PATTERN4, "yyyy-MM-dd HH:mm");
         PATTERN_MAP.put(PATTERN5, "yyyy-MM-dd HH:mm:ss");
         PATTERN_MAP.put(PATTERN6, "yyyy-MM-dd HH:mm:ss.SSS");
         PATTERN_MAP.put(PATTERN7, "yyyy/MM/dd");
         PATTERN_MAP.put(PATTERN71, "yyyy/MM/dd HH:mm:ss");
-        // patternMap.put(PATTERN8, "EEE MMM dd yyyy HH:mm:ss 'GMT+0800'");
-        // patternMap.put(PATTERN9, "yyyyMM");
-        // patternMap.put(PATTERN10, "yyyyMMdd");
-        // patternMap.put(PATTERN10, "yyyyMMdd");
 
         // 添加pattern
-        // patternList.add(PATTERN1);
-        // patternList.add(PATTERN2);
         PATTERN_LIST.add(PATTERN3);
         PATTERN_LIST.add(PATTERN4);
         PATTERN_LIST.add(PATTERN5);
         PATTERN_LIST.add(PATTERN6);
         PATTERN_LIST.add(PATTERN7);
         PATTERN_LIST.add(PATTERN71);
-        // patternList.add(PATTERN8);
-        // patternList.add(PATTERN9);
-        // patternList.add(PATTERN10);
     }
 
-
-    /**
-     * 构造方法
-     */
     private DatePatternUtil() {
-
+        // sonar检测
+        throw new IllegalStateException("不允许实例化");
     }
 
     /**

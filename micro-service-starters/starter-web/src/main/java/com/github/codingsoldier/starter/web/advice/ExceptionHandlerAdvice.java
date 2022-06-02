@@ -5,7 +5,7 @@ import com.github.codingsoldier.common.enums.ResponseCodeEnum;
 import com.github.codingsoldier.common.exception.AppException;
 import com.github.codingsoldier.common.exception.ResultNotSuccessFeignException;
 import com.github.codingsoldier.common.resp.Result;
-import com.github.codingsoldier.common.util.StringUtils;
+import com.github.codingsoldier.common.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.validation.BindingResult;
@@ -69,7 +69,7 @@ public class ExceptionHandlerAdvice {
         BindingResult bindingResult = ex.getBindingResult();
         for (FieldError fieldError : bindingResult.getFieldErrors()) {
             String defaultMessage = fieldError.getDefaultMessage();
-            boolean isMatch = StringUtils.isEndWith(defaultMessage, StringUtils.END_CHAR);
+            boolean isMatch = StringUtil.isEndWith(defaultMessage, StringUtil.END_CHAR);
             // 没有结尾符号，添加句号
             defaultMessage = isMatch ? defaultMessage : String.format("%s。", defaultMessage);
             sb.append(defaultMessage);

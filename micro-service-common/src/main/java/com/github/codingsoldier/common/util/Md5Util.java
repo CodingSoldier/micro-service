@@ -57,9 +57,6 @@ public class Md5Util {
             // 3，计算摘要
             byte[] bytesResult = md.digest();
 
-            // 第2步和第3步可以合并成下面一步
-            // byte[] bytesResult = md.digest(origin.getBytes(charsetname));
-
             // 4,将字节数组转换为16进制位
             resultString = byteArrayToHexString(bytesResult);
         } catch (Exception e) {
@@ -77,9 +74,6 @@ public class Md5Util {
             md.update(input);
             // 3，计算摘要
             byte[] bytesResult = md.digest();
-
-            // 第2步和第3步可以合并成下面一步
-            // byte[] bytesResult = md.digest(origin.getBytes(charsetname));
 
             // 4,将字节数组转换为16进制位
             resultString = byteArrayToHexString(bytesResult);
@@ -106,28 +100,8 @@ public class Md5Util {
         // 默认MD5计算得到128 bit的摘要，即32个 16进制位
         String result32 = md5(origin);
         // E807F1FCF82D132F9BB018CA6738A19F
-        System.out.println(result32);
+        log.info(result32);
 
     }
-
-    //public static String getMD5(String content) {
-    //  try {
-    //    MessageDigest digest = MessageDigest.getInstance("MD5");
-    //    digest.update(content.getBytes());
-    //    return getHashString(digest);
-    //  } catch (NoSuchAlgorithmException e) {
-    //    e.printStackTrace();
-    //  }
-    //  return null;
-    //}
-
-    //private static String getHashString(MessageDigest digest) {
-    //  StringBuilder builder = new StringBuilder();
-    //  for (byte b : digest.digest()) {
-    //    builder.append(Integer.toHexString((b >> 4) & 0xf));
-    //    builder.append(Integer.toHexString(b & 0xf));
-    //  }
-    //  return builder.toString();
-    //}
 
 }
