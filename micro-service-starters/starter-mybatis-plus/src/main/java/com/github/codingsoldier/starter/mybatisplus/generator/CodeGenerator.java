@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -22,6 +23,7 @@ import java.util.Objects;
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
+@SuppressWarnings({"squid:S1104", "squid:S1444"})
 public class CodeGenerator {
 
     public static final String TABLE_PREFIX = "t_";
@@ -47,8 +49,8 @@ public class CodeGenerator {
     }
 
     private static PackageConfig buildPackageConfig() {
-        Map<OutputFile, String> pathInfo = new HashMap<>(16);
-        PackageConfig packageConfig = new PackageConfig.Builder()
+        EnumMap<OutputFile, String> pathInfo = new EnumMap<>(OutputFile.class);
+        return new PackageConfig.Builder()
                 .parent(parent)
                 // .moduleName("多加一层目录，例如表名，生成的代码放在表名目录下")
                 .service("service")
@@ -59,11 +61,10 @@ public class CodeGenerator {
                 .other("")
                 .pathInfo(pathInfo)
                 .build();
-        return packageConfig;
     }
 
     private static StrategyConfig buildStrategyConfig() {
-        StrategyConfig strategyConfig = new StrategyConfig.Builder()
+        return new StrategyConfig.Builder()
                 .addInclude(tableName)
                 .addTablePrefix(TABLE_PREFIX)
                 .entityBuilder()
@@ -91,7 +92,6 @@ public class CodeGenerator {
                 .enableHyphenStyle()
                 .enableRestStyle()
                 .build();
-        return strategyConfig;
     }
 
     /**
@@ -139,8 +139,8 @@ public class CodeGenerator {
 
         InjectionConfig injectionConfig = new InjectionConfig.Builder()
                 .beforeOutputFile((tableInfo, objectMap) -> {
-                    LOGGER.debug("tableInfo = {}", tableInfo.toString());
-                    LOGGER.debug("objectMap = {}", objectMap.toString());
+                    LOGGER.debug("tableInfo = {}", tableInfo);
+                    LOGGER.debug("objectMap = {}", objectMap);
                 })
                 .customMap(map)
                 .customFile(files)
@@ -180,6 +180,7 @@ public class CodeGenerator {
     }
 
 
+    @SuppressWarnings("squid:S1075")
     public static void main(String[] args) {
 
         // 数据库url
@@ -190,6 +191,7 @@ public class CodeGenerator {
         CodeGenerator.dbPassword = "cpq..123";
 
         // 项目 main 目录的绝对路径
+
         CodeGenerator.srcMainAbsolutePath = "E:\\github\\micro-service\\examples\\example-parent\\boot-web\\src\\main";
         // 项目包名
         CodeGenerator.parent = "com.github.codingsoldier.bootweb.temp";

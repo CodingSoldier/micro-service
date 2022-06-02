@@ -23,7 +23,7 @@ public class CustomMetaObjectHandler implements MetaObjectHandler {
     private static final String UPDATE_ID = "updatedBy";
     @Lazy
     @Autowired
-    private TokenInterface tokenInterface;
+    private TokenInterface<Object> tokenInterface;
 
     @Override
     public void insertFill(MetaObject metaObject) {

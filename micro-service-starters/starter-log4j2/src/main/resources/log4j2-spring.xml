@@ -43,7 +43,6 @@ log4j2.xml 比 application-log4j2.yaml 更早加载，需将日志配置文件�
         <Console name="consoleAppender" target="SYSTEM_OUT" follow="true">
             <PatternLayout pattern="${sys:CONSOLE_LOG_PATTERN}"/>
             <!--控制台只输出level及其以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
-            <!--            <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>-->
         </Console>
 
         <!--*********************文件日志***********************-->

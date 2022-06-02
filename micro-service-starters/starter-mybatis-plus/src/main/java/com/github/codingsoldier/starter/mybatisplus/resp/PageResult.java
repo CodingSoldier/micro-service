@@ -30,6 +30,7 @@ public class PageResult<T> implements Serializable {
     private long pages = 0L;
 
     @ApiModelProperty(value = "数据列表")
+    @SuppressWarnings("squid:S1948")
     private List<T> records = Collections.emptyList();
 
     public PageResult() {
@@ -43,8 +44,8 @@ public class PageResult<T> implements Serializable {
         this.records = records;
     }
 
-    public static <T> PageResult<T> create(IPage page, List<T> records) {
-        return new PageResult(page.getCurrent(), page.getSize(), page.getTotal(), page.getPages(), records);
+    public static <T> PageResult<T> create(IPage<?> page, List<T> records) {
+        return new PageResult<>(page.getCurrent(), page.getSize(), page.getTotal(), page.getPages(), records);
     }
 
     public long getCurrent() {
