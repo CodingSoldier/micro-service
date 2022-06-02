@@ -5,13 +5,12 @@ import com.github.codingsoldier.common.enums.ResponseCodeEnum;
 import com.github.codingsoldier.common.resp.Result;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * feign异常处理，@Order需要比 com.github.codingsoldier.starterweb.advice.ExceptionHandlerAdvice 小
+ *
  * @author cpq
  * @since 2022-03-17 11:28:55
  */

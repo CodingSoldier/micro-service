@@ -12,6 +12,7 @@ import java.io.IOException;
 
 /**
  * feign调用，http status 不是 200，抛出异常
+ *
  * @author cpq
  * @since 2022-03-17 11:28:55
  */

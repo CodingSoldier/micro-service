@@ -1,8 +1,10 @@
 package com.github.codingsoldier.starter.openfeign.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+
 /**
  * feign okhttp配置
+ *
  * @author cpq
  * @since 2022-03-17 11:28:55
  */

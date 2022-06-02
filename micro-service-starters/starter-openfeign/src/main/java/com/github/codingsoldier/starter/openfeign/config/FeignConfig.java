@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * OpenFeign 配置类
+ *
  * @author cpq
  * @since 2022-03-17 11:28:55
  */

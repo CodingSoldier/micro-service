@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 
 /**
  * 配置线程池，使线程池中执行的任务也有TraceId
+ *
  * @author cpq
  * @since 2022-03-17 11:28:55
  */

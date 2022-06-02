@@ -3,7 +3,6 @@ package com.github.codingsoldier.starter.mybatisplus.generator;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- *
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
