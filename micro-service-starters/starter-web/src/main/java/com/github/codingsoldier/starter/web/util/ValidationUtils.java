@@ -4,6 +4,7 @@ package com.github.codingsoldier.starter.web.util;
 import com.github.codingsoldier.common.enums.ResponseCodeEnum;
 import com.github.codingsoldier.common.exception.AppException;
 import com.github.codingsoldier.common.util.StringUtil;
+import org.apache.commons.collections4.CollectionUtils;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -58,7 +59,7 @@ public class ValidationUtils {
             StringBuilder sb = new StringBuilder();
             for (ConstraintViolation<Object> constraint : constraintViolations) {
                 // 排除属性
-                if (excludeFieldList != null && excludeFieldList.size() > 0
+                if (CollectionUtils.isNotEmpty(excludeFieldList)
                         && excludeFieldList.contains(constraint.getPropertyPath().toString())) {
                     continue;
                 }
@@ -73,10 +74,6 @@ public class ValidationUtils {
                 throw new AppException(ResponseCodeEnum.PRECONDITION_FAILED.getCode(), sb.toString());
             }
         }
-    }
-
-    public static void main(String[] args) {
-
     }
 
 }

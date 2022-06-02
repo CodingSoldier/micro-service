@@ -1,7 +1,7 @@
 package com.github.codingsoldier.starter.web.util;
 
 import com.github.codingsoldier.common.util.Md5Util;
-import com.google.common.collect.Lists;
+import com.google.common.collect.ImmutableList;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -15,10 +15,11 @@ import java.util.List;
  * @author chenpq05
  * @since 2022/2/16 11:23
  */
+@SuppressWarnings("squid:S2696")
 @Component
 public class FileLocalUtil {
 
-    public static List<String> IMAGE_TYPE_LIST = Lists.newArrayList("jpeg", "png", "jfif", "jpg", "tif", "bmp");
+    public static final List<String> IMAGE_TYPE_LIST = ImmutableList.of("jpeg", "png", "jfif", "jpg", "tif", "bmp");
 
     /**
      * 图片路径目录
@@ -90,14 +91,6 @@ public class FileLocalUtil {
             return fileDir.mkdirs();
         }
         return false;
-    }
-
-    public static void main(String[] args) {
-        String s = StringUtils.substringAfterLast("sdfasjsp", ".");
-        System.out.println(s);
-
-        String s1 = StringUtils.substringAfterLast("sd.fas.jsp", ".");
-        System.out.println(s1);
     }
 
     @Value("${file.upload.dir:null}")

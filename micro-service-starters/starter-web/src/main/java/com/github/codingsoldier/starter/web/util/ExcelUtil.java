@@ -1,6 +1,6 @@
 package com.github.codingsoldier.starter.web.util;
 
-import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.EasyExcelFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -19,6 +19,11 @@ import java.util.Collection;
  */
 @Slf4j
 public class ExcelUtil {
+
+    private ExcelUtil() {
+        // sonar检测
+        throw new IllegalStateException("不允许实例化");
+    }
 
     /**
      * 获取请求头
@@ -52,10 +57,10 @@ public class ExcelUtil {
      */
     public static void download(HttpServletResponse response,
                                 String fileName, String sheetName,
-                                Class clazz, Collection data) throws IOException {
+                                Class<?> clazz, Collection<?> data) throws IOException {
         sheetName = StringUtils.isBlank(sheetName) ? "Sheet1" : sheetName;
         HttpServletResponse excelResp = getExcelResp(response, fileName);
-        EasyExcel.write(excelResp.getOutputStream(), clazz).sheet(sheetName).doWrite(data);
+        EasyExcelFactory.write(excelResp.getOutputStream(), clazz).sheet(sheetName).doWrite(data);
     }
 
     /**
@@ -67,11 +72,15 @@ public class ExcelUtil {
      * @param data      数据
      */
     public static void downloadCatchException(String fileName, String sheetName,
-                                              Class clazz, Collection data) {
+                                              Class<?> clazz, Collection<?> data) {
         try {
             ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-            HttpServletResponse response = servletRequestAttributes.getResponse();
-            download(response, fileName, sheetName, clazz, data);
+            if (servletRequestAttributes != null) {
+                HttpServletResponse response = servletRequestAttributes.getResponse();
+                download(response, fileName, sheetName, clazz, data);
+            } else {
+                log.error("servletRequestAttributes为空");
+            }
         } catch (Exception e) {
             log.error("导出Excel失败{}", e);
         }

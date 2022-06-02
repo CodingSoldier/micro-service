@@ -31,7 +31,7 @@ import java.util.List;
  * @since 2022/2/11 12:02
  */
 @EnableWebMvc
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnProperty(value = "framework.starter.web.enableWebMvcConfig", matchIfMissing = true)
 public class WebMvcConfig implements WebMvcConfigurer {
 
@@ -60,6 +60,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
      *
      * @param converters
      */
+    @SuppressWarnings("squid:S125")
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         if (logger.isDebugEnabled()) {

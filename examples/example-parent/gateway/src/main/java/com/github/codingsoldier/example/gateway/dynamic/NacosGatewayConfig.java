@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 承载nacos配置信息
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class NacosGatewayConfig {
     /**
      * 读取配置的超时时间

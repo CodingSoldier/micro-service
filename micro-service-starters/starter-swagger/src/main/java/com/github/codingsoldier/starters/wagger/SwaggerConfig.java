@@ -3,7 +3,6 @@ package com.github.codingsoldier.starters.wagger;
 import com.github.codingsoldier.starters.wagger.properties.StarterSwaggerProperties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -24,15 +23,16 @@ import java.util.List;
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
+@SuppressWarnings("squid:S125")
 @EnableConfigurationProperties(StarterSwaggerProperties.class)
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableOpenApi
 public class SwaggerConfig {
 
     /**
      * 基础扫描包
      */
-    public final static String BASE_PACKAGE = "com.github.codingsoldier";
+    public static final String BASE_PACKAGE = "com.github.codingsoldier";
 
 
     private static final Log logger = LogFactory.getLog(SwaggerConfig.class);
@@ -43,10 +43,7 @@ public class SwaggerConfig {
     /**
      * 需要swagger每次调接口前携带的头信息的key
      */
-    private final static String HEADER_NAME = "x-token";
-
-    @Autowired
-    private StarterSwaggerProperties starterSwaggerProperties;
+    private static final String HEADER_NAME = "x-token";
 
     public static List<SecurityScheme> securitySchemes() {
         List<SecurityScheme> apiKeyList = new ArrayList<>();
@@ -85,7 +82,7 @@ public class SwaggerConfig {
 
     @Bean
     @ConditionalOnMissingBean(Docket.class)
-    public Docket createRestApi() {
+    public Docket createRestApi(StarterSwaggerProperties starterSwaggerProperties) {
         String basePackage = starterSwaggerProperties.getBasePackage();
         if (BASE_PACKAGE.equals(basePackage)) {
             String msg = String.format("警告：swagger扫描目录为%s，请通过 framework.starter.swagger.base-package 修改扫描目录", basePackage);

@@ -8,8 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.HashMap;
 
 @Slf4j
+@SuppressWarnings("squid:S2187")
 public class OkHttpUtilTest {
-
 
     public static void main(String[] args) {
         Result result = OkHttpUtil.get("http://localhost:8080/example/validations/account?userId=1&account", Result.class);

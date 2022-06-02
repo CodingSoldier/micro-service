@@ -28,7 +28,7 @@ import java.util.List;
  * Gateway 集成 Sentinel 实现限流
  */
 @Slf4j
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class SentinelGatewayConfiguration {
 
     /**

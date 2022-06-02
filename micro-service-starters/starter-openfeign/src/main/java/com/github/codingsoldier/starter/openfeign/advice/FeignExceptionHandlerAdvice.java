@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class FeignExceptionHandlerAdvice {
 
     @ExceptionHandler(value = FeignException.class)
-    public Result feignExceptionHandler(final FeignException ex) {
+    public Result<Object> feignExceptionHandler(final FeignException ex) {
         log.error("捕获feign异常", ex);
         return Result.fail(ResponseCodeEnum.BAD_REQUEST.getCode(), "服务调用异常。");
     }

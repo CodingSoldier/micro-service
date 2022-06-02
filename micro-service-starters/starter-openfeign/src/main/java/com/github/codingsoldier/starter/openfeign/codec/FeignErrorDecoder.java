@@ -22,7 +22,7 @@ public class FeignErrorDecoder implements ErrorDecoder {
     public Exception decode(String methodKey, Response response) {
         try {
             // 获取数据
-            Result result = ObjectMapperUtil.getObjectMapper()
+            Result<?> result = ObjectMapperUtil.getObjectMapper()
                     .readValue(response.body().asInputStream(), Result.class);
             if (result != null) {
                 log.error("feign请求，http status 不是 200，result={}", result.toString());
@@ -33,4 +33,5 @@ public class FeignErrorDecoder implements ErrorDecoder {
         }
         return new AppException("微服务调用异常。");
     }
+
 }

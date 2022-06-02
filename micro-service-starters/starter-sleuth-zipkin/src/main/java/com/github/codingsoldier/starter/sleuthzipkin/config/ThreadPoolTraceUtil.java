@@ -24,6 +24,12 @@ public class ThreadPoolTraceUtil {
         this.beanFactory = beanFactory;
     }
 
+    @SuppressWarnings("squid:S2696")
+    @PostConstruct
+    private void init() {
+        traceExecutor = new LazyTraceExecutor(beanFactory, ThreadUtil.getExecutor());
+    }
+
     /**
      * 在公共线程池中执行任务
      *
@@ -31,11 +37,6 @@ public class ThreadPoolTraceUtil {
      */
     public static void execute(Runnable runnable) {
         traceExecutor.execute(runnable);
-    }
-
-    @PostConstruct
-    private void init() {
-        traceExecutor = new LazyTraceExecutor(beanFactory, ThreadUtil.getExecutor());
     }
 
 }
