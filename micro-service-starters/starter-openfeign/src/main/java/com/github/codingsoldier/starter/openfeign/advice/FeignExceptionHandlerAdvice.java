@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  */
 @Slf4j
 @RestControllerAdvice
-@Order(Ordered.LOWEST_PRECEDENCE - 1)
 public class FeignExceptionHandlerAdvice {
 
     @ExceptionHandler(value = FeignException.class)
