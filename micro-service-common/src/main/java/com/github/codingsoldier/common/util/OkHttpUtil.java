@@ -201,7 +201,7 @@ public class OkHttpUtil {
         log.info("{}", result);
 
         HashMap<String, Object> body = new HashMap<>(16);
-        HashMap<String, Object> vo = new HashMap<>();
+        HashMap<String, Object> vo = new HashMap<>(16);
         body.put("userId", 1);
         body.put("userName", "sdsdff");
         body.put("strList", Lists.newArrayList("a"));
