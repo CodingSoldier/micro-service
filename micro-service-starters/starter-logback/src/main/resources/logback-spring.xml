@@ -18,6 +18,10 @@
               value="${FILE_LOG_PATTERN:-%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%X{traceId}/%X{spanId}] [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
     <property name="FILE_LOG_CHARSET" value="${FILE_LOG_CHARSET:-default}"/>
 
+    <property name="LOGBACK_ROLLINGPOLICY_MAX_FILE_SIZE" value="${LOGBACK_ROLLINGPOLICY_MAX_FILE_SIZE:-500MB}"/>
+    <property name="LOGBACK_ROLLINGPOLICY_TOTAL_SIZE_CAP" value="${LOGBACK_ROLLINGPOLICY_TOTAL_SIZE_CAP:-2GB}"/>
+    <property name="LOGBACK_ROLLINGPOLICY_MAX_HISTORY" value="${LOGBACK_ROLLINGPOLICY_MAX_HISTORY:-10}"/>
+
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
@@ -32,14 +36,16 @@
         </encoder>
         <file>${LOG_PATH}/${LOG_FILE}.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/${LOG_FILE}/${LOG_FILE}-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/old/${LOG_FILE}-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
             <!-- 日志文件达到了 maxFileSize 指定的大小，会进行归档，递增索引从 0 开始 -->
-            <maxFileSize>1MB</maxFileSize>
-            <!--日志文档保留天数-->
-            <maxHistory>30</maxHistory>
+            <!-- 环境变量 org.springframework.boot.logging.logback.DefaultLogbackConfiguration#setRollingPolicy -->
+            <maxFileSize>${LOGBACK_ROLLINGPOLICY_MAX_FILE_SIZE}</maxFileSize>
             <!-- 限制归档文件总的大小-->
-            <totalSizeCap>3MB</totalSizeCap>
+            <totalSizeCap>${LOGBACK_ROLLINGPOLICY_TOTAL_SIZE_CAP}</totalSizeCap>
+            <!--日志文档保留天数-->
+            <maxHistory>${LOGBACK_ROLLINGPOLICY_MAX_HISTORY}</maxHistory>
         </rollingPolicy>
+
     </appender>
 
     <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -49,13 +55,14 @@
         </encoder>
         <file>${LOG_PATH}/${LOG_FILE}-error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/${LOG_FILE}/${LOG_FILE}-error-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/old/${LOG_FILE}-error-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
             <!-- 日志文件达到了 maxFileSize 指定的大小，会进行归档，递增索引从 0 开始 -->
-            <maxFileSize>1MB</maxFileSize>
-            <!--日志文档保留天数-->
-            <maxHistory>30</maxHistory>
+            <!-- 环境变量 org.springframework.boot.logging.logback.DefaultLogbackConfiguration#setRollingPolicy -->
+            <maxFileSize>${LOGBACK_ROLLINGPOLICY_MAX_FILE_SIZE}</maxFileSize>
             <!-- 限制归档文件总的大小-->
-            <totalSizeCap>3MB</totalSizeCap>
+            <totalSizeCap>${LOGBACK_ROLLINGPOLICY_TOTAL_SIZE_CAP}</totalSizeCap>
+            <!--日志文档保留天数-->
+            <maxHistory>${LOGBACK_ROLLINGPOLICY_MAX_HISTORY}</maxHistory>
         </rollingPolicy>
         <!-- 接收（ACCEPT）level及以上级别的信息（onMatch），拒绝输出（DENY）其他的（onMismatch）信息 -->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">

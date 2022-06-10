@@ -20,7 +20,7 @@ public class StarterRedisAutoConfiguration {
 
     @PostConstruct
     public void init() {
-        RedisUtil.initOnceRedisUtil(redisTemplate);
+        RedisUtil.setOnceRedisTemplate(redisTemplate);
     }
 
 }

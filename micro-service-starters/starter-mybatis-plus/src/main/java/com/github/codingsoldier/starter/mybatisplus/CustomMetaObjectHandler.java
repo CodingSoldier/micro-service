@@ -21,6 +21,7 @@ public class CustomMetaObjectHandler implements MetaObjectHandler {
     private static final String CREATE_ID = "createdBy";
     private static final String UPDATE_TIME = "updatedTime";
     private static final String UPDATE_ID = "updatedBy";
+
     @Lazy
     @Autowired
     private TokenInterface<Object> tokenInterface;

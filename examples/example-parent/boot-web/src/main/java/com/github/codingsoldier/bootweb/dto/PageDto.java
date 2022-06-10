@@ -1,6 +1,6 @@
 package com.github.codingsoldier.bootweb.dto;
 
-import com.github.codingsoldier.starter.mybatisplus.req.PageReq;
+import com.github.codingsoldier.common.req.PageReq;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;

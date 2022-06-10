@@ -25,7 +25,7 @@ public class RedisUtil{
      * @see com.github.codingsoldier.starter.redis.StarterRedisAutoConfiguration#init
      * @param redisTemplate
      */
-    public static synchronized void initOnceRedisUtil(RedisTemplate redisTemplate) {
+    public static synchronized void setOnceRedisTemplate(RedisTemplate redisTemplate) {
         if (redisTemplate == null) {
             RedisUtil.redisTemplate = redisTemplate;
         }

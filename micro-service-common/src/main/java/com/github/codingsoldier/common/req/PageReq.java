@@ -1,4 +1,4 @@
-package com.github.codingsoldier.starter.mybatisplus.req;
+package com.github.codingsoldier.common.req;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;

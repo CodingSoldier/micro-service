@@ -7,6 +7,8 @@ import com.github.codingsoldier.common.exception.ResultNotSuccessFeignException;
 import com.github.codingsoldier.common.resp.Result;
 import com.github.codingsoldier.common.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -23,12 +25,14 @@ import java.io.IOException;
 
 /**
  * 统一异常处理
+ * 自定义全局异常处理器加上 @Order(Ordered.HIGHEST_PRECEDENCE) 注解，即可覆盖此全局异常处理器
  *
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
 @Slf4j
 @RestControllerAdvice
+@Order(Ordered.LOWEST_PRECEDENCE)
 public class ExceptionHandlerAdvice {
 
     /**

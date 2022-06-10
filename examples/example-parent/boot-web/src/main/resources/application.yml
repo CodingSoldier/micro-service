@@ -67,13 +67,17 @@ logging:
   config: classpath:logback-spring.xml
   file:
     # 日志根目录
-    path: /logs
+    path: /logs/${spring.application.name}
     # log4j2-spring.xml 使用 logging.file.name 作为日志子目录、日志文件名前缀
     name: ${spring.application.name}
+#  logback:
+#    rollingpolicy:
+#      max-file-size: 1MB
+#      max-history: 10
+#      total-size-cap: 2MB
   level:
-    com:
-      github:
-        codingsoldier: DEBUG
+    com.github.codingsoldier: DEBUG
+    ch.qos.logback: DEBUG
 
 # mybatis-plus 配置
 mybatis-plus:
@@ -87,14 +91,27 @@ mybatis-plus:
 test:
   msg: 测试信息
 
+
 framework:
   starter:
-    #    mybatis-plus:
-    #      enabled: false
+#    # starter-log4j2 配置
+#    log4j2:
+#      time-based-triggering-policy:
+#        interval: 24
+#      size-based-triggering-policy:
+#        size: 1MB
+#      default-rollover-strategy:
+#        max: 7
+    # starter-mybatis-plus 配置
+    mybatis-plus:
+      enabled: false
+    # starter-swagger 配置
     swagger:
-      #      enabled: false
+      enabled: false
       base-package: com.github.codingsoldier.bootweb
+#    # starter-web 配置
 #    web:
 #      enabled: false
+#    # starter-redis 配置
 #    redis:
 #      enabled: false
