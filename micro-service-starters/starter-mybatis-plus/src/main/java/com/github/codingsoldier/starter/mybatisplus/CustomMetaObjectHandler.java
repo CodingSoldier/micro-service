@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 /**
  * 自动填充
  * https://baomidou.com/pages/4c6bcf/
+ *
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
@@ -20,9 +21,10 @@ public class CustomMetaObjectHandler implements MetaObjectHandler {
     private static final String CREATE_ID = "createdBy";
     private static final String UPDATE_TIME = "updatedTime";
     private static final String UPDATE_ID = "updatedBy";
+
     @Lazy
     @Autowired
-    private TokenInterface tokenInterface;
+    private TokenInterface<Object> tokenInterface;
 
     @Override
     public void insertFill(MetaObject metaObject) {

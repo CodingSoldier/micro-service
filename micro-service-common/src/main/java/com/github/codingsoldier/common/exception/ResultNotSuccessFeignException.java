@@ -11,8 +11,8 @@ import com.github.codingsoldier.common.enums.ResponseCodeEnum;
  */
 public class ResultNotSuccessFeignException extends RuntimeException {
 
-    private Integer code;
-    private String message;
+    private final Integer code;
+    private final String message;
 
     public ResultNotSuccessFeignException(String message) {
         super(message);
@@ -30,16 +30,9 @@ public class ResultNotSuccessFeignException extends RuntimeException {
         return code;
     }
 
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
     @Override
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }

@@ -30,6 +30,9 @@ log4j2.xml 比 application-log4j2.yaml 更早加载，需将日志配置文件�
         <!-- 定义日志存储的路径 -->
         <Property name="FILE_PATH">${spring:logging.file.path}</Property>
         <Property name="FILE_NAME">${spring:logging.file.name}</Property>
+        <Property name="TIME_BASED_TRIGGERING_POLICY_INTERVAL">${spring:framework.starter.log4j2.time-based-triggering-policy.interval:-24}</Property>
+        <Property name="SIZE_BASED_TRIGGERING_POLICY_SIZE">${spring:framework.starter.log4j2.size-based-triggering-policy.size:-500MB}</Property>
+        <Property name="DEFAULT_ROLLOVER_STRATEGY_MAX">${spring:framework.starter.log4j2.default-rollover-strategy.max:-100}</Property>
 
     </Properties>
 
@@ -37,37 +40,36 @@ log4j2.xml 比 application-log4j2.yaml 更早加载，需将日志配置文件�
     <Appenders>
 
         <!-- ConsoleAppender 将其输出写入控制台 -->
-        <Console name="consoleAppender" target="SYSTEM_OUT" follow="true">
+        <Console name="CONSOLE" target="SYSTEM_OUT" follow="true">
             <PatternLayout pattern="${sys:CONSOLE_LOG_PATTERN}"/>
             <!--控制台只输出level及其以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
-            <!--            <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>-->
         </Console>
 
         <!--*********************文件日志***********************-->
         <!--  RollingFile节点用于实现日志文件更动更新的Appender，
         当满足条件（日志大小、指定时间等）重命名或打包原日志文件进行归档，生成新日志文件用于日志写入-->
         <!--在文件中输出日志-->
-        <RollingFile name="fileRollingFile"
+        <RollingFile name="DEFAULT_FILE"
                      fileName="${FILE_PATH}/${FILE_NAME}.log"
-                     filePattern="${FILE_PATH}/${FILE_NAME}/${FILE_NAME}-%d{yyyy-MM-dd}.%i.log.gz">
+                     filePattern="${FILE_PATH}/old/${FILE_NAME}-%d{yyyy-MM-dd}.%i.log.gz">
             <PatternLayout pattern="${FILE_LOG_PATTERN}"/>
             <Policies>
                 <!-- 应用重启时归档日志
                 https://www.docs4dev.com/docs/zh/log4j2/2.x/all/manual-appenders.html -->
                 <OnStartupTriggeringPolicy/>
                 <!--interval属性用来指定多久滚动一次，默认是1 hour-->
-                <TimeBasedTriggeringPolicy interval="12"/>
+                <TimeBasedTriggeringPolicy interval="${TIME_BASED_TRIGGERING_POLICY_INTERVAL}"/>
                 <!--设置日志基础文件大小，超过该大小就触发日志文件滚动更新-->
-                <SizeBasedTriggeringPolicy size="10MB"/>
+                <SizeBasedTriggeringPolicy size="${SIZE_BASED_TRIGGERING_POLICY_SIZE}"/>
             </Policies>
             <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件开始覆盖-->
-            <DefaultRolloverStrategy max="100"/>
+            <DefaultRolloverStrategy max="${DEFAULT_ROLLOVER_STRATEGY_MAX}"/>
         </RollingFile>
 
         <!--error级别日志-->
-        <RollingFile name="errorRollingFile"
+        <RollingFile name="ERROR_FILE"
                      fileName="${FILE_PATH}/${FILE_NAME}-error.log"
-                     filePattern="${FILE_PATH}/${FILE_NAME}/${FILE_NAME}-error-%d{yyyy-MM-dd}.%i.log.gz">
+                     filePattern="${FILE_PATH}/old/${FILE_NAME}-error-%d{yyyy-MM-dd}.%i.log.gz">
             <!--只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
             <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="${FILE_LOG_PATTERN}"/>
@@ -76,12 +78,12 @@ log4j2.xml 比 application-log4j2.yaml 更早加载，需将日志配置文件�
                 https://www.docs4dev.com/docs/zh/log4j2/2.x/all/manual-appenders.html -->
                 <OnStartupTriggeringPolicy/>
                 <!--interval属性用来指定多久滚动一次，默认是1 hour-->
-                <TimeBasedTriggeringPolicy interval="24"/>
+                <TimeBasedTriggeringPolicy interval="${TIME_BASED_TRIGGERING_POLICY_INTERVAL}"/>
                 <!--设置日志基础文件大小，超过该大小就触发日志文件滚动更新-->
-                <SizeBasedTriggeringPolicy size="10MB"/>
+                <SizeBasedTriggeringPolicy size="${SIZE_BASED_TRIGGERING_POLICY_SIZE}"/>
             </Policies>
             <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件开始覆盖-->
-            <DefaultRolloverStrategy max="100"/>
+            <DefaultRolloverStrategy max="${DEFAULT_ROLLOVER_STRATEGY_MAX}"/>
         </RollingFile>
 
     </Appenders>
@@ -90,9 +92,9 @@ log4j2.xml 比 application-log4j2.yaml 更早加载，需将日志配置文件�
     <!--然后定义loggers，只有定义了logger并引入的appender，appender才会生效-->
     <loggers>
         <root level="INFO">
-            <appender-ref ref="consoleAppender"/>
-            <appender-ref ref="fileRollingFile"/>
-            <appender-ref ref="errorRollingFile"/>
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="DEFAULT_FILE"/>
+            <appender-ref ref="ERROR_FILE"/>
         </root>
     </loggers>
 

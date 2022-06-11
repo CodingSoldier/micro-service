@@ -16,6 +16,11 @@ import java.util.List;
 @Slf4j
 public class CopyUtils {
 
+    private CopyUtils() {
+        // sonar检测
+        throw new IllegalStateException("不允许实例化");
+    }
+
     /**
      * 集合拷贝
      *

@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @since 2022/2/11 12:02
  */
 @EnableWebMvc
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class BootWebMvcConfig implements WebMvcConfigurer {
 
     /**

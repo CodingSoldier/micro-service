@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,9 @@ import java.util.concurrent.Executor;
 @Component
 @DependsOn({"nacosGatewayConfig"})
 public class NacosListener {
+
+    @Autowired
+    private NacosGatewayProperties nacosGatewayProperties;
 
     private final RouteEventServiceImpl dynamicRouteService;
     /**
@@ -51,9 +55,9 @@ public class NacosListener {
 
             // 通过 Nacos Config 并指定路由配置路径去获取路由配置
             String configInfo = configService.getConfig(
-                    NacosGatewayConfig.NACOS_ROUTE_DATA_ID,
-                    NacosGatewayConfig.NACOS_ROUTE_GROUP,
-                    NacosGatewayConfig.DEFAULT_TIMEOUT
+                    nacosGatewayProperties.getNacosRouteDataId(),
+                    nacosGatewayProperties.getNacosRouteGroup(),
+                    NacosGatewayProperties.DEFAULT_TIMEOUT
             );
 
             log.info("get current gateway config: [{}]", configInfo);
@@ -73,8 +77,8 @@ public class NacosListener {
         }
 
         // 设置监听器
-        dynamicRouteByNacosListener(NacosGatewayConfig.NACOS_ROUTE_DATA_ID,
-                NacosGatewayConfig.NACOS_ROUTE_GROUP);
+        dynamicRouteByNacosListener(nacosGatewayProperties.getNacosRouteDataId(),
+                nacosGatewayProperties.getNacosRouteGroup());
     }
 
     /**
@@ -84,9 +88,10 @@ public class NacosListener {
 
         try {
             Properties properties = new Properties();
-            properties.setProperty("serverAddr", NacosGatewayConfig.NACOS_SERVER_ADDR);
-            properties.setProperty("namespace", NacosGatewayConfig.NACOS_NAMESPACE);
-            return configService = NacosFactory.createConfigService(properties);
+            properties.setProperty("serverAddr", nacosGatewayProperties.getNacosServerAddr());
+            properties.setProperty("namespace", nacosGatewayProperties.getNacosNamespace());
+            configService = NacosFactory.createConfigService(properties);
+            return configService;
         } catch (Exception ex) {
             log.error("init gateway nacos config error。", ex);
             return null;

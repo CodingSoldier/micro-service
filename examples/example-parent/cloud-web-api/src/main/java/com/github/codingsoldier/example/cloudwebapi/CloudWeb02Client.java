@@ -23,10 +23,10 @@ public interface CloudWeb02Client {
     void testvoid(@RequestParam(value = "name", required = false) String name);
 
     @PostMapping("/map")
-    String map(@RequestBody(required = false) @Nullable Map map);
+    String map(@RequestBody(required = false) @Nullable Map<?, ?> map);
 
     @PostMapping("/body/and/param")
-    String bodyAndParam(@RequestBody Map map,
+    String bodyAndParam(@RequestBody Map<?, ?> map,
                         @RequestParam(value = "pageNum", required = false) Integer pageNum,
                         @RequestParam(value = "pageSize", required = false) Integer pageSize);
 

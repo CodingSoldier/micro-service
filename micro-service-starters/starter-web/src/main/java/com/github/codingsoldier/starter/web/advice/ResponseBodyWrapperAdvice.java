@@ -7,7 +7,10 @@ import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
 import com.github.codingsoldier.starter.web.annotation.NoWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -29,8 +32,10 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @RestControllerAdvice
+@Order(Ordered.LOWEST_PRECEDENCE)
 public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
 
+    @SuppressWarnings("squid:S1126")
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
         // 类上使用了 @NoWrapper
@@ -40,13 +45,14 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
         // 方法上使用了 @NoWrapper
         Method method = returnType.getMethod();
 
-        if (method == null || (method != null && method.isAnnotationPresent(NoWrapper.class))) {
+        if (method == null || method.isAnnotationPresent(NoWrapper.class)) {
             return false;
         }
 
         // springfox 接口不包装返回值
         String springfox = "springfox";
-        if (returnType.getDeclaringClass().getName().contains(springfox)) {
+        String name = returnType.getDeclaringClass().getName();
+        if (StringUtils.isNotBlank(name) && name.contains(springfox)) {
             return false;
         }
 
@@ -69,7 +75,7 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
                 && valList.contains(Boolean.TRUE.toString());
         if (isFeignRequest) {
             if (body instanceof Result) {
-                Result result = (Result) body;
+                Result<?> result = (Result) body;
                 Set<Integer> notChangeCodes = FeignConstant.NOT_CHANGE_RESPONSE_STATUS_CODE_SET
                         .stream()
                         .map(ResponseCodeEnum::getCode)

@@ -7,8 +7,8 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
+
 /**
- *
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
@@ -30,6 +30,7 @@ public class PageResult<T> implements Serializable {
     private long pages = 0L;
 
     @ApiModelProperty(value = "数据列表")
+    @SuppressWarnings("squid:S1948")
     private List<T> records = Collections.emptyList();
 
     public PageResult() {
@@ -41,6 +42,10 @@ public class PageResult<T> implements Serializable {
         this.total = total;
         this.pages = pages;
         this.records = records;
+    }
+
+    public static <T> PageResult<T> create(IPage<?> page, List<T> records) {
+        return new PageResult<>(page.getCurrent(), page.getSize(), page.getTotal(), page.getPages(), records);
     }
 
     public long getCurrent() {
@@ -81,11 +86,6 @@ public class PageResult<T> implements Serializable {
 
     public void setRecords(List<T> records) {
         this.records = records;
-    }
-
-
-    public static <T> PageResult<T> create(IPage page, List<T> records) {
-        return new PageResult(page.getCurrent(), page.getSize(), page.getTotal(), page.getPages(), records);
     }
 
 }

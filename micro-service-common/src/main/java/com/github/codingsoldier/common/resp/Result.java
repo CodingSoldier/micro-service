@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 /**
  * 返回统一的数据结构
+ *
  * @author chenpq05
  * @since 2022/2/23 14:14
  */
@@ -25,6 +26,7 @@ public class Result<T> implements Serializable {
     private String message;
 
     @ApiModelProperty(value = "返回数据")
+    @SuppressWarnings("squid:S1948")
     private T data;
 
     public Result() {
@@ -37,24 +39,24 @@ public class Result<T> implements Serializable {
     }
 
 
-    public static Result success() {
-        return new Result(ResponseCodeEnum.SUCCESS.getCode(), ResponseCodeEnum.SUCCESS.getMessage(), null);
+    public static <T> Result<T> success() {
+        return new Result<>(ResponseCodeEnum.SUCCESS.getCode(), ResponseCodeEnum.SUCCESS.getMessage(), null);
     }
 
     public static <T> Result<T> success(T data) {
-        return new Result(ResponseCodeEnum.SUCCESS.getCode(), ResponseCodeEnum.SUCCESS.getMessage(), data);
+        return new Result<>(ResponseCodeEnum.SUCCESS.getCode(), ResponseCodeEnum.SUCCESS.getMessage(), data);
     }
 
-    public static Result fail(String message) {
-        return new Result(ResponseCodeEnum.BAD_REQUEST.getCode(), message, null);
+    public static <T> Result<T> fail(String message) {
+        return new Result<>(ResponseCodeEnum.BAD_REQUEST.getCode(), message, null);
     }
 
-    public static Result fail(Integer code, String message) {
-        return new Result(code, message, null);
+    public static <T> Result<T> fail(Integer code, String message) {
+        return new Result<>(code, message, null);
     }
 
     public static <T> Result<T> fail(Integer code, String message, T data) {
-        return new Result(code, message, data);
+        return new Result<>(code, message, data);
     }
 
     public Integer getCode() {

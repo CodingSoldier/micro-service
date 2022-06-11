@@ -55,13 +55,13 @@ public class Web02Controller implements CloudWeb02Client {
     }
 
     @Override
-    public String map(@RequestBody(required = false) Map map) {
+    public String map(@RequestBody(required = false) Map<?, ?> map) {
         log.info("##map {}", map);
         return "nameList";
     }
 
     @Override
-    public String bodyAndParam(Map map, Integer pageNum, Integer pageSize) {
+    public String bodyAndParam(Map<?, ?> map, Integer pageNum, Integer pageSize) {
         log.info("#######map = {}", map.toString());
         log.info("#######pageNum = {}", pageNum);
         log.info("#######pageSize = {}", pageSize);

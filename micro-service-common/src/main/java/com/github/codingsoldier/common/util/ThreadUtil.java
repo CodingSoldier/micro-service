@@ -21,12 +21,14 @@ public class ThreadUtil {
     }
 
     private ThreadUtil() {
+        // sonar检测
+        throw new IllegalStateException("不允许实例化");
     }
 
     public static void main(String[] args) {
         int max = Math.max(1, 5);
-        System.out.println(max);
-        System.out.println(Math.max(5, 3));
+        log.info("{}", max);
+        log.info("{}", Math.max(5, 3));
     }
 
     /**
@@ -44,10 +46,10 @@ public class ThreadUtil {
 
         // 加上这个纯属为了解决Alibaba代码插件检测
         ThreadFactory defaultThreadFactory = Executors.defaultThreadFactory();
-
+        LinkedBlockingQueue<Runnable> linkedBlockingQueue = new LinkedBlockingQueue<>(100000);
         executor = new ThreadPoolExecutor(cpuCores, maxPool,
                 60L, TimeUnit.SECONDS,
-                new LinkedBlockingQueue(100000),
+                linkedBlockingQueue,
                 defaultThreadFactory,
                 new CustomAbortPolicy());
     }
@@ -63,8 +65,7 @@ public class ThreadUtil {
         int jvmAvailableProcessors = Runtime.getRuntime().availableProcessors();
         int blockTime = 5;
         int runTime = 1;
-        int ioMaxCore = jvmAvailableProcessors * (1 + blockTime / runTime);
-        return ioMaxCore;
+        return jvmAvailableProcessors * (1 + blockTime / runTime);
     }
 
     /**
@@ -107,6 +108,7 @@ public class ThreadUtil {
          * Creates an {@code AbortPolicy}.
          */
         public CustomAbortPolicy() {
+            // sonar检测
         }
 
         /**
@@ -118,7 +120,7 @@ public class ThreadUtil {
          */
         @Override
         public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {
-            String msg = String.format("线程池满了，抛出异常。\nTask: %s 。\nRejected from: %s",
+            String msg = String.format("线程池满了，抛出异常。%n Task: %s 。%n Rejected from: %s",
                     r.toString(), e.toString());
             log.info(msg);
             throw new RejectedExecutionException(msg);

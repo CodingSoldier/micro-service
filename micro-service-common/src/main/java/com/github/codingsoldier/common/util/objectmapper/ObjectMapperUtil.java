@@ -7,13 +7,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.github.codingsoldier.common.util.StringUtils;
 import com.github.codingsoldier.common.util.objectmapper.deserializer.DateDeserializer;
 import com.github.codingsoldier.common.util.objectmapper.deserializer.LocalDateDeserializer;
 import com.github.codingsoldier.common.util.objectmapper.deserializer.LocalDateTimeDeserializer;
 import com.github.codingsoldier.common.util.objectmapper.deserializer.OffsetDateTimeDeserializer;
 import com.github.codingsoldier.common.util.objectmapper.serializer.DateTimeSerializer;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -28,7 +28,12 @@ import java.util.Objects;
 @Slf4j
 public class ObjectMapperUtil {
 
-    private final static ObjectMapper OBJECT_MAPPER = newObjectMapper();
+    private static final ObjectMapper OBJECT_MAPPER = newObjectMapper();
+
+    private ObjectMapperUtil() {
+        // sonar检测
+        throw new IllegalStateException("不允许实例化");
+    }
 
     /**
      * 创建一个新的ObjectMapper
@@ -152,10 +157,5 @@ public class ObjectMapperUtil {
         }
         return "";
     }
-
-    public static void main(String[] args) {
-
-    }
-
 
 }

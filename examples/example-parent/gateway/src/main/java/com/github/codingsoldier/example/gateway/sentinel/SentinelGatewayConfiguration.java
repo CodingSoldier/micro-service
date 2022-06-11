@@ -18,7 +18,6 @@ import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import org.springframework.web.reactive.result.view.ViewResolver;
 import org.springframework.web.server.ServerWebExchange;
-import reactor.core.publisher.Mono;
 
 import javax.annotation.PostConstruct;
 import java.util.Collections;
@@ -28,7 +27,7 @@ import java.util.List;
  * Gateway 集成 Sentinel 实现限流
  */
 @Slf4j
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class SentinelGatewayConfiguration {
 
     /**
@@ -76,18 +75,13 @@ public class SentinelGatewayConfiguration {
     private void initBlockHandler() {
 
         // 自定义 BlockRequestHandler
-        BlockRequestHandler blockRequestHandler = new BlockRequestHandler() {
-            @Override
-            public Mono<ServerResponse> handleRequest(ServerWebExchange serverWebExchange,
-                                                      Throwable throwable) {
+        BlockRequestHandler blockRequestHandler = (ServerWebExchange serverWebExchange, Throwable throwable) -> {
+            Result<?> result = Result.fail(ResponseCodeEnum.TOO_MANY_REQUESTS.getCode(), ResponseCodeEnum.TOO_MANY_REQUESTS.getMessage());
 
-                Result result = Result.fail(ResponseCodeEnum.TOO_MANY_REQUESTS.getCode(), ResponseCodeEnum.TOO_MANY_REQUESTS.getMessage());
-
-                return ServerResponse
-                        .status(HttpStatus.TOO_MANY_REQUESTS)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(BodyInserters.fromValue(result));
-            }
+            return ServerResponse
+                    .status(HttpStatus.TOO_MANY_REQUESTS)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromValue(result));
         };
 
         // 设置自定义限流异常处理器

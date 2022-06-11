@@ -5,8 +5,10 @@ import com.github.codingsoldier.common.enums.ResponseCodeEnum;
 import com.github.codingsoldier.common.exception.AppException;
 import com.github.codingsoldier.common.exception.ResultNotSuccessFeignException;
 import com.github.codingsoldier.common.resp.Result;
-import com.github.codingsoldier.common.util.StringUtils;
+import com.github.codingsoldier.common.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -23,11 +25,14 @@ import java.io.IOException;
 
 /**
  * 统一异常处理
+ * 自定义全局异常处理器加上 @Order(Ordered.HIGHEST_PRECEDENCE) 注解，即可覆盖此全局异常处理器
+ *
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
 @Slf4j
 @RestControllerAdvice
+@Order(Ordered.LOWEST_PRECEDENCE)
 public class ExceptionHandlerAdvice {
 
     /**
@@ -37,7 +42,7 @@ public class ExceptionHandlerAdvice {
      * @return result
      */
     @ExceptionHandler(AppException.class)
-    public Result appExceptionHandler(final AppException ex) {
+    public Result<Object> appExceptionHandler(final AppException ex) {
         log.error("捕获AppException", ex);
         return Result.fail(ex.getCode(), ex.getMessage());
     }
@@ -49,7 +54,7 @@ public class ExceptionHandlerAdvice {
      * @return result
      */
     @ExceptionHandler(ResultNotSuccessFeignException.class)
-    public Result appExceptionHandler(final ResultNotSuccessFeignException ex) {
+    public Result<Object> appExceptionHandler(final ResultNotSuccessFeignException ex) {
         log.error("捕获ResultNotSuccessFeignException", ex);
         return Result.fail(ex.getCode(), ex.getMessage());
     }
@@ -63,13 +68,13 @@ public class ExceptionHandlerAdvice {
      * @return result
      */
     @ExceptionHandler({MethodArgumentNotValidException.class, ConstraintViolationException.class})
-    public Result validExceptionHandler(MethodArgumentNotValidException ex) {
+    public Result<Object> validExceptionHandler(MethodArgumentNotValidException ex) {
         log.error("捕获参数校验异常", ex);
         StringBuilder sb = new StringBuilder();
         BindingResult bindingResult = ex.getBindingResult();
         for (FieldError fieldError : bindingResult.getFieldErrors()) {
             String defaultMessage = fieldError.getDefaultMessage();
-            boolean isMatch = StringUtils.isEndWith(defaultMessage, StringUtils.END_CHAR);
+            boolean isMatch = StringUtil.isEndWith(defaultMessage, StringUtil.END_CHAR);
             // 没有结尾符号，添加句号
             defaultMessage = isMatch ? defaultMessage : String.format("%s。", defaultMessage);
             sb.append(defaultMessage);
@@ -82,7 +87,7 @@ public class ExceptionHandlerAdvice {
      * 请求方法错误。例如 /a 只支持 POST 请求, 前端却使用 GET 请求进行访问
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public Result httpRequestMethodNotSupportedExceptionHandler(final HttpRequestMethodNotSupportedException ex) {
+    public Result<Object> httpRequestMethodNotSupportedExceptionHandler(final HttpRequestMethodNotSupportedException ex) {
         log.error("捕获请求方法错误", ex);
         return Result.fail(ResponseCodeEnum.SERVER_ERROR.getCode(), "请求方法错误。");
     }
@@ -91,7 +96,7 @@ public class ExceptionHandlerAdvice {
      * 参数类型转换失败时抛出异常
      */
     @ExceptionHandler({MethodArgumentTypeMismatchException.class, HttpMessageConversionException.class})
-    public Result methodArgumentTypeMismatchExceptionHandler(final MethodArgumentTypeMismatchException ex) {
+    public Result<Object> methodArgumentTypeMismatchExceptionHandler(final MethodArgumentTypeMismatchException ex) {
         log.error("捕获参数类型错误", ex);
         return Result.fail(ResponseCodeEnum.SERVER_ERROR.getCode(), "参数类型错误。");
     }
@@ -103,31 +108,31 @@ public class ExceptionHandlerAdvice {
      * @return
      */
     @ExceptionHandler(MissingServletRequestParameterException.class)
-    public Result missingParameterExceptionHandle(MissingServletRequestParameterException ex) {
+    public Result<Object> missingParameterExceptionHandle(MissingServletRequestParameterException ex) {
         log.error("捕获缺少请求参数异常", ex);
         return Result.fail("缺少请求参数。");
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)
-    public Result noHandlerFoundExceptionHandle(NoHandlerFoundException ex) {
+    public Result<Object> noHandlerFoundExceptionHandle(NoHandlerFoundException ex) {
         log.error("捕获404异常", ex);
         return Result.fail("404未找到资源。");
     }
 
     @ExceptionHandler(value = IOException.class)
-    public Result nullPointerExceptionHandler(final IOException ex) {
+    public Result<Object> nullPointerExceptionHandler(final IOException ex) {
         log.error("捕获IO异常", ex);
         return Result.fail(ResponseCodeEnum.SERVER_ERROR.getCode(), "IO异常。");
     }
 
     @ExceptionHandler(value = NullPointerException.class)
-    public Result nullPointerExceptionHandler(final NullPointerException ex) {
+    public Result<Object> nullPointerExceptionHandler(final NullPointerException ex) {
         log.error("捕获空指针异常", ex);
         return Result.fail(ResponseCodeEnum.SERVER_ERROR.getCode(), "空指针异常。");
     }
 
     @ExceptionHandler(Exception.class)
-    public Result exceptionHandler(final Exception ex) {
+    public Result<Object> exceptionHandler(final Exception ex) {
         log.error("捕获异常", ex);
         return Result.fail(ResponseCodeEnum.SERVER_ERROR.getCode(), "处理请求失败。");
     }

@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 /**
- *
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
@@ -27,6 +26,7 @@ public class ApplicationContextHolder implements ApplicationContextAware, Dispos
     /**
      * 实现ApplicationContextAware接口, 注入Context到静态变量中.
      */
+    @SuppressWarnings("squid:S2696")
     @Override
     public void setApplicationContext(ApplicationContext appContext) {
         applicationContext = appContext;
@@ -62,10 +62,4 @@ public class ApplicationContextHolder implements ApplicationContextAware, Dispos
         ApplicationContextHolder.clearHolder();
     }
 
-    // /**
-    //  * 检查ApplicationContext不为空.
-    //  */
-    // private static void assertContextInjected() {
-    //     Validate.validState(applicationContext != null, "applicaitonContext属性未注入, 请在applicationContext.xml中定义ApplicationContextHolder.");
-    // }
 }

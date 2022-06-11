@@ -12,19 +12,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 /**
  * https://baomidou.com/pages/981406/#mapper-%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE
+ *
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
-public class MybatisPlusCodeGenerator {
+@SuppressWarnings({"squid:S1104", "squid:S1444"})
+public class CodeGenerator {
 
     public static final String TABLE_PREFIX = "t_";
-    private static final Logger LOGGER = LoggerFactory.getLogger(MybatisPlusCodeGenerator.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CodeGenerator.class);
     public static String dbUrl;
     public static String dbUsername;
     public static String dbPassword;
@@ -46,8 +49,8 @@ public class MybatisPlusCodeGenerator {
     }
 
     private static PackageConfig buildPackageConfig() {
-        Map<OutputFile, String> pathInfo = new HashMap<>(16);
-        PackageConfig packageConfig = new PackageConfig.Builder()
+        EnumMap<OutputFile, String> pathInfo = new EnumMap<>(OutputFile.class);
+        return new PackageConfig.Builder()
                 .parent(parent)
                 // .moduleName("多加一层目录，例如表名，生成的代码放在表名目录下")
                 .service("service")
@@ -58,11 +61,10 @@ public class MybatisPlusCodeGenerator {
                 .other("")
                 .pathInfo(pathInfo)
                 .build();
-        return packageConfig;
     }
 
     private static StrategyConfig buildStrategyConfig() {
-        StrategyConfig strategyConfig = new StrategyConfig.Builder()
+        return new StrategyConfig.Builder()
                 .addInclude(tableName)
                 .addTablePrefix(TABLE_PREFIX)
                 .entityBuilder()
@@ -90,7 +92,6 @@ public class MybatisPlusCodeGenerator {
                 .enableHyphenStyle()
                 .enableRestStyle()
                 .build();
-        return strategyConfig;
     }
 
     /**
@@ -138,8 +139,8 @@ public class MybatisPlusCodeGenerator {
 
         InjectionConfig injectionConfig = new InjectionConfig.Builder()
                 .beforeOutputFile((tableInfo, objectMap) -> {
-                    LOGGER.debug("tableInfo = {}", tableInfo.toString());
-                    LOGGER.debug("objectMap = {}", objectMap.toString());
+                    LOGGER.debug("tableInfo = {}", tableInfo);
+                    LOGGER.debug("objectMap = {}", objectMap);
                 })
                 .customMap(map)
                 .customFile(files)
@@ -179,27 +180,29 @@ public class MybatisPlusCodeGenerator {
     }
 
 
+    @SuppressWarnings("squid:S1075")
     public static void main(String[] args) {
 
         // 数据库url
-        MybatisPlusCodeGenerator.dbUrl = "jdbc:mysql://localhost:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true";
+        CodeGenerator.dbUrl = "jdbc:mysql://localhost:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true";
         // 数据库账号
-        MybatisPlusCodeGenerator.dbUsername = "root";
+        CodeGenerator.dbUsername = "root";
         // 数据库密码
-        MybatisPlusCodeGenerator.dbPassword = "cpq..123";
+        CodeGenerator.dbPassword = "cpq..123";
 
         // 项目 main 目录的绝对路径
-        MybatisPlusCodeGenerator.srcMainAbsolutePath = "E:\\github\\micro-service\\examples\\example-parent\\boot-web\\src\\main";
+
+        CodeGenerator.srcMainAbsolutePath = "E:\\github\\micro-service\\examples\\example-parent\\boot-web\\src\\main";
         // 项目包名
-        MybatisPlusCodeGenerator.parent = "com.github.codingsoldier.bootweb.temp";
+        CodeGenerator.parent = "com.github.codingsoldier.bootweb.temp";
 
         // 作者
-        MybatisPlusCodeGenerator.author = "cpq";
+        CodeGenerator.author = "cpq";
         // 表名
-        MybatisPlusCodeGenerator.tableName = "user";
+        CodeGenerator.tableName = "user";
 
         // 生成代码
-        MybatisPlusCodeGenerator.generate();
+        CodeGenerator.generate();
 
 
     }

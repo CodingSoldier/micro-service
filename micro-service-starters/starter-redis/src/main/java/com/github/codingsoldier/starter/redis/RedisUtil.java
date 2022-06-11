@@ -10,12 +10,25 @@ import java.util.concurrent.TimeUnit;
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
-public class RedisUtil<K, V> {
+@SuppressWarnings("squid:S3740")
+public class RedisUtil{
+
+    private RedisUtil() {
+        // sonar检测
+        throw new IllegalStateException("不允许实例化");
+    }
 
     private static RedisTemplate redisTemplate;
 
-    public RedisUtil(RedisTemplate<K, V> redisTemplate) {
-        RedisUtil.redisTemplate = redisTemplate;
+    /**
+     * 初始化RedisUtil，已在 StarterRedisAutoConfiguration#init() 中初始化
+     * @see com.github.codingsoldier.starter.redis.StarterRedisAutoConfiguration#init
+     * @param redisTemplate
+     */
+    public static synchronized void setOnceRedisTemplate(RedisTemplate redisTemplate) {
+        if (redisTemplate == null) {
+            RedisUtil.redisTemplate = redisTemplate;
+        }
     }
 
     /**
@@ -79,6 +92,7 @@ public class RedisUtil<K, V> {
      * @param <HV>
      * @return
      */
+    @SuppressWarnings("squid:S119")
     public static <K, HK, HV> HashOperations<K, HK, HV> opsForHash() {
         return redisTemplate.opsForHash();
     }
@@ -119,11 +133,10 @@ public class RedisUtil<K, V> {
      * 获取值
      *
      * @param key       键
-     * @param classType 返回类型
      * @param <V>
      * @return
      */
-    public static <V> V get(Object key, Class<V> classType) {
+    public static <V> V get(Object key) {
         Object value = redisTemplate.opsForValue().get(key);
         return (V) value;
     }

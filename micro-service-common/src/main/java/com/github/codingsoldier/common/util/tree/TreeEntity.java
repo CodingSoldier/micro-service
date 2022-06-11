@@ -1,28 +1,29 @@
 package com.github.codingsoldier.common.util.tree;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
- * 数据实体类接口
+ * 树数据实体类接口
  *
  * @author chenpiqian
  * @date 2019-09-16
  */
-public interface TreeChildrenEntity<E> {
+public interface TreeEntity<E> {
 
     /**
      * 获取ID
      *
      * @return
      */
-    Long getId();
+    Serializable getId();
 
     /**
      * 获取父级ID
      *
      * @return
      */
-    Long getParentId();
+    Serializable getParentId();
 
     /**
      * 赋值子类

@@ -15,34 +15,16 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * redis配置类
+ *
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
-@Configuration
+@SuppressWarnings("squid:S125")
+@Configuration(proxyBeanMethods = false)
 @EnableCaching
 public class RedisConfig {
 
     private static final Log logger = LogFactory.getLog(RedisConfig.class);
-
-    // /**
-    //  * 自定义key规则
-    //  * @return
-    //  */
-    // @Bean
-    // public KeyGenerator keyGenerator() {
-    //     return new KeyGenerator() {
-    //         @Override
-    //         public Object generate(Object target, Method method, Object... params) {
-    //             StringBuilder sb = new StringBuilder();
-    //             sb.append(target.getClass().getName());
-    //             sb.append(method.getName());
-    //             for (Object obj : params) {
-    //                 sb.append(obj.toString());
-    //             }
-    //             return sb.toString();
-    //         }
-    //     };
-    // }
 
     /**
      * 设置RedisTemplate规则
@@ -58,7 +40,7 @@ public class RedisConfig {
 
         RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory);
-        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+        Jackson2JsonRedisSerializer<?> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
 
         ObjectMapper objectMapper = ObjectMapperUtil.newObjectMapper();
         // 避免opsForValue()设置bean报错，Redis使用

@@ -13,9 +13,11 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * OpenFeign 配置类
+ *
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
+@SuppressWarnings("squid:S125")
 @Configuration(proxyBeanMethods = false)
 public class FeignConfig {
 
@@ -29,9 +31,7 @@ public class FeignConfig {
      */
     @Bean
     public RequestInterceptor requestInterceptor() {
-        return requestTemplate -> {
-            requestTemplate.header(FeignConstant.FEIGN_REQUEST, Boolean.TRUE.toString());
-        };
+        return requestTemplate -> requestTemplate.header(FeignConstant.FEIGN_REQUEST, Boolean.TRUE.toString());
     }
 
 

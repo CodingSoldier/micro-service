@@ -14,11 +14,13 @@ import java.util.Objects;
 
 /**
  * DateTime序列化
+ *
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
 public class DateTimeSerializer extends JsonSerializer<Object> {
 
+    @SuppressWarnings("squid:S125")
     // @Override
     // public void serializeWithType(Object value, JsonGenerator g, SerializerProvider provider,
     //                               TypeSerializer typeSer) throws IOException {

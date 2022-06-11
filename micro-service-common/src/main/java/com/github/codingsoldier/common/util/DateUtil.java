@@ -1,5 +1,7 @@
 package com.github.codingsoldier.common.util;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -13,6 +15,10 @@ public class DateUtil {
 
     public static final ZoneId ZONE_ID_SHANGHAI = ZoneId.of("Asia/Shanghai");
     public static final ZoneOffset ZONE_OFFSET_8 = ZoneOffset.of("+8");
+    private DateUtil() {
+        // sonar检测
+        throw new IllegalStateException("不允许实例化");
+    }
 
     /**
      * localDate转时间戳
@@ -103,8 +109,7 @@ public class DateUtil {
         if (StringUtils.isBlank(timeString) || Objects.isNull(df)) {
             return null;
         }
-        LocalDateTime ldt = LocalDateTime.parse(timeString, df);
-        return ldt;
+        return LocalDateTime.parse(timeString, df);
     }
 
     /**
@@ -118,8 +123,7 @@ public class DateUtil {
             return null;
         }
         Instant instant = date.toInstant();
-        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZONE_ID_SHANGHAI);
-        return localDateTime;
+        return LocalDateTime.ofInstant(instant, ZONE_ID_SHANGHAI);
     }
 
     /**
@@ -187,11 +191,5 @@ public class DateUtil {
         return Date.from(localDateTime.toInstant(ZONE_OFFSET_8));
     }
 
-
-    public static void main(String[] args) {
-        System.out.println(toDate(LocalDateTime.now()));
-        System.out.println(toDate(OffsetDateTime.now()));
-        System.out.println(toLocalDateTime(new Date()));
-    }
 
 }

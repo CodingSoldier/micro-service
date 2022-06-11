@@ -7,22 +7,23 @@ import okhttp3.*;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
  * OkHttp工具类
+ *
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
 @Slf4j
 public class OkHttpUtil {
 
-    public final static String UTF8 = "UTF-8";
-    public final static int READ_TIMEOUT = 100;
-    public final static int CONNECT_TIMEOUT = 60;
-    public final static int WRITE_TIMEOUT = 60;
+    public static final int READ_TIMEOUT = 100;
+    public static final int CONNECT_TIMEOUT = 60;
+    public static final int WRITE_TIMEOUT = 60;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private static OkHttpClient okHttpClient;
 
@@ -34,8 +35,6 @@ public class OkHttpUtil {
         clientBuilder.connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS);
         //写入超时
         clientBuilder.writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS);
-        //支持HTTPS请求，跳过证书验证
-        // clientBuilder.hostnameVerifier((hostname, session) -> true);
 
         okHttpClient = clientBuilder.build();
     }
@@ -51,7 +50,7 @@ public class OkHttpUtil {
         try {
             response = okHttpClient.newCall(request).execute();
             byte[] bytes = response.body().bytes();
-            return new String(bytes, UTF8);
+            return new String(bytes, StandardCharsets.UTF_8);
         } catch (IOException e) {
             log.error("OkHttp异常", e);
             if (response != null) {
@@ -81,18 +80,18 @@ public class OkHttpUtil {
         Request.Builder builder = new Request.Builder();
         // 设置请求头
         if (headers != null && headers.size() > 0) {
-            headers.forEach((String key, String value) -> builder.header(key, value));
+            headers.forEach(builder::header);
         }
         // 拼接请求参数
         StringBuilder sb = new StringBuilder(url);
-        if (params != null && params.keySet().size() > 0) {
+        if (params != null && !params.keySet().isEmpty()) {
             boolean firstFlag = true;
-            for (String key : params.keySet()) {
+            for (Map.Entry<String, V> entry : params.entrySet()) {
                 if (firstFlag) {
-                    sb.append("?").append(key).append("=").append(params.get(key));
+                    sb.append("?").append(entry.getKey()).append("=").append(entry.getValue());
                     firstFlag = false;
                 } else {
-                    sb.append("&").append(key).append("=").append(params.get(key));
+                    sb.append("&").append(entry.getKey()).append("=").append(entry.getValue());
                 }
             }
         }
@@ -148,7 +147,7 @@ public class OkHttpUtil {
         Request.Builder builder = new Request.Builder();
         // 设置请求头
         if (headers != null && headers.size() > 0) {
-            headers.forEach((String key, String value) -> builder.header(key, value));
+            headers.forEach(builder::header);
         }
         // 创建body
         RequestBody requestBody = RequestBody.create(JSON, jsonBody);
@@ -192,17 +191,17 @@ public class OkHttpUtil {
     }
 
     public static void main(String[] args) {
-        Map result = get("http://localhost:8080/example/validations/account?userId=1&account", Map.class);
-        System.out.println(result);
+        Map<Object, Object> result = get("http://localhost:8080/example/validations/account?userId=1&account", Map.class);
+        log.info("{}", result);
 
         HashMap<String, Object> params = new HashMap<>(16);
         params.put("userId", 1);
         params.put("account", "账号");
         result = get("http://localhost:8080/example/validations/account", params, Map.class);
-        System.out.println(result);
+        log.info("{}", result);
 
         HashMap<String, Object> body = new HashMap<>(16);
-        HashMap<String, Object> vo = new HashMap<>();
+        HashMap<String, Object> vo = new HashMap<>(16);
         body.put("userId", 1);
         body.put("userName", "sdsdff");
         body.put("strList", Lists.newArrayList("a"));
@@ -210,7 +209,7 @@ public class OkHttpUtil {
         vo.put("jobId", 111);
         vo.put("jobName", "234324");
         result = post("http://localhost:8080/example/validations/add", body, Map.class);
-        System.out.println(result);
+        log.info("{}", result);
 
     }
 
