@@ -5,9 +5,6 @@ import com.github.codingsoldier.starter.openfeign.codec.FeignErrorDecoder;
 import feign.Logger;
 import feign.RequestInterceptor;
 import feign.codec.ErrorDecoder;
-import org.springframework.beans.factory.ObjectFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,9 +17,6 @@ import org.springframework.context.annotation.Configuration;
 @SuppressWarnings("squid:S125")
 @Configuration(proxyBeanMethods = false)
 public class FeignConfig {
-
-    @Autowired
-    private ObjectFactory<HttpMessageConverters> messageConverters;
 
     /**
      * 拦截器，feign请求加上请求头

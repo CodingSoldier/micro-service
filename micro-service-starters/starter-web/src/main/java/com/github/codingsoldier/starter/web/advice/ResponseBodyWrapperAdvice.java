@@ -44,7 +44,6 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
         }
         // 方法上使用了 @NoWrapper
         Method method = returnType.getMethod();
-
         if (method == null || method.isAnnotationPresent(NoWrapper.class)) {
             return false;
         }
@@ -77,11 +76,9 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
             if (body instanceof Result) {
                 Result<?> result = (Result) body;
                 Set<Integer> notChangeCodes = FeignConstant.NOT_CHANGE_RESPONSE_STATUS_CODE_SET
-                        .stream()
-                        .map(ResponseCodeEnum::getCode)
-                        .collect(Collectors.toSet());
+                        .stream().map(ResponseCodeEnum::getCode).collect(Collectors.toSet());
                 if (!notChangeCodes.contains(result.getCode())) {
-                    log.error("feign调用，返回结果code不是成功ResponseCodeEnum.SUCCESS.getCode()，" +
+                    log.info("feign调用，返回结果code不是成功ResponseCodeEnum.SUCCESS.getCode()，" +
                             "设置Response.StatusCode=HttpStatus.INTERNAL_SERVER_ERROR");
 
                     response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
