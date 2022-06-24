@@ -2,9 +2,7 @@ package com.github.codingsoldier.bootweb.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -17,9 +15,7 @@ import java.time.LocalDateTime;
  * @author cpq
  * @since 2022-03-16 21:38:52
  */
-@Getter
-@Setter
-@Accessors(chain = true)
+@Data
 @ApiModel(value = "用户新增")
 public class UserAddDto implements Serializable {
 

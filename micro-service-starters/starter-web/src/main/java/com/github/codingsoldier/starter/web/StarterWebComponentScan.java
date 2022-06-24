@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
-@ComponentScan
+@ComponentScan("com.github.codingsoldier.starter.web")
 @ConditionalOnStarterWebEnabled
 public class StarterWebComponentScan {
 }
