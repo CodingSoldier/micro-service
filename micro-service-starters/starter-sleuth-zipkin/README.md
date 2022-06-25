@@ -1,3 +1,0 @@
-# starter-zipkin
-
-

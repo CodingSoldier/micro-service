@@ -103,14 +103,16 @@ framework:
 #      default-rollover-strategy:
 #        max: 7
     # starter-mybatis-plus 配置
-    mybatis-plus:
-      enabled: false
+#    mybatis-plus:
+#      enabled: false
     # starter-swagger 配置
     swagger:
       enabled: false
       base-package: com.github.codingsoldier.bootweb
 #    # starter-web 配置
-#    web:
+    web:
+      logging:
+        requestResponseBodyLog: true
 #      enabled: false
 #    # starter-redis 配置
 #    redis:

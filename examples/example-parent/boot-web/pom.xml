@@ -47,8 +47,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-sleuth</artifactId>
+            <groupId>com.github.codingsoldier</groupId>
+            <artifactId>starter-sleuth</artifactId>
         </dependency>
 
 <!--        <dependency>

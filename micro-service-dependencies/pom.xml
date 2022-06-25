@@ -105,11 +105,6 @@
             </dependency>
             <dependency>
                 <groupId>com.github.codingsoldier</groupId>
-                <artifactId>starter-sleuth-zipkin</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.codingsoldier</groupId>
                 <artifactId>starter-sleuth</artifactId>
                 <version>${revision}</version>
             </dependency>

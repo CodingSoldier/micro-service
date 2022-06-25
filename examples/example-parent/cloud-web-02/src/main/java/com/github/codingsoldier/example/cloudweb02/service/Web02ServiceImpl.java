@@ -1,7 +1,7 @@
 package com.github.codingsoldier.example.cloudweb02.service;
 
 import com.github.codingsoldier.common.util.ThreadUtil;
-import com.github.codingsoldier.starter.sleuthzipkin.config.ThreadPoolTraceUtil;
+import com.github.codingsoldier.starter.sleuth.config.ThreadPoolTraceUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;

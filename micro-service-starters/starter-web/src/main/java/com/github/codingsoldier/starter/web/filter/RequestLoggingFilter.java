@@ -2,13 +2,15 @@ package com.github.codingsoldier.starter.web.filter;
 
 import com.github.codingsoldier.starter.web.properties.RequestLoggingProperties;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.ParameterizedType;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 
 @Slf4j
 @Configuration(proxyBeanMethods = false)
@@ -35,7 +37,15 @@ public class RequestLoggingFilter extends CommonsRequestLoggingFilter{
     @Override
     protected void afterRequest(HttpServletRequest request, String message) {
         if (properties.isRequestResponseBodyLog() || properties.isRequestLog()) {
-            log.info("在请求完成后才打印Request信息={}", message);
+            String decodeQueryString = "";
+            String queryString = request.getQueryString();
+            try {
+                decodeQueryString = StringUtils.isNotBlank(queryString)
+                        ? URLDecoder.decode(queryString, StandardCharsets.UTF_8.name()) : "";
+            } catch (UnsupportedEncodingException e) {
+                log.error("解码queryString失败", e);
+            }
+            log.info("在请求完成后才打印Request信息={}，queryString解码=[{}]", message, decodeQueryString);
         }
     }
 

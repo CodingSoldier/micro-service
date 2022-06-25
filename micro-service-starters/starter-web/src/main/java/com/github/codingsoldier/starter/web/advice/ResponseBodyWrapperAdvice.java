@@ -7,7 +7,6 @@ import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
 import com.github.codingsoldier.starter.web.annotation.NoWrapper;
 import com.github.codingsoldier.starter.web.properties.RequestLoggingProperties;
 import lombok.extern.slf4j.Slf4j;
-import nonapi.io.github.classgraph.json.JSONUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
@@ -99,6 +98,16 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
             Class<? extends HttpMessageConverter<?>> selectedConverterType,
             ServerHttpRequest request,
             ServerHttpResponse response) {
+
+        /**
+         * // 404请求，不包装
+         *         if (response instanceof ServletServerHttpResponse) {
+         *             if (((ServletServerHttpResponse) response).getServletResponse().getStatus()
+         *                     == HttpStatus.NOT_FOUND.value()) {
+         *                 return body;
+         *             }
+         *         }
+         */
 
         // 如果是Feign请求不包装返回结果
         List<String> valList = request.getHeaders().get(FeignConstant.FEIGN_REQUEST);
