@@ -127,13 +127,9 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
             }
             log.debug("feign请求，不对返回结果进行包装。");
             return body;
-        }
-
-        if (body instanceof Result) {
+        } else if (body instanceof Result) {
             return body;
-        }
-
-        if (body instanceof String || body == null) {
+        } else if (body instanceof String || body == null) {
             // 因为StringHttpMessageConverter会直接把字符串写入body, 所以字符串特殊处理
             // body == null ，返回值将被StringHttpMessageConverter处理
             return ObjectMapperUtil.writeValueAsString(Result.success(body));
