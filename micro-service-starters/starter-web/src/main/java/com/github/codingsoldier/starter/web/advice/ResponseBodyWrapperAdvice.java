@@ -5,7 +5,9 @@ import com.github.codingsoldier.common.feign.FeignConstant;
 import com.github.codingsoldier.common.resp.Result;
 import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
 import com.github.codingsoldier.starter.web.annotation.NoWrapper;
+import com.github.codingsoldier.starter.web.properties.RequestLoggingProperties;
 import lombok.extern.slf4j.Slf4j;
+import nonapi.io.github.classgraph.json.JSONUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
@@ -34,6 +36,12 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 @Order(Ordered.LOWEST_PRECEDENCE)
 public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
+
+    private RequestLoggingProperties properties;
+
+    public ResponseBodyWrapperAdvice(RequestLoggingProperties properties) {
+        this.properties = properties;
+    }
 
     @SuppressWarnings("squid:S1126")
     @Override
@@ -67,6 +75,30 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
             ServerHttpRequest request,
             ServerHttpResponse response) {
 
+        // 封装为一个方法仅是为了方便打印返回结果
+        Object bodyObj = handleBody(body, returnType, selectedContentType, selectedConverterType, request, response);
+
+        // 打印responseBody
+        try {
+            if (properties.isRequestResponseBodyLog() || properties.isResponseBodyLog()) {
+                String bodyStr = ObjectMapperUtil.writeValueAsString(bodyObj);
+                log.info("打印ResponseBody信息={}", bodyStr);
+            }
+        }catch (Exception e) {
+            log.error("打印ResponseBody时，body转string异常", e);
+        }
+
+        return bodyObj;
+    }
+
+    @SuppressWarnings("squid:S1172")
+    private Object handleBody(
+            Object body,
+            MethodParameter returnType,
+            MediaType selectedContentType,
+            Class<? extends HttpMessageConverter<?>> selectedConverterType,
+            ServerHttpRequest request,
+            ServerHttpResponse response) {
 
         // 如果是Feign请求不包装返回结果
         List<String> valList = request.getHeaders().get(FeignConstant.FEIGN_REQUEST);
@@ -88,7 +120,6 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
             return body;
         }
 
-
         if (body instanceof Result) {
             return body;
         }
@@ -102,4 +133,5 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
         // 其他类型进行统一包装
         return Result.success(body);
     }
+
 }
