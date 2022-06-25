@@ -27,10 +27,15 @@ public class RequestLoggingFilter extends CommonsRequestLoggingFilter{
         super.setMaxPayloadLength(properties.getMaxPayloadLength());
     }
 
+    /**
+     * afterRequest在ResponseBodyWrapperAdvice#beforeBodyWrite方法后执行，导致先打印responseBody，后打印request信息
+     * @param request
+     * @param message
+     */
     @Override
     protected void afterRequest(HttpServletRequest request, String message) {
         if (properties.isRequestResponseBodyLog() || properties.isRequestLog()) {
-            log.info("打印Request信息={}", message);
+            log.info("在请求完成后才打印Request信息={}", message);
         }
     }
 
