@@ -1,0 +1,12 @@
+{
+    "groups": [],
+    "properties": [
+        {
+            "name": "framework.starter.sleuth.enabled",
+            "type": "java.lang.Boolean",
+            "description": "是否启用 starter-sleuth",
+            "defaultValue": true
+        }
+    ],
+    "hints": []
+}

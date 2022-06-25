@@ -110,6 +110,11 @@
             </dependency>
             <dependency>
                 <groupId>com.github.codingsoldier</groupId>
+                <artifactId>starter-sleuth</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.codingsoldier</groupId>
                 <artifactId>starter-web</artifactId>
                 <version>${revision}</version>
             </dependency>

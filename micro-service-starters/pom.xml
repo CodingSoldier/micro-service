@@ -27,6 +27,7 @@
         <module>starter-redis</module>
         <module>starter-openfeign</module>
         <module>starter-sleuth-zipkin</module>
+        <module>starter-sleuth</module>
         <module>starter-web</module>
     </modules>
 
