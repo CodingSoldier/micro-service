@@ -13,7 +13,7 @@ import java.util.Objects;
  */
 public class DateUtil {
 
-    public static final ZoneId ZONE_ID_SHANGHAI = ZoneId.of("Asia/Shanghai");
+    public static final ZoneId ZONE_ID_DEFAULT = ZoneId.systemDefault();
     public static final ZoneOffset ZONE_OFFSET_8 = ZoneOffset.of("+8");
     private DateUtil() {
         // sonar检测
@@ -69,7 +69,7 @@ public class DateUtil {
         if (Objects.isNull(timestamp)) {
             return null;
         }
-        return Instant.ofEpochMilli(timestamp).atZone(ZONE_ID_SHANGHAI).toLocalDate();
+        return Instant.ofEpochMilli(timestamp).atZone(ZONE_ID_DEFAULT).toLocalDate();
     }
 
     /**
@@ -82,7 +82,7 @@ public class DateUtil {
         if (Objects.isNull(timestamp)) {
             return null;
         }
-        return Instant.ofEpochMilli(timestamp).atZone(ZONE_ID_SHANGHAI).toLocalDateTime();
+        return Instant.ofEpochMilli(timestamp).atZone(ZONE_ID_DEFAULT).toLocalDateTime();
     }
 
     /**
@@ -95,7 +95,7 @@ public class DateUtil {
         if (Objects.isNull(timestamp)) {
             return null;
         }
-        return Instant.ofEpochMilli(timestamp).atZone(ZONE_ID_SHANGHAI).toOffsetDateTime();
+        return Instant.ofEpochMilli(timestamp).atZone(ZONE_ID_DEFAULT).toOffsetDateTime();
     }
 
     /**
@@ -123,7 +123,7 @@ public class DateUtil {
             return null;
         }
         Instant instant = date.toInstant();
-        return LocalDateTime.ofInstant(instant, ZONE_ID_SHANGHAI);
+        return LocalDateTime.ofInstant(instant, ZONE_ID_DEFAULT);
     }
 
     /**
@@ -175,7 +175,7 @@ public class DateUtil {
         if (offsetDateTime == null) {
             return null;
         }
-        return Date.from(offsetDateTime.atZoneSameInstant(ZONE_ID_SHANGHAI).toInstant());
+        return Date.from(offsetDateTime.atZoneSameInstant(ZONE_ID_DEFAULT).toInstant());
     }
 
     /**
