@@ -23,7 +23,7 @@ import java.util.concurrent.Executor;
  */
 @Slf4j
 @Component
-@DependsOn({"nacosGatewayConfig"})
+@DependsOn({"nacosGatewayProperties"})
 public class NacosListener {
 
     @Autowired

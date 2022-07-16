@@ -29,6 +29,11 @@ public class RequestLoggingFilter extends CommonsRequestLoggingFilter{
         super.setMaxPayloadLength(properties.getMaxPayloadLength());
     }
 
+    @Override
+    protected void beforeRequest(HttpServletRequest request, String message) {
+        // 不打印
+    }
+
     /**
      * afterRequest在ResponseBodyWrapperAdvice#beforeBodyWrite方法后执行，导致先打印responseBody，后打印request信息
      * @param request
@@ -48,5 +53,32 @@ public class RequestLoggingFilter extends CommonsRequestLoggingFilter{
             log.info("在请求完成后才打印Request信息={}，queryString解码=[{}]", message, decodeQueryString);
         }
     }
+
+    // @Override
+    // protected void afterRequest(HttpServletRequest request, String message) {
+    //     if (properties.isRequestResponseBodyLog() || properties.isRequestLog()) {
+    //         String requestURI = request.getRequestURI();
+    //         Map<String, String[]> parameterMap = request.getParameterMap();
+    //         // 获取body
+    //         String[] msgArr = message.split(",");
+    //         HashMap<String, Object> bodyMap = new HashMap<>();
+    //         if (msgArr != null && msgArr.length > 0) {
+    //             for (int i = 0; i < msgArr.length; i++) {
+    //                 String[] elemArr = msgArr[i].split("=");
+    //                 if (elemArr != null && elemArr.length > 1
+    //                         && StringUtils.equals("payload", StringUtils.trim(elemArr[0]))) {
+    //                     bodyMap.put(elemArr[0], elemArr[1]);
+    //                     break;
+    //                 }
+    //             }
+    //         }
+    //         HashMap<String, Object> logData = new HashMap<>();
+    //         logData.put("requestURI", requestURI);
+    //         logData.put("requestParam", parameterMap.toString());
+    //         logData.put("body", bodyMap);
+    //         log.info("打印request数据，{}", logData);
+    //
+    //     }
+    // }
 
 }

@@ -2,11 +2,8 @@ package com.github.codingsoldier.example.gateway.filter;
 
 import com.github.codingsoldier.example.gateway.log.SleuthLog;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
-import org.springframework.cloud.sleuth.CurrentTraceContext;
-import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
@@ -15,12 +12,6 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @Component
 public class Global01Filter implements GlobalFilter {
-
-    @Autowired
-    Tracer tracer;
-
-    @Autowired
-    CurrentTraceContext currentTraceContext;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {

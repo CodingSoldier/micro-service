@@ -97,4 +97,11 @@ public class Web01Controller {
         return testVal;
     }
 
+
+    @PostMapping("/test/post/body")
+    public Map postBoyd(@RequestBody(required = false) Map map) {
+        log.info("############{}", map);
+        return map;
+    }
+
 }
