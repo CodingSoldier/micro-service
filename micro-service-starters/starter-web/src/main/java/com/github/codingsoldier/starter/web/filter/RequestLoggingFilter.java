@@ -50,7 +50,7 @@ public class RequestLoggingFilter extends CommonsRequestLoggingFilter{
             } catch (UnsupportedEncodingException e) {
                 log.error("解码queryString失败", e);
             }
-            log.info("在请求完成后才打印Request信息={}，queryString解码=[{}]", message, decodeQueryString);
+            log.info("请求完成后才打印request信息={}，queryString解码=[{}]", message, decodeQueryString);
         }
     }
 

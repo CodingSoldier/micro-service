@@ -1,6 +1,6 @@
 package com.github.codingsoldier.example.gateway.filter;
 
-import com.github.codingsoldier.example.gateway.log.SleuthLog;
+import com.github.codingsoldier.example.gateway.util.SleuthLogUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -16,7 +16,7 @@ public class Global01Filter implements GlobalFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
-        SleuthLog.log(exchange, () -> log.info("全局过滤器，request={}", request.toString()));
+        SleuthLogUtil.log(exchange, () -> log.info("请求进入全局过滤器，request={}", request.toString()));
         return chain.filter(exchange);
 
         //boolean isAllow = true;

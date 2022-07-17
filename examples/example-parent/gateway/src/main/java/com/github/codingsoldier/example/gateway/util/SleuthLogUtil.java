@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.gateway.log;
+package com.github.codingsoldier.example.gateway.util;
 
 import com.github.codingsoldier.example.gateway.context.ApplicationContextHolder;
 import org.springframework.cloud.sleuth.CurrentTraceContext;
@@ -6,15 +6,16 @@ import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.cloud.sleuth.instrument.web.WebFluxSleuthOperators;
 import org.springframework.web.server.ServerWebExchange;
 
-public class SleuthLog {
 
-    private SleuthLog() {
+public class SleuthLogUtil {
+
+    private SleuthLogUtil() {
         // sonar检测
         throw new IllegalStateException("sonar检测，不允许实例化");
     }
 
     /**
-     * sleuth打印日志
+     * sleuth打印日志，非常消耗性能
      * @param exchange
      * @param runnable
      */

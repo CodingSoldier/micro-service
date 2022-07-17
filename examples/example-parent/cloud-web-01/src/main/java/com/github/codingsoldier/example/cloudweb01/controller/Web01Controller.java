@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -90,18 +91,30 @@ public class Web01Controller {
         return pageSize.toString();
     }
 
-
-    @GetMapping("/test/val")
+    @GetMapping(value = "/test/val/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public String getTestVal(HttpServletRequest request) {
         log.info("############{}", testVal);
         return testVal;
+    }
+
+    // response content type 是 text/plain
+    @GetMapping(value = "/test/val")
+    public String getTestValTextPlain(HttpServletRequest request) {
+        log.info("############{}", testVal);
+        return testVal;
+    }
+
+    @GetMapping(value = "/test/val/null")
+    public String getTestValNull(HttpServletRequest request) {
+        log.info("############{}", testVal);
+        return null;
     }
 
 
     @PostMapping("/test/post/body")
     public Map postBoyd(@RequestBody(required = false) Map map) {
         log.info("############{}", map);
-        return map;
+        return null;
     }
 
 }

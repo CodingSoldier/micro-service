@@ -15,6 +15,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -129,9 +130,9 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
             return body;
         } else if (body instanceof Result) {
             return body;
-        } else if (body instanceof String || body == null) {
-            // 因为StringHttpMessageConverter会直接把字符串写入body, 所以字符串特殊处理
-            // body == null ，返回值将被StringHttpMessageConverter处理
+        } else if (selectedConverterType != null
+                && StringHttpMessageConverter.class.isAssignableFrom(selectedConverterType)) {
+            // 返回值将被StringHttpMessageConverter处理，必须把Result转为String
             return ObjectMapperUtil.writeValueAsString(Result.success(body));
         }
 
