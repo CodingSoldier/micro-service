@@ -73,7 +73,7 @@ public class LogRequestFilter implements GlobalFilter, Ordered {
                     String logData = new String(bodyByte, StandardCharsets.UTF_8);
                     // 打印日志
                     printLog(exchange, path, methodValue, queryParams, logData);
-
+                    DataBufferUtils.release(dataBuffer);
                     return chain.filter(newExchange);
                 });
         }

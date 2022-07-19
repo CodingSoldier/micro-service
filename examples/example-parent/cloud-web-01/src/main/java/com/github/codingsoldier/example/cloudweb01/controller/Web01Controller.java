@@ -1,5 +1,6 @@
 package com.github.codingsoldier.example.cloudweb01.controller;
 
+import com.github.codingsoldier.common.util.CommonUtil;
 import com.github.codingsoldier.example.cloudwebapi.CloudWeb02Client;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -110,11 +113,24 @@ public class Web01Controller {
         return null;
     }
 
-
     @PostMapping("/test/post/body")
     public Map postBoyd(@RequestBody(required = false) Map map) {
         log.info("############{}", map);
         return null;
+    }
+
+    @GetMapping("/test/big/body")
+    public Map bigBody() {
+        HashMap<Object, Object> map = new HashMap<>();
+        log.info("############{}", map);
+        for (int i = 0; i < 100; i++) {
+            ArrayList<String> list = new ArrayList<>();
+            for (int j = 0; j < 100; j++) {
+                list.add(CommonUtil.uuid32());
+            }
+            map.put(CommonUtil.uuid32(), list);
+        }
+        return map;
     }
 
 }

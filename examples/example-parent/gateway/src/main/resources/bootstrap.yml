@@ -52,6 +52,7 @@ spring:
       rate: 100  # 每秒间隔接受的 trace 量
       # 在2020.0.0中，已将默认网关反应器检测模式更改为manual,
       # MANUAL-以最小侵入性的方式包装每个Reactor，而无需通过跟踪上下文。由用户决定
+      # https://docs.spring.io/spring-cloud-sleuth/docs/current/reference/html/integrations.html#sleuth-reactor-integration
       # 使用 SleuthLog.log 打印日志
       instrumentation-type: MANUAL
   zipkin:
