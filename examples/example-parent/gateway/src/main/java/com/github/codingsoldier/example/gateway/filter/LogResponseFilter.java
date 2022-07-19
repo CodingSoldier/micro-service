@@ -59,7 +59,6 @@ public class LogResponseFilter implements GlobalFilter, Ordered {
                 if (body instanceof Flux) {
                     Flux<? extends DataBuffer> fluxBody = Flux.from(body);
                     // https://docs.spring.io/spring-cloud-sleuth/docs/current/reference/html/integrations.html#sleuth-reactor-integration
-                    // WebFluxSleuthOperators.withSpanInScope(tracer, currentTraceContext, exchange, () -> log.error("TESTABCTEST"));
                     return super.writeWith(fluxBody
                             .map(dataBuffer -> dataBuffer)
                             .doOnEach(WebFluxSleuthOperators

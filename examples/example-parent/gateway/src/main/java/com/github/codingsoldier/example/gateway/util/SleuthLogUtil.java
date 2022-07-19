@@ -15,7 +15,8 @@ public class SleuthLogUtil {
     }
 
     /**
-     * sleuth打印日志，非常消耗性能
+     * sleuth 打印日志，非常消耗性能
+     * 使用 WebFluxSleuthOperators.withSpanInScope 打印 ServerHttpResponseDecorator#writeWith 没有自定义的traceId
      * @param exchange
      * @param runnable
      */
