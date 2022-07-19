@@ -42,6 +42,9 @@ spring:
             rule-type: gw-api-group
   # sleuth + zipkin 分布式链路追踪
   sleuth:
+    baggage:
+      correlation-fields: x-custom-trace-id
+      remote-fields: x-custom-trace-id
     sampler:
       # ProbabilityBasedSampler 抽样策略
       probability: 1.0  # 采样比例, 1.0 表示 100%, 默认是 0.1

@@ -31,6 +31,7 @@ public class LogRequestFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+
         final ServerHttpRequest request = exchange.getRequest();
         String methodValue = request.getMethodValue();
         String path = request.getURI().getPath();
