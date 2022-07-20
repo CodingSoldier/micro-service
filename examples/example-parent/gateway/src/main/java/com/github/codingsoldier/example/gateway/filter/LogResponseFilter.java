@@ -3,11 +3,8 @@ package com.github.codingsoldier.example.gateway.filter;
 import com.github.codingsoldier.example.gateway.util.SleuthLogUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Publisher;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
-import org.springframework.cloud.sleuth.CurrentTraceContext;
-import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.cloud.sleuth.instrument.web.WebFluxSleuthOperators;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
@@ -34,12 +31,6 @@ import java.util.Objects;
 public class LogResponseFilter implements GlobalFilter, Ordered {
 
     private int printMaxByte = 102400000;
-
-    @Autowired
-    Tracer tracer;
-
-    @Autowired
-    CurrentTraceContext currentTraceContext;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
