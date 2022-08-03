@@ -7,15 +7,13 @@ import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.baomidou.mybatisplus.generator.fill.Column;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 /**
  * https://baomidou.com/pages/981406/#mapper-%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE
@@ -35,14 +33,14 @@ public class MybatisPlusCodeGenerator {
     public static String parent;
     public static String author;
     public static String tableName;
-    public static String templatesDir = "/templates/v2";
+    // public static String templatesDir = "/templates/v2";
 
     private static GlobalConfig buildGlobalConfig() {
         return new GlobalConfig.Builder()
                 .disableOpenDir()
                 .outputDir(srcMainAbsolutePath + File.separator + "java")
                 .author(author)
-                .enableSwagger()
+                .enableSpringdoc()
                 .dateType(DateType.TIME_PACK)
                 .commentDate("yyyy-MM-dd HH:mm:ss")
                 .build();
@@ -58,7 +56,7 @@ public class MybatisPlusCodeGenerator {
                 .mapper("mapper")
                 .xml("mapper")
                 .controller("controller")
-                .other("")
+                // .other("")
                 .pathInfo(pathInfo)
                 .build();
     }
@@ -99,63 +97,62 @@ public class MybatisPlusCodeGenerator {
      * 注意：旧文件不会被覆盖
      */
     public static void generate() {
-
-        String tableJavaName = GeneratorUtil.tableJavaName(tableName);
-
-        Map<String, Object> map = new HashMap<>(128);
-        Map<String, String> files = new HashMap<>(128);
-        map.put("packageDto", parent + ".dto");
-        map.put("packageVo", parent + ".vo");
-
-        String addDtoClassName = tableJavaName + "AddDto";
-        map.put("addDtoClassName", addDtoClassName);
-        files.put(addDtoClassName, templatesDir + "/AddDto.java.ftl");
-
-        String updateDtoClassName = tableJavaName + "UpdateDto";
-        map.put("updateDtoClassName", updateDtoClassName);
-        files.put(updateDtoClassName, templatesDir + "/UpdateDto.java.ftl");
-
-        String pageQueryDtoClassName = tableJavaName + "PageQueryDto";
-        map.put("pageQueryDtoClassName", pageQueryDtoClassName);
-        files.put(pageQueryDtoClassName, templatesDir + "/PageQueryDto.java.ftl");
-
-
-        String detailVoClassName = tableJavaName + "DetailVo";
-        map.put("detailVoClassName", detailVoClassName);
-        files.put(detailVoClassName, templatesDir + "/DetailVo.java.ftl");
-
-        String pageVoClassName = tableJavaName + "PageVo";
-        map.put("pageVoClassName", pageVoClassName);
-        files.put(pageVoClassName, templatesDir + "/PageVo.java.ftl");
-
-        String v2 = "/templates/v2";
-        if (Objects.equals(templatesDir, v2)) {
-            map.put("packageAo", parent + ".ao");
-
-            String addUpdateAoClassName = tableJavaName + "AddUpdateAo";
-            map.put("addUpdateAoClassName", addUpdateAoClassName);
-            files.put(addUpdateAoClassName, templatesDir + "/AddUpdateAo.java.ftl");
-        }
-
-        InjectionConfig injectionConfig = new InjectionConfig.Builder()
-                .beforeOutputFile((tableInfo, objectMap) -> {
-                    LOGGER.debug("tableInfo = {}", tableInfo);
-                    LOGGER.debug("objectMap = {}", objectMap);
-                })
-                .customMap(map)
-                .customFile(files)
-                .build();
+        //
+        // String tableJavaName = GeneratorUtil.tableJavaName(tableName);
+        //
+        // Map<String, Object> map = new HashMap<>(128);
+        // Map<String, String> files = new HashMap<>(128);
+        // map.put("packageDto", parent + ".dto");
+        // map.put("packageVo", parent + ".vo");
+        //
+        // String addDtoClassName = tableJavaName + "AddDto";
+        // map.put("addDtoClassName", addDtoClassName);
+        // files.put(addDtoClassName, templatesDir + "/AddDto.java.ftl");
+        //
+        // String updateDtoClassName = tableJavaName + "UpdateDto";
+        // map.put("updateDtoClassName", updateDtoClassName);
+        // files.put(updateDtoClassName, templatesDir + "/UpdateDto.java.ftl");
+        //
+        // String pageQueryDtoClassName = tableJavaName + "PageQueryDto";
+        // map.put("pageQueryDtoClassName", pageQueryDtoClassName);
+        // files.put(pageQueryDtoClassName, templatesDir + "/PageQueryDto.java.ftl");
+        //
+        //
+        // String detailVoClassName = tableJavaName + "DetailVo";
+        // map.put("detailVoClassName", detailVoClassName);
+        // files.put(detailVoClassName, templatesDir + "/DetailVo.java.ftl");
+        //
+        // String pageVoClassName = tableJavaName + "PageVo";
+        // map.put("pageVoClassName", pageVoClassName);
+        // files.put(pageVoClassName, templatesDir + "/PageVo.java.ftl");
+        //
+        // String v2 = "/templates/v2";
+        // if (Objects.equals(templatesDir, v2)) {
+        //     map.put("packageAo", parent + ".ao");
+        //
+        //     String addUpdateAoClassName = tableJavaName + "AddUpdateAo";
+        //     map.put("addUpdateAoClassName", addUpdateAoClassName);
+        //     files.put(addUpdateAoClassName, templatesDir + "/AddUpdateAo.java.ftl");
+        // }
+        //
+        // InjectionConfig injectionConfig = new InjectionConfig.Builder()
+        //         .beforeOutputFile((tableInfo, objectMap) -> {
+        //             LOGGER.debug("tableInfo = {}", tableInfo);
+        //             LOGGER.debug("objectMap = {}", objectMap);
+        //         })
+        //         .customMap(map)
+        //         .customFile(files)
+        //         .build();
 
         TemplateConfig templateConfig = new TemplateConfig.Builder()
                 .disable(TemplateType.ENTITY)
-                .entity(templatesDir + "/entity.java")
-                .service(templatesDir + "/service.java")
-                .serviceImpl(templatesDir + "/serviceImpl.java")
-                .mapper(templatesDir + "/mapper.java")
-                .mapperXml(templatesDir + "/mapper.xml")
-                .controller(templatesDir + "/controller.java")
+                .entity("/templates/entity.java")
+                .service("/templates/service.java")
+                .serviceImpl("/templates/serviceImpl.java")
+                .mapper("/templates/mapper.java")
+                .xml("/templates/mapper.xml")
+                .controller("/templates/controller.java")
                 .build();
-
 
         DataSourceConfig dataSource = new DataSourceConfig
                 .Builder(dbUrl, dbUsername, dbPassword)
@@ -171,9 +168,9 @@ public class MybatisPlusCodeGenerator {
         generator.global(globalConfig);
         generator.packageInfo(packageConfig);
         generator.strategy(strategyConfig);
-        generator.injection(injectionConfig);
+        // generator.injection(injectionConfig);
         generator.template(templateConfig);
-        generator.execute(new CustomFreemarkerTemplateEngine());
+        generator.execute(new FreemarkerTemplateEngine());
 
         LOGGER.info("##### 代码生成完毕 #####");
 
