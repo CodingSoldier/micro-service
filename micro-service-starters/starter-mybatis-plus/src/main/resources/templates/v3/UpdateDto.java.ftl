@@ -1,17 +1,16 @@
 package ${packageDto};
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 <#list table.importPackages as pkg>
     <#if pkg ? starts_with("com.baomidou.mybatisplus.annotation")>
         <#continue>
     </#if>
 import ${pkg};
 </#list>
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 /**
 * @author ${author}
@@ -21,7 +20,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "${table.comment!}-修改dto")
+@Schema(name = "${table.comment!}-修改dto")
 public class ${updateDtoClassName} implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -29,7 +28,7 @@ public class ${updateDtoClassName} implements Serializable {
 <#list table.fields as field>
 
     <#if field.comment!?length gt 0>
-    @ApiModelProperty(value = "${field.comment}")
+    @Schema(description = "${field.comment}")
     </#if>
     private ${field.propertyType} ${field.propertyName};
 </#list>

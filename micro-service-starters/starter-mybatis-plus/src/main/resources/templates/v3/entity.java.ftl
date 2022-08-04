@@ -1,8 +1,5 @@
 package ${package.Entity};
 
-<#list table.importPackages as pkg>
-import ${pkg};
-</#list>
 <#if springdoc>
 import io.swagger.v3.oas.annotations.media.Schema;
 </#if>
@@ -10,6 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+<#list table.importPackages as pkg>
+import ${pkg};
+</#list>
 
 /**
  * <p>
@@ -27,7 +27,7 @@ import lombok.experimental.SuperBuilder;
 @TableName("${schemaName}${table.name}")
 </#if>
 <#if springdoc>
-@Schema(name = "${entity}对象", description = "$!{table.comment}")
+@Schema(name = "${table.comment!}-对象", description = "${table.comment!}")
 </#if>
 <#if superEntityClass??>
 public class ${entity} extends ${superEntityClass}<#if activeRecord><${entity}></#if> {

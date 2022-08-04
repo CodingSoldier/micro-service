@@ -6,8 +6,7 @@ package ${packageDto};
     </#if>
 import ${pkg};
 </#list>
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +20,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(value = "${table.comment!}-新增dto")
+@Schema(name = "${table.comment!}-新增dto")
 public class ${addDtoClassName} implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -32,7 +31,7 @@ public class ${addDtoClassName} implements Serializable {
     </#if>
 
     <#if field.comment!?length gt 0>
-    @ApiModelProperty(value = "${field.comment}")
+    @Schema(description = "${field.comment}")
     </#if>
     private ${field.propertyType} ${field.propertyName};
 </#list>

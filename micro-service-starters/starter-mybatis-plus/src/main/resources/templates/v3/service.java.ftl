@@ -1,8 +1,8 @@
 package ${package.Service};
 
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
-import ${package.Entity}.${entity};
 import ${superServiceClassPackage};
+import ${package.Entity}.${entity};
 import ${packageAo}.${addUpdateAoClassName};
 import ${packageDto}.${pageQueryDtoClassName};
 import ${packageVo}.${detailVoClassName};

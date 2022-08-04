@@ -8,9 +8,9 @@ import ${packageAo}.${addUpdateAoClassName};
 import ${packageVo}.${detailVoClassName};
 import ${packageVo}.${pageVoClassName};
 import com.github.codingsoldier.starter.mybatisplus.resp.PageResult;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,13 +28,14 @@ import ${superControllerClassPackage};
  * @author ${author}
  * @since ${date}
  */
+@Slf4j
 <#if restControllerStyle>
 @RestController
 <#else>
 @Controller
 </#if>
 @RequestMapping("<#if package.ModuleName?? && package.ModuleName != "">/${package.ModuleName}</#if>/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.entityPath}</#if>")
-@Api(value = "${table.comment!}", tags = "${table.comment!}-API")
+@Tag(name = "${table.comment!}-API")
 <#if kotlin>
 class ${table.controllerName}<#if superControllerClass??> : ${superControllerClass}()</#if>
 <#else>
@@ -49,7 +50,7 @@ public class ${table.controllerName} {
     private ${table.serviceName} ${uncapFirstServerName};
 
     @PostMapping("/add")
-    @ApiOperation(value = "新增")
+    @Operation(summary =  "新增")
     public Long add(@RequestBody @Valid ${addDtoClassName} addDto) {
         ${addUpdateAoClassName} addAo = new ${addUpdateAoClassName}();
         BeanUtils.copyProperties(addDto, addAo);
@@ -57,7 +58,7 @@ public class ${table.controllerName} {
     }
 
     @PutMapping("/update")
-    @ApiOperation(value = "修改")
+    @Operation(summary = "修改")
     public Long update(@RequestBody @Valid ${updateDtoClassName} updateDto) {
         ${addUpdateAoClassName} updateAo = new ${addUpdateAoClassName}();
         BeanUtils.copyProperties(updateDto, updateAo);
@@ -66,19 +67,19 @@ public class ${table.controllerName} {
 
 
     @DeleteMapping("/delete/{id}")
-    @ApiOperation(value = "删除")
+    @Operation(summary = "删除")
     public boolean delete(@PathVariable("id") Long id) {
         return ${uncapFirstServerName}.delete(id);
     }
 
     @GetMapping("/detail/{id}")
-    @ApiOperation(value = "详情")
+    @Operation(summary = "详情")
     public ${detailVoClassName} detail(@PathVariable("id") Long id) {
         return ${uncapFirstServerName}.detail(id);
     }
 
     @GetMapping("/page")
-    @ApiOperation(value = "分页")
+    @Operation(summary = "分页")
     public PageResult<${pageVoClassName}> pageQuery(@ModelAttribute ${pageQueryDtoClassName} queryDto) {
         return ${uncapFirstServerName}.pageQuery(queryDto);
     }

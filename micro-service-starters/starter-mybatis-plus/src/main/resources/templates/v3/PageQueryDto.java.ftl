@@ -1,5 +1,12 @@
 package ${packageDto};
 
+import com.github.codingsoldier.common.req.PageReq;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 <#list table.importPackages as pkg>
     <#if pkg ? starts_with("com.baomidou.mybatisplus.annotation")>
         <#continue>
@@ -9,15 +16,6 @@ package ${packageDto};
     </#if>
 import ${pkg};
 </#list>
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
-
-import com.github.codingsoldier.starter.mybatisplus.req.PageReq;
 
 /**
  * @author ${author}
@@ -28,10 +26,8 @@ import com.github.codingsoldier.starter.mybatisplus.req.PageReq;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@ApiModel(value = "${table.comment!}-分页查询参数")
+@Schema(name = "${table.comment!}-分页查询参数")
 public class ${pageQueryDtoClassName} extends PageReq {
-
-    private static final long serialVersionUID = 1L;
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>
     <#if field.propertyName == "id">
@@ -39,7 +35,7 @@ public class ${pageQueryDtoClassName} extends PageReq {
     </#if>
 
     <#if field.comment!?length gt 0>
-    @ApiModelProperty(value = "${field.comment}")
+    @Schema(description = "${field.comment}")
     </#if>
     private ${field.propertyType} ${field.propertyName};
 </#list>
