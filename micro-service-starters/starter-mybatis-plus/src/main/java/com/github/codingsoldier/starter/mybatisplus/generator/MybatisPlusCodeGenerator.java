@@ -14,6 +14,9 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * https://baomidou.com/pages/981406/#mapper-%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE
@@ -33,7 +36,7 @@ public class MybatisPlusCodeGenerator {
     public static String parent;
     public static String author;
     public static String tableName;
-    // public static String templatesDir = "/templates/v2";
+    public static String templatesDir = "/templates/v3";
 
     private static GlobalConfig buildGlobalConfig() {
         return new GlobalConfig.Builder()
@@ -79,7 +82,7 @@ public class MybatisPlusCodeGenerator {
                         new Column("updated_time", FieldFill.INSERT_UPDATE))
                 .build()
                 .mapperBuilder()
-                .enableMapperAnnotation()
+                .mapperAnnotation(org.apache.ibatis.annotations.Mapper.class)
                 .enableBaseResultMap()
                 .enableBaseColumnList()
                 .build()
@@ -97,52 +100,52 @@ public class MybatisPlusCodeGenerator {
      * 注意：旧文件不会被覆盖
      */
     public static void generate() {
-        //
-        // String tableJavaName = GeneratorUtil.tableJavaName(tableName);
-        //
-        // Map<String, Object> map = new HashMap<>(128);
-        // Map<String, String> files = new HashMap<>(128);
-        // map.put("packageDto", parent + ".dto");
-        // map.put("packageVo", parent + ".vo");
-        //
-        // String addDtoClassName = tableJavaName + "AddDto";
-        // map.put("addDtoClassName", addDtoClassName);
-        // files.put(addDtoClassName, templatesDir + "/AddDto.java.ftl");
-        //
-        // String updateDtoClassName = tableJavaName + "UpdateDto";
-        // map.put("updateDtoClassName", updateDtoClassName);
-        // files.put(updateDtoClassName, templatesDir + "/UpdateDto.java.ftl");
-        //
-        // String pageQueryDtoClassName = tableJavaName + "PageQueryDto";
-        // map.put("pageQueryDtoClassName", pageQueryDtoClassName);
-        // files.put(pageQueryDtoClassName, templatesDir + "/PageQueryDto.java.ftl");
-        //
-        //
-        // String detailVoClassName = tableJavaName + "DetailVo";
-        // map.put("detailVoClassName", detailVoClassName);
-        // files.put(detailVoClassName, templatesDir + "/DetailVo.java.ftl");
-        //
-        // String pageVoClassName = tableJavaName + "PageVo";
-        // map.put("pageVoClassName", pageVoClassName);
-        // files.put(pageVoClassName, templatesDir + "/PageVo.java.ftl");
-        //
-        // String v2 = "/templates/v2";
-        // if (Objects.equals(templatesDir, v2)) {
-        //     map.put("packageAo", parent + ".ao");
-        //
-        //     String addUpdateAoClassName = tableJavaName + "AddUpdateAo";
-        //     map.put("addUpdateAoClassName", addUpdateAoClassName);
-        //     files.put(addUpdateAoClassName, templatesDir + "/AddUpdateAo.java.ftl");
-        // }
-        //
-        // InjectionConfig injectionConfig = new InjectionConfig.Builder()
-        //         .beforeOutputFile((tableInfo, objectMap) -> {
-        //             LOGGER.debug("tableInfo = {}", tableInfo);
-        //             LOGGER.debug("objectMap = {}", objectMap);
-        //         })
-        //         .customMap(map)
-        //         .customFile(files)
-        //         .build();
+
+        String tableJavaName = GeneratorUtil.tableJavaName(tableName);
+
+        Map<String, Object> map = new HashMap<>(128);
+        Map<String, String> files = new HashMap<>(128);
+        map.put("packageDto", parent + ".dto");
+        map.put("packageVo", parent + ".vo");
+
+        String addDtoClassName = tableJavaName + "AddDto";
+        map.put("addDtoClassName", addDtoClassName);
+        files.put(addDtoClassName, templatesDir + "/AddDto.java.ftl");
+
+        String updateDtoClassName = tableJavaName + "UpdateDto";
+        map.put("updateDtoClassName", updateDtoClassName);
+        files.put(updateDtoClassName, templatesDir + "/UpdateDto.java.ftl");
+
+        String pageQueryDtoClassName = tableJavaName + "PageQueryDto";
+        map.put("pageQueryDtoClassName", pageQueryDtoClassName);
+        files.put(pageQueryDtoClassName, templatesDir + "/PageQueryDto.java.ftl");
+
+
+        String detailVoClassName = tableJavaName + "DetailVo";
+        map.put("detailVoClassName", detailVoClassName);
+        files.put(detailVoClassName, templatesDir + "/DetailVo.java.ftl");
+
+        String pageVoClassName = tableJavaName + "PageVo";
+        map.put("pageVoClassName", pageVoClassName);
+        files.put(pageVoClassName, templatesDir + "/PageVo.java.ftl");
+
+        String v2 = "/templates/v2";
+        if (Objects.equals(templatesDir, v2)) {
+            map.put("packageAo", parent + ".ao");
+
+            String addUpdateAoClassName = tableJavaName + "AddUpdateAo";
+            map.put("addUpdateAoClassName", addUpdateAoClassName);
+            files.put(addUpdateAoClassName, templatesDir + "/AddUpdateAo.java.ftl");
+        }
+
+        InjectionConfig injectionConfig = new InjectionConfig.Builder()
+                .beforeOutputFile((tableInfo, objectMap) -> {
+                    LOGGER.debug("tableInfo = {}", tableInfo);
+                    LOGGER.debug("objectMap = {}", objectMap);
+                })
+                .customMap(map)
+                .customFile(files)
+                .build();
 
         TemplateConfig templateConfig = new TemplateConfig.Builder()
                 .disable(TemplateType.ENTITY)
@@ -168,7 +171,7 @@ public class MybatisPlusCodeGenerator {
         generator.global(globalConfig);
         generator.packageInfo(packageConfig);
         generator.strategy(strategyConfig);
-        // generator.injection(injectionConfig);
+        generator.injection(injectionConfig);
         generator.template(templateConfig);
         generator.execute(new FreemarkerTemplateEngine());
 
@@ -181,22 +184,21 @@ public class MybatisPlusCodeGenerator {
     public static void main(String[] args) {
 
         // 数据库url
-        MybatisPlusCodeGenerator.dbUrl = "jdbc:mysql://localhost:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true";
+        MybatisPlusCodeGenerator.dbUrl = "jdbc:mysql://172.16.84.29:3306/easygo_edge?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true";
         // 数据库账号
-        MybatisPlusCodeGenerator.dbUsername = "root";
+        MybatisPlusCodeGenerator.dbUsername = "easygo";
         // 数据库密码
-        MybatisPlusCodeGenerator.dbPassword = "cpq..123";
+        MybatisPlusCodeGenerator.dbPassword = "Vr@Dev123";
 
         // 项目 main 目录的绝对路径
-
-        MybatisPlusCodeGenerator.srcMainAbsolutePath = "E:\\github\\micro-service\\examples\\example-parent\\boot-web\\src\\main";
+        MybatisPlusCodeGenerator.srcMainAbsolutePath = "D:\\mycode\\micro-service\\examples\\example-parent\\boot-web\\src\\main";
         // 项目包名
         MybatisPlusCodeGenerator.parent = "com.github.codingsoldier.bootweb.temp";
 
         // 作者
         MybatisPlusCodeGenerator.author = "cpq";
         // 表名
-        MybatisPlusCodeGenerator.tableName = "user";
+        MybatisPlusCodeGenerator.tableName = "employee";
 
         // 生成代码
         MybatisPlusCodeGenerator.generate();
