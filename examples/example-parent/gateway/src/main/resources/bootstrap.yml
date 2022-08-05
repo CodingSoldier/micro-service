@@ -5,6 +5,16 @@ spring:
   application:
     name: gateway
   cloud:
+    gateway:
+      # 默认已开启跨域
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origin-patterns: "*"
+            allow-credentials: true
+            allowed-headers: "*"
+            allowed-methods: "*"
+            max-ages: 3600
     nacos:
       config:
         server-addr: 127.0.0.1:8848
@@ -42,9 +52,6 @@ spring:
             rule-type: gw-api-group
   # sleuth + zipkin 分布式链路追踪
   sleuth:
-    baggage:
-      correlation-fields: x-custom-trace-id
-      remote-fields: x-custom-trace-id
     sampler:
       # ProbabilityBasedSampler 抽样策略
       probability: 1.0  # 采样比例, 1.0 表示 100%, 默认是 0.1
@@ -90,3 +97,17 @@ logging:
     com:
       github:
         codingsoldier: DEBUG
+
+# springdoc配置
+springdoc:
+  # 预加载
+  pre-loading-enabled: true
+  swagger-ui:
+    # 折叠接口
+    doc-expansion: none
+    # true可以应用根路径访问swagger-ui
+    urls:
+      - name: 服务01
+        url: /cloud-web-01/v3/api-docs
+      - name: 服务02
+        url: /cloud-web-02/v3/api-docs

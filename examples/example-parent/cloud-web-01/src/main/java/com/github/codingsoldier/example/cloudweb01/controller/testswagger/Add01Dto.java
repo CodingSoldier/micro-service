@@ -15,8 +15,8 @@ import java.time.LocalDateTime;
  * @since 2022-03-16 21:38:52
  */
 @Data
-@Schema(name = "用户新增")
-public class UserAddDto implements Serializable {
+@Schema(name = "01新增")
+public class Add01Dto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

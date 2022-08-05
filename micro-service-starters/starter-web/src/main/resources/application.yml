@@ -1,4 +1,0 @@
-logging:
-  level:
-    # 请求日志
-    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG

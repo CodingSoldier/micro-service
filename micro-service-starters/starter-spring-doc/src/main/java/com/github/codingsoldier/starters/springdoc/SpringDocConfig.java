@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  * @author chenpq05
@@ -18,6 +19,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @EnableConfigurationProperties(StarterSpringDocProperties.class)
 @Configuration(proxyBeanMethods = false)
+@PropertySource("classpath:springdoc.properties")
 public class SpringDocConfig {
 
     private static final String X_TOKEN = "x-token";

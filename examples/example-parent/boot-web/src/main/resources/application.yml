@@ -94,7 +94,6 @@ mybatis-plus:
 test:
   msg: 测试信息
 
-
 springdoc:
   swagger-ui:
     # 折叠接口

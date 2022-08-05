@@ -3,6 +3,7 @@ package com.github.codingsoldier.starter.sleuth;
 import com.github.codingsoldier.starter.sleuth.annotation.ConditionalOnStarterSleuthEnabled;
 import com.github.codingsoldier.starter.sleuth.config.ThreadPoolTraceUtil;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  * @author cpq
@@ -10,5 +11,6 @@ import org.springframework.context.annotation.Import;
  */
 @Import({ThreadPoolTraceUtil.class})
 @ConditionalOnStarterSleuthEnabled
+@PropertySource("classpath:sleuth.properties")
 public class StarterSleuthAutoConfiguration {
 }

@@ -21,9 +21,6 @@ spring:
 
   # sleuth + zipkin 分布式链路追踪
   sleuth:
-    baggage:
-      correlation-fields: x-custom-trace-id
-      remote-fields: x-custom-trace-id
     sampler:
       # ProbabilityBasedSampler 抽样策略
       probability: 1.0  # 采样比例, 1.0 表示 100%, 默认是 0.1
@@ -46,21 +43,6 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
-
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 60000
-
-ribbon:
-  ConnectTimeout: 5000
-  ReadTimeout: 50000
-  eager-load:
-    enabled: true
-    clients: cloud-web
 
 # Feign 的相关配置
 feign:
@@ -94,3 +76,17 @@ logging:
     com:
       github:
         codingsoldier: DEBUG
+
+#springdoc:
+#  swagger-ui:
+#    # 折叠接口
+#    doc-expansion: none
+#  # 预加载
+#  pre-loading-enabled: true
+
+#starter:
+framework:
+  starter:
+    # starter-spring-doc 配置
+    spring-doc:
+      title: 服务222的API

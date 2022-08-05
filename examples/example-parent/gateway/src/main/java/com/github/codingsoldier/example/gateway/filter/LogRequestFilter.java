@@ -49,7 +49,9 @@ public class LogRequestFilter implements GlobalFilter, Ordered {
             return DataBufferUtils.join(fluxBody)
                 .flatMap(dataBuffer -> {
                     // 调用一次 retain 方法，缓冲区的引用计数加1，引用计数大于1，确保数据缓冲区不被释放
-                    // DataBufferUtils.retain(dataBuffer);
+                    /**
+                     * DataBufferUtils.retain(dataBuffer);
+                     */
 
                     // slice方法：做数据分割，将当前的position到limit之间的数据分割出来，返回一个新的ByteBuffer,
                     // 同时,mark标记重置为-1。

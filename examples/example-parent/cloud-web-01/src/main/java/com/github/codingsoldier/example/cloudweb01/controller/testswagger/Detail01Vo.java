@@ -19,8 +19,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Schema(name = "用户详情")
-public class UserDetailVo implements Serializable {
+@Schema(name = "01详情")
+public class Detail01Vo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

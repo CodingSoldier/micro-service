@@ -53,6 +53,11 @@
 
         <dependency>
             <groupId>com.github.codingsoldier</groupId>
+            <artifactId>starter-spring-doc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.codingsoldier</groupId>
             <artifactId>starter-logback</artifactId>
         </dependency>
 

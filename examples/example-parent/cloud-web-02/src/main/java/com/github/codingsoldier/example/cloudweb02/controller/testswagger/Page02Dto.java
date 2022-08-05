@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.cloudweb01.controller.testswagger;
+package com.github.codingsoldier.example.cloudweb02.controller.testswagger;
 
 import com.github.codingsoldier.common.req.PageReq;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -7,19 +7,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-/**
- * <p>
- * 用户表
- * </p>
- *
- * @author cpq
- * @since 2022-03-16 21:38:52
- */
+
 @Getter
 @Setter
 @Accessors(chain = true)
-@Schema(name = "用户分页vo")
-public class Test01Dto extends PageReq {
+@Schema(name = "分页02-vo")
+public class Page02Dto extends PageReq {
 
     @Parameter(description = "姓名", example = "姓名01")
     private String name;

@@ -2,6 +2,7 @@ package com.github.codingsoldier.starter.web;
 
 import com.github.codingsoldier.starter.web.annotation.ConditionalOnStarterWebEnabled;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  * @author cpq
@@ -9,5 +10,6 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @ComponentScan("com.github.codingsoldier.starter.web")
 @ConditionalOnStarterWebEnabled
+@PropertySource("classpath:web.properties")
 public class StarterWebComponentScan {
 }
