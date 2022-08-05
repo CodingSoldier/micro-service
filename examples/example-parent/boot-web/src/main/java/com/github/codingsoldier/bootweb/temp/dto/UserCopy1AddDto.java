@@ -1,12 +1,13 @@
 package com.github.codingsoldier.bootweb.temp.dto;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * @author cpq

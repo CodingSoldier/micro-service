@@ -1,8 +1,7 @@
 package com.github.codingsoldier.bootweb.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -22,44 +21,44 @@ import java.time.LocalDateTime;
 @Setter
 @Accessors(chain = true)
 @TableName("user")
-@ApiModel(value = "UserEntity对象", description = "用户表")
+@Schema(name = "UserEntity对象", description = "用户表")
 public class UserEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("id")
+    @Schema(description = "id")
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty("姓名")
+    @Schema(description = "姓名")
     private String name;
 
-    @ApiModelProperty("年龄")
+    @Schema(description = "年龄")
     private Integer age;
 
-    @ApiModelProperty("电话")
+    @Schema(description = "电话")
     private String phone;
 
-    @ApiModelProperty("生日")
+    @Schema(description = "生日")
     private LocalDateTime dateOfBirth;
 
-    @ApiModelProperty("创建人id")
+    @Schema(description = "创建人id")
     @TableField(fill = FieldFill.INSERT)
     private Long createId;
 
-    @ApiModelProperty("更新人id")
+    @Schema(description = "更新人id")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Long updateId;
 
-    @ApiModelProperty("创建时间")
+    @Schema(description = "创建时间")
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
-    @ApiModelProperty("更新时间")
+    @Schema(description = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 
-    @ApiModelProperty("是否已删除，0-未删除，1-删除")
+    @Schema(description = "是否已删除，0-未删除，1-删除")
     @TableLogic
     private Integer deleted;
 

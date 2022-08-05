@@ -1,10 +1,10 @@
 package com.github.codingsoldier.bootweb.temp.mapper;
 
-import com.github.codingsoldier.bootweb.temp.entity.UserCopy1;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.github.codingsoldier.bootweb.temp.vo.UserCopy1PageVo;
-import com.github.codingsoldier.bootweb.temp.dto.UserCopy1PageQueryDto;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.github.codingsoldier.bootweb.temp.dto.UserCopy1PageQueryDto;
+import com.github.codingsoldier.bootweb.temp.entity.UserCopy1;
+import com.github.codingsoldier.bootweb.temp.vo.UserCopy1PageVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 /**

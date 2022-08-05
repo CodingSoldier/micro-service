@@ -3,8 +3,8 @@ package com.github.codingsoldier.bootweb.controller;
 
 import com.github.codingsoldier.bootweb.dto.ValidationDto;
 import com.github.codingsoldier.starter.web.util.ValidationUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
@@ -14,7 +14,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 
-@Api(tags = "参数校验 API")
+@Tag(name = "参数校验 API")
 @Slf4j
 @RestController
 @RequestMapping("/validations")
@@ -31,7 +31,7 @@ public class ValidationController {
     嵌套校验	         支持	                     不支持
      */
 
-    @ApiOperation(value = "新增-校验")
+    @Operation(summary = "新增-校验")
     @PostMapping("/add")
     public ValidationDto addUser(@RequestBody @Validated ValidationDto validationDto) {
         log.info("请求参数：{}", validationDto);

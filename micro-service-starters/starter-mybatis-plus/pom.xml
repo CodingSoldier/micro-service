@@ -24,19 +24,12 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.codingsoldier</groupId>
-            <artifactId>starter-swagger</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.2</version>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
-            <version>3.5.3</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>

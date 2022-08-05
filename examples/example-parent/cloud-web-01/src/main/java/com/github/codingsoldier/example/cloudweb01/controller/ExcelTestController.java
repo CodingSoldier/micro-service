@@ -2,7 +2,6 @@ package com.github.codingsoldier.example.cloudweb01.controller;
 
 
 import com.github.codingsoldier.starter.web.util.ExcelUtil;
-import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +14,6 @@ import java.util.Date;
 import java.util.List;
 
 
-@Api(tags = "Excel API")
 @Slf4j
 @RestController
 @RequestMapping("/excel")

@@ -22,7 +22,7 @@
     <modules>
         <module>starter-log4j2</module>
         <module>starter-logback</module>
-        <module>starter-swagger</module>
+        <module>starter-spring-doc</module>
         <module>starter-mybatis-plus</module>
         <module>starter-redis</module>
         <module>starter-sleuth</module>

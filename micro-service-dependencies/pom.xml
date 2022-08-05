@@ -21,8 +21,6 @@
         <spring-boot.version>2.4.2</spring-boot.version>
         <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
         <spring-cloud.version>2020.0.1</spring-cloud.version>
-        <springfox.version>3.0.0</springfox.version>
-        <mybatis-plus.version>3.5.1</mybatis-plus.version>
         <mysql-connector-java.version>5.1.49</mysql-connector-java.version>
         <freemarker.version>2.3.31</freemarker.version>
         <log4j2.version>2.17.2</log4j2.version>
@@ -100,7 +98,7 @@
             </dependency>
             <dependency>
                 <groupId>com.github.codingsoldier</groupId>
-                <artifactId>starter-swagger</artifactId>
+                <artifactId>starter-spring-doc</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
@@ -115,29 +113,41 @@
             </dependency>
 
 
-            <!-- springfox -->
+            <!-- 暂时取消，不兼容springboot2.6 -->
+            <!--&lt;!&ndash; springfox &ndash;&gt;
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-boot-starter</artifactId>
-                <version>${springfox.version}</version>
+                <version>3.0.0</version>
             </dependency>
-            <!-- 多引入swagger-annotations，以便micro-service-common使用-->
+            &lt;!&ndash; 多引入swagger-annotations，以便micro-service-common使用&ndash;&gt;
             <dependency>
                 <groupId>io.swagger</groupId>
                 <artifactId>swagger-annotations</artifactId>
                 <version>1.5.20</version>
+            </dependency>-->
+
+            <dependency>
+                <groupId>io.swagger.core.v3</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>2.2.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>1.6.9</version>
             </dependency>
 
             <!-- mybatis-plus -->
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus.version}</version>
+                <version>3.5.2</version>
             </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-generator</artifactId>
-                <version>${mybatis-plus.version}</version>
+                <version>3.5.3</version>
             </dependency>
             <dependency>
                 <groupId>mysql</groupId>

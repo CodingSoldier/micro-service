@@ -1,8 +1,7 @@
 package com.github.codingsoldier.starter.mybatisplus.resp;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -12,24 +11,24 @@ import java.util.List;
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
-@ApiModel(value = "分页结果")
+@Schema(name = "分页结果")
 public class PageResult<T> implements Serializable {
 
     private static final long serialVersionUID = 8545996863226528111L;
 
-    @ApiModelProperty(value = "当前页")
+    @Schema(description = "当前页")
     private long current = 1L;
 
-    @ApiModelProperty(value = "每页显示条数")
+    @Schema(description = "每页显示条数")
     private long size = 10L;
 
-    @ApiModelProperty(value = "总数")
+    @Schema(description = "总数")
     private long total = 0L;
 
-    @ApiModelProperty(value = "当前分页总页数")
+    @Schema(description = "当前分页总页数")
     private long pages = 0L;
 
-    @ApiModelProperty(value = "数据列表")
+    @Schema(description = "数据列表")
     @SuppressWarnings("squid:S1948")
     private List<T> records = Collections.emptyList();
 

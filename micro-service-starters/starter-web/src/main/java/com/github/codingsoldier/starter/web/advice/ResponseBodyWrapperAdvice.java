@@ -56,10 +56,10 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
             return false;
         }
 
-        // springfox 接口不包装返回值
-        String springfox = "springfox";
+        // springfox、springdoc 接口不包装返回值
         String name = returnType.getDeclaringClass().getName();
-        if (StringUtils.isNotBlank(name) && name.contains(springfox)) {
+        if (StringUtils.isNotBlank(name)
+                && StringUtils.containsAny(name,"springfox", "springdoc")) {
             return false;
         }
 

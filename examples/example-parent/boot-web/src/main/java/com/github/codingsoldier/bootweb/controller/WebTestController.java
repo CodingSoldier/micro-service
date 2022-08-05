@@ -5,14 +5,14 @@ import com.github.codingsoldier.bootweb.vo.WebTestVo;
 import com.github.codingsoldier.common.exception.AppException;
 import com.github.codingsoldier.starter.web.annotation.NoWrapper;
 import com.github.codingsoldier.starter.web.context.ApplicationContextHolder;
-import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Api(tags = "Web测试API")
+@Tag(name = "Web测试API")
 @Slf4j
 @RestController
 @RequestMapping("/web")

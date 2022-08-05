@@ -17,8 +17,7 @@ public class GeneratorCode {
 
 
         // 数据库url
-        // MybatisPlusCodeGenerator.dbUrl = "jdbc:mysql://172.16.84.29:3306/2_3_aface_material?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false";
-        MybatisPlusCodeGenerator.dbUrl = "jdbc:mysql://172.16.84.29:3306/easygo_edge?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false";
+        MybatisPlusCodeGenerator.dbUrl = "###########";
         // 数据库账号
         MybatisPlusCodeGenerator.dbUsername = "easygo";
         // 数据库密码

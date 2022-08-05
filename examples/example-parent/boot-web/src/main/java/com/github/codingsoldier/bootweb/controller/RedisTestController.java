@@ -1,7 +1,7 @@
 package com.github.codingsoldier.bootweb.controller;
 
 import com.github.codingsoldier.starter.redis.RedisUtil;
-import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-@Api(tags = "Redis测试API")
+@Tag(name = "Redis测试API")
 @Slf4j
 @RestController
 @RequestMapping("/redis")

@@ -15,8 +15,8 @@ import com.github.codingsoldier.bootweb.vo.UserDetailVo;
 import com.github.codingsoldier.common.resp.Result;
 import com.github.codingsoldier.starter.mybatisplus.resp.PageResult;
 import com.github.codingsoldier.starter.web.util.CopyUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ import java.util.Objects;
  * @author cpq
  * @since 2022-03-17 04:10:40
  */
-@Api(tags = "用户CURD API")
+@Tag(name = "用户CURD API")
 @Slf4j
 @RestController
 @RequestMapping("/users")
@@ -42,7 +42,7 @@ public class UserCrudController {
     @Autowired
     private UserService userService;
 
-    @ApiOperation(value = "用户-新增")
+    @Operation(summary = "用户-新增")
     @PostMapping("/add")
     public UserDetailVo addUser(@RequestBody UserAddDto userAddDto) {
         log.info("请求参数：{}", userAddDto);
@@ -58,7 +58,7 @@ public class UserCrudController {
         return userDetailVo;
     }
 
-    @ApiOperation(value = "用户-更新")
+    @Operation(summary = "用户-更新")
     @PutMapping("/update")
     public UserDetailVo updateUser(@RequestBody UserUpdateDto userUpdateDto) {
         log.info("请求参数：{}", userUpdateDto);
@@ -74,7 +74,7 @@ public class UserCrudController {
         return userDetailVo;
     }
 
-    @ApiOperation(value = "用户-删除")
+    @Operation(summary = "用户-删除")
     @DeleteMapping("/{id}")
     public Boolean delete(@PathVariable("id") Long id) {
         log.info("请求参数：{}", id);
@@ -82,7 +82,7 @@ public class UserCrudController {
         return b;
     }
 
-    @ApiOperation(value = "用户-分页")
+    @Operation(summary = "用户-分页")
     @GetMapping("/page")
     public PageResult<UserDetailVo> page(@ModelAttribute PageDto pageDto) {
         log.info("请求参数：{}", pageDto);
@@ -98,14 +98,14 @@ public class UserCrudController {
         return PageResult.create(result, userDetailVoList);
     }
 
-    @ApiOperation(value = "用户-分页-自己写")
+    @Operation(summary = "用户-分页-自己写")
     @GetMapping("/page/test")
     public PageResult<UserDetailVo> pageMapper(@ModelAttribute PageDto pageDto) {
         IPage<UserDetailVo> result = userService.pageQuery(pageDto);
         return PageResult.create(result, result.getRecords());
     }
 
-    @ApiOperation(value = "用户-详情")
+    @Operation(summary = "用户-详情")
     @GetMapping("/detail/{id}")
     public UserDetailVo page(@PathVariable("id") Long id) {
         UserEntity userEntity = userService.getById(id);
@@ -114,7 +114,7 @@ public class UserCrudController {
         return userDetailVo;
     }
 
-    @ApiOperation(value = "swagger测试")
+    @Operation(summary = "swagger测试")
     @GetMapping("/test-swagger/{id}")
     public Result<PageResult<UserDetailVo>> testSwagger(@PathVariable("id") Long id) {
         return null;

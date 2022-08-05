@@ -3,7 +3,7 @@ package com.github.codingsoldier.bootweb.controller;
 
 import com.github.codingsoldier.bootweb.dto.ExcelDemoDto;
 import com.github.codingsoldier.starter.web.util.ExcelUtil;
-import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 
-@Api(tags = "Excel API")
+@Tag(name = "Excel API")
 @Slf4j
 @RestController
 @RequestMapping("/excel")

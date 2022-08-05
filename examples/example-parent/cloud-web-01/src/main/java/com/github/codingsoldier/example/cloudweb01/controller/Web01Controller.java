@@ -2,7 +2,6 @@ package com.github.codingsoldier.example.cloudweb01.controller;
 
 import com.github.codingsoldier.common.util.CommonUtil;
 import com.github.codingsoldier.example.cloudwebapi.CloudWeb02Client;
-import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,7 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Api(tags = "web01-API")
 @Slf4j
 @RefreshScope
 @RestController

@@ -1,8 +1,7 @@
 package com.github.codingsoldier.bootweb.dto;
 
 import com.github.codingsoldier.common.req.PageReq;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -18,13 +17,13 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@ApiModel(value = "用户分页vo")
+@Schema(name = "用户分页vo")
 public class PageDto extends PageReq {
 
-    @ApiModelProperty(value = "姓名", example = "姓名01")
+    @Schema(description = "姓名", example = "姓名01")
     private String name;
 
-    @ApiModelProperty(value = "年龄", example = "10")
+    @Schema(description = "年龄", example = "10")
     private Integer age;
 
 }

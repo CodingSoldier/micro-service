@@ -30,7 +30,6 @@ import java.util.List;
  * @author chenpq05
  * @since 2022/2/11 12:02
  */
-@EnableWebMvc
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnProperty(value = "framework.starter.web.enableWebMvcConfig", matchIfMissing = true)
 public class WebMvcConfig implements WebMvcConfigurer {

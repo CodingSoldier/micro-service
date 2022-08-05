@@ -2,7 +2,7 @@ package com.github.codingsoldier.example.cloudweb02.controller;
 
 import com.github.codingsoldier.example.cloudweb02.service.Web02Service;
 import com.github.codingsoldier.example.cloudwebapi.CloudWeb02Client;
-import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 
-@Api(tags = "web02-API")
+@Tag(name = "web02-API")
 @Slf4j
 @RefreshScope
 @RestController

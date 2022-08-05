@@ -1,7 +1,6 @@
 package com.github.codingsoldier.bootweb.vo;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -20,36 +19,36 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Accessors(chain = true)
-@ApiModel(value = "用户详情")
+@Schema(name = "用户详情")
 public class UserDetailVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("id")
+    @Schema(description = "id")
     private Long id;
 
-    @ApiModelProperty("姓名")
+    @Schema(description = "姓名")
     private String name;
 
-    @ApiModelProperty("年龄")
+    @Schema(description = "年龄")
     private Integer age;
 
-    @ApiModelProperty("电话")
+    @Schema(description = "电话")
     private String phone;
 
-    @ApiModelProperty("生日")
+    @Schema(description = "生日")
     private LocalDateTime dateOfBirth;
 
-    @ApiModelProperty("创建人id")
+    @Schema(description = "创建人id")
     private Long createId;
 
-    @ApiModelProperty("更新人id")
+    @Schema(description = "更新人id")
     private Long updateId;
 
-    @ApiModelProperty("创建时间")
+    @Schema(description = "创建时间")
     private LocalDateTime createTime;
 
-    @ApiModelProperty("更新时间")
+    @Schema(description = "更新时间")
     private LocalDateTime updateTime;
 
 }

@@ -1,8 +1,7 @@
 package com.github.codingsoldier.common.resp;
 
 import com.github.codingsoldier.common.enums.ResponseCodeEnum;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.io.Serializable;
 
@@ -12,20 +11,20 @@ import java.io.Serializable;
  * @author chenpq05
  * @since 2022/2/23 14:14
  */
-@ApiModel(value = "HTTP响应体数据")
+@Schema(name = "HTTP响应体数据")
 public class Result<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "1、code为具体的业务编码，code = 0 表示成功\n"
+    @Schema(description = "1、code为具体的业务编码，code = 0 表示成功\n"
             + "2、40000 <= code <= 49999，表示客户端错误，例如：参数错误\n"
             + "3、50000 <= code <= 59999 , 表示服务端错误，例如：空指针异常\n")
     private Integer code;
 
-    @ApiModelProperty(value = "提示信息")
+    @Schema(description = "提示信息")
     private String message;
 
-    @ApiModelProperty(value = "返回数据")
+    @Schema(description = "返回数据")
     @SuppressWarnings("squid:S1948")
     private T data;
 
