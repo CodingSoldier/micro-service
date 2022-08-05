@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.github.codingsoldier.starter.mybatisplus.annotation.ConditionalOnStarterMybatisPlusEnabled;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Import;
 @ConditionalOnStarterMybatisPlusEnabled
 public class StarterMybatisPlusAutoConfiguration {
 
-    private static final Log logger = LogFactory.getLog(StarterMybatisPlusAutoConfiguration.class);
+    private static final Logger logger = LoggerFactory.getLogger(StarterMybatisPlusAutoConfiguration.class);
 
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {

@@ -7,7 +7,7 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.security.SecurityScheme.In;
 import io.swagger.v3.oas.models.security.SecurityScheme.Type;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,12 +20,16 @@ import org.springframework.context.annotation.Configuration;
 @Configuration(proxyBeanMethods = false)
 public class SpringDocConfig {
 
-    private static final String xToken = "x-token";
+    private static final String X_TOKEN = "x-token";
 
-    @Autowired
-    private StarterSpringDocProperties starterSpringDocProperties;
+    private StarterSpringDocProperties properties;
+
+    public SpringDocConfig(StarterSpringDocProperties properties) {
+        this.properties = properties;
+    }
 
     @Bean
+    @ConditionalOnMissingBean(OpenAPI.class)
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .components(components())
@@ -40,14 +44,14 @@ public class SpringDocConfig {
         SecurityScheme schemeToken = new SecurityScheme()
                 .type(Type.APIKEY)
                 .in(In.HEADER)
-                .name(xToken)
+                .name(X_TOKEN)
                 .description("调用登录接口可获得x-token");
         Components components = new Components();
-        components.addSecuritySchemes(xToken, schemeToken);
+        components.addSecuritySchemes(X_TOKEN, schemeToken);
         return components;
     }
 
     private Info apiInfo() {
-        return new Info().title(starterSpringDocProperties.getTitle());
+        return new Info().title(properties.getTitle());
     }
 }

@@ -61,33 +61,4 @@ public class CustomFreemarkerTemplateEngine extends FreemarkerTemplateEngine {
         });
     }
 
-    //
-    // // @Override
-    // protected void outputCustomFile(Map<String, String> customFile, TableInfo tableInfo, Map<String, Object> objectMap) {
-    //     String otherPath = getPathInfo(OutputFile.other);
-    //     customFile.forEach((key, value) -> {
-    //         LOGGER.debug("key = {}", key);
-    //         LOGGER.debug("value = {}", value);
-    //         String path = otherPath;
-    //         if (value.endsWith(dtoFtl)) {
-    //             // dto的输出目录
-    //             path = path + File.separator + "dto";
-    //         } else {
-    //             if (value.endsWith(voFtl)) {
-    //                 // vo的输出目录
-    //                 path = path + File.separator + "vo";
-    //             } else {
-    //                 if (value.endsWith(aoFtl)) {
-    //                     // ao的输出目录
-    //                     path = path + File.separator + "ao";
-    //                 }
-    //             }
-    //         }
-    //         // 目录 + 文件名
-    //         String fileName = String.format((path + File.separator + "%s%s"), key, ".java");
-    //         // 生成java文件
-    //         outputFile(new File(fileName), objectMap, value);
-    //     });
-    // }
-
 }

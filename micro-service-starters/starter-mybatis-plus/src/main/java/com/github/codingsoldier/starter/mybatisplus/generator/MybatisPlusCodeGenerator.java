@@ -48,9 +48,9 @@ public class MybatisPlusCodeGenerator {
 
         // 项目 main 目录的绝对路径
 
-        MybatisPlusCodeGenerator.srcMainAbsolutePath = "E:\\github\\micro-service\\examples\\example-parent\\boot-springdoc\\src\\main";
+        MybatisPlusCodeGenerator.srcMainAbsolutePath = "E:\\github\\micro-service\\examples\\example-parent\\boot-web\\src\\main";
         // 项目包名
-        MybatisPlusCodeGenerator.parent = "com.github.codingsoldier.example.springdoc";
+        MybatisPlusCodeGenerator.parent = "com.github.codingsoldier.bootweb.temp";
 
         // 作者
         MybatisPlusCodeGenerator.author = "cpq";

@@ -18,22 +18,5 @@ public class Global01Filter implements GlobalFilter {
         ServerHttpRequest request = exchange.getRequest();
         SleuthLogUtil.log(exchange, () -> log.info("请求进入全局过滤器，request={}", request.toString()));
         return chain.filter(exchange);
-
-        //boolean isAllow = true;
-        //if (isAllow) {
-        //    return chain.filter(exchange);
-        //
-        //} else {
-        //    //设置status和body
-        //    return Mono.defer(() -> {
-        //        //setResponseStatus(exchange, HttpStatus.UNAUTHORIZED);
-        //        final ServerHttpResponse response = exchange.getResponse();
-        //        byte[] bytes = "Hello World".getBytes(StandardCharsets.UTF_8);
-        //        DataBuffer buffer = exchange.getResponse().bufferFactory().wrap(bytes);
-        //        response.getHeaders().set("aaa", "bbb");
-        //        return response.writeWith(Flux.just(buffer));
-        //    });
-        //}
-
     }
 }

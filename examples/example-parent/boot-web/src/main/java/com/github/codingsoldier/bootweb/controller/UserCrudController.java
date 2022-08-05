@@ -18,6 +18,7 @@ import com.github.codingsoldier.starter.web.util.CopyUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -84,7 +85,7 @@ public class UserCrudController {
 
     @Operation(summary = "用户-分页")
     @GetMapping("/page")
-    public PageResult<UserDetailVo> page(@ModelAttribute PageDto pageDto) {
+    public PageResult<UserDetailVo> page(@ModelAttribute @ParameterObject PageDto pageDto) {
         log.info("请求参数：{}", pageDto);
         LambdaQueryWrapper<UserEntity> lqw = Wrappers.lambdaQuery();
         lqw.like(StringUtils.isNotBlank(pageDto.getName()), UserEntity::getName, pageDto.getName());

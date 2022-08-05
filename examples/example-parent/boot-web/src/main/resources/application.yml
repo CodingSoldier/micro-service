@@ -8,9 +8,9 @@ spring:
   application:
     name: boot-web
   datasource:
-    url: #########
-    username: easygo
-    password: Vr@Dev123
+    username: root
+    password: cpq..123
+    url: jdbc:mysql://localhost:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true
     driver-class-name: com.mysql.jdbc.Driver
     hikari:
       # 连接池最大连接数

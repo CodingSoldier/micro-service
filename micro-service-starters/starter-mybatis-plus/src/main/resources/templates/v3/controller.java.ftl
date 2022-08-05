@@ -11,6 +11,7 @@ import com.github.codingsoldier.starter.mybatisplus.resp.PageResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -80,7 +81,7 @@ public class ${table.controllerName} {
 
     @GetMapping("/page")
     @Operation(summary = "分页")
-    public PageResult<${pageVoClassName}> pageQuery(@ModelAttribute ${pageQueryDtoClassName} queryDto) {
+    public PageResult<${pageVoClassName}> pageQuery(@ModelAttribute @ParameterObject ${pageQueryDtoClassName} queryDto) {
         return ${uncapFirstServerName}.pageQuery(queryDto);
     }
 

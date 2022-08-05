@@ -1,6 +1,7 @@
 package ${packageDto};
 
 import com.github.codingsoldier.common.req.PageReq;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,7 +36,7 @@ public class ${pageQueryDtoClassName} extends PageReq {
     </#if>
 
     <#if field.comment!?length gt 0>
-    @Schema(description = "${field.comment}")
+    @Parameter(description = "${field.comment}")
     </#if>
     private ${field.propertyType} ${field.propertyName};
 </#list>

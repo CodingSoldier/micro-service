@@ -1,6 +1,5 @@
 package com.github.codingsoldier.example.gateway.filter;
 
-import com.github.codingsoldier.example.gateway.util.SleuthLogUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Publisher;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -89,22 +88,6 @@ public class LogResponseFilter implements GlobalFilter, Ordered {
     public int getOrder() {
         // -1 is response write filter, must be called before that
         return -2;
-    }
-
-    /**
-     * 打印日志
-     *
-     * @param exchange
-     * @param requestURI
-     * @param responseBody
-     */
-    private void printLog(ServerWebExchange exchange, String requestURI, String method, String responseBody) {
-        LinkedHashMap<String, Object> logData = new LinkedHashMap<>();
-        logData.put("method", method);
-        logData.put("requestURI", requestURI);
-        logData.put("responseBody", responseBody);
-        // 添加traceId，非常耗性能
-        SleuthLogUtil.log(exchange, () -> log.info("网关打印response数据。{}", logData));
     }
 
 }

@@ -17,11 +17,11 @@ public class GeneratorCode {
 
 
         // 数据库url
-        MybatisPlusCodeGenerator.dbUrl = "###########";
+        MybatisPlusCodeGenerator.dbUrl = "jdbc:mysql://localhost:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true";
         // 数据库账号
-        MybatisPlusCodeGenerator.dbUsername = "easygo";
+        MybatisPlusCodeGenerator.dbUsername = "root";
         // 数据库密码
-        MybatisPlusCodeGenerator.dbPassword = "Vr@Dev123";
+        MybatisPlusCodeGenerator.dbPassword = "cpq..123";
 
         // 项目 main 目录的绝对路径
         MybatisPlusCodeGenerator.srcMainAbsolutePath = "D:\\mycode\\micro-service\\examples\\example-parent\\boot-web\\src\\main";
@@ -31,7 +31,7 @@ public class GeneratorCode {
         // 作者
         MybatisPlusCodeGenerator.author = "cpq";
         // 表名
-        MybatisPlusCodeGenerator.tableName = "device";
+        MybatisPlusCodeGenerator.tableName = "user";
 
         // 生成代码
         MybatisPlusCodeGenerator.generate();

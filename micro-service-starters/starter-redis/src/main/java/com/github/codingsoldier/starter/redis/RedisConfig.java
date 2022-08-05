@@ -3,8 +3,8 @@ package com.github.codingsoldier.starter.redis;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
 import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +24,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @EnableCaching
 public class RedisConfig {
 
-    private static final Log logger = LogFactory.getLog(RedisConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(RedisConfig.class);
 
     /**
      * 设置RedisTemplate规则

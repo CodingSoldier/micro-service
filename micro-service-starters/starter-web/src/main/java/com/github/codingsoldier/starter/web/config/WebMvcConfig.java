@@ -10,14 +10,13 @@ import com.github.codingsoldier.common.util.objectmapper.deserializer.LocalDateD
 import com.github.codingsoldier.common.util.objectmapper.deserializer.LocalDateTimeDeserializer;
 import com.github.codingsoldier.common.util.objectmapper.deserializer.OffsetDateTimeDeserializer;
 import com.github.codingsoldier.common.util.objectmapper.serializer.DateTimeSerializer;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.time.LocalDate;
@@ -34,12 +33,12 @@ import java.util.List;
 @ConditionalOnProperty(value = "framework.starter.web.enableWebMvcConfig", matchIfMissing = true)
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    private static final Log logger = LogFactory.getLog(WebMvcConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(WebMvcConfig.class);
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         if (logger.isDebugEnabled()) {
-            logger.debug("设置允许跨域");
+            logger.debug("配置为设置允许跨域");
         }
         // 设置允许跨域的路由
         registry.addMapping("/**")
