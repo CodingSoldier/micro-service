@@ -1,6 +1,6 @@
-package com.github.codingsoldier.starters.wagger.properties;
+package com.github.codingsoldier.starters.springfox.properties;
 
-import com.github.codingsoldier.starters.wagger.SwaggerConfig;
+import com.github.codingsoldier.starters.springfox.SpringfoxConfig;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -9,13 +9,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
-@ConfigurationProperties(prefix = "framework.starter.swagger")
-public class StarterSwaggerProperties {
+@ConfigurationProperties(prefix = "framework.starter.springfox")
+public class StarterSpringfoxProperties {
 
     /**
      * 基础扫描路径
      */
-    private String basePackage = SwaggerConfig.BASE_PACKAGE;
+    private String basePackage = SpringfoxConfig.BASE_PACKAGE;
 
     public String getBasePackage() {
         return basePackage;

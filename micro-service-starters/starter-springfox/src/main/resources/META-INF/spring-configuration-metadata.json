@@ -1,0 +1,25 @@
+{
+    "groups": [
+        {
+            "name": "framework.starter.springfox",
+            "type": "com.github.codingsoldier.starters.springfox.properties.StarterSpringfoxProperties",
+            "sourceType": "com.github.codingsoldier.starters.springfox.properties.StarterSpringfoxProperties"
+        }
+    ],
+    "properties": [
+        {
+            "name": "framework.starter.springfox.enabled",
+            "type": "java.lang.Boolean",
+            "description": "是否启用 starter-springfox",
+            "defaultValue": true
+        },
+        {
+            "name": "framework.starter.springfox.base-package",
+            "type": "java.lang.String",
+            "description": "基础扫描路径",
+            "sourceType": "com.github.codingsoldier.starters.springfox.properties.StarterSpringfoxProperties",
+            "defaultValue": "com.github.codingsoldier"
+        }
+    ],
+    "hints": []
+}

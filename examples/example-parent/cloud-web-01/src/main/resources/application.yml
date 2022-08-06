@@ -142,9 +142,6 @@ feign:
   # 打开 Sentinel 对 Feign 的支持
   sentinel:
     enabled: true
-#  # OpenFeign 集成 Hystrix
-#  hystrix:
-#    enabled: true
 
 logging:
   # logback-spring.xml 已在 starter-logback 中配置好了，无需新建

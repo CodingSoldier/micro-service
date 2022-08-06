@@ -1,6 +1,6 @@
-package com.github.codingsoldier.starters.wagger;
+package com.github.codingsoldier.starters.springfox;
 
-import com.github.codingsoldier.starters.wagger.properties.StarterSwaggerProperties;
+import com.github.codingsoldier.starters.springfox.properties.StarterSpringfoxProperties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -24,10 +24,10 @@ import java.util.List;
  * @since 2022-03-17 11:28:55
  */
 @SuppressWarnings("squid:S125")
-@EnableConfigurationProperties(StarterSwaggerProperties.class)
+@EnableConfigurationProperties(StarterSpringfoxProperties.class)
 @Configuration(proxyBeanMethods = false)
 @EnableOpenApi
-public class SwaggerConfig {
+public class SpringfoxConfig {
 
     /**
      * 基础扫描包
@@ -35,7 +35,7 @@ public class SwaggerConfig {
     public static final String BASE_PACKAGE = "com.github.codingsoldier";
 
 
-    private static final Log logger = LogFactory.getLog(SwaggerConfig.class);
+    private static final Log logger = LogFactory.getLog(SpringfoxConfig.class);
 
     // private final static String groupName = "web";//组群名称
     //private final static String headerName2 = "test";//如果要多个请求头信息，自行解放注释
@@ -82,8 +82,8 @@ public class SwaggerConfig {
 
     @Bean
     @ConditionalOnMissingBean(Docket.class)
-    public Docket createRestApi(StarterSwaggerProperties starterSwaggerProperties) {
-        String basePackage = starterSwaggerProperties.getBasePackage();
+    public Docket createRestApi(StarterSpringfoxProperties starterSpringFoxProperties) {
+        String basePackage = starterSpringFoxProperties.getBasePackage();
         if (BASE_PACKAGE.equals(basePackage)) {
             String msg = String.format("警告：swagger扫描目录为%s，请通过 framework.starter.swagger.base-package 修改扫描目录", basePackage);
             logger.warn(msg);

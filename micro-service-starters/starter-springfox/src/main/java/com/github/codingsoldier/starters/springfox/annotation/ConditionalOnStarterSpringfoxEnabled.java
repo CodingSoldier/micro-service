@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.codingsoldier.starters.wagger.annotation;
+package com.github.codingsoldier.starters.springfox.annotation;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
@@ -29,7 +29,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
-@ConditionalOnProperty(value = "framework.starter.swagger.enabled", matchIfMissing = true)
-public @interface ConditionalOnStarterSwaggerEnabled {
+@ConditionalOnProperty(value = "framework.starter.springfox.enabled", matchIfMissing = true)
+public @interface ConditionalOnStarterSpringfoxEnabled {
 
 }
