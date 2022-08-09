@@ -16,14 +16,14 @@ import java.util.Date;
 import java.util.List;
 
 
-@Tag(name = "Excel API")
+@Tag(name = "Excel-API")
 @Slf4j
 @RestController
 @RequestMapping("/excel")
 public class ExcelTestController {
 
-    @GetMapping("download")
-    public void download(HttpServletResponse response) throws IOException {
+    @GetMapping("/download")
+    public void download() {
         ExcelUtil.downloadCatchException("文件名称", "", ExcelDemoDto.class, data());
     }
 

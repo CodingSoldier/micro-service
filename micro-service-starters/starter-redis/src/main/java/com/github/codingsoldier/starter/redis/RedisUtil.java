@@ -26,7 +26,7 @@ public class RedisUtil{
      * @param redisTemplate
      */
     public static synchronized void setOnceRedisTemplate(RedisTemplate redisTemplate) {
-        if (redisTemplate == null) {
+        if (RedisUtil.redisTemplate == null) {
             RedisUtil.redisTemplate = redisTemplate;
         }
     }

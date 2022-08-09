@@ -16,7 +16,7 @@ public enum ResponseCodeEnum {
      * 2、如果失败，code统一为5位，前3位为 HTTP 状态码，后2位表示具体业务状态
      * 3、客户端错误，以4开头。例如：
      * http status = 429 表示“并发请求过多”，则使用 42901 - 42999 表示“并发请求过多” 这类的异常，
-     * 使用 42901 表示“系统忙，您发送的请求被限流了。”
+     * 例如：使用 42901 表示“系统忙，您发送的请求被限流了。”
      * 4、服务端错误，以5开头
      * http status = 500 表示“服务器端程序错误”，则使用 50001 - 50099 表示“并服务器端程序错误” 这类的异常
      */
@@ -24,7 +24,7 @@ public enum ResponseCodeEnum {
     BAD_REQUEST(40000, "失败"),
     TOO_MANY_REQUESTS(42901, "系统忙，您发送的请求被限流了。"),
     PRECONDITION_FAILED(41200, "请求条件错误"),
-    SERVER_ERROR(50000, "发生错误"),
+    SERVER_ERROR(50000, "服务端无法处理此请求"),
     ;
 
     private int code;

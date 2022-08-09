@@ -1,4 +1,4 @@
-package com.github.codingsoldier.bootweb.controller;
+package com.github.codingsoldier.bootweb.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class RedisTestBean implements Serializable {
+public class RedisTestBeanDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
