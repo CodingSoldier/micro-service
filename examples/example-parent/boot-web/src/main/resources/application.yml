@@ -8,9 +8,9 @@ spring:
   application:
     name: boot-web
   datasource:
-    url: jdbc:mysql://172.16.84.29:3306/easygo_edge?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
-    username: easygo
-    password: Vr@Dev123
+    username: root
+    password: cpq..123
+    url: jdbc:mysql://localhost:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true
     driver-class-name: com.mysql.jdbc.Driver
     hikari:
       # 连接池最大连接数
@@ -24,18 +24,18 @@ spring:
       # 测试sql
       connection-test-query: select 1
   redis:
-    host: 172.16.84.29
-    port: 6379
-    password: VR#vanrui123
-    database: 11
-#    # Redis数据库索引（默认为0）
-#    database: 0
-#    # Redis服务器地址
-#    host: 127.0.0.1
-#    # Redis服务器连接端口
+#    host: 172.16.84.29
 #    port: 6379
-#    # Redis服务器连接密码（默认为空）
 #    password:
+#    database: 11
+    # Redis数据库索引（默认为0）
+    database: 0
+    # Redis服务器地址
+    host: 127.0.0.1
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password:
     # 连接超时时间 单位 ms（毫秒）
     timeout: 3000
     lettuce:

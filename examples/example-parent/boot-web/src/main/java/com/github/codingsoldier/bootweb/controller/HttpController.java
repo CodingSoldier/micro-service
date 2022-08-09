@@ -2,9 +2,8 @@ package com.github.codingsoldier.bootweb.controller;
 
 import com.github.codingsoldier.bootweb.dto.PageDto;
 import com.github.codingsoldier.bootweb.dto.UserUpdateDto;
-import com.github.codingsoldier.bootweb.dto.WebTestDto;
-import com.github.codingsoldier.bootweb.vo.WebTestVo;
-import com.github.codingsoldier.common.exception.AppException;
+import com.github.codingsoldier.bootweb.dto.HttpTestDto;
+import com.github.codingsoldier.bootweb.vo.HttpTestVo;
 import com.github.codingsoldier.starter.web.annotation.NoWrapper;
 import com.github.codingsoldier.starter.web.context.ApplicationContextHolder;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -41,17 +40,17 @@ public class HttpController {
     }
 
     @PostMapping("/time")
-    public WebTestVo time(@RequestBody WebTestDto webTestDto) {
-        log.info("请求参数：{}", webTestDto);
-        WebTestVo resp = new WebTestVo();
-        BeanUtils.copyProperties(webTestDto, resp);
+    public HttpTestVo time(@RequestBody HttpTestDto httpTestDto) {
+        log.info("请求参数：{}", httpTestDto);
+        HttpTestVo resp = new HttpTestVo();
+        BeanUtils.copyProperties(httpTestDto, resp);
         return resp;
     }
 
     @GetMapping(value = "/no-wrapper")
     @NoWrapper
-    public WebTestVo noWrapper() {
-        return WebTestVo.builder().id(1L).build();
+    public HttpTestVo noWrapper() {
+        return HttpTestVo.builder().id(1L).build();
     }
 
     @GetMapping(value = "/properties/msg", produces = MediaType.APPLICATION_JSON_VALUE)

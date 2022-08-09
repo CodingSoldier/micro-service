@@ -55,7 +55,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
     /**
-     * 时间转换
+     * 添加自定义 MappingJackson2HttpMessageConverter
      *
      * @param converters
      */
@@ -63,7 +63,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         if (logger.isDebugEnabled()) {
-            logger.debug("配置 configureMessageConverters");
+            logger.debug("在 configureMessageConverters 方法中配置 MappingJackson2HttpMessageConverter");
         }
         ObjectMapper objectMapper = new ObjectMapper();
         //序列化的时候序列对象的所有属性
@@ -73,7 +73,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         //如果是空对象的时候,不抛异常
         objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 
-        // 时间转换为时间戳。
+        // 时间转换。
         JavaTimeModule javaTimeModule = new JavaTimeModule();
         DateTimeSerializer dateTimeSerializer = new DateTimeSerializer();
         javaTimeModule.addSerializer(Date.class, dateTimeSerializer);
@@ -90,9 +90,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
         MappingJackson2HttpMessageConverter jackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
         jackson2HttpMessageConverter.setObjectMapper(objectMapper);
-
-        converters.add(jackson2HttpMessageConverter);
+        int i = 0;
+        for (; i < converters.size(); i++) {
+            if (converters.get(i) instanceof  MappingJackson2HttpMessageConverter) {
+                break;
+            }
+        }
+        converters.add(i , jackson2HttpMessageConverter);
     }
-
 
 }

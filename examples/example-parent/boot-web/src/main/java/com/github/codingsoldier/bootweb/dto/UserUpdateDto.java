@@ -36,7 +36,7 @@ public class UserUpdateDto implements Serializable {
     @Schema(description = "电话", example = "18952145124")
     private String phone;
 
-    @Schema(description = "生日", example = "1647445294184")
+    @Schema(description = "生日", example = "1660049008725")
     private LocalDateTime dateOfBirth;
 
 }

@@ -15,7 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class WebTestVo implements Serializable {
+public class HttpTestVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

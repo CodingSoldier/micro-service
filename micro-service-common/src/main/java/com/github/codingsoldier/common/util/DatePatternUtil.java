@@ -26,7 +26,7 @@ public class DatePatternUtil {
      * 格式化
      */
     private static final Map<Pattern, String> PATTERN_MAP = new HashMap<>();
-    private static final List<Pattern> PATTERN_LIST = new ArrayList<>(5);
+    private static final List<Pattern> PATTERN_LIST = new ArrayList<>(32);
     private static final Pattern PATTERN3 = Pattern.compile("(\\d{4}-\\d{1,2}-\\d{1,2})");
     private static final Pattern PATTERN4 = Pattern.compile("(\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{1,2})");
     private static final Pattern PATTERN5 = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{1,2}:\\d{1,2}:\\d{1,2}");

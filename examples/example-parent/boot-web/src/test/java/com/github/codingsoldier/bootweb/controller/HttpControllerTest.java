@@ -12,8 +12,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * @author chenpq05
  * @since 2022/8/9 17:38
@@ -46,11 +44,11 @@ class HttpControllerTest extends BaseTest {
 
     public static void main(String[] args) {
         HashMap<String, Object> m = new HashMap<>();
-        m.put("id", "122");
+        m.put("id", 122);
         m.put("name", "122");
-        m.put("age", "11");
+        m.put("age", 11);
         m.put("phone", "18952145124");
-        m.put("dateOfBirth", "1647445294184");
+        m.put("dateOfBirth", 1647445294184L);
         String s = ObjectMapperUtil.writeValueAsString(m);
         System.out.println(s);
     }
@@ -73,9 +71,19 @@ class HttpControllerTest extends BaseTest {
 
     @Test
     void noWrapper() throws Exception {
+        MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/http/no-wrapper");
+        super.mockMvc.perform(reqBuilder)
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id",
+                        Matchers.equalTo(1)));
     }
 
     @Test
     void propertiesMsg() throws Exception {
+        MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/http/properties/msg");
+        super.mockMvc.perform(reqBuilder)
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data",
+                        Matchers.equalTo("Junit测试使用")));
     }
 }
