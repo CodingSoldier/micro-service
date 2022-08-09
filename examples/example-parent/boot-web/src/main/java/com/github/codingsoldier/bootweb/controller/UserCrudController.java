@@ -34,7 +34,7 @@ import java.util.Objects;
  * @author cpq
  * @since 2022-03-17 04:10:40
  */
-@Tag(name = "用户CURD API")
+@Tag(name = "用户CURD-API")
 @Slf4j
 @RestController
 @RequestMapping("/users")

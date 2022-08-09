@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.io.IOException;
+import java.util.Set;
 
 /**
  * 统一异常处理
@@ -54,7 +56,7 @@ public class ExceptionHandlerAdvice {
      * @return result
      */
     @ExceptionHandler(ResultNotSuccessFeignException.class)
-    public Result<Object> appExceptionHandler(final ResultNotSuccessFeignException ex) {
+    public Result<Object> resultNotSuccessFeignException(final ResultNotSuccessFeignException ex) {
         log.error("捕获ResultNotSuccessFeignException", ex);
         return Result.fail(ex.getCode(), ex.getMessage());
     }
@@ -67,9 +69,9 @@ public class ExceptionHandlerAdvice {
      * @param ex ex
      * @return result
      */
-    @ExceptionHandler({MethodArgumentNotValidException.class, ConstraintViolationException.class})
-    public Result<Object> validExceptionHandler(MethodArgumentNotValidException ex) {
-        log.error("捕获参数校验异常", ex);
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Result<Object> methodArgumentNotValidException(MethodArgumentNotValidException ex) {
+        log.error("捕获MethodArgumentNotValidException异常", ex);
         StringBuilder sb = new StringBuilder();
         BindingResult bindingResult = ex.getBindingResult();
         for (FieldError fieldError : bindingResult.getFieldErrors()) {
@@ -78,6 +80,24 @@ public class ExceptionHandlerAdvice {
             // 没有结尾符号，添加句号
             defaultMessage = isMatch ? defaultMessage : String.format("%s。", defaultMessage);
             sb.append(defaultMessage);
+        }
+        String msg = sb.toString();
+        return Result.fail(ResponseCodeEnum.PRECONDITION_FAILED.getCode(), msg);
+    }
+    
+    @ExceptionHandler(ConstraintViolationException.class)
+    public Result<Object> constraintViolationException(ConstraintViolationException ex) {
+        log.error("捕获ConstraintViolationException异常", ex);
+        Set<ConstraintViolation<?>> constraintViolations = ex.getConstraintViolations();
+        StringBuilder sb = new StringBuilder();
+        if (!constraintViolations.isEmpty()) {
+            for (ConstraintViolation<?> constraint : constraintViolations) {
+                String message = constraint.getMessage();
+                boolean isMatch = StringUtil.isEndWith(message, StringUtil.END_CHAR);
+                // 没有结尾符号，添加句号
+                message = isMatch ? message : String.format("%s。", message);
+                sb.append(message);
+            }
         }
         String msg = sb.toString();
         return Result.fail(ResponseCodeEnum.PRECONDITION_FAILED.getCode(), msg);
@@ -96,7 +116,7 @@ public class ExceptionHandlerAdvice {
      * 参数类型转换失败时抛出异常
      */
     @ExceptionHandler({MethodArgumentTypeMismatchException.class, HttpMessageConversionException.class})
-    public Result<Object> methodArgumentTypeMismatchExceptionHandler(final MethodArgumentTypeMismatchException ex) {
+    public Result<Object> methodArgumentTypeMismatchExceptionHandler(final Exception ex) {
         log.error("捕获参数类型错误", ex);
         return Result.fail(ResponseCodeEnum.SERVER_ERROR.getCode(), "参数类型错误。");
     }
@@ -110,18 +130,18 @@ public class ExceptionHandlerAdvice {
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public Result<Object> missingParameterExceptionHandle(MissingServletRequestParameterException ex) {
         log.error("捕获缺少请求参数异常", ex);
-        return Result.fail("缺少请求参数。");
+        return Result.fail("缺少请求参数"+ex.getParameterName());
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)
     public Result<Object> noHandlerFoundExceptionHandle(NoHandlerFoundException ex) {
-        log.error("捕获404异常", ex);
+        log.error("捕获404异常NoHandlerFoundException", ex);
         return Result.fail("404未找到资源。");
     }
 
     @ExceptionHandler(value = IOException.class)
-    public Result<Object> nullPointerExceptionHandler(final IOException ex) {
-        log.error("捕获IO异常", ex);
+    public Result<Object> iOException(final IOException ex) {
+        log.error("捕获IOException", ex);
         return Result.fail(ResponseCodeEnum.SERVER_ERROR.getCode(), "IO异常。");
     }
 
@@ -134,7 +154,7 @@ public class ExceptionHandlerAdvice {
     @ExceptionHandler(Exception.class)
     public Result<Object> exceptionHandler(final Exception ex) {
         log.error("捕获异常", ex);
-        return Result.fail(ResponseCodeEnum.SERVER_ERROR.getCode(), "处理请求失败。");
+        return Result.fail(ResponseCodeEnum.SERVER_ERROR.getCode(), ResponseCodeEnum.SERVER_ERROR.getMessage());
     }
 
 }

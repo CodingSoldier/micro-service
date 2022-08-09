@@ -1,7 +1,6 @@
 package com.github.codingsoldier.bootweb.config;
 
 
-import com.github.codingsoldier.common.enums.ResponseCodeEnum;
 import com.github.codingsoldier.common.exception.AppException;
 import com.github.codingsoldier.common.resp.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -27,15 +26,10 @@ public class WebExceptionHandlerAdvice {
      * @return result
      */
     @ExceptionHandler(AppException.class)
-    public Result appExceptionHandler(final AppException ex) {
-        log.error("webwebwebwebweb捕获AppException", ex);
+    public Result<Object> appExceptionHandler(final AppException ex) {
+        log.error("web全局异常捕获AppException", ex);
         return Result.fail(ex.getCode(), ex.getMessage());
     }
 
-    @ExceptionHandler(Exception.class)
-    public Result exceptionHandler(final Exception ex) {
-        log.error("webwebwebwebweb捕获异常", ex);
-        return Result.fail(ResponseCodeEnum.SERVER_ERROR.getCode(), "处理请求失败。");
-    }
 
 }

@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
-import org.springframework.boot.test.context.SpringBootTest;
 import reactor.core.publisher.ConnectableFlux;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -24,7 +23,7 @@ class Tests01 {
     void contextLoads() {
         Flux<Integer> just = Flux.just(1, 2);
 
-        Optional<Object> empty = Optional.empty();
+        Optional<?> empty = Optional.empty();
         System.out.println(empty);
     }
 
@@ -129,7 +128,7 @@ class Tests01 {
 
     @Test
     public void fn7() {
-        ConnectableFlux<Object> publish = Flux.create(fluxSink -> {
+        ConnectableFlux<?> publish = Flux.create(fluxSink -> {
             while (true) {
                 fluxSink.next(System.currentTimeMillis());
             }
@@ -142,7 +141,7 @@ class Tests01 {
 
     @Test
     public void fn8() {
-        ConnectableFlux<Object> publish = Flux.create(fluxSink -> {
+        ConnectableFlux<?> publish = Flux.create(fluxSink -> {
             while (true) {
                 fluxSink.next(System.currentTimeMillis());
             }

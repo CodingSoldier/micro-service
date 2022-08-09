@@ -10,6 +10,6 @@ public class Constants {
         throw new IllegalStateException("不允许实例化");
     }
 
-    public static final String TEST_INFO = "测试信息";
+    public static final String JUNIT_TEST_INFO = "junit测试信息";
 
 }
