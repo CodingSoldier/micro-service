@@ -17,13 +17,10 @@ class LogTestControllerTest extends BaseTest {
 
     @Test
     void testPrint() throws Exception {
-        MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/test/print?str=success");
+        MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/log/test/print?str=success");
         super.mockMvc.perform(reqBuilder)
             .andDo(MockMvcResultHandlers.print())
             .andExpect(MockMvcResultMatchers.status().isOk())
-            .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasKey("code")))
-            .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasKey("message")))
-            .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasKey("data")))
             .andExpect(MockMvcResultMatchers.jsonPath("$.code",
                     Matchers.equalTo(ResponseCodeEnum.SUCCESS.getCode())));
     }

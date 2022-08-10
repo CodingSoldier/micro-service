@@ -34,7 +34,7 @@ public class ValidatedController {
     /**
      * 使用 @Validated 注解，异常被 @ExceptionHandler(ConstraintViolationException.class) 捕获
      */
-    @PostMapping("/bean/")
+    @PostMapping("/bean")
     public ValidationDto bean(@RequestBody @Validated ValidationDto validationDto) {
         log.info("请求参数：{}", validationDto);
         return validationDto;

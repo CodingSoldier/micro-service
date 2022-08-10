@@ -1,7 +1,6 @@
 package com.github.codingsoldier.bootweb.controller;
 
 import com.github.codingsoldier.bootweb.BaseTest;
-import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
@@ -9,8 +8,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
-import java.util.HashMap;
 
 /**
  * @author chenpq05
@@ -40,17 +37,6 @@ class HttpControllerTest extends BaseTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.name",
                         Matchers.equalTo("junit测试修改名字")));
-    }
-
-    public static void main(String[] args) {
-        HashMap<String, Object> m = new HashMap<>();
-        m.put("id", 122);
-        m.put("name", "122");
-        m.put("age", 11);
-        m.put("phone", "18952145124");
-        m.put("dateOfBirth", 1647445294184L);
-        String s = ObjectMapperUtil.writeValueAsString(m);
-        System.out.println(s);
     }
 
     @Test

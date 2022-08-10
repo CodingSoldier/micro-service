@@ -3,12 +3,14 @@ package com.github.codingsoldier.bootweb.controller;
 import com.github.codingsoldier.bootweb.BaseTest;
 import com.github.codingsoldier.common.enums.ResponseCodeEnum;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
 
 class ValidatedControllerTest extends BaseTest {
 
@@ -119,31 +121,41 @@ class ValidatedControllerTest extends BaseTest {
                         Matchers.equalTo(ResponseCodeEnum.SUCCESS.getCode())));
     }
 
+    @Order(1)
     @Test
-    void paramValidate() throws Exception {
+    void paramValidate01() throws Exception {
         MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/validated/param-validate?account=&userId=1");
         super.mockMvc.perform(reqBuilder)
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message",
-                        Matchers.containsString("账号不能为空。")))
+                        Matchers.containsString("账号不能为空")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message",
-                        Matchers.containsString("用户id必须大于等于10。")))
+                        Matchers.containsString("用户id必须大于等于10")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message",
-                        Matchers.containsString("账号长度必须是6~20位。")));
+                        Matchers.containsString("账号长度必须是6~20位")));
+    }
 
-        reqBuilder = MockMvcRequestBuilders.get("/validated/param-validate?account=账号不够长&userId=10");
+    @Order(2)
+    @Test
+    void paramValidate02() throws Exception {
+        MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/validated/param-validate?account=账号不够长&userId=10");
         super.mockMvc.perform(reqBuilder)
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(MockMvcResultMatchers.jsonPath("$.message",
-                Matchers.equalTo("账号长度必须是6~20位。")));
+                Matchers.containsString("账号长度必须是6~20位")));
+    }
 
-        reqBuilder = MockMvcRequestBuilders.get("/validated/param-validate?account=账号1123232&userId=10");
+    @Order(3)
+    @Test
+    void paramValidate03() throws Exception {
+        MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/validated/param-validate?account=账号1123232&userId=10");
         super.mockMvc.perform(reqBuilder)
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(MockMvcResultMatchers.jsonPath("$.code",
                 Matchers.equalTo(ResponseCodeEnum.SUCCESS.getCode())));
     }
 
+    @Order(4)
     @Test
     void pathValidate() throws Exception {
         MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/validated/path/1");
