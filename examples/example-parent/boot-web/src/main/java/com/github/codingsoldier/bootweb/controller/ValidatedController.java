@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
@@ -30,8 +31,20 @@ public class ValidatedController {
     嵌套校验	         支持	                     不支持
      */
 
-    @PostMapping("/bean")
+    /**
+     * 使用 @Validated 注解，异常被 @ExceptionHandler(ConstraintViolationException.class) 捕获
+     */
+    @PostMapping("/bean/")
     public ValidationDto bean(@RequestBody @Validated ValidationDto validationDto) {
+        log.info("请求参数：{}", validationDto);
+        return validationDto;
+    }
+
+    /**
+     * 使用 @Valid 注解，异常被 @ExceptionHandler(MethodArgumentNotValidException.class) 捕获
+     */
+    @PostMapping("/valid/bean")
+    public ValidationDto validBean(@RequestBody @Valid ValidationDto validationDto) {
         log.info("请求参数：{}", validationDto);
         return validationDto;
     }

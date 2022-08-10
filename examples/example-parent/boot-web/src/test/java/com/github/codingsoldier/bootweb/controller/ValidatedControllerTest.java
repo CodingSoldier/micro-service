@@ -49,6 +49,42 @@ class ValidatedControllerTest extends BaseTest {
     }
 
     @Test
+    void validBean() throws Exception {
+
+        String bodyError = "{\"userName\":\"超过长度的名字1223354646\",\"age\":0,\"strList\":[\"错误值\"],\"validation2Dto\":{\"jobName\":\"\"}}";
+        MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders
+                .post("/validated/valid/bean")
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .content(bodyError);
+        super.mockMvc.perform(reqBuilder)
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.jsonPath("$.message",
+                    Matchers.containsString("岗位id不能为空")))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.message",
+                    Matchers.containsString("列表元素不正确（a-原始、b-续签、c-补充）")))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.message",
+                    Matchers.containsString("岗位名称不能为空")))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.message",
+                    Matchers.containsString("年龄必须大于10")))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.message",
+                    Matchers.containsString("用户id不能为空")))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.message",
+                    Matchers.containsString("岗位名称长度必须是2~10位")))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.message",
+                    Matchers.containsString("用户姓名长度必须是2~10位")));
+
+        String bodyTrue = "{\"userId\":11,\"userName\":\"用户名\",\"age\":150,\"strList\":[\"a\",\"b\"],\"validation2Dto\":{\"jobId\":1,\"jobName\":\"工作\"}}";
+        reqBuilder = MockMvcRequestBuilders
+                .post("/validated/valid/bean")
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .content(bodyTrue);
+        super.mockMvc.perform(reqBuilder)
+            .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code",
+                    Matchers.equalTo(ResponseCodeEnum.SUCCESS.getCode())));
+    }
+
+    @Test
     void beanMethod() throws Exception {
         String bodyError = "{\"userName\":\"超过长度的名字1223354646\",\"age\":0,\"strList\":[\"错误值\"],\"validation2Dto\":{\"jobName\":\"\"}}";
         MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders

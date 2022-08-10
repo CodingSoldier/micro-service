@@ -63,11 +63,7 @@ public class ExceptionHandlerAdvice {
 
 
     /**
-     * 转换对象类Request的校验失败结果
-     * 转换单一属性Request的校验失败结果，如string，int等
-     *
-     * @param ex ex
-     * @return result
+     * 使用 @Valid 注解，被此方法捕获
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Result<Object> methodArgumentNotValidException(MethodArgumentNotValidException ex) {
@@ -84,7 +80,10 @@ public class ExceptionHandlerAdvice {
         String msg = sb.toString();
         return Result.fail(ResponseCodeEnum.PRECONDITION_FAILED.getCode(), msg);
     }
-    
+
+    /**
+     * 使用 @Validated 注解，被此方法捕获
+     */
     @ExceptionHandler(ConstraintViolationException.class)
     public Result<Object> constraintViolationException(ConstraintViolationException ex) {
         log.error("捕获ConstraintViolationException异常", ex);
@@ -130,9 +129,13 @@ public class ExceptionHandlerAdvice {
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public Result<Object> missingParameterExceptionHandle(MissingServletRequestParameterException ex) {
         log.error("捕获缺少请求参数异常", ex);
-        return Result.fail("缺少请求参数"+ex.getParameterName());
+        return Result.fail("缺少请求参数: "+ex.getParameterName());
     }
 
+    /**
+     * 默认情况下，当DispatcherServlet找不到请求的处理程序时，它会发送一个404响应。
+     * 但是，如果它的属性"throwExceptionIfNoHandlerFound"被设置为true，则会引发此异常，并可以使用配置的HandlerExceptionResolver来处理。
+     */
     @ExceptionHandler(NoHandlerFoundException.class)
     public Result<Object> noHandlerFoundExceptionHandle(NoHandlerFoundException ex) {
         log.error("捕获404异常NoHandlerFoundException", ex);
