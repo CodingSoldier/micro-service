@@ -159,3 +159,6 @@ springdoc:
 4、访问地址
 
 http://localhost:8000/webjars/swagger-ui/index.html
+
+## 执行测试用例
+启动 cloud-web-01 、cloud-web-02 后，再运行测试用例

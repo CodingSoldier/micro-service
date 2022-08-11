@@ -77,13 +77,6 @@ logging:
       github:
         codingsoldier: DEBUG
 
-#springdoc:
-#  swagger-ui:
-#    # 折叠接口
-#    doc-expansion: none
-#  # 预加载
-#  pre-loading-enabled: true
-
 #starter:
 framework:
   starter:

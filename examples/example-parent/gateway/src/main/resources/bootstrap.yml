@@ -105,7 +105,6 @@ springdoc:
   swagger-ui:
     # 折叠接口
     doc-expansion: none
-    # true可以应用根路径访问swagger-ui
     urls:
       - name: 服务01
         url: /cloud-web-01/v3/api-docs

@@ -155,13 +155,6 @@ logging:
       github:
         codingsoldier: DEBUG
 
-#springdoc:
-#  swagger-ui:
-#    # 折叠接口 list, full, none
-##    doc-expansion: list
-#  # 预加载
-#  pre-loading-enabled: true
-
 #starter:
 framework:
   starter:
