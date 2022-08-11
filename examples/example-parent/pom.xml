@@ -4,6 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>com.github.codingsoldier</groupId>
+        <artifactId>micro-service</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
     <!--  新建组，避免冲突  -->
     <groupId>com.github.codingsoldier.example</groupId>
     <artifactId>example-parent</artifactId>
@@ -69,83 +75,5 @@
 
         </dependencies>
     </dependencyManagement>
-
-    <build>
-
-        <pluginManagement>
-            <!-- spring-boot-maven-plugin 会将依赖包也打进去，形成一个可运行的包，适用于打包服务
-                 maven-compiler-plugin 不会将依赖包也打进去，适用于打依赖包-->
-            <plugins>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>2.4.2</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-
-        <plugins>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-
-            <!-- 测试用例插件 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
-                <configuration>
-                    <testFailureIgnore>true</testFailureIgnore>
-                </configuration>
-            </plugin>
-
-            <!--
-                flatten-maven-plugin：占位符替换插件
-                flatten-maven-plugin 配合 revision 实现版本统一管理
-                https://www.mojohaus.org/flatten-maven-plugin/plugin-info.html
-            -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>flatten-maven-plugin</artifactId>
-                <version>1.2.7</version>
-                <configuration>
-                    <updatePomFile>true</updatePomFile>
-                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
-                    <pomElements>
-                        <!-- 替换dependencyManagement中的占位符
-                         https://www.mojohaus.org/flatten-maven-plugin/plugin-info.html  -->
-                        <dependencyManagement>resolve</dependencyManagement>
-                        <parent>resolve</parent>
-                    </pomElements>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>flatten</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>flatten</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>flatten.clean</id>
-                        <phase>clean</phase>
-                        <goals>
-                            <goal>clean</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-        </plugins>
-    </build>
-
 
 </project>
