@@ -82,7 +82,7 @@ logging:
   level:
     # 请求日志
     org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
-    com.github.codingsoldier: DEBUG
+    com.github.codingsoldier.example: DEBUG
 
 # mybatis-plus 配置
 mybatis-plus:

@@ -9,7 +9,7 @@ import com.github.codingsoldier.common.util.objectmapper.deserializer.DateDeseri
 import com.github.codingsoldier.common.util.objectmapper.deserializer.LocalDateDeserializer;
 import com.github.codingsoldier.common.util.objectmapper.deserializer.LocalDateTimeDeserializer;
 import com.github.codingsoldier.common.util.objectmapper.deserializer.OffsetDateTimeDeserializer;
-import com.github.codingsoldier.common.util.objectmapper.serializer.DateTimeSerializer;
+import com.github.codingsoldier.common.util.objectmapper.serializer.DateAllSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -75,11 +75,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
         // 时间转换。
         JavaTimeModule javaTimeModule = new JavaTimeModule();
-        DateTimeSerializer dateTimeSerializer = new DateTimeSerializer();
-        javaTimeModule.addSerializer(Date.class, dateTimeSerializer);
-        javaTimeModule.addSerializer(LocalDate.class, dateTimeSerializer);
-        javaTimeModule.addSerializer(LocalDateTime.class, dateTimeSerializer);
-        javaTimeModule.addSerializer(OffsetDateTime.class, dateTimeSerializer);
+        DateAllSerializer dateAllSerializer = new DateAllSerializer();
+        javaTimeModule.addSerializer(Date.class, dateAllSerializer);
+        javaTimeModule.addSerializer(LocalDate.class, dateAllSerializer);
+        javaTimeModule.addSerializer(LocalDateTime.class, dateAllSerializer);
+        javaTimeModule.addSerializer(OffsetDateTime.class, dateAllSerializer);
         javaTimeModule.addDeserializer(Date.class, new DateDeserializer());
         javaTimeModule.addDeserializer(LocalDate.class, new LocalDateDeserializer());
         javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer());

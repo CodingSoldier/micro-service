@@ -15,6 +15,19 @@ spring:
             allowed-headers: "*"
             allowed-methods: "*"
             max-ages: 3600
+      routes:
+        - id: cloud-web-01
+          uri: lb://cloud-web-01
+          predicates:
+            - name: Path
+              args:
+                pattern: /cloud-web-01/**
+        - id: cloud-web-02
+          uri: lb://cloud-web-02
+          predicates:
+            - name: Path
+              args:
+                pattern: /cloud-web-02/**
     nacos:
       config:
         server-addr: 127.0.0.1:8848

@@ -1,6 +1,11 @@
 {
     "groups": [
         {
+            "name": "framework.starter.openfeign",
+            "type": "com.github.codingsoldier.starter.openfeign.properties.FeignProperties",
+            "sourceType": "com.github.codingsoldier.starter.openfeign.properties.FeignProperties"
+        },
+        {
             "name": "framework.starter.openfeign.okhttp",
             "type": "com.github.codingsoldier.starter.openfeign.properties.OkHttpClientProperties",
             "sourceType": "com.github.codingsoldier.starter.openfeign.properties.OkHttpClientProperties"
@@ -18,6 +23,12 @@
             "type": "java.lang.Boolean",
             "description": "是否启用 starter-openfeign",
             "defaultValue": true
+        },
+        {
+            "name": "framework.starter.openfeign.log-level",
+            "type": "java.lang.String",
+            "description": "日志级别，可选值：NONE、BASIC、HEADERS、FULL。可参考 feign.Logger.Level",
+            "defaultValue": "BASIC"
         },
         {
             "name": "framework.starter.openfeign.okhttp.connect-timeout-seconds",

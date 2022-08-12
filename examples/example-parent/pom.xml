@@ -27,7 +27,6 @@
         <module>example-common</module>
 
         <module>boot-web</module>
-        <module>boot-springdoc</module>
 
         <module>cloud-web-api</module>
         <module>cloud-web-01</module>
