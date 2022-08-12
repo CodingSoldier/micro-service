@@ -5,6 +5,8 @@ import com.github.codingsoldier.common.enums.ResponseCodeEnum;
 import com.github.codingsoldier.common.resp.Result;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -16,11 +18,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  */
 @Slf4j
 @RestControllerAdvice
+@Order(Ordered.LOWEST_PRECEDENCE - 1)
 public class FeignExceptionHandlerAdvice {
 
     @ExceptionHandler(value = FeignException.class)
     public Result<Object> feignExceptionHandler(final FeignException ex) {
         log.error("捕获feign异常", ex);
-        return Result.fail(ResponseCodeEnum.BAD_REQUEST.getCode(), "服务调用异常。");
+        return Result.fail(ResponseCodeEnum.BAD_REQUEST.getCode(), "服务之间调用异常。");
     }
 }

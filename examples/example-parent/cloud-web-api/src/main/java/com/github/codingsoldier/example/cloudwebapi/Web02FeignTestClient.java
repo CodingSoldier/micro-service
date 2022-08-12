@@ -36,4 +36,7 @@ public interface Web02FeignTestClient {
     @GetMapping(value = "/resp/result", produces = MediaType.APPLICATION_JSON_VALUE)
     Result<DemoVo> respResult(@RequestParam(value = "name", required = false) String name);
 
+
+    @GetMapping(value = "/timeout01", produces = MediaType.APPLICATION_JSON_VALUE)
+    String timeout01(@RequestParam(value = "timeout") Long timeout);
 }

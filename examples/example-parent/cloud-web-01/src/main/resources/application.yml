@@ -133,10 +133,20 @@ feign:
     # 响应时进行压缩
     response:
       enabled: true
+  client:
+    config:
+      default:
+        # 日志级别，取值 feign.Logger.Level
+        loggerLevel: BASIC
+        # feign默认超时时间
+        connectTimeout: 2000
+        readTimeout: 5000
+        writeTimeout: 5000
   # 禁用默认的 http
   httpclient:
     enabled: false
-  # 启用 okhttp
+  # 启用 okhttp。
+  # feign.okhttp.OkHttpClient.execute打断点查看是否启用okhttp
   okhttp:
     enabled: true
   # 打开 Sentinel 对 Feign 的支持
@@ -156,6 +166,7 @@ logging:
         codingsoldier:
           example: DEBUG
 
+
 #starter:
 framework:
   starter:
@@ -165,8 +176,6 @@ framework:
     web:
       logging:
         requestResponseBodyLog: true
-#    openfeign:
-#      log-level: FULL
     # starter-spring-doc 配置
     spring-doc:
       title: 服务111的API

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class Sentinel02TimeoutFallback implements Web02FeignTimeoutClient {
 
     @Override
-    public String test01(String name) {
-        return "sentinel对test01(String name)降级。";
+    public String timeout01(Long timeout) {
+        return "调用web02出错，fallback降级处理。";
     }
 }

@@ -18,8 +18,8 @@ public class Sentinel02TimeoutFallbackFactory implements FallbackFactory<Web02Fe
         log.error("feign调用异常，", throwable);
         return new Web02FeignTimeoutClient() {
             @Override
-            public String test01(String name) {
-                return "调用服务2出错，降级处理。";
+            public String timeout01(Long timeout) {
+                return "调用web02出错，fallbackFactory降级处理。";
             }
         };
     }

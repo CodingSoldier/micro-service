@@ -1,6 +1,7 @@
 package com.github.codingsoldier.example.cloudweb01.feign;
 
 import com.github.codingsoldier.common.resp.Result;
+import com.github.codingsoldier.example.cloudweb01.feign.timeout.Web02FeignTimeoutClient;
 import com.github.codingsoldier.example.cloudwebapi.DemoVo;
 import com.github.codingsoldier.example.cloudwebapi.Web02FeignTestClient;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,9 @@ public class FeignTestController {
     
     @Autowired
     private Web02FeignTestClient web02FeignTestClient;
+    @Autowired
+    private Web02FeignTimeoutClient web02FeignTimeoutClient;
+
 
     @GetMapping(value = "/req/resp/void", produces = MediaType.APPLICATION_JSON_VALUE)
     public String respVoid() {
@@ -70,6 +74,13 @@ public class FeignTestController {
     public Result<DemoVo> respResult(@RequestParam(value = "name", required = false) String name) {
         Result<DemoVo> resp = web02FeignTestClient.respResult(name);
         log.info("!!!!!!!!!!!!!!!!!resp={}", resp);
+        return resp;
+    }
+
+
+    @GetMapping(value = "/timeout01", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String timeout01(@RequestParam(value = "timeout") Long timeout) {
+        String resp = web02FeignTimeoutClient.timeout01(timeout);
         return resp;
     }
     

@@ -1,6 +1,7 @@
 package com.github.codingsoldier.example.cloudweb01.feign.timeout;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 // @FeignClient(value = "cloud-web-02", contextId= "hystrixClient", path = "/cloud-web-02/hystrix"
 // , fallbackFactory = HystrixClientFallbackFactory.class)
 
-// @FeignClient(value = "cloud-web-02", contextId= "web02Feign02Client", path = "/cloud-web-02/feign02", fallback= Sentinel02Fallback.class)
+// @FeignClient(value = "cloud-web-02", contextId= "web02Feign02Client", path = "/cloud-web-02/feign02/test", fallback= Sentinel02TimeoutFallback.class)
 
-@FeignClient(value = "cloud-web-02", contextId = "web02FeignTimeoutClient", path = "/cloud-web-02/feign02", fallbackFactory = Sentinel02TimeoutFallbackFactory.class)
+@FeignClient(value = "cloud-web-02", contextId = "web02FeignTimeoutClient", path = "/cloud-web-02/feign02/test", fallbackFactory = Sentinel02TimeoutFallbackFactory.class)
 public interface Web02FeignTimeoutClient {
 
-    @GetMapping("/timeout")
-    String test01(@RequestParam(value = "name", required = false) String name);
+    @GetMapping(value = "/timeout01", produces = MediaType.APPLICATION_JSON_VALUE)
+    String timeout01(@RequestParam(value = "timeout") Long timeout);
 
 }

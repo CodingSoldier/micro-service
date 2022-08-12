@@ -20,6 +20,7 @@ import java.io.IOException;
 public class FeignErrorDecoder implements ErrorDecoder {
     @Override
     public Exception decode(String methodKey, Response response) {
+        log.error("feign调用异常，response.status() = {}", response.status());
         try {
             // 获取数据
             Result<?> result = ObjectMapperUtil.newObjectMapper()

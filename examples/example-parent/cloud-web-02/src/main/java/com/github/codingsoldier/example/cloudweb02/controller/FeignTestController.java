@@ -13,6 +13,7 @@ import java.time.OffsetDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @RefreshScope
@@ -76,5 +77,19 @@ public class FeignTestController {
         demoVo.setOffsetDateTime(OffsetDateTime.now());
         return Result.success(demoVo);
     }
+
+
+
+    @GetMapping(value = "/timeout01", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String timeout01(@RequestParam(value = "timeout") Long timeout) {
+        try {
+            TimeUnit.MINUTES.sleep(timeout);
+        } catch (Exception e) {
+            log.error("异常", e);
+        }
+        log.info("############{}", timeout);
+        return "超时时间" + timeout;
+    }
+
 
 }
