@@ -22,7 +22,7 @@ class C01FeignTimeoutControllerTest{
     void timeout01FallbackFactory() {
         /**
          * 1、cloud-web-01 的feign超时时间设置为5000
-         * 2、Web02FeignTimeoutClient 使用 fallbackFactory = Sentinel02TimeoutFallbackFactory.class
+         * 2、Web02FeignTimeoutClient 使用 fallbackFactory = TimeoutFallbackFactory.class
           */
         webClient.get()
                 .uri("/cloud-web-01/feign01/test/timeout01?timeout=10")
@@ -37,7 +37,7 @@ class C01FeignTimeoutControllerTest{
     // void timeout01Fallback() {
     //     /**
     //      * 1、cloud-web-01 的feign超时时间设置为5000
-    //      * 2、Web02FeignTimeoutClient 使用 fallback= Sentinel02TimeoutFallback.class
+    //      * 2、Web02FeignTimeoutClient 使用 fallback= TimeoutFallback.class
     //       */
     //     webClient.get()
     //             .uri("/cloud-web-01/feign01/test/timeout01?timeout=10")

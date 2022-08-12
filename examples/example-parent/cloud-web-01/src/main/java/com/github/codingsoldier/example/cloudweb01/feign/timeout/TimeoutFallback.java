@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class Sentinel02TimeoutFallback implements Web02FeignTimeoutClient {
+public class TimeoutFallback implements Web02FeignTimeoutClient {
 
     @Override
     public String timeout01(Long timeout) {

@@ -22,6 +22,7 @@ public enum ResponseCodeEnum {
      */
     SUCCESS(0, "成功"),
     BAD_REQUEST(40000, "失败"),
+    RESULT_NOT_SUCCESS_FEIGN_EX(41110, "微服务之间调用异常"),
     TOO_MANY_REQUESTS(42901, "系统忙，您发送的请求被限流了。"),
     PRECONDITION_FAILED(41200, "请求条件错误"),
     SERVER_ERROR(50000, "服务端无法处理此请求"),

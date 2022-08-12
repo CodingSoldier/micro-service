@@ -1,6 +1,5 @@
 package com.github.codingsoldier.starter.openfeign.codec;
 
-import com.github.codingsoldier.common.exception.AppException;
 import com.github.codingsoldier.common.exception.ResultNotSuccessFeignException;
 import com.github.codingsoldier.common.resp.Result;
 import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
@@ -30,9 +29,10 @@ public class FeignErrorDecoder implements ErrorDecoder {
                 return new ResultNotSuccessFeignException(result.getCode(), result.getMessage());
             }
         } catch (IOException e) {
-            return e;
+            log.error("微服务调用异常编码实现类发生IOException", e);
+            return new ResultNotSuccessFeignException(e.getMessage());
         }
-        return new AppException("微服务调用异常。");
+        return new ResultNotSuccessFeignException("微服务调用异常。");
     }
 
 }

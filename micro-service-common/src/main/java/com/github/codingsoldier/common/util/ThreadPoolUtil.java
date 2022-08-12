@@ -12,7 +12,7 @@ import java.util.concurrent.*;
  * @since 2022-02-09
  */
 @Slf4j
-public class ThreadUtil {
+public class ThreadPoolUtil {
 
     private static ThreadPoolExecutor executor = null;
 
@@ -20,7 +20,7 @@ public class ThreadUtil {
         initExecutor();
     }
 
-    private ThreadUtil() {
+    private ThreadPoolUtil() {
         // sonar检测
         throw new IllegalStateException("不允许实例化");
     }
@@ -61,7 +61,7 @@ public class ThreadUtil {
      * 阻塞系数 = 阻塞时间 /（阻塞时间+计算时间）
      * core / （1-阻塞系数） 和 core * ( 1 + w/c ) 这俩是同一公式
      */
-    private static int ioMaximumPoolSize() {
+    public static int ioMaximumPoolSize() {
         int jvmAvailableProcessors = Runtime.getRuntime().availableProcessors();
         int blockTime = 5;
         int runTime = 1;

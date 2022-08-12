@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 // @FeignClient(value = "cloud-web-02", contextId= "hystrixClient", path = "/cloud-web-02/hystrix"
 // , fallbackFactory = HystrixClientFallbackFactory.class)
 
-// @FeignClient(value = "cloud-web-02", contextId= "web02Feign02Client", path = "/cloud-web-02/feign02/test", fallback= Sentinel02TimeoutFallback.class)
+// @FeignClient(value = "cloud-web-02", contextId= "web02Feign02Client", path = "/cloud-web-02/feign02/test", fallback= TimeoutFallback.class)
 
-@FeignClient(value = "cloud-web-02", contextId = "web02FeignTimeoutClient", path = "/cloud-web-02/feign02/test", fallbackFactory = Sentinel02TimeoutFallbackFactory.class)
+@FeignClient(value = "cloud-web-02", contextId = "web02FeignTimeoutClient", path = "/cloud-web-02/feign02/test", fallbackFactory = TimeoutFallbackFactory.class)
 public interface Web02FeignTimeoutClient {
 
     @GetMapping(value = "/timeout01", produces = MediaType.APPLICATION_JSON_VALUE)

@@ -16,7 +16,7 @@ public class ResultNotSuccessFeignException extends RuntimeException {
 
     public ResultNotSuccessFeignException(String message) {
         super(message);
-        this.code = ResponseCodeEnum.BAD_REQUEST.getCode();
+        this.code = ResponseCodeEnum.RESULT_NOT_SUCCESS_FEIGN_EX.getCode();
         this.message = message;
     }
 

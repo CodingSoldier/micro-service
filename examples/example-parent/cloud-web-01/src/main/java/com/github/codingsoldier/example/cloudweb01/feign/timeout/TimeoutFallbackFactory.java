@@ -11,11 +11,11 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class Sentinel02TimeoutFallbackFactory implements FallbackFactory<Web02FeignTimeoutClient> {
+public class TimeoutFallbackFactory implements FallbackFactory<Web02FeignTimeoutClient> {
 
     @Override
     public Web02FeignTimeoutClient create(Throwable throwable) {
-        log.error("feign调用异常，", throwable);
+        log.error("Web02FeignTimeoutClient.timeout()调用异常", throwable);
         return new Web02FeignTimeoutClient() {
             @Override
             public String timeout01(Long timeout) {

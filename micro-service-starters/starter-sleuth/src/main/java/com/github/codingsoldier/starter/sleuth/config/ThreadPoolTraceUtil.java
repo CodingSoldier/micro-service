@@ -1,6 +1,6 @@
 package com.github.codingsoldier.starter.sleuth.config;
 
-import com.github.codingsoldier.common.util.ThreadUtil;
+import com.github.codingsoldier.common.util.ThreadPoolUtil;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.cloud.sleuth.instrument.async.LazyTraceExecutor;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.annotation.PostConstruct;
 
 /**
- * 配置线程池，使线程池中执行的任务也有TraceId
+ * 带 traceId 的线程池工具类
  *
  * @author cpq
  * @since 2022-03-17 11:28:55
@@ -27,7 +27,7 @@ public class ThreadPoolTraceUtil {
     @SuppressWarnings("squid:S2696")
     @PostConstruct
     private void init() {
-        traceExecutor = new LazyTraceExecutor(beanFactory, ThreadUtil.getExecutor());
+        traceExecutor = new LazyTraceExecutor(beanFactory, ThreadPoolUtil.getExecutor());
     }
 
     /**

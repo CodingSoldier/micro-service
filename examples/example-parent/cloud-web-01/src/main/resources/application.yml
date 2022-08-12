@@ -137,11 +137,11 @@ feign:
     config:
       default:
         # 日志级别，取值 feign.Logger.Level
-        loggerLevel: BASIC
+        loggerLevel: FULL
         # feign默认超时时间
-        connectTimeout: 2000
-        readTimeout: 5000
-        writeTimeout: 5000
+#        connectTimeout: 2000
+#        readTimeout: 5000
+#        writeTimeout: 5000
   # 禁用默认的 http
   httpclient:
     enabled: false
