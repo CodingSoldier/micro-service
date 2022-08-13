@@ -22,7 +22,7 @@ public class DateDeserializer extends JsonDeserializer<Date> {
     public Date deserialize(JsonParser p, DeserializationContext ctxt)
             throws IOException {
         String timestamp = p.getValueAsString();
-        LocalDateTime localDateTime = DatePatternUtil.getPatternDate(timestamp);
+        LocalDateTime localDateTime = DatePatternUtil.strToLocalDateTime(timestamp);
         return DateUtil.toDate(localDateTime);
     }
 

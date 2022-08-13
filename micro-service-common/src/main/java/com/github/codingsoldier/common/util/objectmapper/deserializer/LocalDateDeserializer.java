@@ -20,7 +20,7 @@ public class LocalDateDeserializer extends JsonDeserializer<LocalDate> {
     public LocalDate deserialize(JsonParser p, DeserializationContext ctxt)
             throws IOException {
         String timestamp = p.getValueAsString();
-        LocalDateTime localDateTime = DatePatternUtil.getPatternDate(timestamp);
+        LocalDateTime localDateTime = DatePatternUtil.strToLocalDateTime(timestamp);
         return localDateTime != null ? localDateTime.toLocalDate() : null;
     }
 }

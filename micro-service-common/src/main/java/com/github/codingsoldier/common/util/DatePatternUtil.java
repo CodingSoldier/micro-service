@@ -63,7 +63,7 @@ public class DatePatternUtil {
      * @param strDateValue 字符串类型的日期值
      * @return Date
      */
-    public static LocalDateTime getPatternDate(String strDateValue) {
+    public static LocalDateTime strToLocalDateTime(String strDateValue) {
         if (StringUtils.isBlank(strDateValue)) {
             return null;
         }

@@ -19,6 +19,6 @@ public class LocalDateTimeDeserializer extends JsonDeserializer<LocalDateTime> {
     public LocalDateTime deserialize(JsonParser p, DeserializationContext ctxt)
             throws IOException {
         String timestamp = p.getValueAsString();
-        return DatePatternUtil.getPatternDate(timestamp);
+        return DatePatternUtil.strToLocalDateTime(timestamp);
     }
 }

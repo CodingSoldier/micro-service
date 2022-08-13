@@ -31,13 +31,13 @@ public class CommonUtil {
     }
 
     /**
-     * 所有字符串都不是 null或""或" "
-     *
-     * @param css
+     * 字符串不相等
+     * @param str1
+     * @param str2
      * @return
      */
-    public static boolean isAllNotBlank(final CharSequence... css) {
-        return !StringUtils.isAllBlank(css);
+    public static boolean strNotEqual(String str1, String str2) {
+        return !StringUtils.equals(str1, str2);
     }
 
     /**
@@ -66,9 +66,9 @@ public class CommonUtil {
     public static Long parseLong(Object object) {
         String str = objToStr(object);
         Long num = null;
-        if (!StringUtils.isEmpty(str)) {
+        if (StringUtils.isNotBlank(str)) {
             try {
-                num = Long.parseLong(str);
+                num = Long.parseLong(str.trim());
             } catch (Exception ex) {
                 log.warn("字符串转Long异常", ex);
             }
@@ -85,9 +85,9 @@ public class CommonUtil {
     public static Integer parseInteger(Object object) {
         String str = objToStr(object);
         Integer num = null;
-        if (!StringUtils.isEmpty(str)) {
+        if (StringUtils.isNotBlank(str)) {
             try {
-                num = Integer.parseInt(str);
+                num = Integer.parseInt(str.trim());
             } catch (Exception ex) {
                 log.warn("字符串转Integer异常", ex);
             }
@@ -117,7 +117,7 @@ public class CommonUtil {
             } else if (clazz.isAssignableFrom(Long.class)) {
                 result.add((E) parseLong(arr[i]));
             } else if (clazz.isAssignableFrom(String.class)) {
-                result.add((E) arr[i]);
+                result.add((E) StringUtils.trim(arr[i]));
             }
         }
         return result;

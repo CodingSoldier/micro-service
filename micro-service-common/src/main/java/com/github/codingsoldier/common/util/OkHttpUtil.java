@@ -21,8 +21,8 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class OkHttpUtil {
 
+    public static final int CONNECT_TIMEOUT = 10;
     public static final int READ_TIMEOUT = 100;
-    public static final int CONNECT_TIMEOUT = 60;
     public static final int WRITE_TIMEOUT = 60;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private static OkHttpClient okHttpClient;

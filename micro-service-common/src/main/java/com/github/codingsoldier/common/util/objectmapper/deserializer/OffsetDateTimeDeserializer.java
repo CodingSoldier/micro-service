@@ -21,7 +21,7 @@ public class OffsetDateTimeDeserializer extends JsonDeserializer<OffsetDateTime>
     public OffsetDateTime deserialize(JsonParser p, DeserializationContext ctxt)
             throws IOException {
         String timestamp = p.getValueAsString();
-        LocalDateTime localDateTime = DatePatternUtil.getPatternDate(timestamp);
+        LocalDateTime localDateTime = DatePatternUtil.strToLocalDateTime(timestamp);
         return DateUtil.toOffsetDateTime(localDateTime);
     }
 }

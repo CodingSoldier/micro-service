@@ -20,15 +20,6 @@ import java.util.Objects;
  */
 public class DateAllSerializer extends JsonSerializer<Object> {
 
-    @SuppressWarnings("squid:S125")
-    // @Override
-    // public void serializeWithType(Object value, JsonGenerator g, SerializerProvider provider,
-    //                               TypeSerializer typeSer) throws IOException {
-    //     WritableTypeId typeIdDef = typeSer.writeTypePrefix(g, typeSer.typeId(value, JsonToken.VALUE_STRING));
-    //     serialize(value, g, provider);
-    //     typeSer.writeTypeSuffix(g, typeIdDef);
-    // }
-
     @Override
     public void serialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         if (Objects.isNull(value)) {
