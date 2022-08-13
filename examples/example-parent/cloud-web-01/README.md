@@ -239,7 +239,7 @@ spring:
             rule-type: flow
 ```
 
-3、nacos 新建dataId=${spring.application.name}-sentinel，类型是json，添加如下配置
+3、nacos 新建dataId = ${spring.application.name}-sentinel，类型是json，添加如下配置
 
 ```json
 [

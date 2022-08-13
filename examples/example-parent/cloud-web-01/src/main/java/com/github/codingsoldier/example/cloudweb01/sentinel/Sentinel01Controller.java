@@ -13,11 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-@RequestMapping("/sentinel/dashboard")
+@RequestMapping("/sentinel")
 public class Sentinel01Controller {
+
     /**
+     * 规则未持久化，重启sentinel后失效
+     *
      * 1、在 dashboard 中 "流控规则" 中新增流控规则
      * 2、资源名为“byResource”
+     *
+     * 快速发送多次请求：http://localhost:8001/cloud-web-01/sentinel/dashboard/by-resource 就会触发熔断
      */
     @GetMapping("/by-resource")
     @SentinelResource(
@@ -32,6 +37,8 @@ public class Sentinel01Controller {
 
 
     /**
+     * 规则未持久化，重启sentinel后失效
+     *
      * 1、先发送一次接口请求  http://localhost:8001/cloud-web-01/sentinel/dashboard/by-url
      * 2、刷新 sentinel-dashbord，点击“簇点链路”（簇点链路是所有受sentinel监控的url），即可看到 by-url
      * 3、点击 by-url 的 “流控”，资源名保持为 byUrl
@@ -49,9 +56,9 @@ public class Sentinel01Controller {
     }
 
     /**
-     * 从 nacos 获取规则
+     * 将规则持久化到nacos
      *
-     * @return
+     * 多次发送请求 http://localhost:8000/cloud-web-01/sentinel/from-nacos
      */
     @GetMapping("/from-nacos")
     @SentinelResource(
@@ -64,16 +71,5 @@ public class Sentinel01Controller {
         return new Result<>(0, "", "fromNacos");
     }
 
-    @GetMapping("/gateway01")
-    public Result<String> gateway01(String msg) {
-        log.info("##########gateway01 msg={}", msg);
-        return new Result<>(0, "", "gateway01 " + msg);
-    }
-
-    @GetMapping("/gateway02")
-    public Result<String> gateway02(String msg) {
-        log.info("##########gateway02 msg={}", msg);
-        return new Result<>(0, "", "gateway02 " + msg);
-    }
 
 }

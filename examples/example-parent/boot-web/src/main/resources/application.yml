@@ -129,7 +129,7 @@ framework:
     web:
       logging:
         requestResponseLog: true
-        includeHeaders: true
+        includeHeaders: false
 #      enabled: false
 #    # starter-redis 配置
 #    redis:
