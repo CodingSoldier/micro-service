@@ -2,8 +2,8 @@
     "groups": [
         {
             "name": "framework.starter.web.logging",
-            "type": "com.github.codingsoldier.starter.web.properties.RequestLoggingProperties",
-            "sourceType": "com.github.codingsoldier.starter.web.properties.RequestLoggingProperties"
+            "type": "com.github.codingsoldier.starter.web.properties.LoggingProperties",
+            "sourceType": "com.github.codingsoldier.starter.web.properties.LoggingProperties"
         }
     ],
     "properties": [
@@ -20,59 +20,31 @@
             "defaultValue": true
         },
         {
-            "name": "framework.starter.web.logging.requestResponseBodyLog",
+            "name": "framework.starter.web.logging.requestResponseLog",
             "type": "java.lang.Boolean",
-            "description": "是否打印request、responseBody日志",
-            "sourceType": "com.github.codingsoldier.starter.web.properties.RequestLoggingProperties",
+            "description": "是否打印request、responseBody日志。",
+            "sourceType": "com.github.codingsoldier.starter.web.properties.LoggingProperties",
             "defaultValue": false
         },
         {
             "name": "framework.starter.web.logging.requestLog",
             "type": "java.lang.Boolean",
-            "description": "是否打印request日志，requestResponseBodyLog、requestLog 有一个是true，就打印request日志",
-            "sourceType": "com.github.codingsoldier.starter.web.properties.RequestLoggingProperties",
+            "description": "是否打印request日志，requestResponseLog、requestLog 有一个是true，就打印request日志",
+            "sourceType": "com.github.codingsoldier.starter.web.properties.LoggingProperties",
             "defaultValue": false
         },
         {
             "name": "framework.starter.web.logging.responseBodyLog",
             "type": "java.lang.Boolean",
             "description": "是否打印responseBody日志，requestResponseBodyLog、responseBodyLog 有一个是true，就打印responseBody日志",
-            "sourceType": "com.github.codingsoldier.starter.web.properties.RequestLoggingProperties",
-            "defaultValue": false
-        },
-        {
-            "name": "framework.starter.web.logging.includeClientInfo",
-            "type": "java.lang.Boolean",
-            "description": "是否包含客户端信息",
-            "sourceType": "com.github.codingsoldier.starter.web.properties.RequestLoggingProperties",
+            "sourceType": "com.github.codingsoldier.starter.web.properties.LoggingProperties",
             "defaultValue": false
         },
         {
             "name": "framework.starter.web.logging.includeHeaders",
             "type": "java.lang.Boolean",
             "description": "是否包含请求头信息",
-            "sourceType": "com.github.codingsoldier.starter.web.properties.RequestLoggingProperties",
-            "defaultValue": false
-        },
-        {
-            "name": "framework.starter.web.logging.includeQueryString",
-            "type": "java.lang.Boolean",
-            "description": "是否包含请求查询字符串",
-            "sourceType": "com.github.codingsoldier.starter.web.properties.RequestLoggingProperties",
-            "defaultValue": false
-        },
-        {
-            "name": "framework.starter.web.logging.includePayload",
-            "type": "java.lang.Boolean",
-            "description": "是否包含body",
-            "sourceType": "com.github.codingsoldier.starter.web.properties.RequestLoggingProperties",
-            "defaultValue": false
-        },
-        {
-            "name": "framework.starter.web.logging.maxPayloadLength",
-            "type": "java.lang.Boolean",
-            "description": "body最大长度",
-            "sourceType": "com.github.codingsoldier.starter.web.properties.RequestLoggingProperties",
+            "sourceType": "com.github.codingsoldier.starter.web.properties.LoggingProperties",
             "defaultValue": false
         }
     ],

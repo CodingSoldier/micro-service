@@ -5,12 +5,11 @@ import com.github.codingsoldier.common.feign.FeignConstant;
 import com.github.codingsoldier.common.resp.Result;
 import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
 import com.github.codingsoldier.starter.web.annotation.NoWrapper;
-import com.github.codingsoldier.starter.web.properties.RequestLoggingProperties;
+import com.github.codingsoldier.starter.web.properties.LoggingProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
-import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -34,12 +33,12 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @RestControllerAdvice
-@Order(Ordered.LOWEST_PRECEDENCE)
+@Order()
 public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
 
-    private RequestLoggingProperties properties;
+    private LoggingProperties properties;
 
-    public ResponseBodyWrapperAdvice(RequestLoggingProperties properties) {
+    public ResponseBodyWrapperAdvice(LoggingProperties properties) {
         this.properties = properties;
     }
 
@@ -80,9 +79,9 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
 
         // 打印responseBody
         try {
-            if (properties.isRequestResponseBodyLog() || properties.isResponseBodyLog()) {
+            if (properties.isRequestResponseLog() || properties.isResponseBodyLog()) {
                 String bodyStr = ObjectMapperUtil.writeValueAsString(bodyObj);
-                log.info("打印ResponseBody信息={}", bodyStr);
+                log.info("打印ResponseBody信息 = {}", bodyStr);
             }
         }catch (Exception e) {
             log.error("打印ResponseBody时，body转string异常", e);

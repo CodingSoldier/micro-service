@@ -1,7 +1,9 @@
 package com.github.codingsoldier.starter.web;
 
 import com.github.codingsoldier.starter.web.annotation.ConditionalOnStarterWebEnabled;
+import com.github.codingsoldier.starter.web.properties.LoggingProperties;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 
 /**
@@ -10,6 +12,7 @@ import org.springframework.context.annotation.PropertySource;
  */
 @ComponentScan("com.github.codingsoldier.starter.web")
 @ConditionalOnStarterWebEnabled
+@Import(LoggingProperties.class)
 @PropertySource("classpath:web.properties")
 public class StarterWebComponentScan {
 }

@@ -175,7 +175,8 @@ framework:
     # starter-web 配置
     web:
       logging:
-        requestResponseBodyLog: true
+        requestResponseLog: true
+        includeHeaders: true
     # starter-spring-doc 配置
     spring-doc:
       title: 服务111的API

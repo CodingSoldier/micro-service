@@ -125,9 +125,11 @@ framework:
 #    spring-doc:
 #      enabled: false
     # starter-web 配置
+    # starter-web 配置
     web:
       logging:
-        requestResponseBodyLog: true
+        requestResponseLog: true
+        includeHeaders: true
 #      enabled: false
 #    # starter-redis 配置
 #    redis:
