@@ -31,4 +31,26 @@ class C01FeignExceptionControllerTest extends BaseTest {
                 .jsonPath("$.message").isEqualTo("测试APP异常");
     }
 
+    @Test
+    void resultTypeNotChangeFallback() {
+        webClient.get()
+                .uri("/cloud-web-01/feign01/exception/result/type/not/change/fallback?name=AppException")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$.code").isEqualTo(40020)
+                .jsonPath("$.message").isEqualTo("resultTypeNotChange-测试APP异常");
+    }
+
+    @Test
+    void resultTypeNotChange() {
+        webClient.get()
+                .uri("/cloud-web-01/feign01/exception/result/type/not/change?name=AppException")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$.code").isEqualTo(40020)
+                .jsonPath("$.message").isEqualTo("resultTypeNotChange-测试APP异常");
+    }
+
 }

@@ -79,6 +79,9 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
             Class<? extends HttpMessageConverter<?>> selectedConverterType,
             ServerHttpRequest request,
             ServerHttpResponse response) {
+        if (body == null) {
+            return body;
+        }
 
         // 封装为一个方法仅是为了方便打印返回结果
         Object bodyObj = handleBody(body, returnType, selectedContentType, selectedConverterType, request, response);

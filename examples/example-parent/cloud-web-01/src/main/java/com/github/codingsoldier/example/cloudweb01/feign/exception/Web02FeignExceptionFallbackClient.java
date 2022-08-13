@@ -1,5 +1,6 @@
 package com.github.codingsoldier.example.cloudweb01.feign.exception;
 
+import com.github.codingsoldier.common.resp.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,5 +12,8 @@ public interface Web02FeignExceptionFallbackClient {
 
     @GetMapping(value = "/name")
     Map<String, Object> name(@RequestParam(value = "name") String name);
+
+    @GetMapping(value = "/result/type/not/change")
+    Result resultTypeNotChange(@RequestParam(value = "name") String name);
 
 }

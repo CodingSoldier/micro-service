@@ -12,7 +12,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
  * @since 2022/8/9 16:49
  */
 @SpringBootTest
-@AutoConfigureWebTestClient(timeout = "20000")
+@AutoConfigureWebTestClient(timeout = "70000")
 class C01FeignTimeoutControllerTest{
 
     @Autowired

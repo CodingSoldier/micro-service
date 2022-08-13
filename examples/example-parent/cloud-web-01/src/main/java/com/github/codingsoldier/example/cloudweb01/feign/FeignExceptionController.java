@@ -1,5 +1,6 @@
 package com.github.codingsoldier.example.cloudweb01.feign;
 
+import com.github.codingsoldier.common.resp.Result;
 import com.github.codingsoldier.example.cloudweb01.feign.exception.Web02FeignExceptionClient;
 import com.github.codingsoldier.example.cloudweb01.feign.exception.Web02FeignExceptionFallbackClient;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +38,20 @@ public class FeignExceptionController {
          * feign客户端加fallback
          */
         return web02FeignExceptionFallbackClient.name(name);
+    }
+
+    @GetMapping(value = "/result/type/not/change")
+    public Result resultTypeNotChange(@RequestParam(value = "name") String name) throws Exception{
+        Result result = web02FeignExceptionClient.resultTypeNotChange(name);
+        log.info("web02FeignExceptionClient，result结果={}", result);
+        return result;
+    }
+
+    @GetMapping(value = "/result/type/not/change/fallback")
+    public Result resultTypeNotChangeFallback(@RequestParam(value = "name") String name) throws Exception{
+        Result result = web02FeignExceptionFallbackClient.resultTypeNotChange(name);
+        log.info("web02FeignExceptionFallbackClient，result结果={}", result);
+        return result;
     }
 
 }

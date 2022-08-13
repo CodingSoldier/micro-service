@@ -1,6 +1,7 @@
 package com.github.codingsoldier.example.cloudweb01.feign.exception;
 
 import com.github.codingsoldier.common.exception.FeignResultErrorException;
+import com.github.codingsoldier.common.resp.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
@@ -29,6 +30,12 @@ public class ExceptionFallbackFactory implements FallbackFactory<Web02FeignExcep
                 map.put("key", "服务降级");
                 return map;
             }
+
+            @Override
+            public Result resultTypeNotChange(String name) {
+                return Result.fail(40010, "resultTypeNotChange降级");
+            }
+
         };
     }
 
