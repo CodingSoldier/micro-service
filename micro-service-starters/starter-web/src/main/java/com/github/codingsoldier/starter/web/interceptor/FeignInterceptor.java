@@ -1,0 +1,44 @@
+package com.github.codingsoldier.starter.web.interceptor;
+
+
+import com.github.codingsoldier.common.feign.FeignConstant;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.HandlerInterceptor;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import static com.github.codingsoldier.common.feign.FeignConstant.PROVIDER_FUNTION_RETURN_TYPE;
+
+/**
+ *
+ * @author chenpq05
+ * @since 2022/2/11 11:58
+ */
+@Slf4j
+public class FeignInterceptor implements HandlerInterceptor {
+
+  @Override
+  public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+      throws Exception {
+    try {
+      String isFeignReqStr = request.getHeader(FeignConstant.IS_FEIGN_REQUEST);
+      boolean isFeignReq = StringUtils.equalsIgnoreCase(Boolean.TRUE.toString(), isFeignReqStr);
+      if (isFeignReq && (handler instanceof HandlerMethod)) {
+        HandlerMethod handlerMethod = (HandlerMethod) handler;
+        // 将方法返回值类型存储到RequestContextHolder
+        String returnTypeName = handlerMethod.getMethod().getReturnType().getName();
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        requestAttributes.setAttribute(PROVIDER_FUNTION_RETURN_TYPE, returnTypeName, 0);
+        RequestContextHolder.setRequestAttributes(requestAttributes);
+      }
+    } catch (Exception e){
+      log.error("starter-web 添加 requestAttributes 异常", e);
+    }
+    return true;
+  }
+}

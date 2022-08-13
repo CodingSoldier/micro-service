@@ -19,13 +19,13 @@ import java.io.IOException;
 public class FeignErrorDecoder implements ErrorDecoder {
     @Override
     public Exception decode(String methodKey, Response response) {
-        log.error("feign调用，下游服务异常，response.status() = {}", response.status());
+        log.warn("feign调用，下游服务未返回成功，response.status() = {}", response.status());
         try {
             // 获取数据
             Result<?> result = ObjectMapperUtil.newObjectMapper()
                     .readValue(response.body().asInputStream(), Result.class);
             if (result != null) {
-                log.error("feign调用，下游服务异常，http status 不是 200，result={}", result.toString());
+                log.warn("feign调用，下游服务未返回成功，http status 不是 200，result={}", result.toString());
                 return new FeignResultErrorException(result.getCode(), result.getMessage());
             }
         } catch (IOException e) {

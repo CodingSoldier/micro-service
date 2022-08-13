@@ -3,6 +3,7 @@ package com.github.codingsoldier.starter.web.advice;
 import com.github.codingsoldier.common.enums.ResponseCodeEnum;
 import com.github.codingsoldier.common.feign.FeignConstant;
 import com.github.codingsoldier.common.resp.Result;
+import com.github.codingsoldier.common.util.CommonUtil;
 import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
 import com.github.codingsoldier.starter.web.annotation.NoWrapper;
 import com.github.codingsoldier.starter.web.properties.LoggingProperties;
@@ -19,12 +20,15 @@ import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import static com.github.codingsoldier.common.feign.FeignConstant.PROVIDER_FUNTION_RETURN_TYPE;
 
 /**
  * 将controller返回值包装为Result对象
@@ -117,13 +121,17 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
         if (isFeignRequest) {
             // 返回结果是否已被 ExceptionHandler 处理过
             boolean isExceptionHandler = returnType.hasMethodAnnotation(ExceptionHandler.class);
-            if (isExceptionHandler && (body instanceof Result)) {
-                // 返回结果已经被异常处理器转为Result
+
+            Object functionReturnType = RequestContextHolder.getRequestAttributes().getAttribute(PROVIDER_FUNTION_RETURN_TYPE, 0);
+            // controller方法的返回值类型被异常处理器改变了
+            boolean methodReturnTypeChange = !body.getClass().equals(CommonUtil.objToStr(functionReturnType));
+
+            if (isExceptionHandler && methodReturnTypeChange && (body instanceof Result)) {
                 Result<?> result = (Result) body;
                 Set<Integer> notChangeCodes = FeignConstant.NOT_CHANGE_RESPONSE_STATUS_CODE_SET
                         .stream().map(ResponseCodeEnum::getCode).collect(Collectors.toSet());
                 if (!notChangeCodes.contains(result.getCode())) {
-                    log.info("feign调用，返回结果被@ExceptionHandler处理过，Result.code不在NOT_CHANGE_RESPONSE_STATUS_CODE_SET集合中，设置Response.StatusCode=HttpStatus.INTERNAL_SERVER_ERROR");
+                    log.info("feign调用，返回结果被@ExceptionHandler改变了，Result.code不在NOT_CHANGE_RESPONSE_STATUS_CODE_SET集合中，设置Response.StatusCode=HttpStatus.INTERNAL_SERVER_ERROR");
                     response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
                 }
             }

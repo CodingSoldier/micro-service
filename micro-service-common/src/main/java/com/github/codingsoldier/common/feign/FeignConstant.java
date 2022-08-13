@@ -15,6 +15,11 @@ import java.util.Set;
 public class FeignConstant {
 
     /**
+     * feign服务提供方，方法返回值
+     */
+    public static final String PROVIDER_FUNTION_RETURN_TYPE = "x-pfry";
+
+    /**
      * 是否 feign 请求
      */
     public static final String IS_FEIGN_REQUEST = "is-feign-request";

@@ -10,6 +10,7 @@ import com.github.codingsoldier.common.util.objectmapper.deserializer.LocalDateD
 import com.github.codingsoldier.common.util.objectmapper.deserializer.LocalDateTimeDeserializer;
 import com.github.codingsoldier.common.util.objectmapper.deserializer.OffsetDateTimeDeserializer;
 import com.github.codingsoldier.common.util.objectmapper.serializer.DateAllSerializer;
+import com.github.codingsoldier.starter.web.interceptor.FeignInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -17,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.time.LocalDate;
@@ -52,6 +54,21 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .allowedHeaders("*")
                 // 跨域允许时间
                 .maxAge(3600);
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        if (logger.isDebugEnabled()) {
+            logger.debug("添加FeignInterceptor");
+        }
+        //定义排除访问的路径配置
+        String[] excludePaths = new String[]{"/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**",
+                "/error",
+                "/actuator/**"
+        };
+        registry.addInterceptor(new FeignInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns(excludePaths);
     }
 
     /**
