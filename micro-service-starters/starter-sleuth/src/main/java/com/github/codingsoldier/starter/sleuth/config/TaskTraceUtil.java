@@ -22,15 +22,7 @@ public class TaskTraceUtil {
 
     private BeanFactory beanFactory;
 
-    // TODO 优化
     private ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
-
-    {
-        threadPoolTaskExecutor.setCorePoolSize(5);
-        threadPoolTaskExecutor.setMaxPoolSize(10);
-        threadPoolTaskExecutor.setQueueCapacity(1000);
-        threadPoolTaskExecutor.initialize();
-    }
 
     public TaskTraceUtil(BeanFactory beanFactory) {
         this.beanFactory = beanFactory;
@@ -39,6 +31,10 @@ public class TaskTraceUtil {
     @SuppressWarnings("squid:S2696")
     @PostConstruct
     private void init() {
+        threadPoolTaskExecutor.setCorePoolSize(5);
+        threadPoolTaskExecutor.setMaxPoolSize(10);
+        threadPoolTaskExecutor.setQueueCapacity(1000);
+        threadPoolTaskExecutor.initialize();
         TaskTraceUtil.taskExecutor = new LazyTraceAsyncTaskExecutor(beanFactory, threadPoolTaskExecutor);
     }
 

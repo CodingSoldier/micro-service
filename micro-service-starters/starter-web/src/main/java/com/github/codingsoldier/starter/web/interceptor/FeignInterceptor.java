@@ -33,7 +33,9 @@ public class FeignInterceptor implements HandlerInterceptor {
         // 将方法返回值类型存储到RequestContextHolder
         String returnTypeName = handlerMethod.getMethod().getReturnType().getName();
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-        requestAttributes.setAttribute(PROVIDER_FUNTION_RETURN_TYPE, returnTypeName, 0);
+        if (requestAttributes != null) {
+          requestAttributes.setAttribute(PROVIDER_FUNTION_RETURN_TYPE, returnTypeName, 0);
+        }
         RequestContextHolder.setRequestAttributes(requestAttributes);
       }
     } catch (Exception e){

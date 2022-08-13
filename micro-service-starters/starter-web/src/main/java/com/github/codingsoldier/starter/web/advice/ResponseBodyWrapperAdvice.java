@@ -20,6 +20,7 @@ import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
@@ -121,10 +122,14 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
         if (isFeignRequest) {
             // 返回结果是否已被 ExceptionHandler 处理过
             boolean isExceptionHandler = returnType.hasMethodAnnotation(ExceptionHandler.class);
-
-            Object functionReturnType = RequestContextHolder.getRequestAttributes().getAttribute(PROVIDER_FUNTION_RETURN_TYPE, 0);
-            // controller方法的返回值类型被异常处理器改变了
-            boolean methodReturnTypeChange = !body.getClass().equals(CommonUtil.objToStr(functionReturnType));
+            boolean methodReturnTypeChange = false;
+            RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+            if (requestAttributes != null) {
+                Object functionReturnType = requestAttributes.getAttribute(PROVIDER_FUNTION_RETURN_TYPE, 0);
+                // controller方法的返回值类型被异常处理器改变了
+                methodReturnTypeChange = !StringUtils.equals(body.getClass().getName(),
+                        CommonUtil.objToStr(functionReturnType));
+            }
 
             if (isExceptionHandler && methodReturnTypeChange && (body instanceof Result)) {
                 Result<?> result = (Result) body;

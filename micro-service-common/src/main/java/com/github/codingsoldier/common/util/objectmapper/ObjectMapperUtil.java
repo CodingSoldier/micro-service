@@ -34,7 +34,7 @@ public class ObjectMapperUtil {
   private ObjectMapperUtil() {
   }
 
-  private final static ObjectMapper OBJECT_MAPPER = newObjectMapper();
+  private static final ObjectMapper OBJECT_MAPPER = newObjectMapper();
 
   /**
    * 创建一个新的ObjectMapper
