@@ -22,7 +22,7 @@ spring:
         # 配置 sentinel dashboard 地址
         dashboard: 127.0.0.1:10102
         # 配置端口，启动一个 Http Server, 该 Server 会与 Sentinel 控制台做交互
-        port: 10112
+        port: 10111
       # 服务启动直接建立心跳连接
       eager: true
       datasource:
@@ -139,9 +139,9 @@ feign:
         # 日志级别，取值 feign.Logger.Level
         loggerLevel: FULL
         # feign默认超时时间
-#        connectTimeout: 2000
-#        readTimeout: 5000
-#        writeTimeout: 5000
+        connectTimeout: 2000
+        readTimeout: 5000
+        writeTimeout: 5000
   # 禁用默认的 http
   httpclient:
     enabled: false
