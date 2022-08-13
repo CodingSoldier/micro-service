@@ -17,7 +17,8 @@ public class FeignConstant {
     /**
      * 是否 feign 请求
      */
-    public static final String FEIGN_REQUEST = "feign-request";
+    public static final String IS_FEIGN_REQUEST = "is-feign-request";
+
     /**
      * 上游服务通过 feign 调用下游服务
      * 下游服务已配置为自动使用 Result 包装 Controller 方法返回值，且已开启全局异常捕获器

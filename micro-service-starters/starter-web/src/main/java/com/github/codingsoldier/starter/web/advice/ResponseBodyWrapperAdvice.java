@@ -17,6 +17,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
@@ -110,18 +111,19 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
          */
 
         // 如果是Feign请求不包装返回结果
-        List<String> valList = request.getHeaders().get(FeignConstant.FEIGN_REQUEST);
+        List<String> valList = request.getHeaders().get(FeignConstant.IS_FEIGN_REQUEST);
         boolean isFeignRequest = CollectionUtils.isNotEmpty(valList)
                 && valList.contains(Boolean.TRUE.toString());
         if (isFeignRequest) {
-            if (body instanceof Result) {
+            // 返回结果是否已被 ExceptionHandler 处理过
+            boolean isExceptionHandler = returnType.hasMethodAnnotation(ExceptionHandler.class);
+            if (isExceptionHandler && (body instanceof Result)) {
+                // 返回结果已经被异常处理器转为Result
                 Result<?> result = (Result) body;
                 Set<Integer> notChangeCodes = FeignConstant.NOT_CHANGE_RESPONSE_STATUS_CODE_SET
                         .stream().map(ResponseCodeEnum::getCode).collect(Collectors.toSet());
                 if (!notChangeCodes.contains(result.getCode())) {
-                    log.info("feign调用，返回结果code不是成功ResponseCodeEnum.SUCCESS.getCode()，" +
-                            "设置Response.StatusCode=HttpStatus.INTERNAL_SERVER_ERROR");
-
+                    log.info("feign调用，返回结果被@ExceptionHandler处理过，Result.code不在NOT_CHANGE_RESPONSE_STATUS_CODE_SET集合中，设置Response.StatusCode=HttpStatus.INTERNAL_SERVER_ERROR");
                     response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
                 }
             }

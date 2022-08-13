@@ -1,6 +1,6 @@
 package com.github.codingsoldier.starter.openfeign.codec;
 
-import com.github.codingsoldier.common.exception.ResultNotSuccessFeignException;
+import com.github.codingsoldier.common.exception.FeignResultErrorException;
 import com.github.codingsoldier.common.resp.Result;
 import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
 import feign.Response;
@@ -19,20 +19,20 @@ import java.io.IOException;
 public class FeignErrorDecoder implements ErrorDecoder {
     @Override
     public Exception decode(String methodKey, Response response) {
-        log.error("feign调用异常，response.status() = {}", response.status());
+        log.error("feign调用，下游服务异常，response.status() = {}", response.status());
         try {
             // 获取数据
             Result<?> result = ObjectMapperUtil.newObjectMapper()
                     .readValue(response.body().asInputStream(), Result.class);
             if (result != null) {
-                log.error("feign请求，http status 不是 200，result={}", result.toString());
-                return new ResultNotSuccessFeignException(result.getCode(), result.getMessage());
+                log.error("feign调用，下游服务异常，http status 不是 200，result={}", result.toString());
+                return new FeignResultErrorException(result.getCode(), result.getMessage());
             }
         } catch (IOException e) {
             log.error("微服务调用异常编码实现类发生IOException", e);
-            return new ResultNotSuccessFeignException(e.getMessage());
+            return new FeignResultErrorException(e.getMessage());
         }
-        return new ResultNotSuccessFeignException("微服务调用异常。");
+        return new FeignResultErrorException("微服务调用异常。");
     }
 
 }

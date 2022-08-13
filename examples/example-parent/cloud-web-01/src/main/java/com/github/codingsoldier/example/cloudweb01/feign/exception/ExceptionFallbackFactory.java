@@ -1,6 +1,6 @@
 package com.github.codingsoldier.example.cloudweb01.feign.exception;
 
-import com.github.codingsoldier.common.exception.ResultNotSuccessFeignException;
+import com.github.codingsoldier.common.exception.FeignResultErrorException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
@@ -18,8 +18,8 @@ public class ExceptionFallbackFactory implements FallbackFactory<Web02FeignExcep
         /**
          * 服务提供方抛出异常，starter-openfeign 将异常封装为 ResultNotSuccessFeignException，直接抛出异常即可
          */
-        if (cause instanceof ResultNotSuccessFeignException) {
-            throw (ResultNotSuccessFeignException)cause;
+        if (cause instanceof FeignResultErrorException) {
+            throw (FeignResultErrorException)cause;
         }
         log.error("Web02FeignExceptionClient.name()调用异常", cause);
         return new Web02FeignExceptionFallbackClient()  {

@@ -1,6 +1,7 @@
 package com.github.codingsoldier.starter.web.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * feign okhttp配置
@@ -8,6 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
+@Configuration
 @ConfigurationProperties(prefix = "framework.starter.web.logging")
 public class LoggingProperties {
 

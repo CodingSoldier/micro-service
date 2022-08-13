@@ -24,7 +24,7 @@ public class FeignConfig {
      */
     @Bean
     public RequestInterceptor requestInterceptor() {
-        return requestTemplate -> requestTemplate.header(FeignConstant.FEIGN_REQUEST, Boolean.TRUE.toString());
+        return requestTemplate -> requestTemplate.header(FeignConstant.IS_FEIGN_REQUEST, Boolean.TRUE.toString());
     }
 
 

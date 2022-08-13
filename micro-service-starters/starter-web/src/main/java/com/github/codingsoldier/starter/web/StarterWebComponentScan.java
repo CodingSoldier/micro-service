@@ -12,7 +12,6 @@ import org.springframework.context.annotation.PropertySource;
  */
 @ComponentScan("com.github.codingsoldier.starter.web")
 @ConditionalOnStarterWebEnabled
-@Import(LoggingProperties.class)
 @PropertySource("classpath:web.properties")
 public class StarterWebComponentScan {
 }

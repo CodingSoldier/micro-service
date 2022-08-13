@@ -136,8 +136,8 @@ feign:
   client:
     config:
       default:
-        # 日志级别，取值 feign.Logger.Level
-        loggerLevel: FULL
+        # 日志级别，取值：NONE、BASIC、HEADERS、FULL，源码位置 feign.Logger.Level
+        loggerLevel: BASIC
         # feign默认超时时间
         connectTimeout: 2000
         readTimeout: 5000

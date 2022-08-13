@@ -3,7 +3,7 @@ package com.github.codingsoldier.starter.web.advice;
 
 import com.github.codingsoldier.common.enums.ResponseCodeEnum;
 import com.github.codingsoldier.common.exception.AppException;
-import com.github.codingsoldier.common.exception.ResultNotSuccessFeignException;
+import com.github.codingsoldier.common.exception.FeignResultErrorException;
 import com.github.codingsoldier.common.resp.Result;
 import com.github.codingsoldier.common.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -55,8 +55,8 @@ public class ExceptionHandlerAdvice {
      * @param ex ex
      * @return result
      */
-    @ExceptionHandler(ResultNotSuccessFeignException.class)
-    public Result<Object> resultNotSuccessFeignException(final ResultNotSuccessFeignException ex) {
+    @ExceptionHandler(FeignResultErrorException.class)
+    public Result<Object> resultNotSuccessFeignException(final FeignResultErrorException ex) {
         log.error("捕获ResultNotSuccessFeignException", ex);
         return Result.fail(ex.getCode(), ex.getMessage());
     }
