@@ -128,8 +128,8 @@ framework:
     # starter-web 配置
     web:
       logging:
-        requestResponseLog: true
-        includeHeaders: true
+        requestResponseLog: false
+        includeHeaders: false
 #      enabled: false
 #    # starter-redis 配置
 #    redis:

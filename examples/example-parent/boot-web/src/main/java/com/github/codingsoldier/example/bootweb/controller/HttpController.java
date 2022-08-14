@@ -51,9 +51,10 @@ public class HttpController {
 
     @PostMapping("/time/anno")
     public HttpTestAnnoVo timeAnno(@RequestBody HttpTestAnnoDto httpTestDto) {
-        log.info("请求参数：{}", httpTestDto);
+        log.info("###############进入方法：{}", httpTestDto);
         HttpTestAnnoVo resp = new HttpTestAnnoVo();
         BeanUtils.copyProperties(httpTestDto, resp);
+        log.info("@@@@@@@@@@@@@返回：{}", httpTestDto);
         return resp;
     }
 

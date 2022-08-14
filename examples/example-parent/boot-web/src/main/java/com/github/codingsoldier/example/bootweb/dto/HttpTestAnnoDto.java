@@ -1,13 +1,11 @@
 package com.github.codingsoldier.example.bootweb.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.github.codingsoldier.example.bootweb.common.LocalDateTimeTestAnnoDeserializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -28,11 +26,10 @@ public class HttpTestAnnoDto implements Serializable {
     private String name;
 
     /**
-     *  @DateTimeFormat 时间格式化，主要是前后到后台的时间格式的转换
-     *  @JsonFormat序列化器，后台到前台的时间格式的转换
+     *  @JsonFormat 参数、返回值都可以用
+     *  不支持 @JsonFormat
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    // @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date date;
 
     private LocalDate localDate;

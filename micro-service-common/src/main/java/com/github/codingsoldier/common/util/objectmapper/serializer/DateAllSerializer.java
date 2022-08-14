@@ -27,7 +27,13 @@ public class DateAllSerializer extends JsonSerializer<Object> {
         }
         if (value instanceof Date) {
             Date obj = (Date) value;
-            gen.writeNumber(obj.getTime());
+            /**
+             * @JsonFormat 源码位置
+             * com.fasterxml.jackson.databind.ser.std.DateSerializer.serialize
+             * com.fasterxml.jackson.databind.ser.std.DateTimeSerializerBase#_serializeAsString()
+             * 太复杂，不实现
+             */
+            gen.writeObject(obj.getTime());
         } else if (value instanceof LocalDate) {
             LocalDate obj = (LocalDate) value;
             long timestamp = DateUtil.toTimestamp(obj);
