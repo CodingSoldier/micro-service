@@ -18,7 +18,7 @@ import java.util.Objects;
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
-public class DateAllSerializer extends JsonSerializer<Object> {
+public class TimeToTimestampSerializer extends JsonSerializer<Object> {
 
     @Override
     public void serialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException {

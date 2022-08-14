@@ -13,7 +13,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.github.codingsoldier.common.util.objectmapper.deserializer.LocalDateDeserializer;
 import com.github.codingsoldier.common.util.objectmapper.deserializer.LocalDateTimeDeserializer;
 import com.github.codingsoldier.common.util.objectmapper.deserializer.OffsetDateTimeDeserializer;
-import com.github.codingsoldier.common.util.objectmapper.serializer.DateAllSerializer;
+import com.github.codingsoldier.common.util.objectmapper.serializer.TimeToTimestampSerializer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -56,11 +56,11 @@ public class ObjectMapperUtil {
 
     // 时间转换为时间戳。
     JavaTimeModule javaTimeModule = new JavaTimeModule();
-    DateAllSerializer dateAllSerializer = new DateAllSerializer();
-    javaTimeModule.addSerializer(Date.class, dateAllSerializer);
-    javaTimeModule.addSerializer(LocalDate.class, dateAllSerializer);
-    javaTimeModule.addSerializer(LocalDateTime.class, dateAllSerializer);
-    javaTimeModule.addSerializer(OffsetDateTime.class, dateAllSerializer);
+    TimeToTimestampSerializer timeToTimestampSerializer = new TimeToTimestampSerializer();
+    javaTimeModule.addSerializer(Date.class, timeToTimestampSerializer);
+    javaTimeModule.addSerializer(LocalDate.class, timeToTimestampSerializer);
+    javaTimeModule.addSerializer(LocalDateTime.class, timeToTimestampSerializer);
+    javaTimeModule.addSerializer(OffsetDateTime.class, timeToTimestampSerializer);
     javaTimeModule.addDeserializer(Date.class, new DateDeserializer());
     javaTimeModule.addDeserializer(LocalDate.class, new LocalDateDeserializer());
     javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer());
