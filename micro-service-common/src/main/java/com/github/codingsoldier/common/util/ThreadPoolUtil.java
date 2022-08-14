@@ -25,12 +25,6 @@ public class ThreadPoolUtil {
         throw new IllegalStateException("不允许实例化");
     }
 
-    public static void main(String[] args) {
-        int max = Math.max(1, 5);
-        log.info("{}", max);
-        log.info("{}", Math.max(5, 3));
-    }
-
     /**
      * 初始化
      */
@@ -93,7 +87,7 @@ public class ThreadPoolUtil {
      * @param <T>
      * @return
      */
-    public <T> Future<T> submit(Callable<T> task) {
+    public static <T> Future<T> submit(Callable<T> task) {
         return executor.submit(task);
     }
 
