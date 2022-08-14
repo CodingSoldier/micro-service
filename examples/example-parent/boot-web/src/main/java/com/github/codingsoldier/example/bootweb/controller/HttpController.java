@@ -1,8 +1,10 @@
 package com.github.codingsoldier.example.bootweb.controller;
 
+import com.github.codingsoldier.example.bootweb.dto.HttpTestAnnoDto;
+import com.github.codingsoldier.example.bootweb.dto.HttpTestDto;
 import com.github.codingsoldier.example.bootweb.dto.PageDto;
 import com.github.codingsoldier.example.bootweb.dto.UserUpdateDto;
-import com.github.codingsoldier.example.bootweb.dto.HttpTestDto;
+import com.github.codingsoldier.example.bootweb.vo.HttpTestAnnoVo;
 import com.github.codingsoldier.example.bootweb.vo.HttpTestVo;
 import com.github.codingsoldier.starter.web.annotation.NoWrapper;
 import com.github.codingsoldier.starter.web.context.ApplicationContextHolder;
@@ -43,6 +45,14 @@ public class HttpController {
     public HttpTestVo time(@RequestBody HttpTestDto httpTestDto) {
         log.info("请求参数：{}", httpTestDto);
         HttpTestVo resp = new HttpTestVo();
+        BeanUtils.copyProperties(httpTestDto, resp);
+        return resp;
+    }
+
+    @PostMapping("/time/anno")
+    public HttpTestAnnoVo timeAnno(@RequestBody HttpTestAnnoDto httpTestDto) {
+        log.info("请求参数：{}", httpTestDto);
+        HttpTestAnnoVo resp = new HttpTestAnnoVo();
         BeanUtils.copyProperties(httpTestDto, resp);
         return resp;
     }
