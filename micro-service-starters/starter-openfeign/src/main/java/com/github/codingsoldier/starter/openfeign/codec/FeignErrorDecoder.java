@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 
 /**
- * feign调用，http status 不是 200，抛出异常
+ * feign调用，http status 不是 200，ErrorDecoder 实现类处理返回结果
  *
  * @author cpq
  * @since 2022-03-17 11:28:55
