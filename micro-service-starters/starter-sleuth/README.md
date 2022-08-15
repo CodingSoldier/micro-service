@@ -1,4 +1,14 @@
 # starter-sleuth
+
+## 使用方式
+引入依赖即可
+```xml
+<dependency>
+    <groupId>com.github.codingsoldier</groupId>
+    <artifactId>starter-sleuth</artifactId>
+</dependency>
+```
+
 ## 与 spring-cloud-sleuth-zipkin 整合
 1、导入依赖
 ```xml
@@ -25,5 +35,10 @@ spring:
     base-url: http://localhost:10103
 ```
 
+## 带trace信息的线程池工具类
+使用新线程运行任务，日志没有trace信息，无法实现链路追踪
+，本模块提供两个带trace信息的线程池工具类
 
+带trace信息的线程池工具类：ThreadPoolTraceUtil 
 
+带trace信息的线程池Callable工具类：TaskTraceUtil 

@@ -24,6 +24,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 是否启用 starter-sleuth
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
