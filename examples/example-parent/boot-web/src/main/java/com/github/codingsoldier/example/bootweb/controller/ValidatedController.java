@@ -6,6 +6,7 @@ import com.github.codingsoldier.starter.web.util.ValidationUtils;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,7 +53,7 @@ public class ValidatedController {
     /**
      * 使用方法校验bean
      */
-    @PostMapping("/bean-method")
+    @PostMapping(value = "/bean-method", produces = MediaType.APPLICATION_JSON_VALUE)
     public String beanMethod(@RequestBody ValidationDto validationDto) {
         ValidationUtils.validateEntity(validationDto);
         log.info("请求参数：{}", validationDto);
@@ -62,17 +63,19 @@ public class ValidatedController {
     /**
      * 必须在类上加 @Validated ，get请求参数的校验才生效
      */
-    @GetMapping("/param-validate")
-    public void paramValidate(@Min(value = 10L, message = "用户id必须大于等于10") Long userId,
+    @GetMapping(value = "/param-validate", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String paramValidate(@Min(value = 10L, message = "用户id必须大于等于10") Long userId,
                              @Length(min = 6, max = 20, message = "账号长度必须是6~20位。")
                              @NotEmpty(message = "账号不能为空。") String account) {
         log.info("请求参数：{}", userId);
         log.info("请求参数：{}", account);
+        return "success";
     }
 
-    @GetMapping("/path/{id}")
-    public void pathValidate(@PathVariable("id") @Min(value = 10L, message = "id必须大于等于10") Long id) {
+    @GetMapping(value = "/path/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Long pathValidate(@PathVariable("id") @Min(value = 10L, message = "id必须大于等于10") Long id) {
         log.info("请求参数：{}", id);
+        return id;
     }
 
 }
