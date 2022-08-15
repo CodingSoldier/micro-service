@@ -124,11 +124,9 @@ framework:
     # starter-mybatis-plus 配置
 #    mybatis-plus:
 #      enabled: false
-#    # starter-spring-doc 配置
-#    spring-doc:
-#      enabled: false
-    # starter-web 配置
-    # starter-web 配置
+    # starter-spring-doc 配置
+    spring-doc:
+      title: boot-web的API
     web:
       logging:
         requestResponseLog: false

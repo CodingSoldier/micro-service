@@ -17,7 +17,7 @@ logging:
 ```
 3、本模块只提供一个 logback-spring.xml 日志配置文件，您依旧可以在application配置文件中使用spring提供的logging配置项
 
-## starter-logback自定义配置项
+## 自定义配置项
 ```yaml
 framework:
   starter:
