@@ -27,7 +27,7 @@ public class RedisConfig {
     private static final Logger logger = LoggerFactory.getLogger(RedisConfig.class);
 
     /**
-     * 设置RedisTemplate规则
+     * 配置序列化规则
      *
      * @param redisConnectionFactory
      * @return
@@ -59,29 +59,5 @@ public class RedisConfig {
 
         return redisTemplate;
     }
-
-    // /**
-    //  * 设置CacheManager缓存规则
-    //  * @param factory
-    //  * @return
-    //  */
-    // @Bean
-    // public CacheManager cacheManager(RedisConnectionFactory factory) {
-    //     RedisSerializer<String> redisSerializer = new StringRedisSerializer();
-    //     Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
-    //
-    //     jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
-    //
-    //     // 配置序列化（解决乱码的问题）
-    //     RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
-    //             .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer))
-    //             .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer))
-    //             .disableCachingNullValues();
-    //
-    //     RedisCacheManager cacheManager = RedisCacheManager.builder(factory)
-    //             .cacheDefaults(config)
-    //             .build();
-    //     return cacheManager;
-    // }
 
 }

@@ -4,9 +4,7 @@ import com.github.codingsoldier.example.bootweb.dto.RedisTestBeanDto;
 import com.github.codingsoldier.starter.redis.RedisUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 @Tag(name = "Redis测试-API")
 @Slf4j
@@ -26,9 +23,8 @@ public class RedisTestController {
     @GetMapping(value = "/test", produces = MediaType.APPLICATION_JSON_VALUE)
     public String test(HttpServletRequest request) {
 
-        RedisUtil.opsForValue().set("for-value:aa", "aaa");
-        ValueOperations<String, String> opsForValue = RedisUtil.opsForValue();
-        String str = opsForValue.get("for-value:aa");
+        RedisUtil.<String, String>opsForValue().set("for-value:aa", "aaa");
+        String str = RedisUtil.<String, String>opsForValue().get("for-value:aa");
         log.info("for-value:aa {}", str);
 
         RedisTestBeanDto redisTestBean = RedisTestBeanDto.builder()
@@ -38,15 +34,16 @@ public class RedisTestController {
         RedisTestBeanDto bean1 = RedisUtil.<String, RedisTestBeanDto>template().opsForValue().get("for-value:bean");
         log.info("获取值 {}", bean1);
 
-        HashMap<String, Integer> map = new HashMap<>();
-        map.put("11", 123456);
-        map.put("22", 45678);
-        RedisUtil.opsForHash().putAll("hashkey", map);
-        RedisUtil.opsForHash().put("hashkey", "33", 45678);
+        // HashMap<String, Integer> map = new HashMap<>();
+        // map.put("11", 123456);
+        // map.put("22", 45678);
+        // RedisUtil.opsForHash().putAll("hashkey", map);
+        // RedisUtil.opsForHash().put("hashkey", "33", 45678);
+
         RedisUtil.<String, String, Integer>opsForHash().put("hashkey", "22", 45678);
 
-        HashOperations<String, String, Integer> opsForHash = RedisUtil.opsForHash();
-        Integer hashVal = opsForHash.get("hashkey", "22");
+        Integer hashVal = RedisUtil.<String, String, Integer>opsForHash().get("hashkey", "22");
+
         log.info("hashVal {}", hashVal);
 
         ArrayList<String> list = new ArrayList<>();
