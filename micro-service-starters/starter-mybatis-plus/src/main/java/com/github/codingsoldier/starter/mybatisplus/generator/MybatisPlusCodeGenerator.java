@@ -197,8 +197,6 @@ public class MybatisPlusCodeGenerator {
         generator.template(templateConfig);
         generator.execute(new CustomFreemarkerTemplateEngine());
 
-        LOGGER.info("##### 代码生成完毕 #####");
-
     }
 
 
