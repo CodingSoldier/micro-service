@@ -22,7 +22,7 @@
         {
             "name": "framework.starter.web.logging.requestResponseLog",
             "type": "java.lang.Boolean",
-            "description": "是否打印request、responseBody日志。",
+            "description": "是否打印request、responseBody日志",
             "sourceType": "com.github.codingsoldier.starter.web.properties.LoggingProperties",
             "defaultValue": false
         },

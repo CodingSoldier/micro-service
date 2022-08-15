@@ -8,4 +8,12 @@
     <artifactId>starter-openfeign</artifactId>
 </dependency>
 ```
+## 自定义配置项
+```yaml
+framework:
+  starter:
+    openfeign:
+      # 是否启用starter-openfeign，默认true
+      enabled: true
+```
 

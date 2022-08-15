@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * feign okhttp配置
+ * 打印日志配置
  *
  * @author cpq
  * @since 2022-03-17 11:28:55

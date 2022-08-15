@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 import static com.github.codingsoldier.common.feign.FeignConstant.PROVIDER_FUNTION_RETURN_TYPE;
 
 /**
- * 将controller返回值包装为Result对象
+ * 将controller返回值包装为Result对象，以及Response日志处理
  *
  * @author cpq
  * @since 2022-03-17 11:28:55

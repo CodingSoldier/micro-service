@@ -28,6 +28,8 @@ import java.util.Set;
 /**
  * 统一异常处理
  * 自定义全局异常处理器加上 @Order(Ordered.HIGHEST_PRECEDENCE) 注解，即可覆盖此全局异常处理器
+ * 注意：如果您在自己自定义的全局异常处理器中添加了 @ExceptionHandler(Exception.class) ，
+ *      你的全局异常处理器将捕获所有异常，相当于本异常处理器失效。
  *
  * @author cpq
  * @since 2022-03-17 11:28:55

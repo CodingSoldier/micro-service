@@ -15,7 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import static com.github.codingsoldier.common.feign.FeignConstant.PROVIDER_FUNTION_RETURN_TYPE;
 
 /**
- *
+ * feign拦截器
+ * 主要功能是将 feign 请求的 Controller 接口的返回值类型添加到 RequestAttributes 中
  * @author chenpq05
  * @since 2022/2/11 11:58
  */

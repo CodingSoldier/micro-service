@@ -8,6 +8,14 @@
     <artifactId>starter-redis</artifactId>
 </dependency>
 ```
+## 自定义配置项
+```yaml
+framework:
+  starter:
+    redis:
+      # 是否启用starter-redis，默认true
+      enabled: true
+```
 
 ## 使用 RedisUtil
 ```java

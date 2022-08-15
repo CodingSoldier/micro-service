@@ -9,6 +9,15 @@
 </dependency>
 ```
 
+## 自定义配置项
+```yaml
+framework:
+  starter:
+    mybatis-plus:
+      # 是否启用 starter-mybatis-plus，默认true
+      enabled: true
+```
+
 ## 代码生成
 ```java
 public class MybatisPlusCodeGenerator {

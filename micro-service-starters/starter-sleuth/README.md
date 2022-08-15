@@ -17,6 +17,16 @@
     <artifactId>spring-cloud-sleuth-zipkin</artifactId>
 </dependency>
 ```
+
+## 自定义配置项
+```yaml
+framework:
+  starter:
+    sleuth:
+      # 是否启用starter-sleuth，默认true
+      enabled: true
+```
+
 2、application.yml配置
 ```yaml
 spring:

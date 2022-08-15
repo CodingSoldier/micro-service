@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
+ * 拷贝工具类
  * @author chenpq05
  * @since 2022/3/14 14:01
  */

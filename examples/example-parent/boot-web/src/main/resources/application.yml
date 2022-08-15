@@ -110,9 +110,11 @@ springdoc:
 
 framework:
   starter:
-    logback:
-      # 异常信息最大长度
-      ex-max-length: 1024
+
+#    logback:
+#      # 异常信息最大长度
+#      ex-max-length: 1024
+
 #    # starter-log4j2 配置
 #    log4j2:
 #      time-based-triggering-policy:
@@ -121,17 +123,35 @@ framework:
 #        size: 1MB
 #      default-rollover-strategy:
 #        max: 7
-    # starter-mybatis-plus 配置
+
 #    mybatis-plus:
-#      enabled: false
+#      # 是否启用 starter-mybatis-plus，默认true
+#      enabled: true
+
+#    openfeign:
+#      # 是否启用starter-openfeign，默认true
+#      enabled: true
+
     # starter-spring-doc 配置
     spring-doc:
       title: boot-web的API
+
     web:
       logging:
-        requestResponseLog: false
-        includeHeaders: false
-#      enabled: false
+        # 是否打印request、responseBody日志。默认false
+        requestResponseLog: true
+#        # 是否打印request日志，是否打印request日志。默认false
+#        requestLog: true
+#        # 是否打印request日志。默认false
+#        responseBodyLog: true
+#        # 是否包含请求头信息。默认false
+#        includeHeaders: true
+#      # 是否启用 starter-web，默认true
+#      enabled: true
+#      # 是否启用 WebMvcConfig 配置类，默认true
+#      enableWebMvcConfig: true
+
 #    # starter-redis 配置
 #    redis:
-#      enabled: false
+#      # 是否启用starter-redis，默认true
+#      enabled: true

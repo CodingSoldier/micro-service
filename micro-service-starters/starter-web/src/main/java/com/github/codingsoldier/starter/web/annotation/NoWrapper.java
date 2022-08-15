@@ -14,7 +14,7 @@ import java.lang.annotation.*;
 public @interface NoWrapper {
 
     /**
-     * 是否不包转
+     * 是否不包装
      *
      * @return true不包装
      */

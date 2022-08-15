@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 /**
+ * ApplicationContext 工具类
  * @author cpq
  * @since 2022-03-17 11:28:55
  */

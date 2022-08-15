@@ -28,6 +28,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * WebMvcConfigurer 配置
  * @author chenpq05
  * @since 2022/2/11 12:02
  */
@@ -40,7 +41,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         if (logger.isDebugEnabled()) {
-            logger.debug("配置为设置允许跨域");
+            logger.debug("配置为允许跨域");
         }
         // 设置允许跨域的路由
         registry.addMapping("/**")
@@ -120,6 +121,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 break;
             }
         }
+        // 添加自定义的 MappingJackson2HttpMessageConverter
         converters.add(i , jackson2HttpMessageConverter);
     }
 

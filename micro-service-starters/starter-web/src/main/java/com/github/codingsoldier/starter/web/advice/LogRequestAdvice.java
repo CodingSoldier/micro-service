@@ -20,6 +20,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 import java.util.TreeMap;
 
+/**
+ * Request日志
+ * @author cpq
+ * @since 2022-03-17 11:28:55
+ */
 @Slf4j
 @RestControllerAdvice
 public class LogRequestAdvice extends CommonsRequestLoggingFilter implements RequestBodyAdvice {
