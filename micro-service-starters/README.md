@@ -6,7 +6,7 @@
 
 1、在 micro-service-starters 下新增一个工程，例如：starter-a
 
-2、starter-a 的 parent 设置 micro-service-starters
+2、starter-a 的 parent 设置为 micro-service-starters
 
 3、micro-service-starters 的 pom.xml 的 modules 加入 starter-a 模块
 

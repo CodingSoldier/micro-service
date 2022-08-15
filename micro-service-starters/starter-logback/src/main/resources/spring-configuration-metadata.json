@@ -1,0 +1,12 @@
+{
+    "groups": [],
+    "properties": [
+        {
+            "name": "framework.starter.logback.ex-max-length",
+            "type": "java.lang.String",
+            "description": "异常信息最大长度",
+            "defaultValue": 10000
+        }
+    ],
+    "hints": []
+}

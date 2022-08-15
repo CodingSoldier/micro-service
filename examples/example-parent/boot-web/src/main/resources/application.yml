@@ -110,6 +110,9 @@ springdoc:
 
 framework:
   starter:
+    logback:
+      # 异常信息最大长度
+      ex-max-length: 1024
 #    # starter-log4j2 配置
 #    log4j2:
 #      time-based-triggering-policy:

@@ -20,7 +20,7 @@ public class MybatisPlusCodeGenerator {
         // 项目 main 目录的绝对路径
         CodeGenerator.srcMainAbsolutePath = "E:\\github\\micro-service\\examples\\example-parent\\boot-web\\src\\main";
         // 项目包名
-        CodeGenerator.parent = "com.github.codingsoldier.bootweb.temp";
+        CodeGenerator.parent = "com.github.codingsoldier.example.bootweb.temp";
 
         // 作者
         CodeGenerator.author = "cpq";
@@ -35,11 +35,4 @@ public class MybatisPlusCodeGenerator {
 
 ```
 
-### templates/v1 模板
-
-service层 新增、修改 分两个接口
-
-### templates/v2 模板
-
-service层 新增、修改 合并为一个接口
 
