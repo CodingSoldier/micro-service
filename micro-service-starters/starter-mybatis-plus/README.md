@@ -35,4 +35,9 @@ public class MybatisPlusCodeGenerator {
 
 ```
 
+## 自动填充功能
+1、实现 TokenInterface 接口
 
+2、表插入数据是会自动填充 CustomMetaObjectHandler#CREATE_BY、CustomMetaObjectHandler#UPDATE_BY 字段。
+
+ 更新时会自动填充 CustomMetaObjectHandler#UPDATE_BY 字段。

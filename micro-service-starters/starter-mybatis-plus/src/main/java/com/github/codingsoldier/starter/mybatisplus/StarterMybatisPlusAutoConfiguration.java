@@ -11,9 +11,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 /**
- * @author cpq
- * @Import 的作用：当CpqRedisAutoConfiguration注入IOC容器时，将CpqRedisConfig也注入IOC容器
+ * @Import 的作用：当CpqRedisAutoConfiguration注入IOC容器时，将CustomMetaObjectHandler也注入IOC容器
  * proxyBeanMethods = false 的作用：每次从 IOC 容器获取 MybatisAutoConfiguration 实例，创建一个新的bean
+ * @author cpq
  * @since 2022-03-17 11:28:55
  */
 @Import({CustomMetaObjectHandler.class})

@@ -17,24 +17,28 @@ import java.time.LocalDateTime;
  */
 public class CustomMetaObjectHandler implements MetaObjectHandler {
 
-    private static final String CREATE_TIME = "createdTime";
-    private static final String CREATE_ID = "createdBy";
-    private static final String UPDATE_TIME = "updatedTime";
-    private static final String UPDATE_ID = "updatedBy";
+    public static final String CREATE_TIME = "createdTime";
+    public static final String CREATE_BY = "createdBy";
+    public static final String UPDATE_TIME = "updatedTime";
+    public static final String UPDATE_BY = "updatedBy";
 
     @Lazy
     @Autowired
-    private TokenInterface<Object> tokenInterface;
+    private TokenInterface<?> tokenInterface;
 
+    /**
+     * 需实现 TokenInterface 接口，才能自动填充 createdBy、updatedBy 字段
+     * @param metaObject
+     */
     @Override
     public void insertFill(MetaObject metaObject) {
         if (isFieldValueNull(metaObject, CREATE_TIME)) {
             // 填充创建时间
             this.strictInsertFill(metaObject, CREATE_TIME, LocalDateTime::now, LocalDateTime.class);
         }
-        if (tokenInterface != null && isFieldValueNull(metaObject, CREATE_ID)) {
+        if (tokenInterface != null && isFieldValueNull(metaObject, CREATE_BY)) {
             // 填充创建者id
-            this.fillStrategy(metaObject, CREATE_ID, tokenInterface.getUserId());
+            this.fillStrategy(metaObject, CREATE_BY, tokenInterface.getUserId());
         }
     }
 
@@ -44,9 +48,9 @@ public class CustomMetaObjectHandler implements MetaObjectHandler {
             // 填充更新时间
             this.strictInsertFill(metaObject, UPDATE_TIME, LocalDateTime::now, LocalDateTime.class);
         }
-        if (tokenInterface != null && isFieldValueNull(metaObject, UPDATE_ID)) {
+        if (tokenInterface != null && isFieldValueNull(metaObject, UPDATE_BY)) {
             // 填充更新者id
-            this.fillStrategy(metaObject, UPDATE_ID, tokenInterface.getUserId());
+            this.fillStrategy(metaObject, UPDATE_BY, tokenInterface.getUserId());
         }
     }
 

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 /**
- * 加上请求头 x-request-trace-id
+ * 加上请求头 x-req-trace-id
  */
 @Slf4j
 @RefreshScope
