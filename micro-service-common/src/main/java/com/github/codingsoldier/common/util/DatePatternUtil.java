@@ -27,29 +27,29 @@ public class DatePatternUtil {
      */
     private static final Map<Pattern, String> PATTERN_MAP = new HashMap<>();
     private static final List<Pattern> PATTERN_LIST = new ArrayList<>(32);
-    private static final Pattern PATTERN3 = Pattern.compile("(\\d{4}-\\d{1,2}-\\d{1,2})");
-    private static final Pattern PATTERN4 = Pattern.compile("(\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{1,2})");
-    private static final Pattern PATTERN5 = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{1,2}:\\d{1,2}:\\d{1,2}");
-    private static final Pattern PATTERN6 = Pattern
+    private static final Pattern YYYY_MM_DD_MIDDLE = Pattern.compile("(\\d{4}-\\d{1,2}-\\d{1,2})");
+    private static final Pattern YYYY_MM_DD_HH_MM_MIDDLE = Pattern.compile("(\\d{4}-\\d{1,2}-\\d{1,2} \\d{1,2}:\\d{1,2})");
+    private static final Pattern YYYY_MM_DD_HH_MM_SS_MIDDLE = Pattern.compile("\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{1,2}:\\d{1,2}:\\d{1,2}");
+    private static final Pattern YYYY_MM_DD_HH_MM_SS_SSS_MIDDLE = Pattern
             .compile("\\d{4}-\\d{1,2}-\\d{1,2}\\s\\d{1,2}:\\d{1,2}:\\d{1,2}\\.\\d+");
-    private static final Pattern PATTERN7 = Pattern.compile("\\d{4}/\\d{1,2}/\\d{1,2}");
-    private static final Pattern PATTERN71 = Pattern.compile("\\d{4}/\\d{1,2}/\\d{1,2}\\s\\d{1,2}:\\d{1,2}:\\d{1,2}");
+    private static final Pattern YYYY_MM_DD_SLASH = Pattern.compile("\\d{4}/\\d{1,2}/\\d{1,2}");
+    private static final Pattern YYYY_MM_DD_HH_MM_SS_SLASH = Pattern.compile("\\d{4}/\\d{1,2}/\\d{1,2}\\s\\d{1,2}:\\d{1,2}:\\d{1,2}");
 
     static {
-        PATTERN_MAP.put(PATTERN3, "yyyy-MM-dd");
-        PATTERN_MAP.put(PATTERN4, "yyyy-MM-dd HH:mm");
-        PATTERN_MAP.put(PATTERN5, "yyyy-MM-dd HH:mm:ss");
-        PATTERN_MAP.put(PATTERN6, "yyyy-MM-dd HH:mm:ss.SSS");
-        PATTERN_MAP.put(PATTERN7, "yyyy/MM/dd");
-        PATTERN_MAP.put(PATTERN71, "yyyy/MM/dd HH:mm:ss");
+        PATTERN_MAP.put(YYYY_MM_DD_MIDDLE, "yyyy-MM-dd");
+        PATTERN_MAP.put(YYYY_MM_DD_HH_MM_MIDDLE, "yyyy-MM-dd HH:mm");
+        PATTERN_MAP.put(YYYY_MM_DD_HH_MM_SS_MIDDLE, "yyyy-MM-dd HH:mm:ss");
+        PATTERN_MAP.put(YYYY_MM_DD_HH_MM_SS_SSS_MIDDLE, "yyyy-MM-dd HH:mm:ss.SSS");
+        PATTERN_MAP.put(YYYY_MM_DD_SLASH, "yyyy/MM/dd");
+        PATTERN_MAP.put(YYYY_MM_DD_HH_MM_SS_SLASH, "yyyy/MM/dd HH:mm:ss");
 
         // 添加pattern
-        PATTERN_LIST.add(PATTERN3);
-        PATTERN_LIST.add(PATTERN4);
-        PATTERN_LIST.add(PATTERN5);
-        PATTERN_LIST.add(PATTERN6);
-        PATTERN_LIST.add(PATTERN7);
-        PATTERN_LIST.add(PATTERN71);
+        PATTERN_LIST.add(YYYY_MM_DD_MIDDLE);
+        PATTERN_LIST.add(YYYY_MM_DD_HH_MM_MIDDLE);
+        PATTERN_LIST.add(YYYY_MM_DD_HH_MM_SS_MIDDLE);
+        PATTERN_LIST.add(YYYY_MM_DD_HH_MM_SS_SSS_MIDDLE);
+        PATTERN_LIST.add(YYYY_MM_DD_SLASH);
+        PATTERN_LIST.add(YYYY_MM_DD_HH_MM_SS_SLASH);
     }
 
     private DatePatternUtil() {
@@ -87,7 +87,7 @@ public class DatePatternUtil {
             if (isMatch) {
                 result = DateUtil.toLocalDateTime(CommonUtil.parseLong(strDateValue));
             }
-        } else if (PATTERN3.matcher(strDateValue).matches()) {
+        } else if (YYYY_MM_DD_MIDDLE.matcher(strDateValue).matches()) {
             DateTimeFormatter formatter = new DateTimeFormatterBuilder()
                     .appendPattern("yyyy-MM-dd[['T'HH][:mm][:ss]]")
                     .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
@@ -96,7 +96,7 @@ public class DatePatternUtil {
                     .parseDefaulting(ChronoField.MILLI_OF_SECOND, 0)
                     .toFormatter();
             result = LocalDateTime.parse(strDateValue, formatter);
-        } else if (PATTERN7.matcher(strDateValue).matches()) {
+        } else if (YYYY_MM_DD_SLASH.matcher(strDateValue).matches()) {
             DateTimeFormatter formatter = new DateTimeFormatterBuilder()
                     .appendPattern("yyyy/MM/dd[['T'HH][:mm][:ss]]")
                     .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)

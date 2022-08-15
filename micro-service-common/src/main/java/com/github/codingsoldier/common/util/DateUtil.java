@@ -2,6 +2,7 @@ package com.github.codingsoldier.common.util;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -192,4 +193,52 @@ public class DateUtil {
     }
 
 
+    public static void main(String[] args) {
+        // String f1 = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        // System.out.println(f1);
+        // f1 = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+        // System.out.println(f1);
+        // f1 = OffsetDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        // System.out.println(f1);
+        // f1 = OffsetDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+        // System.out.println(f1);
+        //
+        // f1 = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        // System.out.println(f1);
+        // f1 = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        // System.out.println(f1);
+        //
+        // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // f1 = sdf.format(new Date());
+        // System.out.println(f1);
+        //
+        // sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        // f1 = sdf.format(new Date());
+        // System.out.println(f1);
+
+
+        String f1 = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        System.out.println(f1);
+        f1 = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        System.out.println(f1);
+        f1 = OffsetDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        System.out.println(f1);
+        f1 = OffsetDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        System.out.println(f1);
+
+        f1 = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        System.out.println(f1);
+        f1 = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        System.out.println(f1);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        f1 = sdf.format(new Date());
+        System.out.println(f1);
+
+        sdf = new SimpleDateFormat("yyyy/MM/dd");
+        f1 = sdf.format(new Date());
+        System.out.println(f1);
+
+
+    }
 }

@@ -6,19 +6,23 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.github.codingsoldier.common.util.DateUtil;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Objects;
 
 /**
- * DateTime序列化
+ * Date、LocalDateTime、OffsetDateTime、LocalDate 序列化为 yyyy-MM-dd
  *
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
-public class TimeToTimestampSerializer extends JsonSerializer<Object> {
+public class TimeToyyyyMMddMiddleSerializer extends JsonSerializer<Object> {
+
+    private String pattern = "yyyy-MM-dd";
 
     @Override
     public void serialize(Object value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
@@ -27,26 +31,23 @@ public class TimeToTimestampSerializer extends JsonSerializer<Object> {
         }
         if (value instanceof Date) {
             Date timeObj = (Date) value;
-            /**
-             * @JsonFormat 源码位置
-             * com.fasterxml.jackson.databind.ser.std.DateSerializer.serialize
-             * com.fasterxml.jackson.databind.ser.std.DateTimeSerializerBase#_serializeAsString()
-             * 太复杂，不实现
-             */
-            gen.writeNumber(timeObj.getTime());
-        } else if (value instanceof LocalDateTime) {
+            SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+            String timeStr = sdf.format(timeObj);
+            gen.writeString(timeStr);
+        }else if (value instanceof LocalDateTime) {
             LocalDateTime timeObj = (LocalDateTime) value;
-            Long timestamp = DateUtil.toTimestamp(timeObj);
-            gen.writeNumber(timestamp);
+            String timeStr = timeObj.format(DateTimeFormatter.ofPattern(pattern));
+            gen.writeString(timeStr);
         } else if (value instanceof OffsetDateTime) {
             OffsetDateTime timeObj = (OffsetDateTime) value;
-            Long timestamp = DateUtil.toTimestamp(timeObj);
-            gen.writeNumber(timestamp);
+            String timeStr = timeObj.format(DateTimeFormatter.ofPattern(pattern));
+            gen.writeString(timeStr);
         } else if (value instanceof LocalDate) {
             LocalDate timeObj = (LocalDate) value;
-            long timestamp = DateUtil.toTimestamp(timeObj);
-            gen.writeNumber(timestamp);
+            String timeStr = timeObj.format(DateTimeFormatter.ofPattern(pattern));
+            gen.writeString(timeStr);
         }
     }
+
 
 }

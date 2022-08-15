@@ -53,7 +53,27 @@ public class HttpController {
     public HttpTestAnnoVo timeAnno(@RequestBody HttpTestAnnoDto httpTestDto) {
         log.info("###############进入方法：{}", httpTestDto);
         HttpTestAnnoVo resp = new HttpTestAnnoVo();
-        BeanUtils.copyProperties(httpTestDto, resp);
+
+        resp.setDateMiddle(httpTestDto.getDate());
+        resp.setDateSlash(httpTestDto.getDate());
+        resp.setDateMiddleDay(httpTestDto.getDate());
+        resp.setDateSlashDay(httpTestDto.getDate());
+
+        resp.setLocalDateMiddle(httpTestDto.getLocalDate());
+        resp.setLocalDateSlash(httpTestDto.getLocalDate());
+        resp.setLocalDateMiddleDay(httpTestDto.getLocalDate());
+        resp.setLocalDateSlashDay(httpTestDto.getLocalDate());
+
+        resp.setLocalDateTimeMiddle(httpTestDto.getLocalDateTime());
+        resp.setLocalDateTimeSlash(httpTestDto.getLocalDateTime());
+        resp.setLocalDateTimeMiddleDay(httpTestDto.getLocalDateTime());
+        resp.setLocalDateTimeSlashDay(httpTestDto.getLocalDateTime());
+
+        resp.setOffsetDateTimeMiddle(httpTestDto.getOffsetDateTime());
+        resp.setOffsetDateTimeSlash(httpTestDto.getOffsetDateTime());
+        resp.setOffsetDateTimeMiddleDay(httpTestDto.getOffsetDateTime());
+        resp.setOffsetDateTimeSlashDay(httpTestDto.getOffsetDateTime());
+
         log.info("@@@@@@@@@@@@@返回：{}", httpTestDto);
         return resp;
     }

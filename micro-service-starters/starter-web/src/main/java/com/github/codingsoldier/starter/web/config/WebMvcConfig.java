@@ -73,6 +73,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     /**
      * 添加自定义 MappingJackson2HttpMessageConverter
+     * 注意点：
+     *   1、RequestBody有时间字段，建议前端传时间戳。
+     *      不支持使用 @JsonFormat、@JsonFormat
+     *      支持多种时间格式，详情查看 DatePatternUtil.java
+     *   2、ResponseBody有时间字段，后台返回时间戳。
+     *      不支持使用 @JsonFormat、@JsonFormat 格式化返回值，
+     *      如果需要格式化，请使用 @JsonDeserialize，使用例子 HttpController#timeAnno()
      *
      * @param converters
      */

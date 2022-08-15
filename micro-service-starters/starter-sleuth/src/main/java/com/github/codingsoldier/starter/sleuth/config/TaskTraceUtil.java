@@ -31,8 +31,10 @@ public class TaskTraceUtil {
     @SuppressWarnings("squid:S2696")
     @PostConstruct
     private void init() {
-        threadPoolTaskExecutor.setCorePoolSize(5);
-        threadPoolTaskExecutor.setMaxPoolSize(10);
+        int cpuCores = Runtime.getRuntime().availableProcessors();
+        cpuCores = Math.min(cpuCores, 5);
+        threadPoolTaskExecutor.setCorePoolSize(cpuCores);
+        threadPoolTaskExecutor.setMaxPoolSize(cpuCores * 2);
         threadPoolTaskExecutor.setQueueCapacity(1000);
         threadPoolTaskExecutor.initialize();
         TaskTraceUtil.taskExecutor = new LazyTraceAsyncTaskExecutor(beanFactory, threadPoolTaskExecutor);

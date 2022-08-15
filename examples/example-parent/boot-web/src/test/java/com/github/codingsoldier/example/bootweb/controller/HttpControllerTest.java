@@ -100,6 +100,34 @@ class HttpControllerTest extends BaseTest {
     }
 
     @Test
+    void timeAnno() throws Exception {
+        // 时间戳
+        String bodyTimestamp = "{\"date\":\"1660555532610\",\"localDate\":\"2022-04-01\",\"localDateTime\":\"1660555532610\",\"offsetDateTime\":\"1660555532610\"}";
+        MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders
+                .post("/http/time/anno")
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .content(bodyTimestamp);
+        super.mockMvc.perform(reqBuilder)
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.dateMiddle", Matchers.equalTo("2022-08-15 17:25:32")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateMiddle", Matchers.equalTo(1648742400000L)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateTimeMiddle", Matchers.equalTo("2022-08-15 17:25:32")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.offsetDateTimeMiddle", Matchers.equalTo("2022-08-15 17:25:32")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.dateSlash", Matchers.equalTo("2022/08/15 17:25:32")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateSlash", Matchers.equalTo(1648742400000L)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateTimeSlash", Matchers.equalTo("2022/08/15 17:25:32")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.offsetDateTimeSlash", Matchers.equalTo("2022/08/15 17:25:32")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.dateMiddleDay", Matchers.equalTo("2022-08-15")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateMiddleDay", Matchers.equalTo("2022-04-01")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateTimeMiddleDay", Matchers.equalTo("2022-08-15")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.offsetDateTimeMiddleDay", Matchers.equalTo("2022-08-15")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.dateSlashDay", Matchers.equalTo("2022/08/15")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateSlashDay", Matchers.equalTo("2022/04/01")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateTimeSlashDay", Matchers.equalTo("2022/08/15")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.offsetDateTimeSlashDay", Matchers.equalTo("2022/08/15")));
+    }
+
+    @Test
     void noWrapper() throws Exception {
         MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/http/no-wrapper");
         super.mockMvc.perform(reqBuilder)

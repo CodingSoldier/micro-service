@@ -1,7 +1,5 @@
 package com.github.codingsoldier.example.bootweb.dto;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.github.codingsoldier.example.bootweb.common.LocalDateTimeTestAnnoDeserializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,16 +23,10 @@ public class HttpTestAnnoDto implements Serializable {
     private Integer age;
     private String name;
 
-    /**
-     *  @JsonFormat 参数、返回值都可以用
-     *  不支持 @JsonFormat
-     */
-    // @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date date;
 
     private LocalDate localDate;
 
-    @JsonDeserialize(using = LocalDateTimeTestAnnoDeserializer.class)
     private LocalDateTime localDateTime;
 
     private OffsetDateTime offsetDateTime;

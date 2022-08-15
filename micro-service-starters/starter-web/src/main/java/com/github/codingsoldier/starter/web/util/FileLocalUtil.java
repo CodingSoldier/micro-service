@@ -30,6 +30,16 @@ public class FileLocalUtil {
      */
     private static String imagePreviewUrl;
 
+    @Value("${file.upload.dir:null}")
+    public void setFileUploadDir(String fileUploadDir) {
+        FileLocalUtil.fileUploadDir = fileUploadDir;
+    }
+
+    @Value("${file.image-preview-url:null}")
+    public void setImagePreviewUrl(String imagePreviewUrl) {
+        FileLocalUtil.imagePreviewUrl = imagePreviewUrl;
+    }
+
     /**
      * 上传图片，返回图片路径
      *
@@ -91,16 +101,6 @@ public class FileLocalUtil {
             return fileDir.mkdirs();
         }
         return false;
-    }
-
-    @Value("${file.upload.dir:null}")
-    public void setFileUploadDir(String fileUploadDir) {
-        FileLocalUtil.fileUploadDir = fileUploadDir;
-    }
-
-    @Value("${file.image-preview-url:null}")
-    public void setImagePreviewUrl(String imagePreviewUrl) {
-        FileLocalUtil.imagePreviewUrl = imagePreviewUrl;
     }
 
 }

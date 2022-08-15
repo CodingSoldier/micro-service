@@ -1,6 +1,10 @@
 package com.github.codingsoldier.example.bootweb.vo;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.github.codingsoldier.common.util.objectmapper.serializer.TimeToyyyyMMddHHmmssMiddleSerializer;
+import com.github.codingsoldier.common.util.objectmapper.serializer.TimeToyyyyMMddHHmmssSlashSerializer;
+import com.github.codingsoldier.common.util.objectmapper.serializer.TimeToyyyyMMddMiddleSerializer;
+import com.github.codingsoldier.common.util.objectmapper.serializer.TimeToyyyyMMddSlashSerializer;
 import com.github.codingsoldier.example.bootweb.common.DateAllTestAnnoSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,17 +30,63 @@ public class HttpTestAnnoVo implements Serializable {
     private String name;
 
     /**
-     *  @JsonFormat 参数、返回值都可以用
-     *  不支持 @JsonFormat
-     *  统一返回时间戳
+     *  不支持 @JsonFormat、@JsonFormat
      */
-    // @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
-    private Date date;
+    @JsonSerialize(using = TimeToyyyyMMddHHmmssMiddleSerializer.class)
+    private Date dateMiddle;
 
-    private LocalDate localDate;
+    // @JsonSerialize(using = TimeToyyyyMMddHHmmssMiddleSerializer.class)
+    private LocalDate localDateMiddle;
 
-    @JsonSerialize(using = DateAllTestAnnoSerializer.class)
-    private LocalDateTime localDateTime;
+    @JsonSerialize(using = TimeToyyyyMMddHHmmssMiddleSerializer.class)
+    private LocalDateTime localDateTimeMiddle;
 
-    private OffsetDateTime offsetDateTime;
+    @JsonSerialize(using = TimeToyyyyMMddHHmmssMiddleSerializer.class)
+    private OffsetDateTime offsetDateTimeMiddle;
+
+
+
+
+
+    @JsonSerialize(using = TimeToyyyyMMddHHmmssSlashSerializer.class)
+    private Date dateSlash;
+
+    // @JsonSerialize(using = TimeToyyyyMMddHHmmssMiddleSerializer.class)
+    private LocalDate localDateSlash;
+
+    @JsonSerialize(using = TimeToyyyyMMddHHmmssSlashSerializer.class)
+    private LocalDateTime localDateTimeSlash;
+
+    @JsonSerialize(using = TimeToyyyyMMddHHmmssSlashSerializer.class)
+    private OffsetDateTime offsetDateTimeSlash;
+
+
+
+
+    @JsonSerialize(using = TimeToyyyyMMddMiddleSerializer.class)
+    private Date dateMiddleDay;
+
+    @JsonSerialize(using = TimeToyyyyMMddMiddleSerializer.class)
+    private LocalDate localDateMiddleDay;
+
+    @JsonSerialize(using = TimeToyyyyMMddMiddleSerializer.class)
+    private LocalDateTime localDateTimeMiddleDay;
+
+    @JsonSerialize(using = TimeToyyyyMMddMiddleSerializer.class)
+    private OffsetDateTime offsetDateTimeMiddleDay;
+
+
+
+
+    @JsonSerialize(using = TimeToyyyyMMddSlashSerializer.class)
+    private Date dateSlashDay;
+
+    @JsonSerialize(using = TimeToyyyyMMddSlashSerializer.class)
+    private LocalDate localDateSlashDay;
+
+    @JsonSerialize(using = TimeToyyyyMMddSlashSerializer.class)
+    private LocalDateTime localDateTimeSlashDay;
+
+    @JsonSerialize(using = TimeToyyyyMMddSlashSerializer.class)
+    private OffsetDateTime offsetDateTimeSlashDay;
 }
