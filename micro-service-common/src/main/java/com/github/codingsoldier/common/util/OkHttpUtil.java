@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -49,13 +50,12 @@ public class OkHttpUtil {
         if (!response.isSuccessful()) {
           log.info("http返回code非2XX，code={}", response.code());
         }
-        byte[] bytes = response.body().bytes();
-        return bytes;
+        return response.body().bytes();
       }
     } catch (IOException e) {
       log.error("OkHttp异常", e);
     }
-    return null;
+    return new byte[0];
   }
 
   /**
@@ -71,11 +71,11 @@ public class OkHttpUtil {
     Request.Builder builder = new Request.Builder();
     // 设置请求头
     if (headers != null && headers.size() > 0) {
-      headers.forEach((String key, String value) -> builder.addHeader(key, value));
+      headers.forEach(builder::addHeader);
     }
     // 拼接请求参数
     StringBuilder sb = new StringBuilder(url);
-    if (params != null && params.keySet().size() > 0) {
+    if (params != null && CollectionUtils.isNotEmpty(params.keySet())) {
       boolean firstFlag = true;
       for (Entry<String, Object> entry : params.entrySet()) {
         if (firstFlag) {
@@ -217,7 +217,7 @@ public class OkHttpUtil {
     Request.Builder builder = new Request.Builder();
     // 设置请求头
     if (headers != null && headers.size() > 0) {
-      headers.forEach((String key, String value) -> builder.addHeader(key, value));
+      headers.forEach(builder::addHeader);
     }
     // 创建body
     RequestBody requestBody = RequestBody.create(MEDIA_TYPE_JSON, jsonBody);

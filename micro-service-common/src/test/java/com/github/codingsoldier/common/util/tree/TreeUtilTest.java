@@ -32,7 +32,4 @@ class TreeUtilTest {
         assertEquals(10L, tree2.get(0).getChildren().get(0).getId());
     }
 
-    @Test
-    void tree() {
-    }
 }
