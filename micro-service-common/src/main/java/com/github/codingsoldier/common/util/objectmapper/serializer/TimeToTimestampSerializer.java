@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
- * DateTime序列化
+ * Date、LocalDateTime、OffsetDateTime、LocalDate 序列化为 时间戳
  *
  * @author cpq
  * @since 2022-03-17 11:28:55

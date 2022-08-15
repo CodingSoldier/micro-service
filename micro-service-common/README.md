@@ -1,3 +1,7 @@
 # 公共模块
+公共模块
 
-micro-service-common 不允许依赖 micro-service 任何的子模块。
+公共模块不允许依赖其他子模块
+
+不要导入spring这种重型依赖
+

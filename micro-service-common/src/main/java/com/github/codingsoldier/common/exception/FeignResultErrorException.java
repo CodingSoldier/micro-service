@@ -1,6 +1,5 @@
 package com.github.codingsoldier.common.exception;
 
-
 import com.github.codingsoldier.common.enums.ResponseCodeEnum;
 
 /**

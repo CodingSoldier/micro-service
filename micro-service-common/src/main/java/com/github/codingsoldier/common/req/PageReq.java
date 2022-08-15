@@ -9,6 +9,7 @@ import lombok.experimental.SuperBuilder;
 import java.io.Serializable;
 
 /**
+ * 分页基础请求体
  * @author chenpq
  * @since 2022/2/8 14:19
  */

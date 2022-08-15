@@ -35,13 +35,9 @@ public class FeignConstant {
      * feign接口则是
      * DemoVo demoVo(@RequestParam(value = "name", required = false) String name);
      * 当下游服务抛出异常，接口返回值不是 DemoVo，而是 Result
-     * 当 Result.code 不在 NOT_CHANGE_RESPONSE_STATUS_CODE_SET 集合中
-     *
-     * @see com.github.codingsoldier.starter.web.advice.ResponseBodyWrapperAdvice#beforeBodyWrite 会执行
-     * response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
-     * HTTP 状态码不以 2 开头的请求，被
-     * @see com.github.codingsoldier.starter.openfeign.codec.FeignErrorDecoder#decode
-     * 捕获，并抛出 ResultNotSuccessFeignException
+     * 当 Result.code 不在 NOT_CHANGE_RESPONSE_STATUS_CODE_SET 集合中。
+     * ResponseBodyWrapperAdvice#beforeBodyWrite 会设置 response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
+     * Feign调用HTTP 状态码不以 2 开头的请求，被 FeignErrorDecoder#decode 捕获，并抛出 FeignResultErrorException
      */
     @SuppressWarnings({"squid:S1171", "squid:S3599"})
     public static final Set<ResponseCodeEnum> NOT_CHANGE_RESPONSE_STATUS_CODE_SET = Collections.unmodifiableSet(new HashSet<ResponseCodeEnum>() {{

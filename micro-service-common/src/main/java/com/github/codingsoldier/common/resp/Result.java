@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 
 /**
- * 返回统一的数据结构
+ * ResponseBody返回统一的数据结构
  *
  * @author chenpq05
  * @since 2022/2/23 14:14

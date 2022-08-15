@@ -9,6 +9,7 @@ import lombok.experimental.SuperBuilder;
 import java.io.Serializable;
 
 /**
+ * id请求体
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
