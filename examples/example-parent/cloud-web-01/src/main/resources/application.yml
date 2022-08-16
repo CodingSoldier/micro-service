@@ -153,18 +153,18 @@ feign:
   sentinel:
     enabled: true
 
-logging:
-  # logback-spring.xml 已在 starter-logback 中配置好了，无需新建
-  config: classpath:logback-spring.xml
-  file:
-    # 日志根目录
-    path: /logs
-    name: ${spring.application.name}
-  level:
-    com:
-      github:
-        codingsoldier:
-          example: DEBUG
+#logging:
+#  # logback-spring.xml 已在 starter-logback 中配置好了，无需新建
+#  config: classpath:logback-spring.xml
+#  file:
+#    # 日志根目录
+#    path: /logs
+#    name: ${spring.application.name}
+#  level:
+#    com:
+#      github:
+#        codingsoldier:
+#          example: DEBUG
 
 
 #starter:
@@ -177,6 +177,20 @@ framework:
       logging:
         requestResponseLog: true
         includeHeaders: false
+
     # starter-spring-doc 配置
     spring-doc:
       title: 服务111的API
+    # starter-log4j2 配置
+    log4j2:
+      # 异常信息最大长度
+      ex-max-length: 1024
+      time-based-triggering-policy:
+        # 多久滚动一次
+        interval: 24
+      size-based-triggering-policy:
+        # 超过该大小就触发日志文件滚动更新
+        size: 1MB
+      default-rollover-strategy:
+        # 同一文件夹下文件数量到达该数量开始覆盖
+        max: 7

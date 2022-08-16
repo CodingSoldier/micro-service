@@ -26,9 +26,9 @@ log4j2.xml 比 application-log4j2.yaml 更早加载，需将日志配置文件�
         <!--<Property name="CONSOLE_LOG_PATTERN">%clr{%d{${sys:LOG_DATEFORMAT_PATTERN}}}{faint} %clr{${sys:LOG_LEVEL_PATTERN}} %clr{%pid}{magenta} %clr{-&#45;&#45;}{faint} [%X{traceId}/%X{spanId}] %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n${sys:LOG_EXCEPTION_CONVERSION_WORD}
         </Property>-->
         <!--换行打印-->
-        <Property name="CONSOLE_LOG_PATTERN">%clr{%d{${sys:LOG_DATEFORMAT_PATTERN}}}{faint} %clr{${sys:LOG_LEVEL_PATTERN}} %clr{%pid}{magenta} %clr{---}{faint} [%X{traceId}/%X{spanId}] %X{x-req-trace-id:-} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} \n  %m%n${sys:LOG_EXCEPTION_CONVERSION_WORD}
+        <Property name="CONSOLE_LOG_PATTERN">%clr{%d{${sys:LOG_DATEFORMAT_PATTERN}}}{faint} %clr{${sys:LOG_LEVEL_PATTERN}} %clr{%pid}{magenta} %clr{---}{faint} [%X{traceId}/%X{spanId}] %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} \n  %m%n${sys:LOG_EXCEPTION_CONVERSION_WORD}
         </Property>
-        <Property name="FILE_LOG_PATTERN">%d{${sys:LOG_DATEFORMAT_PATTERN}} ${sys:LOG_LEVEL_PATTERN} %pid --- [%X{traceId}/%X{spanId}] %X{x-req-trace-id:-} [%t] %-40.40c{1.} : %m%n${sys:LOG_EXCEPTION_CONVERSION_WORD}
+        <Property name="FILE_LOG_PATTERN">%d{${sys:LOG_DATEFORMAT_PATTERN}} ${sys:LOG_LEVEL_PATTERN} %pid --- [%X{traceId}/%X{spanId}] [%t] %-40.40c{1.} : %m%n${sys:LOG_EXCEPTION_CONVERSION_WORD}
         </Property>
 
         <!-- 定义日志存储的路径 -->

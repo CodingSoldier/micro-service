@@ -101,7 +101,8 @@ management:
 
 logging:
   # logback-spring.xml 已在 starter-logback 中配置好了，无需新建
-  config: classpath:logback-spring.xml
+#  config: classpath:logback-spring.xml
+  config: classpath:log4j2-spring.xml
   file:
     # 日志根目录
     path: /logs
@@ -110,16 +111,32 @@ logging:
     com:
       github:
         codingsoldier: DEBUG
+#starter:
+framework:
+  starter:
+    # springdoc配置
+    springdoc:
+      # 预加载
+      pre-loading-enabled: true
+      swagger-ui:
+      # 折叠接口
+      doc-expansion: none
+      urls:
+        - name: 服务01
+          url: /cloud-web-01/v3/api-docs
+        - name: 服务02
+          url: /cloud-web-02/v3/api-docs
 
-# springdoc配置
-springdoc:
-  # 预加载
-  pre-loading-enabled: true
-  swagger-ui:
-    # 折叠接口
-    doc-expansion: none
-    urls:
-      - name: 服务01
-        url: /cloud-web-01/v3/api-docs
-      - name: 服务02
-        url: /cloud-web-02/v3/api-docs
+    # starter-log4j2 配置
+    log4j2:
+      # 异常信息最大长度
+      ex-max-length: 1024
+      time-based-triggering-policy:
+        # 多久滚动一次
+        interval: 24
+      size-based-triggering-policy:
+        # 超过该大小就触发日志文件滚动更新
+        size: 1MB
+      default-rollover-strategy:
+        # 同一文件夹下文件数量到达该数量开始覆盖
+        max: 7

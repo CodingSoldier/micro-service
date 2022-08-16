@@ -67,6 +67,7 @@ public class ValidatedController {
     public String paramValidate(@Min(value = 10L, message = "用户id必须大于等于10") Long userId,
                              @Length(min = 6, max = 20, message = "账号长度必须是6~20位。")
                              @NotEmpty(message = "账号不能为空。") String account) {
+        log.debug("debug请求参数：{}", userId);
         log.info("请求参数：{}", userId);
         log.info("请求参数：{}", account);
         return "success";
