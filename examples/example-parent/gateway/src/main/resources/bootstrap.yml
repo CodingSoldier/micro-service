@@ -101,16 +101,14 @@ management:
 
 logging:
   # logback-spring.xml 已在 starter-logback 中配置好了，无需新建
-  config: classpath:logback-spring.xml
-#  config: classpath:log4j2-spring.xml
+#  config: classpath:logback-spring.xml
+  config: classpath:log4j2-spring.xml
   file:
     # 日志根目录
     path: /logs
     name: ${spring.application.name}
   level:
-    com:
-      github:
-        codingsoldier: DEBUG
+    com.github.codingsoldier.example: DEBUG
 #starter:
 framework:
   starter:

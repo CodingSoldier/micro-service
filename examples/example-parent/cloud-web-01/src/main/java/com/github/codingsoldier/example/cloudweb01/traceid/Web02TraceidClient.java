@@ -14,4 +14,6 @@ public interface Web02TraceidClient {
     @GetMapping(value = "/asyncAnno", produces = MediaType.APPLICATION_JSON_VALUE)
     String asyncAnno(@RequestParam("name") String name);
 
+    @GetMapping(value = "/throw/ex", produces = MediaType.APPLICATION_JSON_VALUE)
+    String throwEx(@RequestParam("name") String name);
 }

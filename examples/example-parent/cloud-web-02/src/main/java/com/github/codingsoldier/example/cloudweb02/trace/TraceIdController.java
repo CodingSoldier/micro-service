@@ -1,5 +1,6 @@
 package com.github.codingsoldier.example.cloudweb02.trace;
 
+import com.github.codingsoldier.common.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -28,6 +29,11 @@ public class TraceIdController {
     @GetMapping(value = "/asyncAnno", produces = MediaType.APPLICATION_JSON_VALUE)
     public String asyncAnno(@RequestHeader Map<String, String> headers, String name) {
         return web02Service.asyncAnno(name);
+    }
+
+    @GetMapping(value = "/throw/ex", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String throwEx(@RequestHeader Map<String, String> headers, String name) {
+        throw new AppException("测试异常traceid");
     }
 
 }

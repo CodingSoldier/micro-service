@@ -33,4 +33,10 @@ public class TraceIdController {
         return web02TraceidClient.asyncAnno(name);
     }
 
+    @GetMapping(value = "/throw/ex", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String throwEx(@RequestHeader Map<String, String> headers, String name) {
+        web02TraceidClient.throwEx(name);
+        return "aaa";
+    }
+
 }

@@ -66,14 +66,14 @@
             <artifactId>starter-spring-doc</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.github.codingsoldier</groupId>
-            <artifactId>starter-logback</artifactId>
-        </dependency>
 <!--        <dependency>-->
 <!--            <groupId>com.github.codingsoldier</groupId>-->
-<!--            <artifactId>starter-log4j2</artifactId>-->
+<!--            <artifactId>starter-logback</artifactId>-->
 <!--        </dependency>-->
+        <dependency>
+            <groupId>com.github.codingsoldier</groupId>
+            <artifactId>starter-log4j2</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.github.codingsoldier</groupId>
