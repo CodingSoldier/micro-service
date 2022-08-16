@@ -1,6 +1,7 @@
 package com.github.codingsoldier.example.cloudweb01.traceid;
 
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.MediaType;
@@ -38,5 +39,13 @@ public class TraceIdController {
         web02TraceidClient.throwEx(name);
         return "aaa";
     }
+
+    @GetMapping(value = "/get/mcd/req", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getMcdReq(@RequestHeader Map<String, String> headers, String name) {
+        String id = MDC.get("x-req-trace-id");
+        log.info("###x-req-trace-id###{}", id);
+        return "success";
+    }
+
 
 }
