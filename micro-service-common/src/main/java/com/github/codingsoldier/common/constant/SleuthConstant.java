@@ -8,6 +8,10 @@ package com.github.codingsoldier.common.constant;
  */
 public class SleuthConstant {
 
+    private SleuthConstant() {
+        // sonar
+    }
+
     /**
      * 自定义链路追踪请求头
      */
