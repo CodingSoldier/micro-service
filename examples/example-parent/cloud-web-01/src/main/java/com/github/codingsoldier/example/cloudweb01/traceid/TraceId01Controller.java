@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
+import static com.github.codingsoldier.common.sleuth.SleuthConstant.X_REQ_TRACE_ID;
+
 /**
  * 加上请求头 x-req-trace-id
  */
@@ -19,19 +21,23 @@ import java.util.Map;
 @RefreshScope
 @RestController
 @RequestMapping("/trace")
-public class TraceIdController {
+public class TraceId01Controller {
 
     @Autowired
     private Web02TraceidClient web02TraceidClient;
 
     @GetMapping(value = "/testTraceId", produces = MediaType.APPLICATION_JSON_VALUE)
     public String testTraceId(@RequestHeader Map<String, String> headers, String name) {
-        return web02TraceidClient.testTraceId(name);
+        String mdcReqTrace = MDC.get("x-req-trace-id");
+        String resp = web02TraceidClient.testTraceId(name);
+        return String.format("web01-header-%s-mdc-%s-%s", headers.get(X_REQ_TRACE_ID), mdcReqTrace, resp);
     }
 
     @GetMapping(value = "/asyncAnno", produces = MediaType.APPLICATION_JSON_VALUE)
     public String asyncAnno(@RequestHeader Map<String, String> headers, String name) {
-        return web02TraceidClient.asyncAnno(name);
+        String mdcReqTrace = MDC.get("x-req-trace-id");
+        String resp = web02TraceidClient.asyncAnno(name);
+        return String.format("web01-header-%s-mdc-%s-%s", headers.get(X_REQ_TRACE_ID), mdcReqTrace, resp);
     }
 
     @GetMapping(value = "/throw/ex", produces = MediaType.APPLICATION_JSON_VALUE)

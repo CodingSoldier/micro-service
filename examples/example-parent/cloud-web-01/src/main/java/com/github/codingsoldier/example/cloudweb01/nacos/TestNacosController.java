@@ -20,7 +20,7 @@ public class TestNacosController {
      *
      * @NacosValue 注解竟然无法获取值
      */
-    @Value("${test-nacos}")
+    @Value("${test-nacos:null}")
     // @NacosValue()
     private String testNacos;
 

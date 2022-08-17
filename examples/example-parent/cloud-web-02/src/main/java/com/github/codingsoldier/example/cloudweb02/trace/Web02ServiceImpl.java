@@ -4,10 +4,13 @@ import com.github.codingsoldier.common.util.ThreadPoolUtil;
 import com.github.codingsoldier.starter.sleuth.config.TaskTraceUtil;
 import com.github.codingsoldier.starter.sleuth.config.ThreadPoolTraceUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.Future;
+
+import static com.github.codingsoldier.common.sleuth.SleuthConstant.X_REQ_TRACE_ID;
 
 @Slf4j
 @Service
@@ -28,9 +31,14 @@ public class Web02ServiceImpl implements Web02Service {
 
         Future<String> submit = TaskTraceUtil.submit(() -> {
             log.info("###有traceid--TaskTraceUtil提交Callable");
-            return "完成";
+            return MDC.get(X_REQ_TRACE_ID);
         });
-        return name;
+        try {
+            return submit.get();
+        } catch (Exception e) {
+            log.error("异常", e);
+        }
+        return null;
     }
 
     @Override
@@ -45,9 +53,13 @@ public class Web02ServiceImpl implements Web02Service {
 
         Future<String> submit = TaskTraceUtil.submit(() -> {
             log.info("###有traceid--TaskTraceUtil提交Callable");
-            return "完成";
+            return MDC.get(X_REQ_TRACE_ID);
         });
-
-        return name;
+        try {
+            return submit.get();
+        } catch (Exception e) {
+            log.error("异常", e);
+        }
+        return null;
     }
 }
