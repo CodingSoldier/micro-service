@@ -1,4 +1,4 @@
-package com.github.codingsoldier.common.sleuth;
+package com.github.codingsoldier.common.constant;
 
 /**
  * sleuth常量

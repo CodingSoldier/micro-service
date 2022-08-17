@@ -1,6 +1,6 @@
 package com.github.codingsoldier.starter.openfeign.config;
 
-import com.github.codingsoldier.common.feign.FeignConstant;
+import com.github.codingsoldier.common.constant.FeignConstant;
 import com.github.codingsoldier.starter.openfeign.codec.FeignErrorDecoder;
 import feign.RequestInterceptor;
 import feign.codec.ErrorDecoder;

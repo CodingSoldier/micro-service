@@ -1,4 +1,4 @@
-package com.github.codingsoldier.common.feign;
+package com.github.codingsoldier.common.constant;
 
 import com.github.codingsoldier.common.enums.ResponseCodeEnum;
 

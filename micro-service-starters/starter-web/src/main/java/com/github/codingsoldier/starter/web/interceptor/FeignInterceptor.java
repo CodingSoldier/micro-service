@@ -1,7 +1,7 @@
 package com.github.codingsoldier.starter.web.interceptor;
 
 
-import com.github.codingsoldier.common.feign.FeignConstant;
+import com.github.codingsoldier.common.constant.FeignConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestAttributes;
@@ -12,7 +12,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static com.github.codingsoldier.common.feign.FeignConstant.PROVIDER_FUNTION_RETURN_TYPE;
+import static com.github.codingsoldier.common.constant.FeignConstant.PROVIDER_FUNTION_RETURN_TYPE;
 
 /**
  * feign拦截器

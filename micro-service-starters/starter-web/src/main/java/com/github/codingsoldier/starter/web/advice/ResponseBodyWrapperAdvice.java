@@ -1,7 +1,7 @@
 package com.github.codingsoldier.starter.web.advice;
 
 import com.github.codingsoldier.common.enums.ResponseCodeEnum;
-import com.github.codingsoldier.common.feign.FeignConstant;
+import com.github.codingsoldier.common.constant.FeignConstant;
 import com.github.codingsoldier.common.resp.Result;
 import com.github.codingsoldier.common.util.CommonUtil;
 import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.github.codingsoldier.common.feign.FeignConstant.PROVIDER_FUNTION_RETURN_TYPE;
+import static com.github.codingsoldier.common.constant.FeignConstant.PROVIDER_FUNTION_RETURN_TYPE;
 
 /**
  * 将controller返回值包装为Result对象，以及Response日志处理
