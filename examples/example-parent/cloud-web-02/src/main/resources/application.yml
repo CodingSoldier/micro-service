@@ -10,7 +10,6 @@ spring:
       # 服务注册发现
       discovery:
         server-addr: 192.168.1.2:8848
-        #        server-addr: nacos-dev.vanrui.com:80
         # server-addr: 127.0.0.1:8848,127.0.0.1:8849,127.0.0.1:8850 # Nacos 集群服务器地址
         namespace: namespace-example-dev
     sentinel:
@@ -91,15 +90,15 @@ feign:
   sentinel:
     enabled: true
 
-#logging:
-#  # logback-spring.xml 已在 starter-logback 中配置好了，无需新建
-#  config: classpath:logback-spring.xml
-#  file:
-#    # 日志根目录
-#    path: /logs
-#    name: ${spring.application.name}
-#  level:
-#    com.github.codingsoldier.example: DEBUG
+logging:
+  # logback-spring.xml 已在 starter-logback 中配置好了，无需新建
+  config: classpath:logback-spring.xml
+  file:
+    # 日志根目录
+    path: /logs
+    name: ${spring.application.name}
+  level:
+    com.github.codingsoldier.example: DEBUG
 
 #starter:
 framework:
@@ -109,15 +108,15 @@ framework:
       title: 服务222的API
 
    # starter-log4j2 配置
-    log4j2:
-      # 异常信息最大长度
-      ex-max-length: 1024
-      time-based-triggering-policy:
-        # 多久滚动一次
-        interval: 24
-      size-based-triggering-policy:
-        # 超过该大小就触发日志文件滚动更新
-        size: 1MB
-      default-rollover-strategy:
-        # 同一文件夹下文件数量到达该数量开始覆盖
-        max: 7
+#    log4j2:
+#      # 异常信息最大长度
+#      ex-max-length: 1024
+#      time-based-triggering-policy:
+#        # 多久滚动一次
+#        interval: 24
+#      size-based-triggering-policy:
+#        # 超过该大小就触发日志文件滚动更新
+#        size: 1MB
+#      default-rollover-strategy:
+#        # 同一文件夹下文件数量到达该数量开始覆盖
+#        max: 7
