@@ -1,13 +1,18 @@
 # starter-sleuth
 
 ## 使用方式
-引入依赖即可
+1、引入依赖
 ```xml
 <dependency>
     <groupId>com.github.codingsoldier</groupId>
     <artifactId>starter-sleuth</artifactId>
 </dependency>
 ```
+
+【可选项】 2、 前端每个http请求头带上x-req-trace-id
+，x-req-trace-id由小写英文、数字组成，长度为16位，每次http请求的x-req-trace-id不相同
+
+引入依赖 starter-logback（建议）或者 starter-log4j2
 
 ## 与 spring-cloud-sleuth-zipkin 整合
 1、导入依赖
@@ -52,3 +57,4 @@ spring:
 带trace信息的线程池工具类：ThreadPoolTraceUtil 
 
 带trace信息的线程池Callable工具类：TaskTraceUtil 
+
