@@ -37,32 +37,6 @@ public class MybatisPlusCodeGenerator {
     public static String tableName;
     public static String templatesDir = "/templates/v3";
 
-    @SuppressWarnings("squid:S1075")
-    public static void main(String[] args) {
-
-        // 数据库url
-        MybatisPlusCodeGenerator.dbUrl = "jdbc:mysql://localhost:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true";
-        // 数据库账号
-        MybatisPlusCodeGenerator.dbUsername = "root";
-        // 数据库密码
-        MybatisPlusCodeGenerator.dbPassword = "cpq..123";
-
-        // 项目 main 目录的绝对路径
-
-        MybatisPlusCodeGenerator.srcMainAbsolutePath = "E:\\github\\micro-service\\examples\\example-parent\\boot-web\\src\\main";
-        // 项目包名
-        MybatisPlusCodeGenerator.parent = "com.github.codingsoldier.bootweb.temp";
-
-        // 作者
-        MybatisPlusCodeGenerator.author = "cpq";
-        // 表名
-        MybatisPlusCodeGenerator.tableName = "user_copy1";
-
-        // 生成代码
-        MybatisPlusCodeGenerator.generate();
-
-    }
-
     private static GlobalConfig buildGlobalConfig() {
         return new GlobalConfig.Builder()
                 .disableOpenDir()
@@ -84,7 +58,6 @@ public class MybatisPlusCodeGenerator {
                 .mapper("mapper")
                 .xml("mapper")
                 .controller("controller")
-                // .other("")
                 .pathInfo(pathInfo)
                 .build();
     }

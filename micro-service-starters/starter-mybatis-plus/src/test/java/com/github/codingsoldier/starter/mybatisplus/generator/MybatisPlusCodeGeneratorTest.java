@@ -1,9 +1,11 @@
-package com.github.codingsoldier.example.bootweb;
+package com.github.codingsoldier.starter.mybatisplus.generator;
 
-
-import com.github.codingsoldier.starter.mybatisplus.generator.MybatisPlusCodeGenerator;
-
-public class GeneratorCode {
+/**
+ * 生成代码
+ * @author chenpq05
+ * @since 2022/8/18 17:00
+ */
+class MybatisPlusCodeGeneratorTest {
 
     /**
      * 注意，旧文件不会被覆盖
