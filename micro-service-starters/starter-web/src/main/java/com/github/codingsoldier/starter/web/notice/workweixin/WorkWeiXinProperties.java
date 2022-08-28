@@ -20,14 +20,14 @@ public class WorkWeiXinProperties implements Serializable {
   private boolean enable = false;
 
   /**
-   * 企业微信机器人webhook url
-   */
-  private String url;
-
-  /**
    * 信息最大长度
    */
   private Integer contentMaxLength = 1200;
+
+  /**
+   * 企业微信机器人webhook-url key
+   */
+  private String key;
 
   /**
    * 标题
@@ -51,12 +51,12 @@ public class WorkWeiXinProperties implements Serializable {
     this.enable = enable;
   }
 
-  public String getUrl() {
-    return url;
+  public String getKey() {
+    return key;
   }
 
-  public void setUrl(String url) {
-    this.url = url;
+  public void setKey(String key) {
+    this.key = key;
   }
 
   public Integer getContentMaxLength() {

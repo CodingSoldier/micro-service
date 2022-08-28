@@ -159,18 +159,30 @@ framework:
 #        # 是否包含请求头信息。默认false
 #        includeHeaders: true
 
-#      # 企业微信消息
-#      work-weixin:
-#        # 是否启用企业微信
-#        enable: true
-#        # 企业微信机器人webhook url
-#        url:
-#        # 信息最大长度，最多4000个字符
-#        contentMaxLength: 1500
-#        # 标题
-#        title: 标题
-#        # 标题颜色（只支持3种内置颜色） info 绿色 comment 灰色 warning 橙红色
-#        titleColor: comment
+      # 企业微信消息
+      work-weixin:
+        # 是否启用企业微信
+        enable: true
+        # 企业微信机器人webhook-url key
+        key: 10c91e84-b21b-446e-bec4-3d573b12906e
+        # 信息最大长度，最多4000个字符
+        contentMaxLength: 1500
+        # 标题
+        title: 标题
+        # 标题颜色（只支持3种内置颜色） info 绿色 comment 灰色 warning 橙红色
+        titleColor: comment
+      # 钉钉消息
+      ding-talk:
+        # 是否启用钉钉机器人
+        enable: true
+        # 信息最大长度
+        contentMaxLength: 1500
+        # 标题
+        title: 标题
+        # 加签
+        secret:
+        # access_token
+        accessToken:
 
 #    # starter-redis 配置
 #    redis:

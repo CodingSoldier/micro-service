@@ -42,7 +42,7 @@ public class WorkWxUtil {
   private static boolean canSendMsg(String msg) {
     return workWeiXinProperties != null
         && workWeiXinProperties.isEnable()
-        && StringUtils.isNotBlank(workWeiXinProperties.getUrl())
+        && StringUtils.isNotBlank(workWeiXinProperties.getKey())
         && StringUtils.isNotBlank(msg);
   }
 
@@ -72,7 +72,8 @@ public class WorkWxUtil {
     HashMap<String, Object> param = new HashMap<>(16);
     param.put("msgtype", "markdown");
     param.put("markdown", content);
-    OkHttpUtil.asynPost(workWeiXinProperties.getUrl(), param, callback);
+    String url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=" + workWeiXinProperties.getKey();
+    OkHttpUtil.asynPost(url, param, callback);
   }
 
   /**
@@ -105,7 +106,7 @@ public class WorkWxUtil {
   }
 
   /**
-   * 异步发送异常到企业微信消息
+   * 异步发送异常到企业微信
    *
    * @param throwable 异常
    */

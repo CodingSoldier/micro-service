@@ -60,9 +60,9 @@
             "defaultValue": false
         },
         {
-            "name": "framework.starter.web.work-weixin.url",
+            "name": "framework.starter.web.work-weixin.key",
             "type": "java.lang.String",
-            "description": "企业微信机器人webhook url",
+            "description": "企业微信机器人webhook-url key",
             "sourceType": "com.github.codingsoldier.starter.web.notice.workweixin.WorkWeiXinProperties",
             "defaultValue": ""
         },

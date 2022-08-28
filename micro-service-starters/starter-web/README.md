@@ -32,8 +32,8 @@ framework:
       work-weixin:
         # 是否启用企业微信
         enable: true
-        # 企业微信机器人webhook url
-        url: https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxxxxxxxxxxxxx
+        # 企业微信机器人webhook-url key
+        key: xxxxxxxxxxxxxx
         # 信息最大长度，最多4000个字符
         contentMaxLength: 1500
         # 标题
