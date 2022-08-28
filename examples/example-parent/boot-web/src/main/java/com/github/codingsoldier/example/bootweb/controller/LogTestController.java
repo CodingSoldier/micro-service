@@ -1,8 +1,10 @@
 package com.github.codingsoldier.example.bootweb.controller;
 
+import com.github.codingsoldier.common.exception.AppException;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +50,19 @@ public class LogTestController {
             }
         }
         return str;
+    }
+
+    @GetMapping(value = "/limit", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String printLimit(String p1) {
+
+        String stackTrace = ExceptionUtils.getStackTrace(new RuntimeException("测试信息长度限制"));
+        stackTrace = stackTrace.replaceAll("\r\n\t", "");
+        log.info(stackTrace);
+        AppException ex = new AppException("测试异常长度限制");
+        if ("logEx".equals(p1)) {
+            log.error("", ex);
+        }
+        return "success";
     }
 
 

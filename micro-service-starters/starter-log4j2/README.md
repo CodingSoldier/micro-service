@@ -40,8 +40,10 @@ framework:
   starter:
     # starter-log4j2 配置
     log4j2:
+      # 信息最大长度
+      msg-max-length: 9000
       # 异常信息最大长度
-      ex-max-length: 1024
+      ex-max-length: 2000
       time-based-triggering-policy:
         # 多久滚动一次
         interval: 24

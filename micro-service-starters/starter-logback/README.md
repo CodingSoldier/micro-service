@@ -22,8 +22,10 @@ logging:
 framework:
   starter:
     logback:
+      # 信息最大长度
+      msg-max-length: 9000
       # 异常信息最大长度
-      ex-max-length: 2048
+      ex-max-length: 2000
 ```
 
 ## 对 sleuth 的支持
