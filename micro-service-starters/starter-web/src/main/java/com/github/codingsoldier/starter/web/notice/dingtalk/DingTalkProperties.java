@@ -20,7 +20,7 @@ public class DingTalkProperties implements Serializable {
   private boolean enable = false;
 
   /**
-     * 信息最大长度
+   * 信息最大长度
    */
   private Integer contentMaxLength = 5000;
 

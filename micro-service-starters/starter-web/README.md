@@ -40,6 +40,18 @@ framework:
         title: 标题
         # 标题颜色（只支持3种内置颜色） info 绿色 comment 灰色 warning 橙红色
         titleColor: comment
+      # 钉钉消息
+      ding-talk:
+        # 是否启用钉钉机器人
+        enable: true
+        # 信息最大长度
+        contentMaxLength: 1500
+        # 标题
+        title: 标题
+        # 加签
+        secret:
+        # access_token
+        accessToken:
 ```
 
 ## open-feign、返回值包装器ResponseBodyAdvice、全局异常捕获器 整合，代码介绍
