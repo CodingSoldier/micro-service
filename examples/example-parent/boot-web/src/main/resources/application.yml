@@ -145,6 +145,10 @@ framework:
       title: boot-web的API
 
     web:
+      # 是否启用 starter-web，默认true
+      enabled: true
+      # 是否启用 WebMvcConfig 配置类，默认true
+      enableWebMvcConfig: true
       logging:
 #        # 是否打印request、responseBody日志。默认false
         requestResponseLog: true
@@ -154,10 +158,7 @@ framework:
 #        responseBodyLog: true
 #        # 是否包含请求头信息。默认false
 #        includeHeaders: true
-      # 是否启用 starter-web，默认true
-      enabled: true
-      # 是否启用 WebMvcConfig 配置类，默认true
-      enableWebMvcConfig: true
+
 #      # 企业微信消息
 #      work-weixin:
 #        # 是否启用企业微信
