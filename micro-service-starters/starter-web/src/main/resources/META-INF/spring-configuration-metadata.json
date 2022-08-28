@@ -4,6 +4,11 @@
             "name": "framework.starter.web.logging",
             "type": "com.github.codingsoldier.starter.web.properties.LoggingProperties",
             "sourceType": "com.github.codingsoldier.starter.web.properties.LoggingProperties"
+        },
+        {
+            "name": "framework.starter.web.work-weixin",
+            "type": "com.github.codingsoldier.starter.web.notice.workweixin.WorkWeiXinProperties",
+            "sourceType": "com.github.codingsoldier.starter.web.notice.workweixin.WorkWeiXinProperties"
         }
     ],
     "properties": [
@@ -46,6 +51,41 @@
             "description": "是否包含请求头信息",
             "sourceType": "com.github.codingsoldier.starter.web.properties.LoggingProperties",
             "defaultValue": false
+        },
+        {
+            "name": "framework.starter.web.work-weixin.enable",
+            "type": "java.lang.Boolean",
+            "description": "是否启用企业微信",
+            "sourceType": "com.github.codingsoldier.starter.web.notice.workweixin.WorkWeiXinProperties",
+            "defaultValue": false
+        },
+        {
+            "name": "framework.starter.web.work-weixin.url",
+            "type": "java.lang.String",
+            "description": "企业微信机器人webhook url",
+            "sourceType": "com.github.codingsoldier.starter.web.notice.workweixin.WorkWeiXinProperties",
+            "defaultValue": ""
+        },
+        {
+            "name": "framework.starter.web.work-weixin.contentMaxLength",
+            "type": "java.lang.Integer",
+            "description": "信息最大长度，最多4000个字符",
+            "sourceType": "com.github.codingsoldier.starter.web.notice.workweixin.WorkWeiXinProperties",
+            "defaultValue": 1200
+        },
+        {
+            "name": "framework.starter.web.work-weixin.title",
+            "type": "java.lang.String",
+            "description": "标题",
+            "sourceType": "com.github.codingsoldier.starter.web.notice.workweixin.WorkWeiXinProperties",
+            "defaultValue": "标题"
+        },
+        {
+            "name": "framework.starter.web.work-weixin.titleColor",
+            "type": "java.lang.String",
+            "description": "标题颜色（只支持3种内置颜色） info 绿色 comment 灰色 warning 橙红色",
+            "sourceType": "com.github.codingsoldier.starter.web.notice.workweixin.WorkWeiXinProperties",
+            "defaultValue": ""
         }
     ],
     "hints": []

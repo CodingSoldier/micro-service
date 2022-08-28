@@ -4,10 +4,13 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.github.codingsoldier.common.enums.ResponseCodeEnum;
 import com.github.codingsoldier.common.resp.Result;
 import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
+import okhttp3.*;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -142,5 +145,42 @@ class OkHttpUtilTest {
         assertEquals(1647187201000L, r44.getData().get("localDateTime"));
     }
 
+    @Test
+    void testAsynPostMap() throws Exception{
+        String url = "http://localhost:8080/boot-web/http/time";
+        HashMap<String, Object> bodyMap = new HashMap<>();
+        bodyMap.put("id", 123456);
+        bodyMap.put("localDateTime", 1647187201000L);
+
+        OkHttpUtil.asynPost(url, bodyMap, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                assertTrue(false, "请求失败");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String respBodyStr = response.body().string();
+                Result r = ObjectMapperUtil.readValue(respBodyStr, Result.class);
+                assertEquals(ResponseCodeEnum.SUCCESS.getCode(), r.getCode());
+            }
+        });
+
+        OkHttpUtil.asynPost(url, bodyMap, null, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                assertTrue(false, "请求失败");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String respBodyStr = response.body().string();
+                Result r = ObjectMapperUtil.readValue(respBodyStr, Result.class);
+                assertEquals(ResponseCodeEnum.SUCCESS.getCode(), r.getCode());
+            }
+        });
+
+        TimeUnit.SECONDS.sleep(2L);
+    }
 
 }

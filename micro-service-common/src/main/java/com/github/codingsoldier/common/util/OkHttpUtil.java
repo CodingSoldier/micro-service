@@ -231,7 +231,6 @@ public class OkHttpUtil {
     return respBody;
   }
 
-
   /**
    * post请求
    *
@@ -351,6 +350,59 @@ public class OkHttpUtil {
     String jsonBody = ObjectMapperUtil.writeValueAsString(mapBody);
     String data = postString(url, jsonBody, null);
     return ObjectMapperUtil.readValue(data, valueTypeRef);
+  }
+
+
+
+
+  /**
+   * 异步发送post请求
+   * @param url           url
+   * @param jsonBody      请求body
+   * @param headers       headers
+   * @param callback      请求返回结果
+   */
+  public static void asynPost(String url, String jsonBody, Map<String, String> headers, Callback callback) {
+    if (jsonBody == null) {
+      log.error("http post 请求，body不能为null");
+      return ;
+    }
+    // 创建builder
+    Request.Builder builder = new Request.Builder();
+    // 设置请求头
+    if (headers != null && headers.size() > 0) {
+      headers.forEach(builder::addHeader);
+    }
+    // 创建body
+    RequestBody requestBody = RequestBody.create(MEDIA_TYPE_JSON, jsonBody);
+    // 构造Request
+    Request request = builder.post(requestBody).url(url).build();
+    // 执行请求
+    log.debug("发送异步POST请求，url：{}，header：{}，body: {}", request.url(), headers, jsonBody);
+    okHttpClient.newCall(request).enqueue(callback);
+  }
+
+  /**
+   * 异步发送post请求
+   * @param url           url
+   * @param mapBody      请求body
+   * @param headers       headers
+   * @param callback      请求返回结果
+   */
+  public static void asynPost(String url, Map<String, Object> mapBody, Map<String, String> headers, Callback callback) {
+    String jsonBody = ObjectMapperUtil.writeValueAsString(mapBody);
+    asynPost(url, jsonBody, headers, callback);
+  }
+
+  /**
+   * 异步发送post请求
+   * @param url           url
+   * @param mapBody      请求body
+   * @param callback      请求返回结果
+   */
+  public static void asynPost(String url, Map<String, Object> mapBody, Callback callback) {
+    String jsonBody = ObjectMapperUtil.writeValueAsString(mapBody);
+    asynPost(url, jsonBody, null, callback);
   }
 
 }
