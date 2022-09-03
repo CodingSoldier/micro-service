@@ -1,13 +1,13 @@
 # 应用名称。必须配置
-application-name: boot-web
+applicationName: boot-web
 # 端口。必须配置
 port: 10001
 
 dev:
   # 启动命令。必须配置
-  jar-start-command: nohup java -jar -Xms256m -Xmx256m -XX:+UseConcMarkSweepGC boot-web.jar --spring.profiles.active=dev >/dev/null 2>&1 &
+  jarStartCommand: nohup java -jar -Xms256m -Xmx256m -XX:+UseConcMarkSweepGC boot-web.jar --spring.profiles.active=dev >/dev/null 2>&1 &
 
 test:
-  jar-start-command: nohup java -jar -Xms256m -Xmx256m -XX:+UseConcMarkSweepGC boot-web.jar --spring.profiles.active=test >/dev/null 2>&1 &
+  jarStartCommand: nohup java -jar -Xms256m -Xmx256m -XX:+UseConcMarkSweepGC boot-web.jar --spring.profiles.active=test >/dev/null 2>&1 &
 
 
