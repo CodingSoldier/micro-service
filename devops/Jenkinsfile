@@ -1,0 +1,74 @@
+#!groovy
+pipeline {
+    agent any
+    environment {
+        // 发布脚本目录
+        DEPLOY_SCRIPT_DIR = "/usr/local/devops"
+//         // 项目路径
+//         PROJECT_DIR = "${pwd()}/${params.project_name}"
+    }
+    stages {
+        stage('编译') {
+            steps {
+                echo "【信息】全部参数 ${params}"
+                echo "【信息】当前路径 ${pwd()}"
+
+//                 // 拉取配置文件
+//                 dir("${DEPLOY_SCRIPT_DIR}"){
+//                     git "${GIT_URL}"
+//                 }
+
+                // 需要安装插件git parameter
+                git branch: "${GIT_BRANCH}", url: "${GIT_URL}"
+//
+//                 script {
+//                     // 切换tag
+//                     if ("${params.git_tag}"){
+//                         echo "切换tag: ${PROJECT_DIR}"
+//                         sh "git checkout ${params.git_tag}"
+//                     }
+//
+//                     // 单个项目的git工程，项目路径就是当前路径
+//                     PROJECT_DIR = fileExists("${PROJECT_DIR}") ? "${PROJECT_DIR}" : "${pwd()}"
+//                 }
+//                 echo "【信息】项目路径 ${PROJECT_DIR}"
+//
+//                 // 编译
+//                 sh "mvn clean install '-Dmaven.test.skip=true'"
+//
+//                 // 拷贝jar包到远程服务器
+//                 dir("${PROJECT_DIR}"){
+//
+//                     sh "scp target/${params.project_name}*.jar devops_user@10.122.90.4:/home/devops_user/java-project/${params.project_name}.jar"
+//                 }
+//
+//                 // 拷贝启动脚本
+//                 sh "scp ${DEPLOY_SCRIPT_DIR}/java/run.sh devops_user@10.122.90.4:/home/devops_user/java-project/run.sh"
+//                 sh "scp ${DEPLOY_SCRIPT_DIR}/java-property/${params.project_name}/application-demo.yml devops_user@10.122.90.4:/home/devops_user/java-project/property/${params.project_name}/application-demo.yml"
+            }
+        }
+//         stage("部署"){
+//             steps{
+//                 script{
+//                     // 定义远程服务器信息，需要安装 SSH Pipeline Steps
+//                     def remote = [:]
+//                     remote.name = "10.122.90.4"
+//                     remote.host = "10.122.90.4"
+//                     remote.port = 22
+//                     remote.allowAnyHosts = true
+//                     withCredentials([usernamePassword(credentialsId: "10.122.90.4_devops_user", usernameVariable: 'username', passwordVariable: 'password')]) {
+//                         remote.user = username
+//                         remote.password = password
+//                     }
+//
+//                     // 远程服务器执行shell命令
+//                     sshCommand remote: remote, command: """
+//                         cd /home/devops_user/java-project
+//                         chmod +x run.sh
+//                         ./run.sh ${params.project_name}
+//                     """
+//                 }
+//             }
+//         }
+    }
+}
