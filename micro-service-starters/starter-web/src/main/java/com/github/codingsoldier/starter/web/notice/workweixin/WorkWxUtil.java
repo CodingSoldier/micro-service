@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -20,7 +21,8 @@ import java.util.HashMap;
  * @Date 2021/12/9 10:12
  * @Author chenpq
  */
-@Configuration
+@DependsOn("applicationContextHolder")
+@Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(WorkWeiXinProperties.class)
 @Slf4j
 public class WorkWxUtil {

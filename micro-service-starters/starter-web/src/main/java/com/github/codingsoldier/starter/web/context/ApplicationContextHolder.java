@@ -3,16 +3,14 @@ package com.github.codingsoldier.starter.web.context;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 /**
  * ApplicationContext 工具类
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
-@Service
-@Lazy(false)
+@Component
 public class ApplicationContextHolder implements ApplicationContextAware, DisposableBean {
 
     private static ApplicationContext applicationContext = null;

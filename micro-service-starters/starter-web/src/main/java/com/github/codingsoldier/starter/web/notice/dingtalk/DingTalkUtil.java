@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
 import javax.annotation.PostConstruct;
 import javax.crypto.Mac;
@@ -21,7 +22,8 @@ import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.HashMap;
 
-@Configuration
+@DependsOn("applicationContextHolder")
+@Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(DingTalkProperties.class)
 @Slf4j
 public class DingTalkUtil {

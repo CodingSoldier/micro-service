@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConfigurationProperties(prefix = "framework.starter.web.logging")
 public class LoggingProperties {
 
