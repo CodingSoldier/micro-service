@@ -20,7 +20,7 @@ pipeline {
                 dir("${PIPELINE_SCRIPT_DIR}") {
                     echo "【信息】获取配置文件starter"
 //                    git GIT_URL
-                    sh "mv -f devops/* ${PIPELINE_SCRIPT_DIR}/"
+                    sh "cp -f devops/* ${PIPELINE_SCRIPT_DIR}/"
                     echo "【信息】获取配置文件end"
                 }
 
