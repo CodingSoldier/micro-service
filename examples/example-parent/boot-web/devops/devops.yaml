@@ -4,7 +4,7 @@ application-name: boot-web
 port: boot-web
 
 dev:
-  jar-start-command: nohup java -jar -Xms256m -Xmx256m -XX:+UseConcMarkSweepGC boot-web.jar --spring.profiles.active=dev >/dev/null 2>&1 &
+  jar-start-command: nohup java -jar -Xms256m -Xmx256m -XX:+UseConcMarkSweepGC boot-web-10.0.0.jar --spring.profiles.active=dev >/dev/null 2>&1 &
 
 test:
   start-jar-command: nohup java -jar -Xms256m -Xmx256m -XX:+UseConcMarkSweepGC boot-web.jar --spring.profiles.active=test >/dev/null 2>&1 &

@@ -1,6 +1,6 @@
 server:
   # 服务端口
-  port: 8080
+  port: 10001
   servlet:
     context-path: /boot-web
 

@@ -25,14 +25,14 @@ class OkHttpUtilTest {
 
     @Test
     void getString() {
-        String url = "http://localhost:8080/boot-web/http/params/path/111?msg=账号不ddddddddd够长";
+        String url = "http://localhost:10001/boot-web/http/params/path/111?msg=账号不ddddddddd够长";
         String result = OkHttpUtil.getString(url, null, null);
         assertEquals(true, result.contains("\"code\":0"));
     }
 
     @Test
     void get() {
-        String url = "http://localhost:8080/boot-web/http/params/path/111?msg=账号不ddddddddd够长";
+        String url = "http://localhost:10001/boot-web/http/params/path/111?msg=账号不ddddddddd够长";
         Result result = OkHttpUtil.get(url, null, null, Result.class);
         assertEquals(ResponseCodeEnum.SUCCESS.getCode(), result.getCode());
 
@@ -42,7 +42,7 @@ class OkHttpUtilTest {
         assertEquals(ResponseCodeEnum.SUCCESS.getCode(), result.getCode());
 
         headers.put("xxxxxx", "aaaaaa");
-        result = OkHttpUtil.get("http://localhost:8080/boot-web/http/params/path/111?msg=账号不够长&name=名字",
+        result = OkHttpUtil.get("http://localhost:10001/boot-web/http/params/path/111?msg=账号不够长&name=名字",
                 params, headers, Result.class);
         assertEquals(ResponseCodeEnum.SUCCESS.getCode(), result.getCode());
         assertEquals("111账号不够长名字", result.getData());
@@ -50,7 +50,7 @@ class OkHttpUtilTest {
 
     @Test
     void testGet() {
-        String url = "http://localhost:8080/boot-web/http/params/path/111";
+        String url = "http://localhost:10001/boot-web/http/params/path/111";
         HashMap<String, Object> params = new HashMap<>();
         params.put("msg", "账号禅城南村村长");
         params.put("name", "名字");
@@ -67,7 +67,7 @@ class OkHttpUtilTest {
 
     @Test
     void testGet1() {
-        String url = "http://localhost:8080/boot-web/http/params/path/111?msg=账号禅城南村村长&name=名字";
+        String url = "http://localhost:10001/boot-web/http/params/path/111?msg=账号禅城南村村长&name=名字";
         HashMap<String, String> headers = new HashMap<>();
         headers.put("xxxxxx", "aaaaaa");
         Result result = OkHttpUtil.get(url, headers, Result.class);
@@ -81,7 +81,7 @@ class OkHttpUtilTest {
 
     @Test
     void testGet2() {
-        String url = "http://localhost:8080/boot-web/http/params/path/111?msg=账号禅城南村村长&name=名字";
+        String url = "http://localhost:10001/boot-web/http/params/path/111?msg=账号禅城南村村长&name=名字";
         Result result = OkHttpUtil.get(url, Result.class);
         assertEquals(ResponseCodeEnum.SUCCESS.getCode(), result.getCode());
         assertEquals("111账号禅城南村村长名字", result.getData());
@@ -93,14 +93,14 @@ class OkHttpUtilTest {
 
     @Test
     void postString() {
-        String url = "http://localhost:8080/boot-web/http/time";
+        String url = "http://localhost:10001/boot-web/http/time";
         String result = OkHttpUtil.postString(url, "{}", null);
         assertEquals(true, result.contains("\"code\":0"));
     }
 
     @Test
     void testPost() {
-        String url = "http://localhost:8080/boot-web/http/time";
+        String url = "http://localhost:10001/boot-web/http/time";
         HashMap<String, Object> bodyMap = new HashMap<>();
         bodyMap.put("id", 123456);
         bodyMap.put("localDateTime", 1647187201000L);
@@ -124,7 +124,7 @@ class OkHttpUtilTest {
 
     @Test
     void testPost1() {
-        String url = "http://localhost:8080/boot-web/http/time";
+        String url = "http://localhost:10001/boot-web/http/time";
         HashMap<String, Object> bodyMap = new HashMap<>();
         bodyMap.put("id", 123456);
         bodyMap.put("localDateTime", 1647187201000L);
@@ -147,7 +147,7 @@ class OkHttpUtilTest {
 
     @Test
     void testAsynPostMap() throws Exception{
-        String url = "http://localhost:8080/boot-web/http/time";
+        String url = "http://localhost:10001/boot-web/http/time";
         HashMap<String, Object> bodyMap = new HashMap<>();
         bodyMap.put("id", 123456);
         bodyMap.put("localDateTime", 1647187201000L);
