@@ -72,12 +72,12 @@ DemoVo reqRespDemoVo(@RequestBody DemoVo demoVo);
 
 解决方式：
 
-每个feign请求都加上请求头 is-feign-request = true。代码
+每个feign请求都加上请求头 is-feign-request = true。代码位置
 ```java
 FeignConfig.requestInterceptor()
 ```
 
-ResponseBodyAdvice 判断请求头，如果带有 is-feign-request = true，不包装 Controller 返回值。代码：
+ResponseBodyAdvice 判断请求头，如果带有 is-feign-request = true，不包装 Controller 返回值。代码位置：
 ```java
 ResponseBodyWrapperAdvice#handleBody()
 ```
