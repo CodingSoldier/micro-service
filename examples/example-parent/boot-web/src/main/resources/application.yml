@@ -104,7 +104,7 @@ springdoc:
   # 预加载
   pre-loading-enabled: true
   # 扫描路径
-  packages-to-scan: com.github.codingsoldier.bootweb
+  packages-to-scan: com.github.codingsoldier.example.bootweb
 
 framework:
   starter:
