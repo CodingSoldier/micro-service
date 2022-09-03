@@ -3,7 +3,7 @@ pipeline {
     agent any
     environment {
         // CICD脚本目录
-        PIPELINE_SCRIPT_DIR = "/usr/local/devops"
+        PIPELINE_SCRIPT_DIR = "/usr/local/devops-script"
         // 应用根目录绝对路径
         APPLICATION_ROOT_ABSOLUTE = getApplicationRootAbsolute()
         DEVOPS_DATA = null
