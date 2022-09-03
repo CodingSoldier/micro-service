@@ -6,7 +6,7 @@ pipeline {
         PIPELINE_SCRIPT_DIR = "/usr/local/devops/"
         // 应用根目录绝对路径
         APPLICATION_ROOT_ABSOLUTE = getApplicationRootAbsolute()
-        DEVOPS_DATA = null
+        DEVOPS_DATA = [:]
     }
     stages {
         stage('编译') {
