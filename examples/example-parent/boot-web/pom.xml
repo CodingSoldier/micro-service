@@ -99,6 +99,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.github.codingsoldier.example.bootweb.BootWebApplication</mainClass>
+                </configuration>
             </plugin>
         </plugins>
 
