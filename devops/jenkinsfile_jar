@@ -25,7 +25,9 @@ pipeline {
                 // 需要安装插件git parameter
                 git branch: "${GIT_BRANCH}", url: "${GIT_URL}"
                 dir(APPLICATION_ROOT_ABSOLUTE) {
-                    DEVOPS_DATA = getDevopsData()
+                    script {
+                        DEVOPS_DATA = getDevopsData()
+                    }
                     sh "mvn clean install -D maven.test.skip=true"
                 }
             }
