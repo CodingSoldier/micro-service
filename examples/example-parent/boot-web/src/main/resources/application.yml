@@ -1,4 +1,6 @@
 server:
+  # 开启优雅停机，默认值：immediate 为立即关闭
+  shutdown: graceful
   # 服务端口
   port: 10001
   servlet:
@@ -7,6 +9,9 @@ server:
 spring:
   application:
     name: boot-web
+  lifecycle:
+    # 停机缓冲时间，默认：30秒
+    timeout-per-shutdown-phase: 30s
   datasource:
     username: root
     password: cpq..123

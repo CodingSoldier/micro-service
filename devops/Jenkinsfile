@@ -4,37 +4,51 @@ pipeline {
     environment {
         // 发布脚本目录
         DEPLOY_SCRIPT_DIR = "/usr/local/devops"
-//         // 项目路径
-//         PROJECT_DIR = "${pwd()}/${params.project_name}"
+        // 应用根目录绝对路径
+        APPLICATION_ROOT_ABSOLUTE = getApplicationRootAbsolute()
+        DEVOPS_DATA = null
     }
+//    parameters {
+//        string(name: 'APPLICATION_ROOT_DIR', defaultValue: "${pwd()}", description: '应用根目录')
+//    }
     stages {
         stage('编译') {
             steps {
-                echo "【信息】全部参数 ${params}"
-                echo "【信息】当前路径 ${pwd()}"
+                echo "【信息】所有环境变量初始值"
+                sh "printenv"
 
-//                 // 拉取配置文件
-//                 dir("${DEPLOY_SCRIPT_DIR}"){
-//                     git "${GIT_URL}"
-//                 }
+                echo "【信息】全部参数：${params}"
+
+                //                 // 拉取配置文件
+                //                 dir("${DEPLOY_SCRIPT_DIR}"){
+                //                     git "${GIT_URL}"
+                //                 }
 
                 // 需要安装插件git parameter
                 git branch: "${GIT_BRANCH}", url: "${GIT_URL}"
-//
-//                 script {
-//                     // 切换tag
-//                     if ("${params.git_tag}"){
-//                         echo "切换tag: ${PROJECT_DIR}"
-//                         sh "git checkout ${params.git_tag}"
-//                     }
-//
-//                     // 单个项目的git工程，项目路径就是当前路径
-//                     PROJECT_DIR = fileExists("${PROJECT_DIR}") ? "${PROJECT_DIR}" : "${pwd()}"
-//                 }
-//                 echo "【信息】项目路径 ${PROJECT_DIR}"
-//
-//                 // 编译
-//                 sh "mvn clean install '-Dmaven.test.skip=true'"
+                dir(APPLICATION_ROOT_ABSOLUTE) {
+                    getDevopsData()
+                    sh "mvn clean install -D maven.test.skip=true"
+                    script {
+                        for (int i = 0; i < DEVOPS_DATA.envData.ipArr.length; i++) {
+                            def serverIp = DEVOPS_DATA.envData.ipArr[i]
+                            sh """
+                        scp target/*.jar root@${serverIp}:/usr/local/${DEVOPS_DATA.applicationName}.jar
+                        ssh root@${serverIp} "cd /usr/local ; ${DEVOPS_DATA.envData.jarStartCommand}"
+                       """
+                        }
+                    }
+                }
+
+//                script {
+//                    // 切换tag
+//                    if ("${GIT_TAG}") {
+//                        echo "切换tag: ${PROJECT_DIR}"
+//                        sh "git checkout ${GIT_TAG}"
+//                    }
+//                }
+
+
 //
 //                 // 拷贝jar包到远程服务器
 //                 dir("${PROJECT_DIR}"){
@@ -72,3 +86,44 @@ pipeline {
 //         }
     }
 }
+
+/**
+ * 获取应用根目录绝对路径
+ */
+def getApplicationRootAbsolute() {
+    return params.APPLICATION_ROOT_DIR ? pwd() + "/" + params.APPLICATION_ROOT_DIR : pwd()
+}
+
+def stringIsBlank(str) {
+    str == null || "" == str.trim()
+}
+
+/**
+ * 需要去Available下安装 pipeline utility steps
+ */
+def getDevopsData() {
+
+    String[] devopsOptionArr = DEVOPS_OPTION.split('-')
+    def devopsEnv = devopsOptionArr[0]
+    String[] ipArr = devopsOptionArr[1].split(',')
+
+    DEVOPS_DATA = readYaml file:"${APPLICATION_ROOT_ABSOLUTE}/devops/devops.yaml"
+
+//    if (DEVOPS_DATA == "" ) {
+//        echo "【错误】devops/devops.yaml读取结果=${DEVOPS_DATA}"
+//        throw new RuntimeException("【错误】读取devops/devops.yaml的结果为空")
+//    }
+
+    DEVOPS_DATA.envData = devopsEnv == "dev" ? DEVOPS_DATA.dev
+            : devopsEnv == "test" ? DEVOPS_DATA.test
+            : devopsEnv == "uat" ? DEVOPS_DATA.uat
+            : devopsEnv == "prod" ? DEVOPS_DATA.prod
+            : [:]
+
+    DEVOPS_DATA.envData.devopsEnvName = devopsEnv
+    DEVOPS_DATA.envData.ipArr = ipArr
+
+    echo "【信息】devops/devops.yaml读取结果=${DEVOPS_DATA}"
+
+}
+
