@@ -3,7 +3,7 @@ pipeline {
     agent any
     environment {
         // CICD脚本目录
-        PIPELINE_SCRIPT_DIR = "/usr/local/devops/"
+        PIPELINE_SCRIPT_DIR = "/usr/local/devops"
         // 应用根目录绝对路径
         APPLICATION_ROOT_ABSOLUTE = getApplicationRootAbsolute()
         DEVOPS_DATA = [:]
@@ -18,8 +18,8 @@ pipeline {
 
                 // 拉取部署文件
                 dir("${PIPELINE_SCRIPT_DIR}") {
-                    git "${GIT_URL}"
-                    sh "mv -f devops/* ${PIPELINE_SCRIPT_DIR}"
+                    git GIT_URL
+                    sh "mv -f devops/* ${PIPELINE_SCRIPT_DIR}/"
                 }
 
                 // 需要安装插件git parameter
