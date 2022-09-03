@@ -23,7 +23,7 @@ pipeline {
                 }
 
                 // 需要安装插件git parameter
-                git branch: "${GIT_BRANCH}", url: "${GIT_URL}"
+                git branch: "${APPLICATION_GIT_BRANCH}", url: "${APPLICATION_GIT_URL}"
                 dir(APPLICATION_ROOT_ABSOLUTE) {
                     script {
                         DEVOPS_DATA = getDevopsData()
