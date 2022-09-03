@@ -37,8 +37,10 @@ pipeline {
                         for (int i = 0; i < DEVOPS_DATA.envData.ipArr.length; i++) {
                             def serverIp = DEVOPS_DATA.envData.ipArr[i]
                             sh """
-                                scp target/*.jar root@${serverIp}:/usr/local/${DEVOPS_DATA.applicationName}.jar
-                                ssh root@${serverIp} "cd /usr/local ; ${DEVOPS_DATA.envData.jarStartCommand}"
+                                ssh root@${serverIp} "mkdir /usr/local/${DEVOPS_DATA.applicationName}"
+                                scp target/*.jar root@${serverIp}:/usr/local/${DEVOPS_DATA.applicationName}/${DEVOPS_DATA.applicationName}.jar
+                                scp ${PIPELINE_SCRIPT_DIR}/deploy_jar.sh root@${serverIp}:/usr/local/${DEVOPS_DATA.applicationName}/deploy_jar.sh
+                                ssh root@${serverIp} "chmod +x ${PIPELINE_SCRIPT_DIR}/deploy_jar.sh; ${PIPELINE_SCRIPT_DIR}/deploy_jar.sh ${DEVOPS_DATA.applicationName}.jar ${DEVOPS_DATA.envData.stopStartInterval} ${DEVOPS_DATA.envData.jarStartCommand}"
                                """
                         }
                     }

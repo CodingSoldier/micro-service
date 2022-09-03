@@ -23,6 +23,7 @@ if [ -n "$project_pid" ]; then
 fi
 
 # 备份
+mkdir backup
 sudo cp -f $jar_name.jar backup/$jar_name.jar.`date '+%Y%m%d_%H.%M.%S'`
 
 # 启动
