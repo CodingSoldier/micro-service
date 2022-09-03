@@ -15,6 +15,7 @@ if [ -n "$project_pid" ]; then
     sudo kill -15 $project_pid
 fi
 
+echo "【信息】等待$sleep_time"
 sleep $sleep_time
 
 project_pid=$(ps -ef | grep $jar_name.jar | grep java | awk '{print $2}')

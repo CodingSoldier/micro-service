@@ -44,7 +44,7 @@ pipeline {
                                 ssh root@${serverIp} "mkdir -p /usr/local/${DEVOPS_DATA.applicationName}"
                                 scp target/*.jar root@${serverIp}:/usr/local/${DEVOPS_DATA.applicationName}/${DEVOPS_DATA.applicationName}.jar
                                 scp ${PIPELINE_SCRIPT_DIR}/deploy_jar.sh root@${serverIp}:/usr/local/${DEVOPS_DATA.applicationName}/deploy_jar.sh
-                                ssh root@${serverIp} "chmod +x /usr/local/${DEVOPS_DATA.applicationName}/deploy_jar.sh; /usr/local/${DEVOPS_DATA.applicationName}/deploy_jar.sh ${DEVOPS_DATA.applicationName} ${DEVOPS_DATA.envData.stopStartInterval}"
+                                ssh root@${serverIp} "cd /usr/local/${DEVOPS_DATA.applicationName}; chmod +x deploy_jar.sh; ./deploy_jar.sh ${DEVOPS_DATA.applicationName} ${DEVOPS_DATA.envData.stopStartInterval}"
                                """
                         }
                     }
