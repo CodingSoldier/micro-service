@@ -1,10 +1,10 @@
 # 应用名称。必须配置
 applicationName: cloud-web-01
 
-# 端口。必须配置
+# 端口。docker部署必须配置
 port: 8001
 
-# docker镜像的项目名。必须配置
+# docker镜像的项目名。docker部署必须配置
 imageProjectName: example
 
 dev:
