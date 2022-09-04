@@ -1,0 +1,20 @@
+# 应用名称。必须配置
+applicationName: cloud-web-01
+
+# 端口。必须配置
+port: 8001
+
+# docker镜像的项目名
+imageProjectName: example
+
+dev:
+  # 启动命令，在容器中启动，不必后台启动。必须配置
+  jarStartCommand: java -jar -Xms256m -Xmx256m -XX:+UseConcMarkSweepGC cloud-web-01.jar --spring.cloud.nacos.config.server-addr=192.168.1.3:8848 --spring.cloud.nacos.discovery.server-addr=192.168.1.3:8848
+  # 停止旧服务 与 启动新服务 之间的时间间隔
+  stopStartInterval: 32s
+
+test:
+  jarStartCommand: java -jar -Xms256m -Xmx256m -XX:+UseConcMarkSweepGC cloud-web-01.jar --spring.cloud.nacos.config.server-addr=192.168.1.3:8848 --spring.cloud.nacos.discovery.server-addr=192.168.1.3:8848
+  stopStartInterval: 32s
+
+
