@@ -11,7 +11,7 @@ spring:
     name: boot-web
   lifecycle:
     # 停机缓冲时间，默认：30秒
-    timeout-per-shutdown-phase: 30s
+    timeout-per-shutdown-phase: 10s
   datasource:
     username: root
     password: cpq..123
