@@ -26,7 +26,7 @@ spec:
       containers:
         - name: cloud-web-02
           # 镜像版本
-          image: 192.168.1.239/example/cloud-web-02:d2022-09-06t20-51-55
+          image: 192.168.1.239/example/cloud-web-02:d2022-09-07t00-04-30
           # 容器端口
           ports:
             - name: http
