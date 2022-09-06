@@ -10,7 +10,7 @@ dev:
   # 1、必须包含 --name 参数，以便停止删除旧容器
   # 2、部署时在Jenkins上填写 DOCKER_IMAGE。在命令中使用 ${DOCKER_IMAGE} 可获取 DOCKER_IMAGE 的值
   dockerRunCommand: docker run -p 10001:10001 --name cloud-web-01
-    -e JVM_OPTIONS="-Xms256m -Xmx256m -XX:+UseConcMarkSweepGC"
+    -e JVM_OPTIONS='-Xms256m -Xmx256m -XX:+UseConcMarkSweepGC'
     -e PROJECT_ARGUMENTS="--spring.cloud.nacos.config.server-addr=192.168.1.3:8848 --spring.cloud.nacos.discovery.server-addr=192.168.1.3:8848"
     -d 192.168.1.239/example/cloud-web-01:latest
 
