@@ -9,7 +9,7 @@ server:
 spring:
   lifecycle:
     # 停机缓冲时间，默认：30秒
-    timeout-per-shutdown-phase: 30s
+    timeout-per-shutdown-phase: 10s
   cloud:
     nacos:
       # 服务注册发现
