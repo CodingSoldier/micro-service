@@ -5,12 +5,12 @@ metadata:
   name: deployment-cloud-web-02
 spec:
   # pod数量
-  replicas: 1
+  replicas: 2
   strategy:
     type: RollingUpdate
     rollingUpdate:
       # 超过期望的可用pod个数。
-      maxSurge: 2
+      maxSurge: 1
       # 在升级过程中不可用Pod的最大数量
       maxUnavailable: 0
   selector:
