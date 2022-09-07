@@ -4,7 +4,24 @@ applicationName: cloud-web-02
 # 镜像组
 imageGroup: example
 
+# 端口号，不使用自定义的Dockerfile时必须配置
+port: 8002
+
+# 自定义的Dockerfile。Dockerfile 以及 相关文件 必须放在cicd目录下
+#dockerfile: Dockerfile
+
 dev:
-  # k8s部署文件
-  k8sDeployFile: k8s-deploy.yaml
+  # 自定义的k8s部署文件名
+  #k8sDeployFile: k8s-deploy.yaml
+  k8sDeployArgument:
+    replicas: 2
+    terminationGracePeriodSeconds: 15s
+    jvmOptions: -Xms400m -Xmx400m -XX:+UseConcMarkSweepGC
+    projectArguments: --spring.cloud.nacos.config.server-addr=192.168.1.3:8848 --spring.cloud.nacos.discovery.server-addr=192.168.1.3:8848
+    requestsMemory: 512Mi
+    requestsCpu: 500m
+    limitsMemory: 700Mi
+    limitsCpu: 1000m
+    probePath: /cloud-web-02/actuator/info
+    initialDelaySeconds: 20
 

@@ -7,7 +7,7 @@ imageGroup: example
 # 端口号，不使用自定义的Dockerfile时必须配置
 port: 8001
 
-# 自定义的Dockerfile路径。Dockerfile 以及 相关文件 必须放在cicd目录下
+# 自定义的Dockerfile。Dockerfile 以及 相关文件 必须放在cicd目录下
 #dockerfile: Dockerfile
 
 dev:
