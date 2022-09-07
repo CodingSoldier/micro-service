@@ -1,8 +1,13 @@
 # 应用名称。必须配置
 applicationName: cloud-web-01
 
-# 镜像组
+# 镜像组。必须配置
 imageGroup: example
+
+port: 8001
+
+# 自定义的Dockerfile路径。Dockerfile 以及 相关文件 必须放在cicd目录下
+dockerfile: Dockerfile
 
 dev:
   # docker启动命令
