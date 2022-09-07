@@ -4,6 +4,7 @@ applicationName: cloud-web-01
 # 镜像组。必须配置
 imageGroup: example
 
+# 端口号，不使用自定义的Dockerfile时必须配置
 port: 8001
 
 # 自定义的Dockerfile路径。Dockerfile 以及 相关文件 必须放在cicd目录下
