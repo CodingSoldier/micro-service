@@ -15,7 +15,7 @@ public class StartRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         log.info("###################profile-val={}", profileVal);
-        log.info("@@@@@@@@@@@@@@@@@@@@@@@@@修改了代码");
+        log.info("333333333333修改了代码");
     }
 
 }
