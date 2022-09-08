@@ -114,6 +114,9 @@ spec:
   minReplicas: 1
   maxReplicas: 3
   behavior:
+    scaleDown:
+      # 稳定窗口时间
+      stabilizationWindowSeconds: 60
     scaleUp:
       # 稳定窗口时间
       stabilizationWindowSeconds: 60
@@ -132,7 +135,7 @@ spec:
         target:
           type: Utilization
           averageUtilization: 80
-    # 每个 Pod 每秒能够服务 1000 个数据包请求
+    # pod每秒查询率
     - type: Pods
       pods:
         metric:
