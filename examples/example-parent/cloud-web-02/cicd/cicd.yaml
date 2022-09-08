@@ -1,7 +1,7 @@
 # 应用名称。必须配置
 applicationName: cloud-web-02
 
-# 镜像组
+# 镜像组。必须配置
 imageGroup: example
 
 # 端口号，不使用自定义的Dockerfile时必须配置
