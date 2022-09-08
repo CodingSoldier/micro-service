@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deployment-cloud-web-02
+  name: cloud-web-02
 spec:
   # pod数量
   replicas: 1
@@ -106,7 +106,7 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: cloud-web-02
 spec:
-  # 指定缩放的对象是php-apache Deployment
+  # 指定缩放的对象是cloud-web-02 Deployment
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
