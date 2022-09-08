@@ -149,6 +149,5 @@ spec:
         target:
           type: Value
           value: 10k
-  initialReadinessDelay:
-    value: 200
+  initialReadinessDelay: 200
 
