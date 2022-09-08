@@ -1,6 +1,7 @@
 package com.github.codingsoldier.example.cloudweb02.k8s;
 
 
+import com.github.codingsoldier.common.util.CommonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +26,18 @@ public class K8sHpaController {
             MemObj memObj = new MemObj(UUID.randomUUID().toString(), n, new byte[n]);
             map.put(UUID.randomUUID().toString(), memObj);
             log.info("########mem###{}", i);
+        }
+        return "ok";
+    }
+
+    @RequestMapping("/cpu")
+    public String cpu(@RequestParam("num") Integer num) {
+        for (int i = 0; i < num; i++) {
+            new Thread(() -> {
+                while (true) {
+                    log.info("########mem###{}", CommonUtil.uuid32());
+                }
+            }).start();
         }
         return "ok";
     }

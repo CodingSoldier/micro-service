@@ -114,20 +114,20 @@ spec:
   minReplicas: 1
   maxReplicas: 10
   metrics:
-    # 每个 Pod 的 CPU 利用率在 50% 以内
+    # 每个 Pod 的 CPU 利用率在 90% 以内
     - type: Resource
       resource:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: 50
-    # 每个 Pod 的内存利用率在 60% 以内
+          averageUtilization: 90
+    # 每个 Pod 的内存利用率在 80% 以内
     - type: Resource
       resource:
         name: memory
         target:
           type: Utilization
-          averageUtilization: 60
+          averageUtilization: 80
     # 每个 Pod 每秒能够服务 1000 个数据包请求
     - type: Pods
       pods:
@@ -136,7 +136,7 @@ spec:
         target:
           type: AverageValue
 #          averageValue: 1k
-          averageValue: 3
+          averageValue: 15
     # Ingress 后的 Pod 每秒能够服务的请求总数达到 10000 个
     - type: Object
       object:
