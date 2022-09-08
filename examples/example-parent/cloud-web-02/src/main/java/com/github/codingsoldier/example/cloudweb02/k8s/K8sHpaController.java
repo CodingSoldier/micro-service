@@ -44,7 +44,7 @@ public class K8sHpaController {
 
     @RequestMapping("/packets-per-second")
     public String packetsPerSecond(@RequestParam("num") Integer num) {
-        log.info("###########packetsPerSecond#######{}", num);
+        log.info("#######packetsPerSecond#######{}", num);
         return "ok";
     }
 }
