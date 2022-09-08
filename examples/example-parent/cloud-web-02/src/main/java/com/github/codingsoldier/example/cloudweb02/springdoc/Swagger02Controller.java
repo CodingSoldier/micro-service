@@ -8,7 +8,7 @@ import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.web.bind.annotation.*;
 
 
-@Tag(name = "测试swagger02222-API")
+@Tag(name = "测试swagger-API")
 @Slf4j
 @RestController
 @RequestMapping("/s02")
