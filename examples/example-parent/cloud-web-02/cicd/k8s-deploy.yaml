@@ -41,11 +41,11 @@ spec:
           # 资源限制
           resources:
             requests:
-              memory: 512Mi
-              cpu: 500m
+              memory: "512Mi"
+              cpu: "500m"
             limits:
-              memory: 700Mi
-              cpu: 1000m
+              memory: "700Mi"
+              cpu: "1000m"
           lifecycle:
             # 在容器被终止前睡眠一段时间，以便kube-proxy更新service的endpoint
             preStop:
@@ -111,7 +111,7 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: cloud-web-02
-  minReplicas: 1
+  minReplicas: 0
   maxReplicas: 3
   behavior:
     scaleDown:
@@ -144,17 +144,5 @@ spec:
           type: AverageValue
 #          averageValue: 1k
           averageValue: 15
-#    # Ingress 后的 Pod 每秒能够服务的请求总数达到 10000 个
-#    - type: Object
-#      object:
-#        metric:
-#          name: requests-per-second
-#        describedObject:
-#          apiVersion: networking.k8s.io/v1beta1
-#          kind: Ingress
-#          # Ingress的名称
-#          name: ingress-rule
-#        target:
-#          type: Value
-#          value: 10k
+
 
