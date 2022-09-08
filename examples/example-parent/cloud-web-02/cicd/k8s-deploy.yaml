@@ -112,7 +112,7 @@ spec:
     kind: Deployment
     name: cloud-web-02
   minReplicas: 1
-  maxReplicas: 10
+  maxReplicas: 3
   behavior:
     scaleUp:
       stabilizationWindowSeconds: 60
