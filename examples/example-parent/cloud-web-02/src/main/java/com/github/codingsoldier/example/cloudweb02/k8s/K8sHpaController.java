@@ -23,7 +23,7 @@ public class K8sHpaController {
     public String mem(@RequestParam("num") Integer num) {
         for (int i = 0; i < num; i++) {
             int n = new Random().nextInt(Integer.MAX_VALUE);
-            MemObj memObj = new MemObj(UUID.randomUUID().toString(), n, new byte[n]);
+            MemObj memObj = new MemObj(UUID.randomUUID().toString(), n, new byte[num*1024*1024]);
             map.put(UUID.randomUUID().toString(), memObj);
             log.info("########mem###{}", i);
         }

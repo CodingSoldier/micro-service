@@ -115,6 +115,7 @@ spec:
   maxReplicas: 3
   behavior:
     scaleUp:
+      # 稳定窗口时间
       stabilizationWindowSeconds: 60
   metrics:
     # 每个 Pod 的 CPU 利用率在 90% 以内
