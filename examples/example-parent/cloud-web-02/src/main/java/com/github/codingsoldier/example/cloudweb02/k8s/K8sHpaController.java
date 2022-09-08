@@ -48,4 +48,6 @@ public class K8sHpaController {
         return "ok";
     }
 
+
+
 }
