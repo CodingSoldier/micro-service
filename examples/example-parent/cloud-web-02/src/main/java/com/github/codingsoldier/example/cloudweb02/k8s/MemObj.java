@@ -19,4 +19,6 @@ public class MemObj  implements Serializable {
     private Integer num;
     private byte[]  bytes;
 
+
+
 }
