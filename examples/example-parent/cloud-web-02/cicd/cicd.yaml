@@ -35,12 +35,12 @@ dev:
 #    initialDelaySeconds: 20
     # 健康检查URI，必填
     probePath: /cloud-web-02/actuator/info
-    # 水平伸缩，最小副本
+    # 水平伸缩，最小副本。非必填，默认0
     minReplicas: 0
-    # 水平伸缩，最大副本
+    # 水平伸缩，最大副本。非必填，默认3
     maxReplicas: 3
-    # 水平伸缩，稳定窗口时间，单位秒
+    # 水平伸缩，稳定窗口时间，单位秒。非必填，默认60
     stabilizationWindowSeconds: 60
-    # 水平伸缩，pod每秒查询率
+    # 水平伸缩，pod每秒查询率。非必填，默认1K
     requestsPerSecond: 1K
 
