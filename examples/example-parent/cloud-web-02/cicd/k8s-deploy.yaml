@@ -44,7 +44,7 @@ spec:
               memory: 512Mi
               cpu: 500m
             limits:
-              memory: 512Mi
+              memory: 700Mi
               cpu: 1000m
           lifecycle:
             # 在容器被终止前睡眠一段时间，以便kube-proxy更新service的endpoint
