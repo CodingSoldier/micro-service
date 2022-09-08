@@ -47,7 +47,4 @@ public class K8sHpaController {
         log.info("###########packetsPerSecond#######{}", num);
         return "ok";
     }
-
-
-
 }
