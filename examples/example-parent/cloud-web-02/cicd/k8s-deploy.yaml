@@ -4,8 +4,8 @@ kind: Deployment
 metadata:
   name: cloud-web-02
 spec:
-  # pod数量
-  replicas: 1
+#  # pod数量
+#  replicas: 1
   strategy:
     type: RollingUpdate
     rollingUpdate:
