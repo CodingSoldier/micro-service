@@ -12,7 +12,7 @@ port: 8002
 
 dev:
   # 自定义的k8s部署文件名
-#  k8sDeployFile: k8s-deploy.yaml
+  k8sDeployFile: k8s-deploy.yaml
   # 使用默认的k8s部署文件的参数配置。配置 k8sDeployFile 后，本参数无效。probePath为必填项
   k8sDeployArgument:
 #    # pod数量。非必填，默认2

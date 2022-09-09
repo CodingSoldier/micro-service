@@ -121,20 +121,20 @@ spec:
       # 稳定窗口时间
       stabilizationWindowSeconds: 60
   metrics:
-    # 每个 Pod 的 CPU 利用率在 90% 以内
-    - type: Resource
-      resource:
-        name: cpu
-        target:
-          type: Utilization
-          averageUtilization: 90
-    # 每个 Pod 的内存利用率在 80% 以内
-    - type: Resource
-      resource:
-        name: memory
-        target:
-          type: Utilization
-          averageUtilization: 80
+#    # 每个 Pod 的 CPU 利用率在 90% 以内
+#    - type: Resource
+#      resource:
+#        name: cpu
+#        target:
+#          type: Utilization
+#          averageUtilization: 90
+#    # 每个 Pod 的内存利用率在 80% 以内
+#    - type: Resource
+#      resource:
+#        name: memory
+#        target:
+#          type: Utilization
+#          averageUtilization: 80
     # pod每秒查询率
     - type: Pods
       pods:
