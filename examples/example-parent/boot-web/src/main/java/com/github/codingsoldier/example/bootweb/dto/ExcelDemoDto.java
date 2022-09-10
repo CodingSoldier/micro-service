@@ -23,4 +23,8 @@ public class ExcelDemoDto {
      */
     @ExcelIgnore
     private String ignore;
+
+    public static void main(String[] args) {
+
+    }
 }

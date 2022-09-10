@@ -1,6 +1,14 @@
 # 应用名称。必须配置
 applicationName: boot-web
 
+notice:
+  wx:
+    key: 293007f2-bb86-4118-867b-208836359194
+    ciSuccessSend: true
+    cdSuccessSend: true
+    ciFailureSend: true
+    cdFailureSend: true
+
 dev:
   # 启动命令，&必须转译为\&。必须配置
   jarStartCommand: nohup java -jar -Xms256m -Xmx256m -XX:+UseConcMarkSweepGC boot-web.jar --spring.profiles.active=dev >/dev/null 2>\\&1 \\&
