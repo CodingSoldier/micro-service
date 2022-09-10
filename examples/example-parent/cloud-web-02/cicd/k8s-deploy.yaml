@@ -142,7 +142,6 @@ spec:
         name: packets-per-second
       target:
         type: AverageValue
-#          averageValue: 1k
         averageValue: 15
   # Ingress 后的 Pod 每秒能够服务的请求总数达到 10000 个
   - type: Object
