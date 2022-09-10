@@ -139,7 +139,7 @@ spec:
     - type: Pods
       pods:
         metric:
-          name: requests-per-second
+          name: packets-per-second
         target:
           type: AverageValue
 #          averageValue: 1k
