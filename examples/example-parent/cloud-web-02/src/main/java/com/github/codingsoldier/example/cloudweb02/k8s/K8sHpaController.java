@@ -19,22 +19,33 @@ public class K8sHpaController {
 
     public Map map = new HashMap();
 
+    public final Map<String, Integer> cpu = new HashMap();
+
     @RequestMapping("/mem")
-    public String mem(@RequestParam("num") Integer num) {
+    public String mem(@RequestParam("num") Integer num,
+                      @RequestParam(defaultValue = "0") Integer clear) {
         for (int i = 0; i < num; i++) {
             int n = new Random().nextInt(Integer.MAX_VALUE);
             MemObj memObj = new MemObj(UUID.randomUUID().toString(), n, new byte[num*1024*1024]);
             map.put(UUID.randomUUID().toString(), memObj);
             log.info("########mem###{}", i);
         }
+        if (clear == 1) {
+            map = new HashMap();
+        }
         return "ok";
     }
 
     @RequestMapping("/cpu")
-    public String cpu(@RequestParam("num") Integer num) {
+    public String cpu(@RequestParam("num") Integer num,
+                      @RequestParam(defaultValue = "0") Integer stop) {
+        cpu.put("stop", stop);
         for (int i = 0; i < num; i++) {
             new Thread(() -> {
                 while (true) {
+                    if (cpu.get("stop") == 1) {
+                        break;
+                    }
                     log.info("########mem###{}", CommonUtil.uuid32());
                 }
             }).start();
@@ -42,9 +53,4 @@ public class K8sHpaController {
         return "ok";
     }
 
-    @RequestMapping("/requests-per-second")
-    public String requestsPerSecond(@RequestParam("num") Integer num) {
-        log.info("#00resPer###{}", UUID.randomUUID().toString() + num);
-        return UUID.randomUUID().toString();
-    }
 }
