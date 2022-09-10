@@ -114,9 +114,9 @@ spec:
   minReplicas: 1
   maxReplicas: 3
   behavior:
-#    scaleDown:
-#      # 稳定窗口时间
-#      stabilizationWindowSeconds: 60
+    scaleDown:
+      # 稳定窗口时间
+      stabilizationWindowSeconds: 60
     scaleUp:
       # 稳定窗口时间
       stabilizationWindowSeconds: 60
