@@ -156,4 +156,4 @@ spec:
         name: ingress-rule
       target:
         type: Value
-        value: 15
+        value: 20
