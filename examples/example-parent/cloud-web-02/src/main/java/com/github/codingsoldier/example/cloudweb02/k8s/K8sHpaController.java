@@ -46,7 +46,7 @@ public class K8sHpaController {
                     if (cpu.get("stop") == 1) {
                         throw new RuntimeException("停止线程");
                     }
-                    log.info("########mem###{}", CommonUtil.uuid32());
+                    log.info("########cpu###{}", CommonUtil.uuid32());
                 }
             }).start();
         }
