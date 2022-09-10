@@ -44,7 +44,7 @@ public class K8sHpaController {
 
     @RequestMapping("/requests-per-second")
     public String requestsPerSecond(@RequestParam("num") Integer num) {
-        log.info("#00reque-------stsPer###{}", UUID.randomUUID().toString() + num);
+        log.info("#00requ-stsPer###{}", UUID.randomUUID().toString() + num);
         return UUID.randomUUID().toString();
     }
 }
