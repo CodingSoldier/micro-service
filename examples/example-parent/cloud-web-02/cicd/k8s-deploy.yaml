@@ -113,46 +113,25 @@ spec:
     name: cloud-web-02
   minReplicas: 1
   maxReplicas: 3
-#  behavior:
-#    scaleDown:
-#      # 稳定窗口时间
-#      stabilizationWindowSeconds: 60
-#    scaleUp:
-#      # 稳定窗口时间
-#      stabilizationWindowSeconds: 60
+  behavior:
+    scaleDown:
+      # 稳定窗口时间
+      stabilizationWindowSeconds: 60
+    scaleUp:
+      # 稳定窗口时间
+      stabilizationWindowSeconds: 60
   metrics:
-#  # 每个 Pod 的 CPU 利用率在 90% 以内
-#  - type: Resource
-#    resource:
-#      name: cpu
-#      target:
-#        type: Utilization
-#        averageUtilization: 90
-#  # 每个 Pod 的内存利用率在 80% 以内
-#  - type: Resource
-#    resource:
-#      name: memory
-#      target:
-#        type: Utilization
-#        averageUtilization: 80
-  # pod每秒查询率
-  - type: Pods
-    pods:
-      metric:
-        name: packets-per-second
+  # 每个 Pod 的 CPU 利用率在 90% 以内
+  - type: Resource
+    resource:
+      name: cpu
       target:
-        type: AverageValue
-        averageValue: 15
-  # Ingress 后的 Pod 每秒能够服务的请求总数达到 10000 个
-  - type: Object
-    object:
-      metric:
-        name: requests-per-second
-      describedObject:
-        apiVersion: networking.k8s.io/v1beta1
-        kind: Ingress
-        # Ingress的名称
-        name: ingress-rule
+        type: Utilization
+        averageUtilization: 90
+  # 每个 Pod 的内存利用率在 80% 以内
+  - type: Resource
+    resource:
+      name: memory
       target:
-        type: Value
-        value: 20
+        type: Utilization
+        averageUtilization: 80
