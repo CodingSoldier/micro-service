@@ -15,8 +15,6 @@ dev:
 #  k8sDeployFile: k8s-deploy.yaml
   # 使用默认的k8s部署文件的参数配置。配置 k8sDeployFile 后，本参数无效。probePath为必填项
   k8sDeployArgument:
-#    # pod数量。非必填，默认2
-#    replicas: 2
 #    # 发送SIGTERM信号到强制关闭的时间间隔。非必填，默认30，单位秒
 #    terminationGracePeriodSeconds: 15
 #    # JVM参数。非必填
