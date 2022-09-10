@@ -41,6 +41,3 @@ dev:
     maxReplicas: 3
     # 水平伸缩，稳定窗口时间，单位秒。非必填，默认60
     stabilizationWindowSeconds: 60
-    # 水平伸缩，pod每秒查询率。非必填，默认1K
-    requestsPerSecond: 15
-
