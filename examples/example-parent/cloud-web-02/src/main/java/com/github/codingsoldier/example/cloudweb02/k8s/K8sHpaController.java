@@ -44,7 +44,7 @@ public class K8sHpaController {
             new Thread(() -> {
                 while (true) {
                     if (cpu.get("stop") == 1) {
-                        break;
+                        throw new RuntimeException("停止线程");
                     }
                     log.info("########mem###{}", CommonUtil.uuid32());
                 }

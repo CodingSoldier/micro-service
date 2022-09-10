@@ -120,6 +120,10 @@ spec:
     scaleUp:
       # 稳定窗口时间
       stabilizationWindowSeconds: 60
+      policies:
+      - type: Pods
+        value: 1
+        periodSeconds: 60
   metrics:
   # 每个 Pod 的 CPU 利用率在 80% 以内
   - type: Resource
