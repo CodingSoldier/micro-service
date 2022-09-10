@@ -1,12 +1,19 @@
 # 应用名称。必须配置
 applicationName: boot-web
 
+# 通知
 notice:
+  # 企业微信
   wx:
+    # 企业微信机器人key
     key: 293007f2-bb86-4118-867b-208836359194
+    # ci成功，发送通知
     ciSuccessSend: true
+    # cd成功，发送通知
     cdSuccessSend: true
+    # ci失败，发送通知
     ciFailureSend: true
+    # cd失败，发送通知
     cdFailureSend: true
 
 dev:
