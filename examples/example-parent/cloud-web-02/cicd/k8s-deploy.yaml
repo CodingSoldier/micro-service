@@ -101,7 +101,7 @@ spec:
 
 ---
 # 弹性伸缩
-apiVersion: autoscaling/v2
+apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
   name: cloud-web-02
