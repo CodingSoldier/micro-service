@@ -144,18 +144,18 @@ spec:
           type: AverageValue
 #          averageValue: 1k
           averageValue: 15
-    # Ingress 后的 Pod 每秒能够服务的请求总数达到 10000 个
-    - type: Object
-      object:
-        metric:
-          name: requests-per-second
-        describedObject:
-          apiVersion: networking.k8s.io/v1beta1
-          kind: Ingress
-          # Ingress的名称
-          name: ingress-rule
-        target:
-          type: Value
-          value: 10k
+#    # Ingress 后的 Pod 每秒能够服务的请求总数达到 10000 个
+#    - type: Object
+#      object:
+#        metric:
+#          name: requests-per-second
+#        describedObject:
+#          apiVersion: networking.k8s.io/v1beta1
+#          kind: Ingress
+#          # Ingress的名称
+#          name: ingress-rule
+#        target:
+#          type: Value
+#          value: 10k
 
 
