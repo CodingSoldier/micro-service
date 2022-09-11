@@ -16,7 +16,7 @@ public class StartRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         log.info("###################test-nacos={}", testNacos);
-        log.info("222222222222222222222022-09-07#……………");
+        log.info("2222222022-09-07#……………");
     }
 
 }
