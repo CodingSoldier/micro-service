@@ -1,31 +1,13 @@
 package com.github.codingsoldier.starter.web.config;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.github.codingsoldier.common.util.objectmapper.deserializer.DateDeserializer;
-import com.github.codingsoldier.common.util.objectmapper.deserializer.LocalDateDeserializer;
-import com.github.codingsoldier.common.util.objectmapper.deserializer.LocalDateTimeDeserializer;
-import com.github.codingsoldier.common.util.objectmapper.deserializer.OffsetDateTimeDeserializer;
-import com.github.codingsoldier.common.util.objectmapper.serializer.TimeToTimestampSerializer;
 import com.github.codingsoldier.starter.web.interceptor.FeignInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.util.Date;
-import java.util.List;
 
 /**
  * WebMvcConfigurer 配置
@@ -73,17 +55,22 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
     /**
+     *
      * 添加自定义 MappingJackson2HttpMessageConverter
+     * 前端可以传的时间格式：
+     *      时间戳
+     *      yyyy-MM-dd、yyyy-MM-dd HH:mm、yyyy-MM-dd HH:mm:ss、yyyy-MM-dd HH:mm:ss.SSS
+     *      yyyy/MM/dd、yyyy/MM/dd HH:mm:ss
+     * 后端返回时间格式：
+     *      时间戳
+     *      如果需要格式化为其他格式，请使用 @JsonDeserialize，使用例子 HttpController#timeAnno()
+     *
      * 注意点：
-     *   1、RequestBody有时间字段，建议前端传时间戳。
-     *      不支持使用 @JsonFormat、@JsonFormat
-     *      支持多种时间格式，详情查看 DatePatternUtil.java
-     *   2、ResponseBody有时间字段，后台返回时间戳。
-     *      不支持使用 @JsonFormat、@JsonFormat 格式化返回值，
-     *      如果需要格式化，请使用 @JsonDeserialize，使用例子 HttpController#timeAnno()
+     *   添加此Converters后不支持使用 @JsonFormat、@DateTimeFormat。
+     *   也正是由于这点，注释了代码，不添加此converter
      *
      * @param converters
-     */
+
     @SuppressWarnings("squid:S125")
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
@@ -124,5 +111,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
         // 添加自定义的 MappingJackson2HttpMessageConverter
         converters.add(i , jackson2HttpMessageConverter);
     }
+     */
 
 }

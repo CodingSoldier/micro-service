@@ -5,7 +5,6 @@ import com.github.codingsoldier.common.util.objectmapper.serializer.TimeToyyyyMM
 import com.github.codingsoldier.common.util.objectmapper.serializer.TimeToyyyyMMddHHmmssSlashSerializer;
 import com.github.codingsoldier.common.util.objectmapper.serializer.TimeToyyyyMMddMiddleSerializer;
 import com.github.codingsoldier.common.util.objectmapper.serializer.TimeToyyyyMMddSlashSerializer;
-import com.github.codingsoldier.example.bootweb.common.DateAllTestAnnoSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +20,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class HttpTestAnnoVo implements Serializable {
+public class CustomTimeTestAnnoVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

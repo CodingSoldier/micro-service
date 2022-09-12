@@ -44,7 +44,7 @@ class HttpControllerTest extends BaseTest {
         MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders
                 .post("/http/body")
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .content("{\"phone\":\"18952145124\",\"name\":\"名字\",\"dateOfBirth\":1647445294184,\"id\":122,\"age\":11}");
+                .content("{\"phone\":\"18952145124\",\"name\":\"名字\",\"dateOfBirth\":\"2022-01-01 01:02:02\",\"id\":122,\"age\":11}");
         super.mockMvc.perform(reqBuilder)
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.name",
@@ -52,80 +52,119 @@ class HttpControllerTest extends BaseTest {
     }
 
     @Test
-    void time() throws Exception {
-        // 时间戳
-        String bodyTimestamp = "{\"id\":12345,\"age\":18,\"name\":\"姓名\",\"date\":1647187201000,\"localDate\":1647187201000,\"localDateTime\":1647187201000,\"offsetDateTime\":1647187201000}";
-        MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders
-                .post("/http/time")
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .content(bodyTimestamp);
-        super.mockMvc.perform(reqBuilder)
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.date",
-                        Matchers.equalTo(1647187201000L)));
-
+    void timeBar() throws Exception {
         // 时间字符串
-        String timeString = "{\"id\":12345,\"age\":1212,\"name\":\"姓名\",\"date\":\"2022-01-01 01:02:02\",\"localDate\":\"2022-01-01\",\"localDateTime\":\"2022-01-01 01:02:02\",\"offsetDateTime\":\"2022-01-01 01:02:02\"}";
-        reqBuilder = MockMvcRequestBuilders
-                .post("/http/time")
+        String timeString = "{\"id\":12345,\"age\":1212,\"name\":\"姓名\",\"date\":\"2022-01-01 01:02:02\",\"localDate\":\"2022-01-01\",\"localDateTime\":\"2022-01-01 01:02:02\"}";
+        MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders
+                .post("/http/time/bar")
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .content(timeString);
         super.mockMvc.perform(reqBuilder)
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.date",
-                        Matchers.equalTo(1640970122000L)))
+                        Matchers.equalTo("2022-01-01 01:02:02")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateTime",
-                        Matchers.equalTo(1640970122000L)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.offsetDateTime",
-                        Matchers.equalTo(1640970122000L)))
+                        Matchers.equalTo("2022-01-01 01:02:02")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDate",
-                        Matchers.equalTo(1640966400000L)));
-
-        // 时间字符串斜杠
-        timeString = "{\"id\":12345,\"age\":1212,\"name\":\"姓名\",\"date\":\"2022/01/01 01:02:02\",\"localDate\":\"2022/01/01\",\"localDateTime\":\"2022/01/01 01:02:02\",\"offsetDateTime\":\"2022/01/01 01:02:02\"}";
-        reqBuilder = MockMvcRequestBuilders
-                .post("/http/time")
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .content(timeString);
-        super.mockMvc.perform(reqBuilder)
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.date",
-                        Matchers.equalTo(1640970122000L)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateTime",
-                        Matchers.equalTo(1640970122000L)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.offsetDateTime",
-                        Matchers.equalTo(1640970122000L)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDate",
-                        Matchers.equalTo(1640966400000L)));
+                        Matchers.equalTo("2022-01-01")));
     }
 
     @Test
-    void timeAnno() throws Exception {
-        // 时间戳
-        String bodyTimestamp = "{\"date\":\"1660555532610\",\"localDate\":\"2022-04-01\",\"localDateTime\":\"1660555532610\",\"offsetDateTime\":\"1660555532610\"}";
+    void timeSlash() throws Exception {
+        // 时间字符串
+        String timeString = "{\"id\":12345,\"age\":1212,\"name\":\"姓名\",\"date\":\"2022/01/01 01:02:02\",\"localDate\":\"2022/01/01\",\"localDateTime\":\"2022/01/01 01:02:02\"}";
         MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders
-                .post("/http/time/anno")
+                .post("/http/time/slash")
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .content(bodyTimestamp);
+                .content(timeString);
         super.mockMvc.perform(reqBuilder)
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.dateMiddle", Matchers.equalTo("2022-08-15 17:25:32")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateMiddle", Matchers.equalTo(1648742400000L)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateTimeMiddle", Matchers.equalTo("2022-08-15 17:25:32")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.offsetDateTimeMiddle", Matchers.equalTo("2022-08-15 17:25:32")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.dateSlash", Matchers.equalTo("2022/08/15 17:25:32")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateSlash", Matchers.equalTo(1648742400000L)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateTimeSlash", Matchers.equalTo("2022/08/15 17:25:32")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.offsetDateTimeSlash", Matchers.equalTo("2022/08/15 17:25:32")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.dateMiddleDay", Matchers.equalTo("2022-08-15")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateMiddleDay", Matchers.equalTo("2022-04-01")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateTimeMiddleDay", Matchers.equalTo("2022-08-15")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.offsetDateTimeMiddleDay", Matchers.equalTo("2022-08-15")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.dateSlashDay", Matchers.equalTo("2022/08/15")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateSlashDay", Matchers.equalTo("2022/04/01")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateTimeSlashDay", Matchers.equalTo("2022/08/15")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.offsetDateTimeSlashDay", Matchers.equalTo("2022/08/15")));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.date",
+                        Matchers.equalTo("2022/01/01 01:02:02")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateTime",
+                        Matchers.equalTo("2022/01/01 01:02:02")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDate",
+                        Matchers.equalTo("2022/01/01")));
     }
+
+    /**
+
+     @Test
+     void time() throws Exception {
+     // 时间戳
+     String bodyTimestamp = "{\"id\":12345,\"age\":18,\"name\":\"姓名\",\"date\":1647187201000,\"localDate\":1647187201000,\"localDateTime\":1647187201000,\"offsetDateTime\":1647187201000}";
+     MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders
+     .post("/http/time")
+     .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+     .content(bodyTimestamp);
+     super.mockMvc.perform(reqBuilder)
+     .andExpect(MockMvcResultMatchers.status().isOk())
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.date",
+     Matchers.equalTo(1647187201000L)));
+
+     // 时间字符串
+     String timeString = "{\"id\":12345,\"age\":1212,\"name\":\"姓名\",\"date\":\"2022-01-01 01:02:02\",\"localDate\":\"2022-01-01\",\"localDateTime\":\"2022-01-01 01:02:02\",\"offsetDateTime\":\"2022-01-01 01:02:02\"}";
+     reqBuilder = MockMvcRequestBuilders
+     .post("/http/time")
+     .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+     .content(timeString);
+     super.mockMvc.perform(reqBuilder)
+     .andExpect(MockMvcResultMatchers.status().isOk())
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.date",
+     Matchers.equalTo(1640970122000L)))
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateTime",
+     Matchers.equalTo(1640970122000L)))
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.offsetDateTime",
+     Matchers.equalTo(1640970122000L)))
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDate",
+     Matchers.equalTo(1640966400000L)));
+
+     // 时间字符串斜杠
+     timeString = "{\"id\":12345,\"age\":1212,\"name\":\"姓名\",\"date\":\"2022/01/01 01:02:02\",\"localDate\":\"2022/01/01\",\"localDateTime\":\"2022/01/01 01:02:02\",\"offsetDateTime\":\"2022/01/01 01:02:02\"}";
+     reqBuilder = MockMvcRequestBuilders
+     .post("/http/time")
+     .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+     .content(timeString);
+     super.mockMvc.perform(reqBuilder)
+     .andExpect(MockMvcResultMatchers.status().isOk())
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.date",
+     Matchers.equalTo(1640970122000L)))
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateTime",
+     Matchers.equalTo(1640970122000L)))
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.offsetDateTime",
+     Matchers.equalTo(1640970122000L)))
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDate",
+     Matchers.equalTo(1640966400000L)));
+     }
+
+     @Test
+     void timeAnno() throws Exception {
+     // 时间戳
+     String bodyTimestamp = "{\"date\":\"1660555532610\",\"localDate\":\"2022-04-01\",\"localDateTime\":\"1660555532610\",\"offsetDateTime\":\"1660555532610\"}";
+     MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders
+     .post("/http/time/anno")
+     .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+     .content(bodyTimestamp);
+     super.mockMvc.perform(reqBuilder)
+     .andExpect(MockMvcResultMatchers.status().isOk())
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.dateMiddle", Matchers.equalTo("2022-08-15 17:25:32")))
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateMiddle", Matchers.equalTo(1648742400000L)))
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateTimeMiddle", Matchers.equalTo("2022-08-15 17:25:32")))
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.offsetDateTimeMiddle", Matchers.equalTo("2022-08-15 17:25:32")))
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.dateSlash", Matchers.equalTo("2022/08/15 17:25:32")))
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateSlash", Matchers.equalTo(1648742400000L)))
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateTimeSlash", Matchers.equalTo("2022/08/15 17:25:32")))
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.offsetDateTimeSlash", Matchers.equalTo("2022/08/15 17:25:32")))
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.dateMiddleDay", Matchers.equalTo("2022-08-15")))
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateMiddleDay", Matchers.equalTo("2022-04-01")))
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateTimeMiddleDay", Matchers.equalTo("2022-08-15")))
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.offsetDateTimeMiddleDay", Matchers.equalTo("2022-08-15")))
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.dateSlashDay", Matchers.equalTo("2022/08/15")))
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateSlashDay", Matchers.equalTo("2022/04/01")))
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.localDateTimeSlashDay", Matchers.equalTo("2022/08/15")))
+     .andExpect(MockMvcResultMatchers.jsonPath("$.data.offsetDateTimeSlashDay", Matchers.equalTo("2022/08/15")));
+     }
+     */
 
     @Test
     void noWrapper() throws Exception {

@@ -1,5 +1,6 @@
 package com.github.codingsoldier.example.bootweb.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,7 +37,8 @@ public class UserUpdateDto implements Serializable {
     @Schema(description = "电话", example = "18952145124")
     private String phone;
 
-    @Schema(description = "生日", example = "1660049008725")
+    @Schema(description = "生日", example = "2022-01-01 01:02:02")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private LocalDateTime dateOfBirth;
 
 }

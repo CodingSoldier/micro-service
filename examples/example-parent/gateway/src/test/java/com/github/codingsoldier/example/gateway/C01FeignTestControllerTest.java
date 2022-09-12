@@ -105,7 +105,7 @@ class C01FeignTestControllerTest extends BaseTest {
 
     @Test
     void reqRespDemoVo() {
-        String body = "{\"id\":123,\"name\":\"中文\",\"date\":1660319791693,\"localDate\":\"2012-01-10\",\"localDateTime\":1660319791692,\"offsetDateTime\":1660319791691}";
+        String body = "{\"id\":123,\"name\":\"中文\",\"date\":\"2022-11-01 01:02:02\",\"localDate\":\"2012-01-10\",\"localDateTime\":\"2022-08-01 01:02:02\"}";
         webClient.post()
                 .uri("/cloud-web-01/feign01/test/req/resp/demo-vo")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -114,10 +114,9 @@ class C01FeignTestControllerTest extends BaseTest {
                 .expectStatus().isOk()
                 .expectBody()
                 .jsonPath("$.code").isEqualTo(ResponseCodeEnum.SUCCESS.getCode())
-                .jsonPath("$.data.date").isEqualTo(1660319791693L)
-                .jsonPath("$.data.localDate").isEqualTo(1326124800000L)
-                .jsonPath("$.data.localDateTime").isEqualTo(1660319791692L)
-                .jsonPath("$.data.offsetDateTime").isEqualTo(1660319791691L);
+                .jsonPath("$.data.date").isEqualTo("2022-11-01 01:02:02")
+                .jsonPath("$.data.localDate").isEqualTo("2012-01-10")
+                .jsonPath("$.data.localDateTime").isEqualTo("2022-08-01 01:02:02");
     }
 
     @Test
@@ -128,7 +127,7 @@ class C01FeignTestControllerTest extends BaseTest {
                 .expectStatus().isOk()
                 .expectBody()
                 .jsonPath("$.code").isEqualTo(ResponseCodeEnum.SUCCESS.getCode())
-                .jsonPath("$.data.localDateTime").isEqualTo(1286643730000L);
+                .jsonPath("$.data.localDateTime").isEqualTo("2010-10-10 01:02:10");
     }
 
 }

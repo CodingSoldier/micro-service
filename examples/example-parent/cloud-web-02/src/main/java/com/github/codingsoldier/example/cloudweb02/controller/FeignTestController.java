@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -62,7 +61,6 @@ public class FeignTestController {
         demoVo.setDate(demoVo.getDate());
         demoVo.setLocalDate(demoVo.getLocalDate());
         demoVo.setLocalDateTime(demoVo.getLocalDateTime());
-        demoVo.setOffsetDateTime(demoVo.getOffsetDateTime());
         return demoVo;
     }
 
@@ -74,7 +72,6 @@ public class FeignTestController {
         demoVo.setDate(new Date());
         demoVo.setLocalDate(LocalDate.now());
         demoVo.setLocalDateTime(LocalDateTime.of(2010, 10, 10, 01, 02, 10));
-        demoVo.setOffsetDateTime(OffsetDateTime.now());
         return Result.success(demoVo);
     }
 
