@@ -77,6 +77,9 @@ mvn clean deploy -D maven.test.skip=true
 
 3、demo地址 [example-parent](./examples/example-parent)
 
+## 使用jenkins打包、部署
+[地址](https://gitee.com/CodingSoldier/cicd)
+
 ## 其他说明
 
 [examples](./examples) 目录是使用例子
