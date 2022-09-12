@@ -26,6 +26,9 @@ import java.util.Map;
 @SuppressWarnings({"squid:S1104", "squid:S1444"})
 public class MybatisPlusCodeGenerator {
 
+    private MybatisPlusCodeGenerator() {
+    }
+
     public static final String TABLE_PREFIX = "t_";
     private static final Logger LOGGER = LoggerFactory.getLogger(MybatisPlusCodeGenerator.class);
     public static String dbUrl;

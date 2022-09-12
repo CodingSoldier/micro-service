@@ -5,6 +5,7 @@ package com.github.codingsoldier.starter.mybatisplus.generator;
  * @author chenpq05
  * @since 2022/8/18 17:00
  */
+@SuppressWarnings("squid:S2187")
 class MybatisPlusCodeGeneratorTest {
 
     /**
