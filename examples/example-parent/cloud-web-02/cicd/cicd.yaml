@@ -20,7 +20,7 @@ dev:
 #    # JVM参数。非必填
 #    jvmOptions: -Xms400m -Xmx400m -XX:+UseConcMarkSweepGC
 #    # 项目参数
-#    projectArguments: --spring.cloud.nacos.config.server-addr=192.168.1.3:8848 --spring.cloud.nacos.discovery.server-addr=192.168.1.3:8848
+    projectArguments: --spring.cloud.nacos.config.server-addr=192.168.1.200:8848 --spring.cloud.nacos.discovery.server-addr192.168.1.200:8848
 #    # 请求的内存。非必填，默认512Mi
 #    requestsMemory: 512Mi
 #    # 请求的CPU。非必填，默认500m
