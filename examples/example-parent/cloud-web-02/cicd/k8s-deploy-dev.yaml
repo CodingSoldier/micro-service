@@ -127,13 +127,13 @@ spec:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 80
+        averageUtilization: 95
   # 每个 Pod 的内存利用率在 80% 以内
   - type: Resource
     resource:
       name: memory
       target:
         type: Utilization
-        averageUtilization: 80
+        averageUtilization: 95
 
 ### 测试信息k8s-deploy-dev.yaml
