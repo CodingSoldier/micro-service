@@ -24,7 +24,7 @@ spring:
     sentinel:
       transport:
         # 配置 sentinel dashboard 地址
-        dashboard: 192.168.1.200:10102
+        dashboard: 192.168.1.101:10102
         # 配置端口，启动一个 Http Server, 该 Server 会与 Sentinel 控制台做交互
         port: 10111
       # 服务启动直接建立心跳连接
@@ -51,7 +51,7 @@ spring:
   datasource:
     username: root
     password: cpq..123
-    url: jdbc:mysql://192.168.1.200:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    url: jdbc:mysql://192.168.1.101:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true
     driver-class-name: com.mysql.jdbc.Driver
     hikari:
       # 连接池最大连接数
@@ -68,7 +68,7 @@ spring:
     # Redis数据库索引（默认为0）
     database: 0
     # Redis服务器地址
-    host: 192.168.1.200
+    host: 192.168.1.101
     # Redis服务器连接端口
     port: 6379
     # Redis服务器连接密码（默认为空）
@@ -99,7 +99,7 @@ spring:
       # 指定通过什么类型发送消息 默认是 web
       type: WEB
     # 指定 zipkin 的地址
-    base-url: http://192.168.1.200:10103
+    base-url: http://192.168.1.101:10103
 
 
 

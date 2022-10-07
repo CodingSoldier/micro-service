@@ -15,7 +15,7 @@ spring:
   datasource:
     username: root
     password: cpq..123
-    url: jdbc:mysql://192.168.1.200:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    url: jdbc:mysql://192.168.1.101:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true
     driver-class-name: com.mysql.jdbc.Driver
     hikari:
       # 连接池最大连接数
@@ -55,7 +55,7 @@ spring:
   boot:
     admin:
       client:
-        url: http://192.168.1.200:10100
+        url: http://192.168.1.101:10100
 
 
 # 暴露 actuator 端点
