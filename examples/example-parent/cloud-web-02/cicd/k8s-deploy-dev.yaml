@@ -135,3 +135,5 @@ spec:
       target:
         type: Utilization
         averageUtilization: 80
+
+### 测试信息k8s-deploy-dev.yaml
