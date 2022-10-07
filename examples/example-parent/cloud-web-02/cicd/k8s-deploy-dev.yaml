@@ -41,11 +41,11 @@ spec:
           # 资源限制
           resources:
             requests:
+              memory: "700Mi"
+              cpu: "900m"
+            limits:
               memory: "800Mi"
               cpu: "1000m"
-            limits:
-              memory: "1000Mi"
-              cpu: "1500m"
           lifecycle:
             # 在容器被终止前睡眠一段时间，以便kube-proxy更新service的endpoint
             preStop:
