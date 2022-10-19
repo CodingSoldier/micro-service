@@ -112,8 +112,17 @@ public class WorkWxUtil {
    *
    * @param throwable 异常
    */
+  /**
+   * 异步发送异常到企业微信
+   *
+   * @param throwable 异常
+   */
   public static void sendAsyn(Throwable throwable) {
-    sendAsyn(ExceptionUtils.getStackTrace(throwable));
+    try {
+      sendAsyn(ExceptionUtils.getStackTrace(throwable));
+    } catch (Exception ex) {
+      log.error("", ex);
+    }
   }
 
 }

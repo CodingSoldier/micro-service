@@ -34,8 +34,8 @@ public class TaskTraceUtil {
         int cpuCores = Runtime.getRuntime().availableProcessors();
         cpuCores = Math.min(cpuCores, 5);
         threadPoolTaskExecutor.setCorePoolSize(cpuCores);
-        threadPoolTaskExecutor.setMaxPoolSize(cpuCores * 2);
-        threadPoolTaskExecutor.setQueueCapacity(1000);
+        threadPoolTaskExecutor.setMaxPoolSize(cpuCores * 10);
+        threadPoolTaskExecutor.setQueueCapacity(10000);
         threadPoolTaskExecutor.initialize();
         TaskTraceUtil.taskExecutor = new LazyTraceAsyncTaskExecutor(beanFactory, threadPoolTaskExecutor);
     }
@@ -45,6 +45,22 @@ public class TaskTraceUtil {
      */
     public static <T> Future<T> submit(Callable<T> task) {
         return taskExecutor.submit(task);
+    }
+
+    /**
+     * 运行任务
+     * @param task
+     */
+    public static void execute(Runnable task) {
+        taskExecutor.execute(task);
+    }
+
+    /**
+     * 运行任务
+     * @param task
+     */
+    public void execute(Runnable task, long startTimeout) {
+        taskExecutor.execute(task, startTimeout);
     }
 
 }
