@@ -12,6 +12,7 @@ class TestsExampleCommonLib {
     @Test
     void lib() {
         assertEquals("junit测试信息", Constants.JUNIT_TEST_INFO);
+        log.info("#################");
     }
 
 }
