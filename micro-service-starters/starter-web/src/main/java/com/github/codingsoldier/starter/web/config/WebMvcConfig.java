@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @since 2022/2/11 12:02
  */
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnProperty(value = "framework.starter.web.enableWebMvcConfig", matchIfMissing = true)
+@ConditionalOnProperty(value = "micro-service.starter.web.enableWebMvcConfig", matchIfMissing = true)
 public class WebMvcConfig implements WebMvcConfigurer {
 
     private static final Logger logger = LoggerFactory.getLogger(WebMvcConfig.class);

@@ -13,8 +13,8 @@
                     converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
 
     <!--  异常信息最大长度  -->
-    <springProperty scope="context" name="exMaxLength" source="framework.starter.logback.ex-max-length" defaultValue="9999999"/>
-    <springProperty scope="context" name="msgMaxLength" source="framework.starter.logback.msg-max-length" defaultValue="9999999"/>
+    <springProperty scope="context" name="exMaxLength" source="micro-service.starter.logback.ex-max-length" defaultValue="9999999"/>
+    <springProperty scope="context" name="msgMaxLength" source="micro-service.starter.logback.msg-max-length" defaultValue="9999999"/>
 
     <!--换行打印-->
     <property name="CONSOLE_LOG_PATTERN"

@@ -11,7 +11,7 @@
 
 ## 自定义配置项
 ```yaml
-framework:
+micro-service:
   starter:
     mybatis-plus:
       # 是否启用 starter-mybatis-plus，默认true

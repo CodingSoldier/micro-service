@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @Date 2021/12/9 10:12
  * @Author chenpq
  */
-@ConfigurationProperties(prefix = "framework.starter.web.ding-talk")
+@ConfigurationProperties(prefix = "micro-service.starter.web.ding-talk")
 public class DingTalkProperties implements Serializable {
 
   private static final long serialVersionUID = 1L;

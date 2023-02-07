@@ -9,7 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
-@ConfigurationProperties(prefix = "framework.starter.springfox")
+@ConfigurationProperties(prefix = "micro-service.starter.springfox")
 public class StarterSpringfoxProperties {
 
     /**

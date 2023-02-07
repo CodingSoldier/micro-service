@@ -25,7 +25,7 @@
 
 ## 自定义配置项
 ```yaml
-framework:
+micro-service:
   starter:
     sleuth:
       # 是否启用starter-sleuth，默认true

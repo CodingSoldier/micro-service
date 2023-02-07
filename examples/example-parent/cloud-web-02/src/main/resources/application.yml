@@ -106,7 +106,7 @@ logging:
     com.github.codingsoldier.example: DEBUG
 
 #starter:
-framework:
+micro-service:
   starter:
     # starter-spring-doc 配置
     spring-doc:

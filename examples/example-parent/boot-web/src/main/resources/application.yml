@@ -111,7 +111,7 @@ springdoc:
   # 扫描路径
   packages-to-scan: com.github.codingsoldier.example.bootweb
 
-framework:
+micro-service:
   starter:
 
 #    logback:

@@ -19,7 +19,7 @@ logging:
 
 ## 自定义配置项
 ```yaml
-framework:
+micro-service:
   starter:
     logback:
       # 信息最大长度

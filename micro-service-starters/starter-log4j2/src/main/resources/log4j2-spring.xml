@@ -17,8 +17,8 @@ log4j2.xml 比 application-log4j2.yaml 更早加载，需将日志配置文件�
     <!--<Configuration status="INFO" monitorInterval="30"> -->
 
     <Properties>
-        <Property name="exMaxLength">${spring:framework.starter.log4j2.ex-max-length:-9999999}</Property>
-        <Property name="msgMaxLength">${spring:framework.starter.log4j2.msg-max-length:-9999999}</Property>
+        <Property name="exMaxLength">${spring:micro-service.starter.log4j2.ex-max-length:-9999999}</Property>
+        <Property name="msgMaxLength">${spring:micro-service.starter.log4j2.msg-max-length:-9999999}</Property>
         <Property name="LOG_EXCEPTION_CONVERSION_WORD">%.-${exMaxLength}xwEx</Property>
         <Property name="LOG_LEVEL_PATTERN">%5p</Property>
         <Property name="LOG_DATEFORMAT_PATTERN">yyyy-MM-dd HH:mm:ss.SSS</Property>
@@ -35,9 +35,9 @@ log4j2.xml 比 application-log4j2.yaml 更早加载，需将日志配置文件�
         <!-- 定义日志存储的路径 -->
         <Property name="FILE_PATH">${spring:logging.file.path}</Property>
         <Property name="FILE_NAME">${spring:logging.file.name}</Property>
-        <Property name="TIME_BASED_TRIGGERING_POLICY_INTERVAL">${spring:framework.starter.log4j2.time-based-triggering-policy.interval:-24}</Property>
-        <Property name="SIZE_BASED_TRIGGERING_POLICY_SIZE">${spring:framework.starter.log4j2.size-based-triggering-policy.size:-500MB}</Property>
-        <Property name="DEFAULT_ROLLOVER_STRATEGY_MAX">${spring:framework.starter.log4j2.default-rollover-strategy.max:-100}</Property>
+        <Property name="TIME_BASED_TRIGGERING_POLICY_INTERVAL">${spring:micro-service.starter.log4j2.time-based-triggering-policy.interval:-24}</Property>
+        <Property name="SIZE_BASED_TRIGGERING_POLICY_SIZE">${spring:micro-service.starter.log4j2.size-based-triggering-policy.size:-500MB}</Property>
+        <Property name="DEFAULT_ROLLOVER_STRATEGY_MAX">${spring:micro-service.starter.log4j2.default-rollover-strategy.max:-100}</Property>
 
     </Properties>
 

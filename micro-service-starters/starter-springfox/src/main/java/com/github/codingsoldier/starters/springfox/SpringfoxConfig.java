@@ -85,7 +85,7 @@ public class SpringfoxConfig {
     public Docket createRestApi(StarterSpringfoxProperties starterSpringFoxProperties) {
         String basePackage = starterSpringFoxProperties.getBasePackage();
         if (BASE_PACKAGE.equals(basePackage)) {
-            String msg = String.format("警告：swagger扫描目录为%s，请通过 framework.starter.swagger.base-package 修改扫描目录", basePackage);
+            String msg = String.format("警告：swagger扫描目录为%s，请通过 micro-service.starter.swagger.base-package 修改扫描目录", basePackage);
             logger.warn(msg);
         }
 

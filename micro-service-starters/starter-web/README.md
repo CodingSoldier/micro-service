@@ -12,7 +12,7 @@
 
 ## 自定义配置项
 ```yaml
-framework:
+micro-service:
   starter:
     web:
       # 是否启用 starter-web，默认true     

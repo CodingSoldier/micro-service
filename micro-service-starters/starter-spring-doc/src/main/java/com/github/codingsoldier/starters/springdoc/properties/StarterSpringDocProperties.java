@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
-@ConfigurationProperties(prefix = "framework.starter.spring-doc")
+@ConfigurationProperties(prefix = "micro-service.starter.spring-doc")
 public class StarterSpringDocProperties {
 
     /**

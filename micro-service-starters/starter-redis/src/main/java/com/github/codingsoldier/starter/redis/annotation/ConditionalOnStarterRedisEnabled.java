@@ -30,7 +30,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
-@ConditionalOnProperty(value = "framework.starter.redis.enabled", matchIfMissing = true)
+@ConditionalOnProperty(value = "micro-service.starter.redis.enabled", matchIfMissing = true)
 public @interface ConditionalOnStarterRedisEnabled {
 
 }

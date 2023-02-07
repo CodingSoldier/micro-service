@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @Date 2021/12/9 10:12
  * @Author chenpq
  */
-@ConfigurationProperties(prefix = "framework.starter.web.work-weixin")
+@ConfigurationProperties(prefix = "micro-service.starter.web.work-weixin")
 public class WorkWeiXinProperties implements Serializable {
 
   private static final long serialVersionUID = 1L;

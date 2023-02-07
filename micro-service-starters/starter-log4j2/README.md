@@ -36,7 +36,7 @@ logging:
 
 ## 自定义配置项
 ```yaml
-framework:
+micro-service:
   starter:
     # starter-log4j2 配置
     log4j2:

@@ -30,7 +30,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
-@ConditionalOnProperty(value = "framework.starter.web.enabled", matchIfMissing = true)
+@ConditionalOnProperty(value = "micro-service.starter.web.enabled", matchIfMissing = true)
 public @interface ConditionalOnStarterWebEnabled {
 
 }

@@ -11,7 +11,7 @@
 
 ## 自定义配置项
 ```yaml
-framework:
+micro-service:
   starter:
     spring-doc:
       # 是否启用 starter-spring-doc，默认是true

@@ -169,7 +169,7 @@ logging:
 
 
 #starter:
-framework:
+micro-service:
   starter:
     mybatis-plus:
       enabled: false

@@ -10,7 +10,7 @@
 ```
 ## 自定义配置项
 ```yaml
-framework:
+micro-service:
   starter:
     openfeign:
       # 是否启用starter-openfeign，默认true

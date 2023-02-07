@@ -10,7 +10,7 @@
 ```
 ## 自定义配置项
 ```yaml
-framework:
+micro-service:
   starter:
     redis:
       # 是否启用starter-redis，默认true

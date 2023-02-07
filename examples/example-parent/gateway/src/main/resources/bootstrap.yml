@@ -110,7 +110,7 @@ logging:
   level:
     com.github.codingsoldier.example: DEBUG
 #starter:
-framework:
+micro-service:
   starter:
     # springdoc配置
     springdoc:

@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
-@ConditionalOnProperty(value = "framework.starter.spring-doc.enabled", matchIfMissing = true)
+@ConditionalOnProperty(value = "micro-service.starter.spring-doc.enabled", matchIfMissing = true)
 public @interface ConditionalOnStarterSpringDocEnabled {
 
 }
