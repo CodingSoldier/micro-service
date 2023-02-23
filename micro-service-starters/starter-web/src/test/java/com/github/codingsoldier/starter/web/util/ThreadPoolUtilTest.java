@@ -1,4 +1,4 @@
-package com.github.codingsoldier.common.util;
+package com.github.codingsoldier.starter.web.util;
 
 import com.github.codingsoldier.common.exception.AppException;
 import com.github.codingsoldier.common.util.thread.ThreadPoolUtil;
@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.Future;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ThreadPoolUtilTest {
 

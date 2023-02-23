@@ -1,6 +1,6 @@
 package com.github.codingsoldier.example.cloudweb02.trace;
 
-import com.github.codingsoldier.common.util.ThreadPoolUtil;
+import com.github.codingsoldier.common.util.thread.ThreadPoolUtil;
 import com.github.codingsoldier.starter.sleuth.config.TaskTraceUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;

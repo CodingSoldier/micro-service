@@ -1,4 +1,4 @@
-package com.github.codingsoldier.common.util;
+package com.github.codingsoldier.common.util.thread;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,13 +38,13 @@ public class ThreadPoolUtil {
 
         log.info("初始化线程池 corePoolSize:{} , maximumPoolSize:{}", cpuCores, maxPool);
 
-        // 加上这个纯属为了解决Alibaba代码插件检测
-        ThreadFactory defaultThreadFactory = Executors.defaultThreadFactory();
-        LinkedBlockingQueue<Runnable> linkedBlockingQueue = new LinkedBlockingQueue<>(100000);
+        ThreadFactory customThreadFactory = new CustomThreadFactory("ThreadPoolUtil-");
+
+        LinkedBlockingQueue<Runnable> linkedBlockingQueue = new LinkedBlockingQueue<>(5000000);
         executor = new ThreadPoolExecutor(cpuCores, maxPool,
                 60L, TimeUnit.SECONDS,
                 linkedBlockingQueue,
-                defaultThreadFactory,
+                customThreadFactory,
                 new CustomAbortPolicy());
     }
 
@@ -89,36 +89,6 @@ public class ThreadPoolUtil {
      */
     public static <T> Future<T> submit(Callable<T> task) {
         return executor.submit(task);
-    }
-
-    /**
-     * 自定义程池饱和策略，模仿AbortPolicy（终止）。发送钉钉消息
-     * <p>
-     * A handler for rejected tasks that throws a
-     * {@code RejectedExecutionException}.
-     */
-    public static class CustomAbortPolicy implements RejectedExecutionHandler {
-        /**
-         * Creates an {@code AbortPolicy}.
-         */
-        public CustomAbortPolicy() {
-            // sonar检测
-        }
-
-        /**
-         * Always throws RejectedExecutionException.
-         *
-         * @param r the runnable task requested to be executed
-         * @param e the executor attempting to execute this task
-         * @throws RejectedExecutionException always
-         */
-        @Override
-        public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {
-            String msg = String.format("线程池满了，抛出异常。%n Task: %s 。%n Rejected from: %s",
-                    r.toString(), e.toString());
-            log.info(msg);
-            throw new RejectedExecutionException(msg);
-        }
     }
 
 }

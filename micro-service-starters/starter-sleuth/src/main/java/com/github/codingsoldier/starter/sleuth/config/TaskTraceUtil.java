@@ -1,5 +1,8 @@
 package com.github.codingsoldier.starter.sleuth.config;
 
+import com.github.codingsoldier.common.util.thread.CustomAbortPolicy;
+import com.github.codingsoldier.common.util.thread.CustomThreadFactory;
+import com.github.codingsoldier.common.util.thread.ThreadPoolUtil;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.cloud.sleuth.instrument.async.LazyTraceAsyncTaskExecutor;
 import org.springframework.context.annotation.Configuration;
@@ -35,7 +38,9 @@ public class TaskTraceUtil {
         cpuCores = Math.min(cpuCores, 5);
         threadPoolTaskExecutor.setCorePoolSize(cpuCores);
         threadPoolTaskExecutor.setMaxPoolSize(cpuCores * 10);
-        threadPoolTaskExecutor.setQueueCapacity(10000);
+        threadPoolTaskExecutor.setQueueCapacity(500000);
+        threadPoolTaskExecutor.setThreadFactory(new CustomThreadFactory("TaskTraceUtil-"));
+        threadPoolTaskExecutor.setRejectedExecutionHandler(new CustomAbortPolicy());
         threadPoolTaskExecutor.initialize();
         TaskTraceUtil.taskExecutor = new LazyTraceAsyncTaskExecutor(beanFactory, threadPoolTaskExecutor);
     }
