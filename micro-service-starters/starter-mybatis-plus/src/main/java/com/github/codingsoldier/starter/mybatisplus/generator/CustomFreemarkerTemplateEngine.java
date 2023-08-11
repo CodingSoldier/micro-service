@@ -40,7 +40,6 @@ public class CustomFreemarkerTemplateEngine extends FreemarkerTemplateEngine {
 
     private String dtoFtl = "Dto.java.ftl";
     private String voFtl = "Vo.java.ftl";
-    private String aoFtl = "Ao.java.ftl";
 
     @Override
     protected void outputCustomFile(@NotNull List<CustomFile> customFiles, @NotNull TableInfo tableInfo, @NotNull Map<String, Object> objectMap) {
@@ -53,8 +52,6 @@ public class CustomFreemarkerTemplateEngine extends FreemarkerTemplateEngine {
                 filePath = filePath + File.separator + "dto";
             } else if (file.getTemplatePath().endsWith(voFtl)) {
                 filePath = filePath + File.separator + "vo";
-            } else if (file.getTemplatePath().endsWith(aoFtl)) {
-                filePath = filePath + File.separator + "ao";
             }
             String fileName = filePath + File.separator + file.getFileName() + ".java";
             outputFile(new File(fileName), objectMap, file.getTemplatePath(), file.isFileOverride());

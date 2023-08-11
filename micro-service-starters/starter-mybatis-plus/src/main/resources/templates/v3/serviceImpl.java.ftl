@@ -9,11 +9,14 @@ import ${package.Entity}.${entity};
 import ${package.Mapper}.${table.mapperName};
 import ${package.Service}.${table.serviceName};
 import ${superServiceImplClassPackage};
-import ${packageAo}.${addUpdateAoClassName};
+import ${packageDto}.${addDtoClassName};
+import ${packageDto}.${updateDtoClassName};
 import ${packageDto}.${pageQueryDtoClassName};
 import ${packageVo}.${detailVoClassName};
 import ${packageVo}.${pageVoClassName};
 import com.github.codingsoldier.starter.mybatisplus.resp.PageResult;
+import com.github.codingsoldier.common.enums.ResponseCodeEnum;
+import com.github.codingsoldier.common.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.BeanUtils;
@@ -48,23 +51,25 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Long addUpdate(${addUpdateAoClassName} addUpdateAo) {
-        // id 为空，新增；id 不为空，修改
-        Long id = addUpdateAo.getId();
-        // if (isRepeat(updateDto.getId(), ${entity}::getName, updateDto.getName())){
-        //     throw new AppException(ResponseCodeEnum.PRECONDITION_FAILED, "修改失败，XX已存在。请修改XX。");
-        // }
+    public Long add(${addDtoClassName} addDto) {
+        //if (isRepeat(null, ${entity}::getName, addDto.getName())){
+        //    throw new AppException(ResponseCodeEnum.PRECONDITION_FAILED, "新增失败，XX已存在。请修改XX。");
+        //}
         ${entity} ${uncapFirstEntity} = new ${entity}();
-        BeanUtils.copyProperties(addUpdateAo, ${uncapFirstEntity});
-        if (Objects.isNull(id)){
-            // 新增
-            super.save(${uncapFirstEntity});
-            id = ${uncapFirstEntity}.getId();
-        } else {
-            // 修改
-            super.updateById(${uncapFirstEntity});
-        }
-        return id;
+        BeanUtils.copyProperties(addDto, ${uncapFirstEntity});
+        super.save(${uncapFirstEntity});
+        return ${uncapFirstEntity}.getId();
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void update(${updateDtoClassName} updateDto) {
+        //if (isRepeat(updateDto.getId(), ${entity}::getName, updateDto.getName())){
+        //    throw new AppException(ResponseCodeEnum.PRECONDITION_FAILED, "修改失败，XX已存在。请修改XX。");
+        //}
+        ${entity} ${uncapFirstEntity} = new ${entity}();
+        BeanUtils.copyProperties(updateDto, ${uncapFirstEntity});
+        super.updateById(${uncapFirstEntity});
     }
  
     @Override

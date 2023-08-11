@@ -130,12 +130,6 @@ public class MybatisPlusCodeGenerator {
         map.put("pageVoClassName", pageVoClassName);
         files.put(pageVoClassName, templatesDir + "/PageVo.java.ftl");
 
-        map.put("packageAo", parent + ".ao");
-
-        String addUpdateAoClassName = tableJavaName + "AddUpdateAo";
-        map.put("addUpdateAoClassName", addUpdateAoClassName);
-        files.put(addUpdateAoClassName, templatesDir + "/AddUpdateAo.java.ftl");
-
         InjectionConfig injectionConfig = new InjectionConfig.Builder()
                 .beforeOutputFile((tableInfo, objectMap) -> {
                     LOGGER.debug("tableInfo = {}", tableInfo);

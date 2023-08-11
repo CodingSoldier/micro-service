@@ -3,7 +3,8 @@ package ${package.Service};
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import ${superServiceClassPackage};
 import ${package.Entity}.${entity};
-import ${packageAo}.${addUpdateAoClassName};
+import ${packageDto}.${addDtoClassName};
+import ${packageDto}.${updateDtoClassName};
 import ${packageDto}.${pageQueryDtoClassName};
 import ${packageVo}.${detailVoClassName};
 import ${packageVo}.${pageVoClassName};
@@ -23,12 +24,18 @@ interface ${table.serviceName} : ${superServiceClass}<${entity}>
 public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
 
     /**
-     * 新增/修改
-     * @param addUpdateAo 新增/修改 参数
+     * 新增
+     * @param addDto 新增参数
      * @return id
      */
-    Long addUpdate(${addUpdateAoClassName} addUpdateAo);
+    Long add(${addDtoClassName} addDto);
 
+    /**
+     * 修改
+     * @param updateDto 修改参数
+     * @return id
+     */
+    void update(${updateDtoClassName} updateDto);
 
     /**
      * 删除

@@ -217,7 +217,11 @@ public class OkHttpUtil {
     Request.Builder builder = new Request.Builder();
     // 设置请求头
     if (headers != null && headers.size() > 0) {
-      headers.forEach(builder::addHeader);
+      for (Entry<String, String> entry:headers.entrySet()) {
+        if (entry.getKey() != null && entry.getValue() != null) {
+          builder.addHeader(entry.getKey(), entry.getValue());
+        }
+      }
     }
     // 创建body
     RequestBody requestBody = RequestBody.create(MEDIA_TYPE_JSON, jsonBody);
