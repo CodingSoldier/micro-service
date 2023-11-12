@@ -1,0 +1,12 @@
+{
+    "groups": [],
+    "properties": [
+        {
+            "name": "micro-service.starter.nacos.graceful.enabled",
+            "type": "java.lang.Boolean",
+            "description": "是否启用 starter-nacos",
+            "defaultValue": true
+        }
+    ],
+    "hints": []
+}
