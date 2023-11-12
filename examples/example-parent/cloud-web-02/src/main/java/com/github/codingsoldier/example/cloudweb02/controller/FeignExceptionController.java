@@ -1,6 +1,6 @@
 package com.github.codingsoldier.example.cloudweb02.controller;
 
-import com.github.codingsoldier.common.exception.AppException;
+import com.github.codingsoldier.common.exception.MicroServiceException;
 import com.github.codingsoldier.common.resp.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -30,8 +30,8 @@ public class FeignExceptionController {
             log.info("{}", i);
         } else if (StringUtils.equals("RuntimeException", name)) {
             throw new RuntimeException("RuntimeException");
-        } else if (StringUtils.equals("AppException", name)) {
-            throw new AppException("测试APP异常");
+        } else if (StringUtils.equals("MicroServiceException", name)) {
+            throw new MicroServiceException("测试MicroServiceException异常");
         } else if (StringUtils.equals("Exception", name)) {
             throw new Exception("测试Exception");
         }
@@ -50,8 +50,8 @@ public class FeignExceptionController {
             log.info("{}", i);
         } else if (StringUtils.equals("RuntimeException", name)) {
             throw new RuntimeException("resultTypeNotChange-RuntimeException");
-        } else if (StringUtils.equals("AppException", name)) {
-            throw new AppException(40020, "resultTypeNotChange-测试APP异常");
+        } else if (StringUtils.equals("MicroServiceException", name)) {
+            throw new MicroServiceException(40020, "resultTypeNotChange-测试MicroServiceException异常");
         } else if (StringUtils.equals("Exception", name)) {
             throw new Exception("resultTypeNotChange-测试Exception");
         }

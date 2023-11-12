@@ -1,12 +1,13 @@
 package com.github.codingsoldier.common.util;
 
-import com.github.codingsoldier.common.exception.AppException;
+import com.github.codingsoldier.common.exception.BackendServicesException;
 import com.github.codingsoldier.common.util.thread.ThreadPoolUtil;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.Future;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ThreadPoolUtilTest {
 
@@ -18,7 +19,7 @@ class ThreadPoolUtilTest {
     @Test
     void executeException() {
         ThreadPoolUtil.execute(() -> {
-            throw new AppException("线程池中抛出异常");
+            throw new BackendServicesException("线程池中抛出异常");
         });
     }
 

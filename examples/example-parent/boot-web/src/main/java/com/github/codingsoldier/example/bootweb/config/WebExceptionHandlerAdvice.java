@@ -1,13 +1,16 @@
 package com.github.codingsoldier.example.bootweb.config;
 
 
-import com.github.codingsoldier.common.exception.AppException;
+import com.github.codingsoldier.common.exception.ClientException;
 import com.github.codingsoldier.common.resp.Result;
+import com.github.codingsoldier.common.util.CommonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 使用 @Order 排序值，覆盖 micro-service 默认异常处理
@@ -19,15 +22,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class WebExceptionHandlerAdvice {
 
-    /**
-     * AppException
-     *
-     * @param ex ex
-     * @return result
-     */
-    @ExceptionHandler(AppException.class)
-    public Result<Object> appExceptionHandler(final AppException ex) {
-        log.error("web全局异常捕获AppException", ex);
+    @ExceptionHandler(ClientException.class)
+    public Result<Object> clientException(final ClientException ex, HttpServletResponse response) {
+        log.error("#############捕获ClientException", ex);
+        response.setStatus(CommonUtil.getResponseStatus(ex.getCode()));
         return Result.fail(ex.getCode(), ex.getMessage());
     }
 

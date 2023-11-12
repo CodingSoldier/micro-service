@@ -1,6 +1,6 @@
 package com.github.codingsoldier.example.gateway;
 
-import com.github.codingsoldier.common.enums.ResponseCodeEnum;
+import com.github.codingsoldier.common.enums.ResultCodeEnum;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -17,7 +17,7 @@ class C01TraceControllerTest extends BaseTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .jsonPath("$.code").isEqualTo(ResponseCodeEnum.SUCCESS.getCode())
+                .jsonPath("$.code").isEqualTo(ResultCodeEnum.SUCCESS.getCode())
                 .jsonPath("$.data").isEqualTo("web01-header-43325268ff7aaaaa-mdc-43325268ff7aaaaa-web02-header-43325268ff7aaaaa-mdc-43325268ff7aaaaa");
     }
 
@@ -29,7 +29,7 @@ class C01TraceControllerTest extends BaseTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .jsonPath("$.code").isEqualTo(ResponseCodeEnum.SUCCESS.getCode())
+                .jsonPath("$.code").isEqualTo(ResultCodeEnum.SUCCESS.getCode())
                 .jsonPath("$.data").isEqualTo("web01-header-43325268ff7aaaaa-mdc-43325268ff7aaaaa-web02-header-43325268ff7aaaaa-mdc-43325268ff7aaaaa");
     }
 

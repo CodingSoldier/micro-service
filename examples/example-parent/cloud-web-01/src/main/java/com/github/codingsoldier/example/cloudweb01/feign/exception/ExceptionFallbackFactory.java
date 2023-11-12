@@ -1,6 +1,6 @@
 package com.github.codingsoldier.example.cloudweb01.feign.exception;
 
-import com.github.codingsoldier.common.exception.FeignResultErrorException;
+import com.github.codingsoldier.common.exception.feign.FeignResultErrorException;
 import com.github.codingsoldier.common.resp.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.openfeign.FallbackFactory;

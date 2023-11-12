@@ -14,7 +14,7 @@ spring:
             allow-credentials: true
             allowed-headers: "*"
             allowed-methods: "*"
-            max-ages: 3600
+            max-age: 3600
       routes:
         - id: cloud-web-01
           uri: lb://cloud-web-01

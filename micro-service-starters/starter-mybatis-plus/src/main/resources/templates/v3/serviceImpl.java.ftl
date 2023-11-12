@@ -16,7 +16,7 @@ import ${packageVo}.${detailVoClassName};
 import ${packageVo}.${pageVoClassName};
 import com.github.codingsoldier.starter.mybatisplus.resp.PageResult;
 import com.github.codingsoldier.common.enums.ResponseCodeEnum;
-import com.github.codingsoldier.common.exception.AppException;
+import com.github.codingsoldier.common.exception.ClientException;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.BeanUtils;
@@ -53,7 +53,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     @Transactional(rollbackFor = Exception.class)
     public Long add(${addDtoClassName} addDto) {
         //if (isRepeat(null, ${entity}::getName, addDto.getName())){
-        //    throw new AppException(ResponseCodeEnum.PRECONDITION_FAILED, "新增失败，XX已存在。请修改XX。");
+        //    throw new ClientException(ResponseCodeEnum.PRECONDITION_FAILED, "新增失败，XX已存在。请修改XX。");
         //}
         ${entity} ${uncapFirstEntity} = new ${entity}();
         BeanUtils.copyProperties(addDto, ${uncapFirstEntity});
@@ -65,7 +65,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     @Transactional(rollbackFor = Exception.class)
     public void update(${updateDtoClassName} updateDto) {
         //if (isRepeat(updateDto.getId(), ${entity}::getName, updateDto.getName())){
-        //    throw new AppException(ResponseCodeEnum.PRECONDITION_FAILED, "修改失败，XX已存在。请修改XX。");
+        //    throw new ClientException(ResponseCodeEnum.PRECONDITION_FAILED, "修改失败，XX已存在。请修改XX。");
         //}
         ${entity} ${uncapFirstEntity} = new ${entity}();
         BeanUtils.copyProperties(updateDto, ${uncapFirstEntity});

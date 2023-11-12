@@ -1,6 +1,6 @@
 package com.github.codingsoldier.example.gateway;
 
-import com.github.codingsoldier.common.enums.ResponseCodeEnum;
+import com.github.codingsoldier.common.enums.ResultCodeEnum;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
@@ -21,7 +21,7 @@ class C01FeignTestControllerTest extends BaseTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .jsonPath("$.code").isEqualTo(ResponseCodeEnum.SUCCESS.getCode());
+                .jsonPath("$.code").isEqualTo(ResultCodeEnum.SUCCESS.getCode());
     }
 
     @Test
@@ -31,7 +31,7 @@ class C01FeignTestControllerTest extends BaseTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .jsonPath("$.code").isEqualTo(ResponseCodeEnum.SUCCESS.getCode())
+                .jsonPath("$.code").isEqualTo(ResultCodeEnum.SUCCESS.getCode())
                 .jsonPath("$.data").isEqualTo("123456--");
 
         webClient.get()
@@ -39,7 +39,7 @@ class C01FeignTestControllerTest extends BaseTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .jsonPath("$.code").isEqualTo(ResponseCodeEnum.SUCCESS.getCode())
+                .jsonPath("$.code").isEqualTo(ResultCodeEnum.SUCCESS.getCode())
                 .jsonPath("$.data").isEqualTo("123456--测试信息");
     }
 
@@ -50,7 +50,7 @@ class C01FeignTestControllerTest extends BaseTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .jsonPath("$.code").isEqualTo(ResponseCodeEnum.SUCCESS.getCode())
+                .jsonPath("$.code").isEqualTo(ResultCodeEnum.SUCCESS.getCode())
                 .jsonPath("$.data").isEqualTo("--1--10");
 
         webClient.get()
@@ -58,7 +58,7 @@ class C01FeignTestControllerTest extends BaseTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .jsonPath("$.code").isEqualTo(ResponseCodeEnum.SUCCESS.getCode())
+                .jsonPath("$.code").isEqualTo(ResultCodeEnum.SUCCESS.getCode())
                 .jsonPath("$.data").isEqualTo("名字--1--10");
 
     }
@@ -73,7 +73,7 @@ class C01FeignTestControllerTest extends BaseTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .jsonPath("$.code").isEqualTo(ResponseCodeEnum.SUCCESS.getCode())
+                .jsonPath("$.code").isEqualTo(ResultCodeEnum.SUCCESS.getCode())
                 .jsonPath("$.data[0]").isEqualTo("测试中文");
 
     }
@@ -88,7 +88,7 @@ class C01FeignTestControllerTest extends BaseTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .jsonPath("$.code").isEqualTo(ResponseCodeEnum.SUCCESS.getCode())
+                .jsonPath("$.code").isEqualTo(ResultCodeEnum.SUCCESS.getCode())
                 .jsonPath("$.data.newKey").isEqualTo("web02返回");
 
         body.put("aa", "测试");
@@ -99,7 +99,7 @@ class C01FeignTestControllerTest extends BaseTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .jsonPath("$.code").isEqualTo(ResponseCodeEnum.SUCCESS.getCode())
+                .jsonPath("$.code").isEqualTo(ResultCodeEnum.SUCCESS.getCode())
                 .jsonPath("$.data.aa").isEqualTo("测试");
     }
 
@@ -113,7 +113,7 @@ class C01FeignTestControllerTest extends BaseTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .jsonPath("$.code").isEqualTo(ResponseCodeEnum.SUCCESS.getCode())
+                .jsonPath("$.code").isEqualTo(ResultCodeEnum.SUCCESS.getCode())
                 .jsonPath("$.data.date").isEqualTo("2022-11-01 01:02:02")
                 .jsonPath("$.data.localDate").isEqualTo("2012-01-10")
                 .jsonPath("$.data.localDateTime").isEqualTo("2022-08-01 01:02:02");
@@ -126,7 +126,7 @@ class C01FeignTestControllerTest extends BaseTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .jsonPath("$.code").isEqualTo(ResponseCodeEnum.SUCCESS.getCode())
+                .jsonPath("$.code").isEqualTo(ResultCodeEnum.SUCCESS.getCode())
                 .jsonPath("$.data.localDateTime").isEqualTo("2010-10-10 01:02:10");
     }
 

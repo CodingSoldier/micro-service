@@ -1,6 +1,6 @@
 package com.github.codingsoldier.starter.web.advice;
 
-import com.github.codingsoldier.common.enums.ResponseCodeEnum;
+import com.github.codingsoldier.common.enums.ResultCodeEnum;
 import com.github.codingsoldier.common.constant.FeignConstant;
 import com.github.codingsoldier.common.resp.Result;
 import com.github.codingsoldier.common.util.CommonUtil;
@@ -50,7 +50,8 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
 
     @SuppressWarnings("squid:S1126")
     @Override
-    public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
+    public boolean supports(MethodParameter returnType,
+            Class<? extends HttpMessageConverter<?>> converterType) {
         // 类上使用了 @NoWrapper
         if (returnType.getDeclaringClass().isAnnotationPresent(NoWrapper.class)) {
             return false;
@@ -137,7 +138,7 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
             if (isExceptionHandler && methodReturnTypeChange && (body instanceof Result)) {
                 Result<?> result = (Result) body;
                 Set<Integer> notChangeCodes = FeignConstant.NOT_CHANGE_RESPONSE_STATUS_CODE_SET
-                        .stream().map(ResponseCodeEnum::getCode).collect(Collectors.toSet());
+                        .stream().map(ResultCodeEnum::getCode).collect(Collectors.toSet());
                 if (!notChangeCodes.contains(result.getCode())) {
                     log.info("feign调用，返回结果被@ExceptionHandler改变了，Result.code不在NOT_CHANGE_RESPONSE_STATUS_CODE_SET集合中，设置Response.StatusCode=HttpStatus.INTERNAL_SERVER_ERROR");
                     response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);

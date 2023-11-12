@@ -1,6 +1,6 @@
 package com.github.codingsoldier.example.bootweb.controller;
 
-import com.github.codingsoldier.common.exception.AppException;
+import com.github.codingsoldier.common.exception.MicroServiceException;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -26,8 +26,8 @@ public class GlobalExceptionHandlerController {
             Integer a = null;
             int i = 1 / a;
             log.info("{}", i);
-        } else if (StringUtils.equals("AppException", name)) {
-            throw new AppException("测试APP异常");
+        } else if (StringUtils.equals("MicroServiceException", name)) {
+            throw new MicroServiceException("测试MicroServiceException异常");
         } else if (StringUtils.equals("Exception", name)) {
             throw new Exception("测试Exception");
         }

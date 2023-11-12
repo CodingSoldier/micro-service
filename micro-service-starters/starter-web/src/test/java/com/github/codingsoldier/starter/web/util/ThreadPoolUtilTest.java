@@ -1,6 +1,6 @@
 package com.github.codingsoldier.starter.web.util;
 
-import com.github.codingsoldier.common.exception.AppException;
+import com.github.codingsoldier.common.exception.BackendServicesException;
 import com.github.codingsoldier.common.util.thread.ThreadPoolUtil;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +19,7 @@ class ThreadPoolUtilTest {
     @Test
     void executeException() {
         ThreadPoolUtil.execute(() -> {
-            throw new AppException("线程池中抛出异常");
+            throw new BackendServicesException("线程池中抛出异常");
         });
     }
 

@@ -14,13 +14,13 @@ spring:
     nacos:
       # 服务注册发现
       discovery:
-        server-addr: 192.168.1.101:8848
+        server-addr: localhost:8848
         # server-addr: 127.0.0.1:8848,127.0.0.1:8849,127.0.0.1:8850 # Nacos 集群服务器地址
         namespace: namespace-example-dev
     sentinel:
       transport:
         # 配置 sentinel dashboard 地址
-        dashboard: 192.168.1.101:10102
+        dashboard: 127.0.0.1:10102
         # 配置端口，启动一个 Http Server, 该 Server 会与 Sentinel 控制台做交互
         port: 10112
       # 服务启动直接建立心跳连接
@@ -58,7 +58,7 @@ spring:
       # 指定通过什么类型发送消息 默认是 web
       type: WEB
     # 指定 zipkin 的地址
-    base-url: http://192.168.1.101:10103
+    base-url: http://127.0.0.1:10103
 
 # 暴露 actuator 端点
 # 还需要在拦截器中排除 /actuator/**

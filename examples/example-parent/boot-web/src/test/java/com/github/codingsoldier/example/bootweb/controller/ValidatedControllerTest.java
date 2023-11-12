@@ -1,7 +1,7 @@
 package com.github.codingsoldier.example.bootweb.controller;
 
 import com.github.codingsoldier.example.bootweb.BaseTest;
-import com.github.codingsoldier.common.enums.ResponseCodeEnum;
+import com.github.codingsoldier.common.enums.ResultCodeEnum;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -47,7 +47,7 @@ class ValidatedControllerTest extends BaseTest {
         super.mockMvc.perform(reqBuilder)
             .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code",
-                    Matchers.equalTo(ResponseCodeEnum.SUCCESS.getCode())));
+                    Matchers.equalTo(ResultCodeEnum.SUCCESS.getCode())));
     }
 
     @Test
@@ -83,7 +83,7 @@ class ValidatedControllerTest extends BaseTest {
         super.mockMvc.perform(reqBuilder)
             .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code",
-                    Matchers.equalTo(ResponseCodeEnum.SUCCESS.getCode())));
+                    Matchers.equalTo(ResultCodeEnum.SUCCESS.getCode())));
     }
 
     @Test
@@ -118,7 +118,7 @@ class ValidatedControllerTest extends BaseTest {
         super.mockMvc.perform(reqBuilder)
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code",
-                        Matchers.equalTo(ResponseCodeEnum.SUCCESS.getCode())));
+                        Matchers.equalTo(ResultCodeEnum.SUCCESS.getCode())));
     }
 
     @Order(1)
@@ -152,7 +152,7 @@ class ValidatedControllerTest extends BaseTest {
         super.mockMvc.perform(reqBuilder)
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(MockMvcResultMatchers.jsonPath("$.code",
-                Matchers.equalTo(ResponseCodeEnum.SUCCESS.getCode())));
+                Matchers.equalTo(ResultCodeEnum.SUCCESS.getCode())));
     }
 
     @Order(4)
@@ -168,6 +168,6 @@ class ValidatedControllerTest extends BaseTest {
         super.mockMvc.perform(reqBuilder)
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(MockMvcResultMatchers.jsonPath("$.code",
-                Matchers.equalTo(ResponseCodeEnum.SUCCESS.getCode())));
+                Matchers.equalTo(ResultCodeEnum.SUCCESS.getCode())));
     }
 }

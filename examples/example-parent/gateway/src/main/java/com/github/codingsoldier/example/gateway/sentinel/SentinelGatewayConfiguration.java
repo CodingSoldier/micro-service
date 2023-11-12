@@ -3,7 +3,7 @@ package com.github.codingsoldier.example.gateway.sentinel;
 import com.alibaba.csp.sentinel.adapter.gateway.sc.callback.BlockRequestHandler;
 import com.alibaba.csp.sentinel.adapter.gateway.sc.callback.GatewayCallbackManager;
 import com.alibaba.csp.sentinel.adapter.gateway.sc.exception.SentinelGatewayBlockExceptionHandler;
-import com.github.codingsoldier.common.enums.ResponseCodeEnum;
+import com.github.codingsoldier.common.enums.ResultCodeEnum;
 import com.github.codingsoldier.common.resp.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.ObjectProvider;
@@ -76,7 +76,7 @@ public class SentinelGatewayConfiguration {
 
         // 自定义 BlockRequestHandler
         BlockRequestHandler blockRequestHandler = (ServerWebExchange serverWebExchange, Throwable throwable) -> {
-            Result<?> result = Result.fail(ResponseCodeEnum.TOO_MANY_REQUESTS.getCode(), ResponseCodeEnum.TOO_MANY_REQUESTS.getMessage());
+            Result<?> result = Result.fail(ResultCodeEnum.TOO_MANY_REQUESTS.getCode(), ResultCodeEnum.TOO_MANY_REQUESTS.getMessage());
 
             return ServerResponse
                     .status(HttpStatus.TOO_MANY_REQUESTS)

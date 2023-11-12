@@ -1,7 +1,7 @@
 package com.github.codingsoldier.example.bootweb.controller;
 
 import com.github.codingsoldier.example.bootweb.BaseTest;
-import com.github.codingsoldier.common.enums.ResponseCodeEnum;
+import com.github.codingsoldier.common.enums.ResultCodeEnum;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
@@ -17,14 +17,14 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 class GlobalExceptionHandlerControllerTest extends BaseTest {
 
     @Test
-    void testAppException() throws Exception{
-        MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/global/exception/handler/test/more/exception?id=1&name=AppException");
+    void testMicroServiceException() throws Exception{
+        MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/global/exception/handler/test/more/exception?id=1&name=MicroServiceException");
         super.mockMvc.perform(reqBuilder)
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message",
-                        Matchers.equalTo("测试APP异常")))
+                        Matchers.equalTo("测试MicroServiceException异常")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code",
-                        Matchers.equalTo(ResponseCodeEnum.BAD_REQUEST.getCode())));
+                        Matchers.equalTo(ResultCodeEnum.BAD_REQUEST.getCode())));
     }
 
     @Test
@@ -82,6 +82,6 @@ class GlobalExceptionHandlerControllerTest extends BaseTest {
         super.mockMvc.perform(reqBuilder)
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code",
-                        Matchers.equalTo(ResponseCodeEnum.SERVER_ERROR.getCode())));
+                        Matchers.equalTo(ResultCodeEnum.SERVER_ERROR.getCode())));
     }
 }

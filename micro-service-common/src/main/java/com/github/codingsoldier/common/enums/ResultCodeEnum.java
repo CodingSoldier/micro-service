@@ -6,7 +6,7 @@ package com.github.codingsoldier.common.enums;
  * @author chenpq
  * @since 2022/2/8 14:19
  */
-public enum ResponseCodeEnum {
+public enum ResultCodeEnum {
 
     /**
      * http状态码大全 https://seo.juziseo.com/doc/http_code/
@@ -19,24 +19,25 @@ public enum ResponseCodeEnum {
      * 例如：使用 42901 表示“系统忙，您发送的请求被限流了。”
      * 4、服务端错误，以5开头
      * http status = 500 表示“服务器端程序错误”，则使用 50001 - 50099 表示“并服务器端程序错误” 这类的异常
+     * 5、建议：前端收到响应，400 <= response.status <= 499，使用黄色弹出框。500 <= response.status <= 599，使用红色弹出框。
      */
-    SUCCESS(0, "成功"),
+    SUCCESS(20000, "成功"),
     BAD_REQUEST(40000, "失败"),
-    FEIGN_RESULT_ERROR_EX(41110, "微服务之间调用异常"),
+    PRECONDITION_FAILED(40001, "请求条件错误"),
     TOO_MANY_REQUESTS(42901, "系统忙，您发送的请求被限流了。"),
-    PRECONDITION_FAILED(41200, "请求条件错误"),
+    FEIGN_RESULT_ERROR_EX(45000, "微服务之间调用异常"),
     SERVER_ERROR(50000, "服务端无法处理此请求"),
     ;
 
     private int code;
     private String message;
 
-    ResponseCodeEnum(int code, String message) {
+    ResultCodeEnum(int code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public Integer getCode() {
+    public int getCode() {
         return this.code;
     }
 

@@ -1,44 +1,44 @@
 package com.github.codingsoldier.common.exception;
 
 
-import com.github.codingsoldier.common.enums.ResponseCodeEnum;
+import com.github.codingsoldier.common.enums.ResultCodeEnum;
 
 /**
- * 自定义异常
+ * 基础异常类，建议不要直接使用此类，建议使用ClientException或者BackendServicesException
  *
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
-public class AppException extends RuntimeException {
+public class MicroServiceException extends RuntimeException {
 
-    private final Integer code;
+    private final int code;
     private final String message;
 
-    public AppException(String message) {
+    public MicroServiceException(String message) {
         super(message);
-        this.code = ResponseCodeEnum.BAD_REQUEST.getCode();
+        this.code = ResultCodeEnum.BAD_REQUEST.getCode();
         this.message = message;
     }
 
-    public AppException(Integer code, String message) {
+    public MicroServiceException(int code, String message) {
         super(message);
         this.code = code;
         this.message = message;
     }
 
-    public AppException(ResponseCodeEnum responseCodeEnum) {
+    public MicroServiceException(ResultCodeEnum responseCodeEnum) {
         super(responseCodeEnum.getMessage());
         this.code = responseCodeEnum.getCode();
         this.message = responseCodeEnum.getMessage();
     }
 
-    public AppException(ResponseCodeEnum responseCodeEnum, String message) {
+    public MicroServiceException(ResultCodeEnum responseCodeEnum, String message) {
         super(message);
         this.code = responseCodeEnum.getCode();
         this.message = message;
     }
 
-    public Integer getCode() {
+    public int getCode() {
         return code;
     }
 

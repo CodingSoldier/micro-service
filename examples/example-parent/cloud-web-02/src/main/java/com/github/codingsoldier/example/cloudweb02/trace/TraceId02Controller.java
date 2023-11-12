@@ -1,6 +1,6 @@
 package com.github.codingsoldier.example.cloudweb02.trace;
 
-import com.github.codingsoldier.common.exception.AppException;
+import com.github.codingsoldier.common.exception.BackendServicesException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -38,7 +38,7 @@ public class TraceId02Controller {
 
     @GetMapping(value = "/throw/ex", produces = MediaType.APPLICATION_JSON_VALUE)
     public String throwEx(@RequestHeader Map<String, String> headers, String name) {
-        throw new AppException("测试异常traceid");
+        throw new BackendServicesException("测试异常traceid");
     }
 
 }

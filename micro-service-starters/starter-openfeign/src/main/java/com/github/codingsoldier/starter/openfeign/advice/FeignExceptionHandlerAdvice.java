@@ -1,7 +1,7 @@
 package com.github.codingsoldier.starter.openfeign.advice;
 
 
-import com.github.codingsoldier.common.enums.ResponseCodeEnum;
+import com.github.codingsoldier.common.enums.ResultCodeEnum;
 import com.github.codingsoldier.common.resp.Result;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +29,6 @@ public class FeignExceptionHandlerAdvice {
     @ExceptionHandler(value = FeignException.class)
     public Result<Object> feignExceptionHandler(final FeignException ex) {
         log.error("捕获feign异常", ex);
-        return Result.fail(ResponseCodeEnum.BAD_REQUEST.getCode(), "服务之间调用异常。");
+        return Result.fail(ResultCodeEnum.BAD_REQUEST.getCode(), "服务之间调用异常。");
     }
 }

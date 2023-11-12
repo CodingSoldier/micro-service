@@ -1,7 +1,7 @@
 package com.github.codingsoldier.common.util;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.github.codingsoldier.common.enums.ResponseCodeEnum;
+import com.github.codingsoldier.common.enums.ResultCodeEnum;
 import com.github.codingsoldier.common.resp.Result;
 import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
 import okhttp3.*;
@@ -34,17 +34,17 @@ class OkHttpUtilTest {
     void get() {
         String url = "http://localhost:10001/boot-web/http/params/path/111?msg=账号不ddddddddd够长";
         Result result = OkHttpUtil.get(url, null, null, Result.class);
-        assertEquals(ResponseCodeEnum.SUCCESS.getCode(), result.getCode());
+        assertEquals(ResultCodeEnum.SUCCESS.getCode(), result.getCode());
 
         HashMap<String, Object> params = new HashMap<>();
         HashMap<String, String> headers = new HashMap<>();
         result = OkHttpUtil.get(url, params, headers, Result.class);
-        assertEquals(ResponseCodeEnum.SUCCESS.getCode(), result.getCode());
+        assertEquals(ResultCodeEnum.SUCCESS.getCode(), result.getCode());
 
         headers.put("xxxxxx", "aaaaaa");
         result = OkHttpUtil.get("http://localhost:10001/boot-web/http/params/path/111?msg=账号不够长&name=名字",
                 params, headers, Result.class);
-        assertEquals(ResponseCodeEnum.SUCCESS.getCode(), result.getCode());
+        assertEquals(ResultCodeEnum.SUCCESS.getCode(), result.getCode());
         assertEquals("111账号不够长名字", result.getData());
     }
 
@@ -57,11 +57,11 @@ class OkHttpUtilTest {
         HashMap<String, String> headers = new HashMap<>();
         headers.put("xxxxxx", "aaaaaa");
         Result result = OkHttpUtil.get(url, params, headers, Result.class);
-        assertEquals(ResponseCodeEnum.SUCCESS.getCode(), result.getCode());
+        assertEquals(ResultCodeEnum.SUCCESS.getCode(), result.getCode());
         assertEquals("111账号禅城南村村长名字", result.getData());
 
         Result<String> r2 = OkHttpUtil.get(url, params, headers, new TypeReference<Result<String>>(){});
-        assertEquals(ResponseCodeEnum.SUCCESS.getCode(), r2.getCode());
+        assertEquals(ResultCodeEnum.SUCCESS.getCode(), r2.getCode());
         assertEquals("111账号禅城南村村长名字", r2.getData());
     }
 
@@ -71,11 +71,11 @@ class OkHttpUtilTest {
         HashMap<String, String> headers = new HashMap<>();
         headers.put("xxxxxx", "aaaaaa");
         Result result = OkHttpUtil.get(url, headers, Result.class);
-        assertEquals(ResponseCodeEnum.SUCCESS.getCode(), result.getCode());
+        assertEquals(ResultCodeEnum.SUCCESS.getCode(), result.getCode());
         assertEquals("111账号禅城南村村长名字", result.getData());
 
         Result<String> r2 = OkHttpUtil.get(url, headers, new TypeReference<Result<String>>(){});
-        assertEquals(ResponseCodeEnum.SUCCESS.getCode(), r2.getCode());
+        assertEquals(ResultCodeEnum.SUCCESS.getCode(), r2.getCode());
         assertEquals("111账号禅城南村村长名字", r2.getData());
     }
 
@@ -83,11 +83,11 @@ class OkHttpUtilTest {
     void testGet2() {
         String url = "http://localhost:10001/boot-web/http/params/path/111?msg=账号禅城南村村长&name=名字";
         Result result = OkHttpUtil.get(url, Result.class);
-        assertEquals(ResponseCodeEnum.SUCCESS.getCode(), result.getCode());
+        assertEquals(ResultCodeEnum.SUCCESS.getCode(), result.getCode());
         assertEquals("111账号禅城南村村长名字", result.getData());
 
         Result<String> r2 = OkHttpUtil.get(url, new TypeReference<Result<String>>(){});
-        assertEquals(ResponseCodeEnum.SUCCESS.getCode(), r2.getCode());
+        assertEquals(ResultCodeEnum.SUCCESS.getCode(), r2.getCode());
         assertEquals("111账号禅城南村村长名字", r2.getData());
     }
 
@@ -106,19 +106,19 @@ class OkHttpUtilTest {
         bodyMap.put("localDateTime", 1647187201000L);
 
         Result r1 = OkHttpUtil.post(url, ObjectMapperUtil.writeValueAsString(bodyMap), null, Result.class);
-        assertEquals(ResponseCodeEnum.SUCCESS.getCode(), r1.getCode());
+        assertEquals(ResultCodeEnum.SUCCESS.getCode(), r1.getCode());
 
         Result r2 = OkHttpUtil.post(url, bodyMap, null, Result.class);
-        assertEquals(ResponseCodeEnum.SUCCESS.getCode(), r2.getCode());
+        assertEquals(ResultCodeEnum.SUCCESS.getCode(), r2.getCode());
 
         HashMap<String, String> headers = new HashMap<>();
         headers.put("xxxxxx", "val");
         Result<Map<String, Object>> r33 = OkHttpUtil.post(url, bodyMap, headers, new TypeReference<Result<Map<String, Object>>>(){});
-        assertEquals(ResponseCodeEnum.SUCCESS.getCode(), r33.getCode());
+        assertEquals(ResultCodeEnum.SUCCESS.getCode(), r33.getCode());
         assertEquals(1647187201000L, r33.getData().get("localDateTime"));
 
         Result<Map<String, Object>> r44 = OkHttpUtil.post(url, ObjectMapperUtil.writeValueAsString(bodyMap), headers, new TypeReference<Result<Map<String, Object>>>(){});
-        assertEquals(ResponseCodeEnum.SUCCESS.getCode(), r44.getCode());
+        assertEquals(ResultCodeEnum.SUCCESS.getCode(), r44.getCode());
         assertEquals(1647187201000L, r44.getData().get("localDateTime"));
     }
 
@@ -130,18 +130,18 @@ class OkHttpUtilTest {
         bodyMap.put("localDateTime", 1647187201000L);
 
         Result r1 = OkHttpUtil.post(url, ObjectMapperUtil.writeValueAsString(bodyMap), Result.class);
-        assertEquals(ResponseCodeEnum.SUCCESS.getCode(), r1.getCode());
+        assertEquals(ResultCodeEnum.SUCCESS.getCode(), r1.getCode());
 
         Result r2 = OkHttpUtil.post(url, bodyMap, Result.class);
-        assertEquals(ResponseCodeEnum.SUCCESS.getCode(), r2.getCode());
+        assertEquals(ResultCodeEnum.SUCCESS.getCode(), r2.getCode());
 
 
         Result<Map<String, Object>> r33 = OkHttpUtil.post(url, bodyMap, new TypeReference<Result<Map<String, Object>>>(){});
-        assertEquals(ResponseCodeEnum.SUCCESS.getCode(), r33.getCode());
+        assertEquals(ResultCodeEnum.SUCCESS.getCode(), r33.getCode());
         assertEquals(1647187201000L, r33.getData().get("localDateTime"));
 
         Result<Map<String, Object>> r44 = OkHttpUtil.post(url, ObjectMapperUtil.writeValueAsString(bodyMap), new TypeReference<Result<Map<String, Object>>>(){});
-        assertEquals(ResponseCodeEnum.SUCCESS.getCode(), r44.getCode());
+        assertEquals(ResultCodeEnum.SUCCESS.getCode(), r44.getCode());
         assertEquals(1647187201000L, r44.getData().get("localDateTime"));
     }
 
@@ -162,7 +162,7 @@ class OkHttpUtilTest {
             public void onResponse(Call call, Response response) throws IOException {
                 String respBodyStr = response.body().string();
                 Result r = ObjectMapperUtil.readValue(respBodyStr, Result.class);
-                assertEquals(ResponseCodeEnum.SUCCESS.getCode(), r.getCode());
+                assertEquals(ResultCodeEnum.SUCCESS.getCode(), r.getCode());
             }
         });
 
@@ -176,7 +176,7 @@ class OkHttpUtilTest {
             public void onResponse(Call call, Response response) throws IOException {
                 String respBodyStr = response.body().string();
                 Result r = ObjectMapperUtil.readValue(respBodyStr, Result.class);
-                assertEquals(ResponseCodeEnum.SUCCESS.getCode(), r.getCode());
+                assertEquals(ResultCodeEnum.SUCCESS.getCode(), r.getCode());
             }
         });
 

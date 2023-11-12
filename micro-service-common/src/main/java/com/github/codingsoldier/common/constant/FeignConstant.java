@@ -1,6 +1,6 @@
 package com.github.codingsoldier.common.constant;
 
-import com.github.codingsoldier.common.enums.ResponseCodeEnum;
+import com.github.codingsoldier.common.enums.ResultCodeEnum;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -40,8 +40,8 @@ public class FeignConstant {
      * Feign调用HTTP 状态码不以 2 开头的请求，被 FeignErrorDecoder#decode 捕获，并抛出 FeignResultErrorException
      */
     @SuppressWarnings({"squid:S1171", "squid:S3599"})
-    public static final Set<ResponseCodeEnum> NOT_CHANGE_RESPONSE_STATUS_CODE_SET = Collections.unmodifiableSet(new HashSet<ResponseCodeEnum>() {{
-        add(ResponseCodeEnum.SUCCESS);
+    public static final Set<ResultCodeEnum> NOT_CHANGE_RESPONSE_STATUS_CODE_SET = Collections.unmodifiableSet(new HashSet<ResultCodeEnum>() {{
+        add(ResultCodeEnum.SUCCESS);
     }});
 
     private FeignConstant() {

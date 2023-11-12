@@ -1,6 +1,6 @@
 package com.github.codingsoldier.starter.openfeign.codec;
 
-import com.github.codingsoldier.common.exception.FeignResultErrorException;
+import com.github.codingsoldier.common.exception.feign.FeignResultErrorException;
 import com.github.codingsoldier.common.resp.Result;
 import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
 import feign.Response;

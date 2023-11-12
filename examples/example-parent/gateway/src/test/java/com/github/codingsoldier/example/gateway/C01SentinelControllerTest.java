@@ -1,6 +1,6 @@
 package com.github.codingsoldier.example.gateway;
 
-import com.github.codingsoldier.common.enums.ResponseCodeEnum;
+import com.github.codingsoldier.common.enums.ResultCodeEnum;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -32,7 +32,7 @@ class C01SentinelControllerTest extends BaseTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .jsonPath("$.code").isEqualTo(ResponseCodeEnum.BAD_REQUEST.getCode())
+                .jsonPath("$.code").isEqualTo(ResultCodeEnum.BAD_REQUEST.getCode())
                 .jsonPath("$.message").isEqualTo("访问太频繁，请稍后重试。");
     }
 

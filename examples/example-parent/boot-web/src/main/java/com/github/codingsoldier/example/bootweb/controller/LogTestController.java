@@ -1,6 +1,6 @@
 package com.github.codingsoldier.example.bootweb.controller;
 
-import com.github.codingsoldier.common.exception.AppException;
+import com.github.codingsoldier.common.exception.ClientException;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -58,7 +58,7 @@ public class LogTestController {
         String stackTrace = ExceptionUtils.getStackTrace(new RuntimeException("测试信息长度限制"));
         stackTrace = stackTrace.replaceAll("\r\n\t", "");
         log.info(stackTrace);
-        AppException ex = new AppException("测试异常长度限制");
+        ClientException ex = new ClientException("测试异常长度限制");
         if ("logEx".equals(p1)) {
             log.error("", ex);
         }

@@ -1,6 +1,6 @@
 package com.github.codingsoldier.example.gateway;
 
-import com.github.codingsoldier.common.enums.ResponseCodeEnum;
+import com.github.codingsoldier.common.enums.ResultCodeEnum;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
@@ -29,7 +29,7 @@ class C01FeignTimeoutControllerTest{
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .jsonPath("$.code").isEqualTo(ResponseCodeEnum.SUCCESS.getCode())
+                .jsonPath("$.code").isEqualTo(ResultCodeEnum.SUCCESS.getCode())
                 .jsonPath("$.data").isEqualTo("调用web02出错，fallbackFactory降级处理。");
     }
 

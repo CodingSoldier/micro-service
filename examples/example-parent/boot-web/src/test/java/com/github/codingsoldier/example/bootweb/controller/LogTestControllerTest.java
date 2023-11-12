@@ -1,7 +1,7 @@
 package com.github.codingsoldier.example.bootweb.controller;
 
 import com.github.codingsoldier.example.bootweb.BaseTest;
-import com.github.codingsoldier.common.enums.ResponseCodeEnum;
+import com.github.codingsoldier.common.enums.ResultCodeEnum;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -22,7 +22,7 @@ class LogTestControllerTest extends BaseTest {
             .andDo(MockMvcResultHandlers.print())
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(MockMvcResultMatchers.jsonPath("$.code",
-                    Matchers.equalTo(ResponseCodeEnum.SUCCESS.getCode())));
+                    Matchers.equalTo(ResultCodeEnum.SUCCESS.getCode())));
     }
 
 }

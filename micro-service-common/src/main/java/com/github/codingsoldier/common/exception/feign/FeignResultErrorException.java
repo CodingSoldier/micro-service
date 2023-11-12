@@ -1,6 +1,6 @@
-package com.github.codingsoldier.common.exception;
+package com.github.codingsoldier.common.exception.feign;
 
-import com.github.codingsoldier.common.enums.ResponseCodeEnum;
+import com.github.codingsoldier.common.enums.ResultCodeEnum;
 
 /**
  * feign调用，下游服务的Result#code不是成功code
@@ -15,7 +15,7 @@ public class FeignResultErrorException extends RuntimeException {
 
     public FeignResultErrorException(String message) {
         super(message);
-        this.code = ResponseCodeEnum.FEIGN_RESULT_ERROR_EX.getCode();
+        this.code = ResultCodeEnum.FEIGN_RESULT_ERROR_EX.getCode();
         this.message = message;
     }
 
