@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.codingsoldier.example.cloudweb01.nacos.annotation;
+package com.github.codingsoldier.starter.nacos.annotation;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
@@ -30,7 +30,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
-@ConditionalOnProperty(value = "micro-service.starter.nacos.graceful", matchIfMissing = true)
+@ConditionalOnProperty(value = "micro-service.starter.nacos.graceful.enabled", matchIfMissing = true)
 public @interface ConditionalOnStarterNacosEnabled {
 
 }

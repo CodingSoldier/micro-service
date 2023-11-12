@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.cloudweb01.nacos;
+package com.github.codingsoldier.starter.nacos.config;
 
 import com.alibaba.cloud.nacos.NacosDiscoveryProperties;
 import com.alibaba.cloud.nacos.NacosServiceManager;

@@ -1,14 +1,15 @@
-package com.github.codingsoldier.example.cloudweb01.nacos;
+package com.github.codingsoldier.starter.nacos.controller;
 
 import com.alibaba.nacos.api.exception.NacosException;
 import com.github.codingsoldier.common.resp.Result;
+import com.github.codingsoldier.starter.nacos.config.NacosGraceful;
+import com.github.codingsoldier.starter.nacos.constant.Constant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.github.codingsoldier.example.cloudweb01.nacos.constant.Constant.URI_DEREGISTER_INSTANCE;
 
 @Slf4j
 @RefreshScope
@@ -24,7 +25,7 @@ public class NacosGracefulController {
         return Result.success("");
     }
 
-    @GetMapping(value = URI_DEREGISTER_INSTANCE)
+    @GetMapping(value = Constant.URI_DEREGISTER_INSTANCE)
     public Result<String> deregisterInstance() throws NacosException {
         nacosGraceful.deregisterInstance();
         return Result.success("");

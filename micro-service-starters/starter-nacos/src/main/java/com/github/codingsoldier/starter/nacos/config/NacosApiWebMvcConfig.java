@@ -1,6 +1,6 @@
-package com.github.codingsoldier.example.cloudweb01.nacos;
+package com.github.codingsoldier.starter.nacos.config;
 
-import com.github.codingsoldier.example.cloudweb01.nacos.properties.NacosGracefulProperties;
+import com.github.codingsoldier.starter.nacos.properties.NacosGracefulProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

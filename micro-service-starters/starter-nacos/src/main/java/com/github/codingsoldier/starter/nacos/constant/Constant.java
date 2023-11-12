@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.cloudweb01.nacos.constant;
+package com.github.codingsoldier.starter.nacos.constant;
 
 public class Constant {
 

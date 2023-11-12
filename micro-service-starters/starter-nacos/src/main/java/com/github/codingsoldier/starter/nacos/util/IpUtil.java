@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.cloudweb01.nacos;
+package com.github.codingsoldier.starter.nacos.util;
 
 import lombok.extern.slf4j.Slf4j;
 

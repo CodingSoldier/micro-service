@@ -25,6 +25,7 @@
         <module>starter-spring-doc</module>
         <module>starter-mybatis-plus</module>
         <module>starter-redis</module>
+        <module>starter-nacos</module>
         <module>starter-sleuth</module>
         <module>starter-openfeign</module>
         <module>starter-web</module>
