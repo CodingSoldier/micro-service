@@ -1,4 +1,4 @@
-package com.github.codingsoldier.starter.nacos.config;
+package com.github.codingsoldier.starter.nacos.graceful.config;
 
 import com.alibaba.cloud.nacos.NacosDiscoveryProperties;
 import com.alibaba.cloud.nacos.NacosServiceManager;
@@ -10,6 +10,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
+/**
+ * nacos客户单优雅发布核心类
+ * @author cpq
+ * @since 2022-03-17 11:28:55
+ */
 @Slf4j
 @Component
 public class NacosGraceful {

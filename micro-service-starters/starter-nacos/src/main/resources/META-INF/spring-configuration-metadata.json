@@ -1,11 +1,31 @@
 {
-    "groups": [],
+    "groups": [
+        {
+            "name": "micro-service.starter.nacos.graceful",
+            "type": "com.github.codingsoldier.starter.nacos.graceful.properties.NacosGracefulProperties",
+            "sourceType": "com.github.codingsoldier.starter.nacos.graceful.properties.NacosGracefulProperties"
+        }
+    ],
     "properties": [
         {
             "name": "micro-service.starter.nacos.graceful.enabled",
             "type": "java.lang.Boolean",
-            "description": "是否启用 starter-nacos",
+            "description": "是否启用nacos灰度发布",
             "defaultValue": true
+        },
+        {
+            "name": "micro-service.starter.nacos.graceful.ip-white-list",
+            "type": "java.util.List",
+            "description": "可以调用nacos客户端下线接口的ip白名单列表，支持正则表达式，默认值=[\"127.0.0.1\", \"0:0:0:0:0:0:0:1\"]",
+            "sourceType": "com.github.codingsoldier.starter.nacos.graceful.properties.NacosGracefulProperties",
+            "defaultValue": ["127.0.0.1", "0:0:0:0:0:0:0:1"]
+        },
+        {
+            "name": "micro-service.starter.nacos.graceful.delay-register-milliseconds",
+            "type": "java.lang.Long",
+            "description": "nacos客户端在系统启动后，延迟注册的时间，默认值=1000",
+            "sourceType": "com.github.codingsoldier.starter.nacos.graceful.properties.NacosGracefulProperties",
+            "defaultValue": 1000
         }
     ],
     "hints": []
