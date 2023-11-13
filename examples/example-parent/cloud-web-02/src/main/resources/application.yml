@@ -7,58 +7,11 @@ server:
     context-path: /cloud-web-02
 
 spring:
+  profiles:
+    active: dev
   lifecycle:
     # 停机缓冲时间，默认：30秒
     timeout-per-shutdown-phase: 10s
-  cloud:
-    nacos:
-      # 服务注册发现
-      discovery:
-        server-addr: localhost:8848
-        # server-addr: 127.0.0.1:8848,127.0.0.1:8849,127.0.0.1:8850 # Nacos 集群服务器地址
-        namespace: namespace-example-dev
-    sentinel:
-      transport:
-        # 配置 sentinel dashboard 地址
-        dashboard: 127.0.0.1:10102
-        # 配置端口，启动一个 Http Server, 该 Server 会与 Sentinel 控制台做交互
-        port: 10112
-      # 服务启动直接建立心跳连接
-      eager: true
-      datasource:
-        # 名称任意, 代表数据源
-        ds:
-          nacos:
-            # sentinel 整合 nacos 实现规则持久化
-            server-addr: ${spring.cloud.nacos.discovery.server-addr}
-            username: nacos
-            password: nacos
-            dataId: ${spring.application.name}-sentinel
-            namespace: ${spring.cloud.nacos.discovery.namespace}
-            groupId: DEFAULT_GROUP
-            data-type: json
-            # 规则类型: com.alibaba.cloud.sentinel.datasource.RuleType
-            # FlowRule 就是限流规则
-            rule-type: flow
-  #        # 指定actuator端点的访问路径，因为我们上面配置了服务的前缀 context-path ，所以我们需要将它拼接上，不然路径不对会报错
-  #        # spring-boot-admin配置
-  #        metadata:
-  #          management:
-  #            context-path: ${server.servlet.context-path}/actuator
-
-  # sleuth + zipkin 分布式链路追踪
-  sleuth:
-    sampler:
-      # ProbabilityBasedSampler 抽样策略
-      probability: 1.0  # 采样比例, 1.0 表示 100%, 默认是 0.1
-      # RateLimitingSampler 抽样策略, 设置了限速采集, spring.sleuth.sampler.probability 属性值无效
-      rate: 100  # 每秒间隔接受的 trace 量
-  zipkin:
-    sender:
-      # 指定通过什么类型发送消息 默认是 web
-      type: WEB
-    # 指定 zipkin 的地址
-    base-url: http://127.0.0.1:10103
 
 # 暴露 actuator 端点
 # 还需要在拦截器中排除 /actuator/**
@@ -94,34 +47,3 @@ feign:
   # 打开 Sentinel 对 Feign 的支持
   sentinel:
     enabled: true
-
-logging:
-  # logback-spring.xml 已在 starter-logback 中配置好了，无需新建
-  config: classpath:logback-spring.xml
-  file:
-    # 日志根目录
-    path: /logs
-    name: ${spring.application.name}
-  level:
-    com.github.codingsoldier.example: DEBUG
-
-#starter:
-micro-service:
-  starter:
-    # starter-spring-doc 配置
-    spring-doc:
-      title: 服务222的API
-
-   # starter-log4j2 配置
-#    log4j2:
-#      # 异常信息最大长度
-#      ex-max-length: 1024
-#      time-based-triggering-policy:
-#        # 多久滚动一次
-#        interval: 24
-#      size-based-triggering-policy:
-#        # 超过该大小就触发日志文件滚动更新
-#        size: 1MB
-#      default-rollover-strategy:
-#        # 同一文件夹下文件数量到达该数量开始覆盖
-#        max: 7
