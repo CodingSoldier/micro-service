@@ -1,1 +1,144 @@
+spring:
+  datasource:
+    username: root
+    password: cpq..123
+    url: jdbc:mysql://192.168.1.4:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      # 连接池最大连接数
+      maximum-pool-size: 200
+      # 空闲时保持最小连接数
+      minimum-idle: 20
+      # 空闲连接存活时间
+      idle-timeout: 300000
+      # 连接超时时间
+      connection-timeout: 20000
+      # 测试sql
+      connection-test-query: select 1
+  redis:
+    # Redis数据库索引（默认为0）
+    database: 0
+    # Redis服务器地址
+    host: 192.168.1.4
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password:
+    # 连接超时时间 单位 ms（毫秒）
+    timeout: 3000
+    lettuce:
+      pool:
+        # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
+        max-wait: 3000
+        # 连接池中的最大空闲连接 默认 8
+        max-idle: 100
+        # 连接池中的最小空闲连接 默认 0
+        min-idle: 20
+  # springboot方式连接spring-boot-admin-server
+  boot:
+    admin:
+      client:
+        url: http://192.168.1.4:10100
+
+logging:
+  # logback-spring.xml 已在 starter-logback 中配置好了，无需新建
+  config: classpath:logback-spring.xml
+  # log4j2-spring.xml 已在 starter-log4j2 中配置好了，无需新建
+  #  config: classpath:log4j2-spring.xml
+  file:
+    # 日志根目录
+    path: /logs/${spring.application.name}
+    # log4j2-spring.xml 使用 logging.file.name 作为日志子目录、日志文件名前缀
+    name: ${spring.application.name}
+  #  logback:
+  #    rollingpolicy:
+  #      max-file-size: 1MB
+  #      max-history: 10
+  #      total-size-cap: 2MB
+  level:
+    com.github.codingsoldier: DEBUG
+
+
+micro-service:
+  starter:
+    #    logback:
+    #      # 信息最大长度
+    #      msg-max-length: 9000
+    #      # 异常信息最大长度
+    #      ex-max-length: 2000
+
+    #    # starter-log4j2 配置
+    #    log4j2:
+    #      # 信息最大长度
+    #      msg-max-length: 9000
+    #      # 异常信息最大长度
+    #      ex-max-length: 2000
+    #      time-based-triggering-policy:
+    #        # 多久滚动一次
+    #        interval: 24
+    #      size-based-triggering-policy:
+    #        # 超过该大小就触发日志文件滚动更新
+    #        size: 1MB
+    #      default-rollover-strategy:
+    #        # 同一文件夹下文件数量到达该数量开始覆盖
+    #        max: 7
+
+    #    mybatis-plus:
+    #      # 是否启用 starter-mybatis-plus，默认true
+    #      enabled: true
+
+    #    openfeign:
+    #      # 是否启用starter-openfeign，默认true
+    #      enabled: true
+
+    # starter-spring-doc 配置
+    spring-doc:
+      title: boot-web的API
+    web:
+      # 是否启用 starter-web，默认true
+      enabled: true
+      # 是否启用 WebMvcConfig 配置类，默认true
+      enableWebMvcConfig: true
+      logging:
+        #        # 是否打印request、responseBody日志。默认false
+        requestResponseLog: true
+    #        # 是否打印request日志，是否打印request日志。默认false
+    #        requestLog: true
+    #        # 是否打印request日志。默认false
+    #        responseBodyLog: true
+    #        # 是否包含请求头信息。默认false
+    #        includeHeaders: true
+    #      # 企业微信消息
+    #      work-weixin:
+    #        # 是否启用企业微信
+    #        enable: true
+    #        # 企业微信机器人webhook-url key
+    #        key: 10c91e84-b21b-446e-bec4-3d573b12906e
+    #        # 信息最大长度，最多4000个字符
+    #        contentMaxLength: 1500
+    #        # 标题
+    #        title: 标题
+    #        # 标题颜色（只支持3种内置颜色） info 绿色 comment 灰色 warning 橙红色
+    #        titleColor: comment
+    #      # 钉钉消息
+    #      ding-talk:
+    #        # 是否启用钉钉机器人
+    #        enable: false
+    #        # 信息最大长度
+    #        contentMaxLength: 1500
+    #        # 标题
+    #        title: 标题
+    #        # 加签
+    #        secret:
+    #        # access_token
+    #        accessToken:
+    #    # starter-redis 配置
+    #    redis:
+    #      # 是否启用starter-redis，默认true
+    #      enabled: true
+
+
 profile-val: 开发13-15
+
+junit-test:
+  msg: Junit测试使用

@@ -1,0 +1,96 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.1.4:8848
+        namespace: namespace-example-dev
+        file-extension: yaml
+      discovery:
+        server-addr: 192.168.1.4:8848
+        namespace: namespace-example-dev
+    sentinel:
+      eager: true
+      transport:
+        port: 10112
+        dashboard: 192.168.1.4:10102
+      datasource:
+        # 集成 Nacos
+        ds1:
+          nacos:
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+            namespace: ${spring.cloud.nacos.discovery.namespace}
+            username: nacos
+            password: nacos
+            data-id: gateway-flow-rule-sentinel
+            group-id: DEFAULT_GROUP
+            data-type: json
+            rule-type: gw-flow
+        ds2:
+          nacos:
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+            namespace: ${spring.cloud.nacos.discovery.namespace}
+            username: nacos
+            password: nacos
+            data-id: gateway-flow-rule-api-sentinel
+            group-id: DEFAULT_GROUP
+            data-type: json
+            rule-type: gw-api-group
+  # sleuth + zipkin 分布式链路追踪
+  sleuth:
+    sampler:
+      # ProbabilityBasedSampler 抽样策略
+      probability: 1.0  # 采样比例, 1.0 表示 100%, 默认是 0.1
+      # RateLimitingSampler 抽样策略, 设置了限速采集, spring.sleuth.sampler.probability 属性值无效
+      rate: 100  # 每秒间隔接受的 trace 量
+      # 在2020.0.0中，已将默认网关反应器检测模式更改为manual,
+      # MANUAL-以最小侵入性的方式包装每个Reactor，而无需通过跟踪上下文。由用户决定
+      # https://docs.spring.io/spring-cloud-sleuth/docs/current/reference/html/integrations.html#sleuth-reactor-integration
+      # 使用 SleuthLog.log 打印日志
+      instrumentation-type: MANUAL
+  zipkin:
+    sender:
+      # 指定通过什么类型发送消息 默认是 web
+      type: WEB
+    # 指定 zipkin 的地址
+    base-url: http://192.168.1.4:10103
+
+
+logging:
+  # logback-spring.xml 已在 starter-logback 中配置好了，无需新建
+  config: classpath:logback-spring.xml
+  #  config: classpath:log4j2-spring.xml
+  file:
+    # 日志根目录
+    path: /logs
+    name: ${spring.application.name}
+  level:
+    com.github.codingsoldier.example: DEBUG
+#starter:
+micro-service:
+  starter:
+    # springdoc配置
+    springdoc:
+      # 预加载
+      pre-loading-enabled: true
+      swagger-ui:
+      # 折叠接口
+      doc-expansion: none
+      urls:
+        - name: 服务01
+          url: /cloud-web-01/v3/api-docs
+        - name: 服务02
+          url: /cloud-web-02/v3/api-docs
+
+    #    # starter-log4j2 配置
+    #    log4j2:
+    #      # 异常信息最大长度
+    #      ex-max-length: 1024
+    #      time-based-triggering-policy:
+    #        # 多久滚动一次
+    #        interval: 24
+    #      size-based-triggering-policy:
+    #        # 超过该大小就触发日志文件滚动更新
+    #        size: 1MB
+    #      default-rollover-strategy:
+    #        # 同一文件夹下文件数量到达该数量开始覆盖
+    #        max: 7
