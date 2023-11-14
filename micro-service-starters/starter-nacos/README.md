@@ -34,7 +34,9 @@ sleep 20
 ```
 详细使用方式可参考[cloud-web-01的cicd](../../examples/example-parent/cloud-web-01/cicd)
 
-3、k8s部署文件添加preStop指令，配置方式如下：
+3、k8s部署文件添加preStop指令，执行preStop.sh脚本。
+
+以cloud-web-02为例，配置方式如下：
 ```yaml
       lifecycle:
         preStop:
@@ -42,9 +44,9 @@ sleep 20
             command:
               - /bin/sh
               - '-c'
-              - ./preStop.sh
+              - /app/preStop.sh
 ```
-可参考cloud-web-02的k8s部署文件[k8s-deploy-dev.yaml](../../examples/example-parent/cloud-web-02/cicd)
+详细使用方式可参考cloud-web-02的k8s部署文件[k8s-deploy-dev.yaml](../../examples/example-parent/cloud-web-02/cicd)
 
 ## 自定义配置项
 ```yaml
