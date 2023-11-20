@@ -18,15 +18,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>2.6.3</spring-boot.version>
-        <spring-cloud-alibaba.version>2021.0.1.0</spring-cloud-alibaba.version>
-        <spring-cloud.version>2021.0.1</spring-cloud.version>
-        <mysql-connector-java.version>5.1.49</mysql-connector-java.version>
-        <freemarker.version>2.3.31</freemarker.version>
-        <log4j2.version>2.17.2</log4j2.version>
-        <guava.version>31.1-jre</guava.version>
-        <easyexcel.version>3.0.5</easyexcel.version>
-        <commons-collections4.version>4.4</commons-collections4.version>
+        <spring-boot.version>3.0.2</spring-boot.version>
+        <spring-cloud.version>2022.0.0</spring-cloud.version>
+        <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
     </properties>
 
     <modules>
@@ -71,11 +65,7 @@
                 <artifactId>micro-service-starters</artifactId>
                 <version>${revision}</version>
             </dependency>
-            <dependency>
-                <groupId>com.github.codingsoldier</groupId>
-                <artifactId>starter-log4j2</artifactId>
-                <version>${revision}</version>
-            </dependency>
+
             <dependency>
                 <groupId>com.github.codingsoldier</groupId>
                 <artifactId>starter-logback</artifactId>
@@ -83,12 +73,12 @@
             </dependency>
             <dependency>
                 <groupId>com.github.codingsoldier</groupId>
-                <artifactId>starter-mybatis-plus</artifactId>
+                <artifactId>starter-log4j2</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.codingsoldier</groupId>
-                <artifactId>starter-openfeign</artifactId>
+                <artifactId>starter-mybatis-plus</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
@@ -101,19 +91,33 @@
                 <artifactId>starter-nacos</artifactId>
                 <version>${revision}</version>
             </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.github.codingsoldier</groupId>-->
+<!--                <artifactId>starter-sleuth</artifactId>-->
+<!--                <version>${revision}</version>-->
+<!--            </dependency>-->
             <dependency>
                 <groupId>com.github.codingsoldier</groupId>
-                <artifactId>starter-spring-doc</artifactId>
+                <artifactId>starter-openfeign</artifactId>
                 <version>${revision}</version>
             </dependency>
-            <dependency>
-                <groupId>com.github.codingsoldier</groupId>
-                <artifactId>starter-sleuth</artifactId>
-                <version>${revision}</version>
-            </dependency>
+
+
+<!--            <dependency>-->
+<!--                <groupId>com.github.codingsoldier</groupId>-->
+<!--                <artifactId>starter-spring-doc</artifactId>-->
+<!--                <version>${revision}</version>-->
+<!--            </dependency>-->
+
             <dependency>
                 <groupId>com.github.codingsoldier</groupId>
                 <artifactId>starter-web</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.codingsoldier</groupId>
+                <artifactId>starter-knife4j</artifactId>
                 <version>${revision}</version>
             </dependency>
 
@@ -132,82 +136,83 @@
                 <version>1.5.20</version>
             </dependency>-->
 
+            <!-- 引入swagger-annotations-jakarta依赖，是为了给micro-service-common使用@Schema注解-->
             <dependency>
                 <groupId>io.swagger.core.v3</groupId>
-                <artifactId>swagger-annotations</artifactId>
-                <version>2.2.0</version>
+                <artifactId>swagger-annotations-jakarta</artifactId>
+                <version>2.2.8</version>
             </dependency>
             <dependency>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-ui</artifactId>
-                <version>1.6.9</version>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+                <version>4.3.0</version>
             </dependency>
 
             <!-- mybatis-plus -->
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>3.5.2</version>
+                <version>3.5.4.1</version>
             </dependency>
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-generator</artifactId>
-                <version>3.5.3</version>
+                <version>3.5.4.1</version>
             </dependency>
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql-connector-java.version}</version>
+                <version>5.1.49</version>
             </dependency>
             <dependency>
                 <groupId>org.freemarker</groupId>
                 <artifactId>freemarker</artifactId>
-                <version>${freemarker.version}</version>
+                <version>2.3.32</version>
             </dependency>
 
-            <!-- log4j -->
-            <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-core</artifactId>
-                <version>${log4j2.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-slf4j-impl</artifactId>
-                <version>${log4j2.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-api</artifactId>
-                <version>${log4j2.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-jul</artifactId>
-                <version>${log4j2.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-spring-boot</artifactId>
-                <version>${log4j2.version}</version>
-            </dependency>
+<!--            &lt;!&ndash; log4j &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>org.apache.logging.log4j</groupId>-->
+<!--                <artifactId>log4j-core</artifactId>-->
+<!--                <version>${log4j2.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.apache.logging.log4j</groupId>-->
+<!--                <artifactId>log4j-slf4j-impl</artifactId>-->
+<!--                <version>${log4j2.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.apache.logging.log4j</groupId>-->
+<!--                <artifactId>log4j-api</artifactId>-->
+<!--                <version>${log4j2.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.apache.logging.log4j</groupId>-->
+<!--                <artifactId>log4j-jul</artifactId>-->
+<!--                <version>${log4j2.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.apache.logging.log4j</groupId>-->
+<!--                <artifactId>log4j-spring-boot</artifactId>-->
+<!--                <version>${log4j2.version}</version>-->
+<!--            </dependency>-->
 
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>${guava.version}</version>
+                <version>32.1.3-jre</version>
             </dependency>
 
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>easyexcel</artifactId>
-                <version>${easyexcel.version}</version>
+                <version>3.3.2</version>
             </dependency>
 
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-collections4</artifactId>
-                <version>${commons-collections4.version}</version>
+                <version>4.4</version>
             </dependency>
 
         </dependencies>

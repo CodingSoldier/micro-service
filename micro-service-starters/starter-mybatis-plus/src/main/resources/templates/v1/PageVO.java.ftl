@@ -1,4 +1,4 @@
-package ${packageVo};
+package ${packageVO};
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -21,7 +21,7 @@ import ${pkg};
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(name = "${table.comment!}-分页-返回值vo")
-public class ${pageVoClassName} implements Serializable {
+public class ${pageVOClassName} implements Serializable {
 
     private static final long serialVersionUID = 1L;
 <#-- ----------  BEGIN 字段循环遍历  ---------->

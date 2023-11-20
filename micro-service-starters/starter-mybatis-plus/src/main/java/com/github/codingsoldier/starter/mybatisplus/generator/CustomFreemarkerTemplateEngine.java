@@ -38,8 +38,8 @@ public class CustomFreemarkerTemplateEngine extends FreemarkerTemplateEngine {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomFreemarkerTemplateEngine.class);
 
-    private String dtoFtl = "Dto.java.ftl";
-    private String voFtl = "Vo.java.ftl";
+    private String dtoFtl = "DTO.java.ftl";
+    private String voFtl = "VO.java.ftl";
 
     @Override
     protected void outputCustomFile(@NotNull List<CustomFile> customFiles, @NotNull TableInfo tableInfo, @NotNull Map<String, Object> objectMap) {

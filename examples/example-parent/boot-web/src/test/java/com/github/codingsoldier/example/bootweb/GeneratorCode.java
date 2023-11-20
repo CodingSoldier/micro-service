@@ -19,7 +19,7 @@ public class GeneratorCode {
         // 项目 main 目录的绝对路径
         MybatisPlusCodeGenerator.srcMainAbsolutePath = "D:\\mycode\\micro-service\\examples\\example-parent\\boot-web\\src\\main";
         // 项目包名
-        MybatisPlusCodeGenerator.parent = "com.github.codingsoldier.temp111";
+        MybatisPlusCodeGenerator.parent = "com.github.codingsoldier.example.bootweb.temp";
 
         // 作者
         MybatisPlusCodeGenerator.author = "cpq";

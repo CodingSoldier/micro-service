@@ -23,7 +23,7 @@ class ValidatedControllerTest extends BaseTest {
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .content(bodyError);
         super.mockMvc.perform(reqBuilder)
-            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.status().is(400))
             .andExpect(MockMvcResultMatchers.jsonPath("$.message",
                     Matchers.containsString("岗位id不能为空")))
             .andExpect(MockMvcResultMatchers.jsonPath("$.message",
@@ -45,7 +45,7 @@ class ValidatedControllerTest extends BaseTest {
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .content(bodyTrue);
         super.mockMvc.perform(reqBuilder)
-            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.status().is(400))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code",
                     Matchers.equalTo(ResultCodeEnum.SUCCESS.getCode())));
     }
@@ -59,7 +59,7 @@ class ValidatedControllerTest extends BaseTest {
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .content(bodyError);
         super.mockMvc.perform(reqBuilder)
-            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.status().is(400))
             .andExpect(MockMvcResultMatchers.jsonPath("$.message",
                     Matchers.containsString("岗位id不能为空")))
             .andExpect(MockMvcResultMatchers.jsonPath("$.message",
@@ -81,7 +81,7 @@ class ValidatedControllerTest extends BaseTest {
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .content(bodyTrue);
         super.mockMvc.perform(reqBuilder)
-            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.status().is(400))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code",
                     Matchers.equalTo(ResultCodeEnum.SUCCESS.getCode())));
     }
@@ -94,7 +94,7 @@ class ValidatedControllerTest extends BaseTest {
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .content(bodyError);
         super.mockMvc.perform(reqBuilder)
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.status().is(400))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message",
                         Matchers.containsString("岗位id不能为空")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message",
@@ -116,7 +116,7 @@ class ValidatedControllerTest extends BaseTest {
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .content(bodyTrue);
         super.mockMvc.perform(reqBuilder)
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.status().is(400))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code",
                         Matchers.equalTo(ResultCodeEnum.SUCCESS.getCode())));
     }
@@ -126,7 +126,7 @@ class ValidatedControllerTest extends BaseTest {
     void paramValidate01() throws Exception {
         MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/validated/param-validate?account=&userId=1");
         super.mockMvc.perform(reqBuilder)
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.status().is(400))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message",
                         Matchers.containsString("账号不能为空")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message",
@@ -140,7 +140,7 @@ class ValidatedControllerTest extends BaseTest {
     void paramValidate02() throws Exception {
         MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/validated/param-validate?account=账号不够长&userId=10");
         super.mockMvc.perform(reqBuilder)
-            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.status().is(400))
             .andExpect(MockMvcResultMatchers.jsonPath("$.message",
                 Matchers.containsString("账号长度必须是6~20位")));
     }
@@ -150,7 +150,7 @@ class ValidatedControllerTest extends BaseTest {
     void paramValidate03() throws Exception {
         MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/validated/param-validate?account=账号1123232&userId=10");
         super.mockMvc.perform(reqBuilder)
-            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.status().is(400))
             .andExpect(MockMvcResultMatchers.jsonPath("$.code",
                 Matchers.equalTo(ResultCodeEnum.SUCCESS.getCode())));
     }
@@ -160,13 +160,13 @@ class ValidatedControllerTest extends BaseTest {
     void pathValidate() throws Exception {
         MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/validated/path/1");
         super.mockMvc.perform(reqBuilder)
-            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.status().is(400))
             .andExpect(MockMvcResultMatchers.jsonPath("$.message",
                 Matchers.equalTo("id必须大于等于10。")));
 
         reqBuilder = MockMvcRequestBuilders.get("/validated/path/11");
         super.mockMvc.perform(reqBuilder)
-            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.status().is(400))
             .andExpect(MockMvcResultMatchers.jsonPath("$.code",
                 Matchers.equalTo(ResultCodeEnum.SUCCESS.getCode())));
     }

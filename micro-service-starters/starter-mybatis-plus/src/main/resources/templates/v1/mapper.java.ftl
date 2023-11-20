@@ -2,8 +2,8 @@ package ${package.Mapper};
 
 import ${package.Entity}.${entity};
 import ${superMapperClassPackage};
-import ${packageVo}.${pageVoClassName};
-import ${packageDto}.${pageQueryDtoClassName};
+import ${packageVO}.${pageVOClassName};
+import ${packageDTO}.${pageQueryDTOClassName};
 import com.baomidou.mybatisplus.core.metadata.IPage;
 <#if mapperAnnotation>
 import org.apache.ibatis.annotations.Mapper;
@@ -28,10 +28,10 @@ public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
     /**
      * 分页
      * @param page page
-     * @param pageQueryVo 查询参数
+     * @param pageQueryVO 查询参数
      * @return 分页数据
      */
-    IPage<${pageVoClassName}> pageQuery(IPage<?> page, @Param("pageQueryVo") ${pageQueryDtoClassName} pageQueryVo);
+    IPage<${pageVOClassName}> pageQuery(IPage<?> page, @Param("pageQueryVO") ${pageQueryDTOClassName} pageQueryVO);
 
 }
 </#if>

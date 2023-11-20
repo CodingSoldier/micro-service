@@ -38,7 +38,7 @@ public class MybatisPlusCodeGenerator {
     public static String parent;
     public static String author;
     public static String tableName;
-    public static String templatesDir = "/templates/v3";
+    public static String templatesDir = "/templates/v1";
 
     private static GlobalConfig buildGlobalConfig() {
         return new GlobalConfig.Builder()
@@ -106,29 +106,29 @@ public class MybatisPlusCodeGenerator {
 
         Map<String, Object> map = new HashMap<>(128);
         Map<String, String> files = new HashMap<>(128);
-        map.put("packageDto", parent + ".dto");
-        map.put("packageVo", parent + ".vo");
+        map.put("packageDTO", parent + ".dto");
+        map.put("packageVO", parent + ".vo");
 
-        String addDtoClassName = tableJavaName + "AddDto";
-        map.put("addDtoClassName", addDtoClassName);
-        files.put(addDtoClassName, templatesDir + "/AddDto.java.ftl");
+        String addDTOClassName = tableJavaName + "AddDTO";
+        map.put("addDTOClassName", addDTOClassName);
+        files.put(addDTOClassName, templatesDir + "/AddDTO.java.ftl");
 
-        String updateDtoClassName = tableJavaName + "UpdateDto";
-        map.put("updateDtoClassName", updateDtoClassName);
-        files.put(updateDtoClassName, templatesDir + "/UpdateDto.java.ftl");
+        String updateDTOClassName = tableJavaName + "UpdateDTO";
+        map.put("updateDTOClassName", updateDTOClassName);
+        files.put(updateDTOClassName, templatesDir + "/UpdateDTO.java.ftl");
 
-        String pageQueryDtoClassName = tableJavaName + "PageQueryDto";
-        map.put("pageQueryDtoClassName", pageQueryDtoClassName);
-        files.put(pageQueryDtoClassName, templatesDir + "/PageQueryDto.java.ftl");
+        String pageQueryDTOClassName = tableJavaName + "PageQueryDTO";
+        map.put("pageQueryDTOClassName", pageQueryDTOClassName);
+        files.put(pageQueryDTOClassName, templatesDir + "/PageQueryDTO.java.ftl");
 
 
-        String detailVoClassName = tableJavaName + "DetailVo";
-        map.put("detailVoClassName", detailVoClassName);
-        files.put(detailVoClassName, templatesDir + "/DetailVo.java.ftl");
+        String detailVOClassName = tableJavaName + "DetailVO";
+        map.put("detailVOClassName", detailVOClassName);
+        files.put(detailVOClassName, templatesDir + "/DetailVO.java.ftl");
 
-        String pageVoClassName = tableJavaName + "PageVo";
-        map.put("pageVoClassName", pageVoClassName);
-        files.put(pageVoClassName, templatesDir + "/PageVo.java.ftl");
+        String pageVOClassName = tableJavaName + "PageVO";
+        map.put("pageVOClassName", pageVOClassName);
+        files.put(pageVOClassName, templatesDir + "/PageVO.java.ftl");
 
         InjectionConfig injectionConfig = new InjectionConfig.Builder()
                 .beforeOutputFile((tableInfo, objectMap) -> {

@@ -20,15 +20,16 @@
     </properties>
 
     <modules>
-        <module>starter-log4j2</module>
         <module>starter-logback</module>
-        <module>starter-spring-doc</module>
+        <module>starter-log4j2</module>
+        <!--        <module>starter-spring-doc</module>-->
         <module>starter-mybatis-plus</module>
         <module>starter-redis</module>
         <module>starter-nacos</module>
-        <module>starter-sleuth</module>
+<!--        <module>starter-sleuth</module>-->
         <module>starter-openfeign</module>
         <module>starter-web</module>
+<!--        <module>starter-knife4j</module>-->
     </modules>
 
     <dependencies>

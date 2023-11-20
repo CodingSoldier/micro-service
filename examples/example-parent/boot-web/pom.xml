@@ -34,18 +34,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.codingsoldier.example</groupId>
-            <artifactId>example-common</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.github.codingsoldier</groupId>
             <artifactId>micro-service-common</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.codingsoldier</groupId>
-            <artifactId>starter-spring-doc</artifactId>
         </dependency>
 
         <dependency>
@@ -61,11 +51,6 @@
             <groupId>com.github.codingsoldier</groupId>
             <artifactId>starter-log4j2</artifactId>
         </dependency>-->
-
-        <dependency>
-            <groupId>com.github.codingsoldier</groupId>
-            <artifactId>starter-sleuth</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>com.github.codingsoldier</groupId>
@@ -86,6 +71,17 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.github.codingsoldier.example</groupId>
+            <artifactId>example-common</artifactId>
         </dependency>
 
     </dependencies>

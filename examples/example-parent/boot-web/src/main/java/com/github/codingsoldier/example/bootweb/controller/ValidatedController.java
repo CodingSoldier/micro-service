@@ -4,15 +4,16 @@ package com.github.codingsoldier.example.bootweb.controller;
 import com.github.codingsoldier.example.bootweb.dto.ValidationDto;
 import com.github.codingsoldier.starter.web.util.ValidationUtils;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
+
 
 
 @Tag(name = "参数校验-API")

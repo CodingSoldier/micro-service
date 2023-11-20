@@ -2,6 +2,7 @@ package com.github.codingsoldier.starter.web.notice.dingtalk;
 
 import com.github.codingsoldier.common.util.OkHttpUtil;
 import com.github.codingsoldier.starter.web.context.ApplicationContextHolder;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -12,7 +13,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
-import javax.annotation.PostConstruct;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;

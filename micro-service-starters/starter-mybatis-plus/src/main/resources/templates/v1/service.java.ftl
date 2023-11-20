@@ -3,11 +3,11 @@ package ${package.Service};
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import ${superServiceClassPackage};
 import ${package.Entity}.${entity};
-import ${packageDto}.${addDtoClassName};
-import ${packageDto}.${updateDtoClassName};
-import ${packageDto}.${pageQueryDtoClassName};
-import ${packageVo}.${detailVoClassName};
-import ${packageVo}.${pageVoClassName};
+import ${packageDTO}.${addDTOClassName};
+import ${packageDTO}.${updateDTOClassName};
+import ${packageDTO}.${pageQueryDTOClassName};
+import ${packageVO}.${detailVOClassName};
+import ${packageVO}.${pageVOClassName};
 import com.github.codingsoldier.starter.mybatisplus.resp.PageResult;
 
 /**
@@ -25,17 +25,17 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
 
     /**
      * 新增
-     * @param addDto 新增参数
+     * @param addDTO 新增参数
      * @return id
      */
-    Long add(${addDtoClassName} addDto);
+    Long add(${addDTOClassName} addDTO);
 
     /**
      * 修改
-     * @param updateDto 修改参数
+     * @param updateDTO 修改参数
      * @return id
      */
-    void update(${updateDtoClassName} updateDto);
+    void update(${updateDTOClassName} updateDTO);
 
     /**
      * 删除
@@ -49,14 +49,14 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
      * @param id id
      * @return 详情
      */
-    ${detailVoClassName} detail(Long id);
+    ${detailVOClassName} detail(Long id);
 
     /**
      * 分页
-     * @param queryDto 查询参数
+     * @param queryDTO 查询参数
      * @return 分页结果
      */
-    PageResult<${pageVoClassName}> pageQuery(${pageQueryDtoClassName} queryDto);
+    PageResult<${pageVOClassName}> pageQuery(${pageQueryDTOClassName} queryDTO);
 
     /**
      * 是否重复

@@ -9,6 +9,9 @@ import com.github.codingsoldier.common.exception.feign.FeignResultErrorException
 import com.github.codingsoldier.common.resp.Result;
 import com.github.codingsoldier.common.util.CommonUtil;
 import com.github.codingsoldier.common.util.StringUtil;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -25,9 +28,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
+
 import java.io.IOException;
 import java.util.Set;
 

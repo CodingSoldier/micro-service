@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.github.codingsoldier</groupId>
         <artifactId>micro-service</artifactId>
-        <version>1.0.0</version>
+        <version>17.0.0</version>
     </parent>
 
     <!--  新建组，避免冲突  -->
@@ -17,11 +17,11 @@
     <packaging>pom</packaging>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <revision>10.0.0</revision>
+        <revision>170.0.0</revision>
     </properties>
 
     <modules>
@@ -29,11 +29,11 @@
 
         <module>boot-web</module>
 
-        <module>cloud-web-api</module>
-        <module>cloud-web-01</module>
-        <module>cloud-web-02</module>
+<!--        <module>cloud-web-api</module>-->
+<!--        <module>cloud-web-01</module>-->
+<!--        <module>cloud-web-02</module>-->
 
-        <module>gateway</module>
+<!--        <module>gateway</module>-->
     </modules>
 
     <dependencyManagement>
@@ -42,7 +42,7 @@
             <dependency>
                 <groupId>com.github.codingsoldier</groupId>
                 <artifactId>micro-service-dependencies</artifactId>
-                <version>1.0.0</version>
+                <version>17.0.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -53,16 +53,16 @@
                 <artifactId>example-common</artifactId>
                 <version>${revision}</version>
             </dependency>
-            <dependency>
-                <groupId>com.github.codingsoldier.example</groupId>
-                <artifactId>cloud-web-api</artifactId>
-                <version>${revision}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.github.codingsoldier.example</groupId>-->
+<!--                <artifactId>cloud-web-api</artifactId>-->
+<!--                <version>${revision}</version>-->
+<!--            </dependency>-->
 
             <dependency>
                 <groupId>de.codecentric</groupId>
                 <artifactId>spring-boot-admin-starter-client</artifactId>
-                <version>2.4.2</version>
+                <version>3.0.2</version>
             </dependency>
 
         </dependencies>

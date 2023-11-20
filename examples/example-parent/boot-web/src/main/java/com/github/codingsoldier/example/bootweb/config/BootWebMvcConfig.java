@@ -20,10 +20,11 @@ public class BootWebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //定义排除访问的路径配置
-        String[] excludePaths = new String[]{"/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**",
-                "/error",
-                "/actuator/**",
-                "/open/api/**"
+        String[] excludePaths = new String[]{"/swagger-ui.html", "/swagger-ui/**",
+            "/doc.html", "/v3/api-docs/**",
+            "/error",
+            "/actuator/**",
+            "/open/api/**"
         };
 
         registry.addInterceptor(new WebHandlerInterceptor())

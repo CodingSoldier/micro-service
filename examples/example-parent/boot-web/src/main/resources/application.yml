@@ -37,11 +37,20 @@ mybatis-plus:
       # 逻辑未删除值(默认为 0)
       logic-not-delete-value: 0
 
+# springdoc-openapi项目配置
 springdoc:
   swagger-ui:
-    # 折叠接口
-    doc-expansion: none
-  # 预加载
-  pre-loading-enabled: true
-  # 扫描路径
-  packages-to-scan: com.github.codingsoldier.example.bootweb
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: com.github.codingsoldier.example.bootweb
+# knife4j的增强配置，不需要增强可以不配
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn

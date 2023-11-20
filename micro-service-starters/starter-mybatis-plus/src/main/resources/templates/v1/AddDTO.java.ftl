@@ -1,4 +1,4 @@
-package ${packageDto};
+package ${packageDTO};
 
 <#list table.importPackages as pkg>
     <#if pkg ? starts_with("com.baomidou.mybatisplus.annotation")>
@@ -20,8 +20,8 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(name = "${table.comment!}-新增dto")
-public class ${addDtoClassName} implements Serializable {
+@Schema(name = "${table.comment!}-新增DTO")
+public class ${addDTOClassName} implements Serializable {
 
     private static final long serialVersionUID = 1L;
 <#-- ----------  BEGIN 字段循环遍历  ---------->

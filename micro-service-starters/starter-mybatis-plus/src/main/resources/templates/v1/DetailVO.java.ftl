@@ -1,4 +1,4 @@
-package ${packageAo};
+package ${packageVO};
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -20,10 +20,10 @@ import ${pkg};
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(name = "${table.comment!}-新增修改ao")
-public class ${addUpdateAoClassName} implements Serializable {
+@Schema(name = "${table.comment!}-详情VO")
+public class ${detailVOClassName} implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>
 

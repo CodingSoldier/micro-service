@@ -1,8 +1,8 @@
 spring:
   datasource:
     username: root
-    password: cpq..123
-    url: jdbc:mysql://192.168.1.4:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    password: 123456
+    url: jdbc:mysql://10.39.174.41:3306/cpq_01?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
     hikari:
       # 连接池最大连接数
@@ -15,25 +15,26 @@ spring:
       connection-timeout: 20000
       # 测试sql
       connection-test-query: select 1
-  redis:
-    # Redis数据库索引（默认为0）
-    database: 0
-    # Redis服务器地址
-    host: 192.168.1.4
-    # Redis服务器连接端口
-    port: 6379
-    # Redis服务器连接密码（默认为空）
-    password:
-    # 连接超时时间 单位 ms（毫秒）
-    timeout: 3000
-    lettuce:
-      pool:
-        # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
-        max-wait: 3000
-        # 连接池中的最大空闲连接 默认 8
-        max-idle: 100
-        # 连接池中的最小空闲连接 默认 0
-        min-idle: 20
+  data:
+    redis:
+      # Redis数据库索引（默认为0）
+      database: 0
+      # Redis服务器地址
+      host: 192.168.1.4
+      # Redis服务器连接端口
+      port: 6379
+      # Redis服务器连接密码（默认为空）
+      password:
+      # 连接超时时间 单位 ms（毫秒）
+      timeout: 3000
+      lettuce:
+        pool:
+          # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
+          max-wait: 3000
+          # 连接池中的最大空闲连接 默认 8
+          max-idle: 100
+          # 连接池中的最小空闲连接 默认 0
+          min-idle: 20
   # springboot方式连接spring-boot-admin-server
   boot:
     admin:
@@ -91,9 +92,6 @@ micro-service:
     #      # 是否启用starter-openfeign，默认true
     #      enabled: true
 
-    # starter-spring-doc 配置
-    spring-doc:
-      title: boot-web的API
     web:
       # 是否启用 starter-web，默认true
       enabled: true

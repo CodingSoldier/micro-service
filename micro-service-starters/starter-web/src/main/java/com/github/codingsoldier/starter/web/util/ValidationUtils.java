@@ -4,11 +4,12 @@ package com.github.codingsoldier.starter.web.util;
 import com.github.codingsoldier.common.enums.ResultCodeEnum;
 import com.github.codingsoldier.common.exception.ClientException;
 import com.github.codingsoldier.common.util.StringUtil;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
 import org.apache.commons.collections4.CollectionUtils;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
+
 import java.util.List;
 import java.util.Set;
 

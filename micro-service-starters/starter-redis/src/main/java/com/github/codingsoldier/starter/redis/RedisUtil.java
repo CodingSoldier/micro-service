@@ -22,10 +22,11 @@ public class RedisUtil{
 
     /**
      * 初始化RedisUtil，已在 StarterRedisAutoConfiguration#init() 中初始化
-     * @see com.github.codingsoldier.starter.redis.StarterRedisAutoConfiguration#init
+     * @see com.github.codingsoldier.starter.redis.StarterRedisAutoConfiguration#StarterRedisAutoConfiguration(RedisTemplate)
      * @param redisTemplate
      */
     public static synchronized void setOnceRedisTemplate(RedisTemplate redisTemplate) {
+
         if (RedisUtil.redisTemplate == null) {
             RedisUtil.redisTemplate = redisTemplate;
         }

@@ -45,9 +45,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
             logger.debug("添加FeignInterceptor");
         }
         //定义排除访问的路径配置
-        String[] excludePaths = new String[]{"/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**",
-                "/error",
-                "/actuator/**"
+        String[] excludePaths = new String[]{"/swagger-ui.html", "/swagger-ui/**",
+            "/doc.html", "/v3/api-docs/**",
+            "/error",
+            "/actuator/**"
         };
         registry.addInterceptor(new FeignInterceptor())
                 .addPathPatterns("/**")

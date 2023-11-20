@@ -1,0 +1,1 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.github.codingsoldier.starter.knife4j.StarterKnife4jAutoConfiguration

@@ -37,12 +37,12 @@
 
 </#if>
 
-    <select id="pageQuery" resultType="${packageVo}.${pageVoClassName}">
+    <select id="pageQuery" resultType="${packageVO}.${pageVOClassName}">
         SELECT *
         FROM ${table.name}
         <where>
             deleted = 0
-            <if test="pageQueryVo != null">
+            <if test="pageQueryVO != null">
             </if>
             ORDER BY id DESC
         </where>

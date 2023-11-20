@@ -5,27 +5,25 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.codingsoldier.common.enums.ResultCodeEnum;
+import com.github.codingsoldier.common.exception.ClientException;
 import ${package.Entity}.${entity};
 import ${package.Mapper}.${table.mapperName};
 import ${package.Service}.${table.serviceName};
 import ${superServiceImplClassPackage};
-import ${packageDto}.${addDtoClassName};
-import ${packageDto}.${updateDtoClassName};
-import ${packageDto}.${pageQueryDtoClassName};
-import ${packageVo}.${detailVoClassName};
-import ${packageVo}.${pageVoClassName};
+import ${packageDTO}.${addDTOClassName};
+import ${packageDTO}.${updateDTOClassName};
+import ${packageDTO}.${pageQueryDTOClassName};
+import ${packageVO}.${detailVOClassName};
+import ${packageVO}.${pageVOClassName};
 import com.github.codingsoldier.starter.mybatisplus.resp.PageResult;
-import com.github.codingsoldier.common.enums.ResponseCodeEnum;
-import com.github.codingsoldier.common.exception.ClientException;
+import java.util.List;
+import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Objects;
 
 /**
  * <p>
@@ -51,24 +49,24 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Long add(${addDtoClassName} addDto) {
-        //if (isRepeat(null, ${entity}::getName, addDto.getName())){
-        //    throw new ClientException(ResponseCodeEnum.PRECONDITION_FAILED, "新增失败，XX已存在。请修改XX。");
+    public Long add(${addDTOClassName} addDTO) {
+        //if (isRepeat(null, ${entity}::getName, addDTO.getName())){
+        //    throw new ClientException(ResultCodeEnum.PRECONDITION_FAILED, "新增失败，XX已存在。请修改XX。");
         //}
         ${entity} ${uncapFirstEntity} = new ${entity}();
-        BeanUtils.copyProperties(addDto, ${uncapFirstEntity});
+        BeanUtils.copyProperties(addDTO, ${uncapFirstEntity});
         super.save(${uncapFirstEntity});
         return ${uncapFirstEntity}.getId();
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void update(${updateDtoClassName} updateDto) {
-        //if (isRepeat(updateDto.getId(), ${entity}::getName, updateDto.getName())){
-        //    throw new ClientException(ResponseCodeEnum.PRECONDITION_FAILED, "修改失败，XX已存在。请修改XX。");
+    public void update(${updateDTOClassName} updateDTO) {
+        //if (isRepeat(updateDTO.getId(), ${entity}::getName, updateDTO.getName())){
+        //    throw new ClientException(ResultCodeEnum.PRECONDITION_FAILED, "修改失败，XX已存在。请修改XX。");
         //}
         ${entity} ${uncapFirstEntity} = new ${entity}();
-        BeanUtils.copyProperties(updateDto, ${uncapFirstEntity});
+        BeanUtils.copyProperties(updateDTO, ${uncapFirstEntity});
         super.updateById(${uncapFirstEntity});
     }
  
@@ -81,18 +79,18 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     }
 
     @Override
-    public ${detailVoClassName} detail(Long id) {
+    public ${detailVOClassName} detail(Long id) {
         ${entity} ${uncapFirstEntity} = super.getById(id);
-        ${detailVoClassName} detailVo = new ${detailVoClassName}();
-        BeanUtils.copyProperties(${uncapFirstEntity}, detailVo);
-        return detailVo;
+        ${detailVOClassName} detailVO = new ${detailVOClassName}();
+        BeanUtils.copyProperties(${uncapFirstEntity}, detailVO);
+        return detailVO;
     }
 
     @Override
-    public PageResult<${pageVoClassName}> pageQuery(${pageQueryDtoClassName} queryDto) {
-        Page<${pageVoClassName}> p = new Page<>(queryDto.getCurrent(), queryDto.getSize());
-        IPage<${pageVoClassName}> pageData = ${uncapFirstMapper}.pageQuery(p, queryDto);
-        List<${pageVoClassName}> listData = pageData.getRecords();
+    public PageResult<${pageVOClassName}> pageQuery(${pageQueryDTOClassName} queryDTO) {
+        Page<${pageVOClassName}> p = new Page<>(queryDTO.getCurrent(), queryDTO.getSize());
+        IPage<${pageVOClassName}> pageData = ${uncapFirstMapper}.pageQuery(p, queryDTO);
+        List<${pageVOClassName}> listData = pageData.getRecords();
         return PageResult.create(pageData, listData);
     }
 
