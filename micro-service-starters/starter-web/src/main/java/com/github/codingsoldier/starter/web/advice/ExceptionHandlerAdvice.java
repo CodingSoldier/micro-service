@@ -43,7 +43,7 @@ import java.util.Set;
  */
 @Slf4j
 @RestControllerAdvice
-@Order(Ordered.LOWEST_PRECEDENCE)
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class ExceptionHandlerAdvice {
 
     @ExceptionHandler(ClientException.class)

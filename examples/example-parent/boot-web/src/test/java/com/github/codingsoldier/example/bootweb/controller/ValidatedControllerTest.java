@@ -45,7 +45,7 @@ class ValidatedControllerTest extends BaseTest {
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .content(bodyTrue);
         super.mockMvc.perform(reqBuilder)
-            .andExpect(MockMvcResultMatchers.status().is(400))
+            .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code",
                     Matchers.equalTo(ResultCodeEnum.SUCCESS.getCode())));
     }
@@ -81,7 +81,7 @@ class ValidatedControllerTest extends BaseTest {
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .content(bodyTrue);
         super.mockMvc.perform(reqBuilder)
-            .andExpect(MockMvcResultMatchers.status().is(400))
+            .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code",
                     Matchers.equalTo(ResultCodeEnum.SUCCESS.getCode())));
     }
@@ -116,7 +116,7 @@ class ValidatedControllerTest extends BaseTest {
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .content(bodyTrue);
         super.mockMvc.perform(reqBuilder)
-                .andExpect(MockMvcResultMatchers.status().is(400))
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code",
                         Matchers.equalTo(ResultCodeEnum.SUCCESS.getCode())));
     }
@@ -150,7 +150,7 @@ class ValidatedControllerTest extends BaseTest {
     void paramValidate03() throws Exception {
         MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/validated/param-validate?account=账号1123232&userId=10");
         super.mockMvc.perform(reqBuilder)
-            .andExpect(MockMvcResultMatchers.status().is(400))
+            .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(MockMvcResultMatchers.jsonPath("$.code",
                 Matchers.equalTo(ResultCodeEnum.SUCCESS.getCode())));
     }
@@ -166,7 +166,7 @@ class ValidatedControllerTest extends BaseTest {
 
         reqBuilder = MockMvcRequestBuilders.get("/validated/path/11");
         super.mockMvc.perform(reqBuilder)
-            .andExpect(MockMvcResultMatchers.status().is(400))
+            .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(MockMvcResultMatchers.jsonPath("$.code",
                 Matchers.equalTo(ResultCodeEnum.SUCCESS.getCode())));
     }
