@@ -12,13 +12,9 @@ public class StartRunner implements CommandLineRunner {
     @Value("${profile-val:未配置}")
     private String profileVal;
 
-    @Value("${micro-service.starter.web.enabled}")
-    private String aaa;
-
     @Override
     public void run(String... args) throws Exception {
         log.info("###################profile-val={}", profileVal);
-        log.info("###################aaa={}", aaa);
     }
 
 }
