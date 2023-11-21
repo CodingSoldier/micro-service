@@ -1,8 +1,8 @@
 spring:
   datasource:
     username: root
-    password: 123456
-    url: jdbc:mysql://10.39.174.41:3306/cpq_01?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false
+    password: cpq..123
+    url: jdbc:mysql://127.0.0.1:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
     hikari:
       # 连接池最大连接数
@@ -20,11 +20,11 @@ spring:
       # Redis数据库索引（默认为0）
       database: 0
       # Redis服务器地址
-      host: 10.39.174.41
+      host: 127.0.0.1
       # Redis服务器连接端口
       port: 6379
       # Redis服务器连接密码（默认为空）
-      password: 123456
+      password:
       # 连接超时时间 单位 ms（毫秒）
       timeout: 3000
       lettuce:
@@ -58,7 +58,6 @@ logging:
   #      total-size-cap: 2MB
   level:
     com.github.codingsoldier: DEBUG
-
 
 micro-service:
   starter:

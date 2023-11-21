@@ -1,8 +1,8 @@
 package com.github.codingsoldier.common.util.thread;
 
 import org.apache.commons.lang3.ClassUtils;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.io.Serializable;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -21,7 +21,6 @@ public class CustomThreadFactory implements Serializable, ThreadFactory {
 
   private boolean daemon = false;
 
-  @Nullable
   private ThreadGroup threadGroup;
 
   private final AtomicInteger threadCount = new AtomicInteger(0);
@@ -38,7 +37,7 @@ public class CustomThreadFactory implements Serializable, ThreadFactory {
    * Create a new CustomizableThreadCreator with the given thread name prefix.
    * @param threadNamePrefix the prefix to use for the names of newly created threads
    */
-  public CustomThreadFactory(@Nullable String threadNamePrefix) {
+  public CustomThreadFactory(String threadNamePrefix) {
     this.threadNamePrefix = (threadNamePrefix != null ? threadNamePrefix : getDefaultThreadNamePrefix());
   }
 
@@ -47,7 +46,7 @@ public class CustomThreadFactory implements Serializable, ThreadFactory {
    * Specify the prefix to use for the names of newly created threads.
    * Default is "SimpleAsyncTaskExecutor-".
    */
-  public void setThreadNamePrefix(@Nullable String threadNamePrefix) {
+  public void setThreadNamePrefix(String threadNamePrefix) {
     this.threadNamePrefix = (threadNamePrefix != null ? threadNamePrefix : getDefaultThreadNamePrefix());
   }
 
@@ -108,7 +107,7 @@ public class CustomThreadFactory implements Serializable, ThreadFactory {
    * Specify the thread group that threads should be created in.
    * @see #setThreadGroupName
    */
-  public void setThreadGroup(@Nullable ThreadGroup threadGroup) {
+  public void setThreadGroup(ThreadGroup threadGroup) {
     this.threadGroup = threadGroup;
   }
 

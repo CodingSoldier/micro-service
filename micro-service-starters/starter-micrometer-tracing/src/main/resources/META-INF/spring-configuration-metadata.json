@@ -1,0 +1,12 @@
+{
+    "groups": [],
+    "properties": [
+        {
+            "name": "micro-service.starter.micrometer-tracing.enabled",
+            "type": "java.lang.Boolean",
+            "description": "是否启用 starter-micrometer-tracing",
+            "defaultValue": true
+        }
+    ],
+    "hints": []
+}
