@@ -20,17 +20,14 @@
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>com.github.codingsoldier</groupId>
             <artifactId>micro-service-common</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.github.codingsoldier</groupId>
             <artifactId>starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.github.codingsoldier</groupId>
             <artifactId>starter-logback</artifactId>
@@ -39,17 +36,14 @@
             <groupId>com.github.codingsoldier</groupId>
             <artifactId>starter-log4j2</artifactId>
         </dependency>-->
-
         <dependency>
             <groupId>com.github.codingsoldier</groupId>
             <artifactId>starter-redis</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.github.codingsoldier</groupId>
             <artifactId>starter-mybatis-plus</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.github.codingsoldier</groupId>
             <artifactId>starter-micrometer-tracing</artifactId>

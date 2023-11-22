@@ -1,8 +1,8 @@
 package com.github.codingsoldier.starter.redis;
 
+import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
-import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.EnableCaching;
@@ -40,7 +40,6 @@ public class RedisConfig {
 
         RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory);
-
 
         ObjectMapper objectMapper = ObjectMapperUtil.newObjectMapper();
         // 避免opsForValue()设置bean报错，Redis使用
