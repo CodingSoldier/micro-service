@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.cloudweb02.springdoc;
+package com.github.codingsoldier.example.cloudweb02.openapi3;
 
 import com.github.codingsoldier.common.req.PageReq;
 import io.swagger.v3.oas.annotations.Parameter;

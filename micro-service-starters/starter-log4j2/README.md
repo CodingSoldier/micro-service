@@ -55,7 +55,5 @@ micro-service:
         max: 7
 ```
 
-## 对 sleuth 的支持
-前端每个http请求头带上x-req-trace-id。
-
-x-req-trace-id由小写英文、数字组成，长度为16位，每次http请求的x-req-trace-id不相同。
+## 对链路追踪的支持
+请查看[starter-micrometer-tracing](../starter-micrometer-tracing/README.md)

@@ -1,7 +1,7 @@
 package com.github.codingsoldier.example.cloudweb02.trace;
 
 import com.github.codingsoldier.common.util.thread.ThreadPoolUtil;
-import com.github.codingsoldier.starter.sleuth.config.TaskTraceUtil;
+import com.github.codingsoldier.starter.micrometer.tracing.config.TheadPoolTraceUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.scheduling.annotation.Async;
@@ -24,11 +24,11 @@ public class Web02ServiceImpl implements Web02Service {
             log.info("！！！没有traceid--普通线程池中打印日志");
         });
 
-        TaskTraceUtil.execute(() -> {
+        TheadPoolTraceUtil.execute(() -> {
             log.info("###有traceid--ThreadPoolTraceUtil线程池中打印日志");
         });
 
-        Future<String> submit = TaskTraceUtil.submit(() -> {
+        Future<String> submit = TheadPoolTraceUtil.submit(() -> {
             log.info("###有traceid--TaskTraceUtil提交Callable");
             return MDC.get(X_REQ_TRACE_ID);
         });
@@ -46,11 +46,11 @@ public class Web02ServiceImpl implements Web02Service {
 
         log.info("####@Async注解的方法有traceid不不不在在线程池中打印日志");
 
-        TaskTraceUtil.execute(() -> {
+        TheadPoolTraceUtil.execute(() -> {
             log.info("####@Async注解使用ThreadPoolTraceUtil，有traceid，线程池中打印日志");
         });
 
-        Future<String> submit = TaskTraceUtil.submit(() -> {
+        Future<String> submit = TheadPoolTraceUtil.submit(() -> {
             log.info("###有traceid--TaskTraceUtil提交Callable");
             return MDC.get(X_REQ_TRACE_ID);
         });

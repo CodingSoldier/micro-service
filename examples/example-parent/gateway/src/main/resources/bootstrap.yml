@@ -7,6 +7,15 @@ spring:
   profiles:
     active: dev
   cloud:
+    nacos:
+      server-addr: 10.39.176.47:8848
+      config:
+        server-addr: ${spring.cloud.nacos.server-addr}
+        namespace: namespace-example-dev
+        file-extension: yaml
+      discovery:
+        server-addr: ${spring.cloud.nacos.server-addr}
+        namespace: namespace-example-dev
     gateway:
       # 默认已开启跨域
       globalcors:
@@ -47,3 +56,28 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
+
+# knife4j服务发现模式所有的子服务必须统一规范，既要么都是swagger2，要么都是openapi3，不可混用
+#knife4j:
+#  gateway:
+#    enabled: true
+#    strategy: discover
+#    discover:
+#      version: openapi3
+#      enabled: true
+
+knife4j:
+  gateway:
+    enabled: true
+    strategy: manual
+    routes:
+      - name: cloud-web-01
+        service-name: cloud-web-01
+        url: /cloud-web-01/v3/api-docs/default
+        context-path: /
+        order: 1
+      - name: cloud-web-02
+        service-name: cloud-web-02
+        url: /cloud-web-02/v3/api-docs/default
+        context-path: /
+        order: 2

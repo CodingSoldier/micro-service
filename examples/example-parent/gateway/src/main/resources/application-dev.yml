@@ -1,13 +1,5 @@
 spring:
   cloud:
-    nacos:
-      config:
-        server-addr: 192.168.1.4:8848
-        namespace: namespace-example-dev
-        file-extension: yaml
-      discovery:
-        server-addr: 192.168.1.4:8848
-        namespace: namespace-example-dev
     sentinel:
       eager: true
       transport:
@@ -19,8 +11,8 @@ spring:
           nacos:
             server-addr: ${spring.cloud.nacos.discovery.server-addr}
             namespace: ${spring.cloud.nacos.discovery.namespace}
-            username: nacos
-            password: nacos
+#            username: nacos
+#            password: nacos
             data-id: gateway-flow-rule-sentinel
             group-id: DEFAULT_GROUP
             data-type: json
@@ -29,8 +21,8 @@ spring:
           nacos:
             server-addr: ${spring.cloud.nacos.discovery.server-addr}
             namespace: ${spring.cloud.nacos.discovery.namespace}
-            username: nacos
-            password: nacos
+#            username: nacos
+#            password: nacos
             data-id: gateway-flow-rule-api-sentinel
             group-id: DEFAULT_GROUP
             data-type: json
@@ -68,19 +60,6 @@ logging:
 #starter:
 micro-service:
   starter:
-    # springdoc配置
-    springdoc:
-      # 预加载
-      pre-loading-enabled: true
-      swagger-ui:
-      # 折叠接口
-      doc-expansion: none
-      urls:
-        - name: 服务01
-          url: /cloud-web-01/v3/api-docs
-        - name: 服务02
-          url: /cloud-web-02/v3/api-docs
-
     #    # starter-log4j2 配置
     #    log4j2:
     #      # 异常信息最大长度

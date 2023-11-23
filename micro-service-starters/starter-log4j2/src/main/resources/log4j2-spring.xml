@@ -17,7 +17,7 @@ log4j2.xml 比 application-log4j2.yaml 更早加载，需将日志配置文件�
     <!--<Configuration status="INFO" monitorInterval="30"> -->
 
     <Properties>
-        <Property name="exMaxLength">${spring:micro-service.starter.log4j2.ex-max-length:-1024}</Property>
+        <Property name="exMaxLength">${spring:micro-service.starter.log4j2.ex-max-length:-99999}</Property>
         <Property name="msgMaxLength">${spring:micro-service.starter.log4j2.msg-max-length:-99999}</Property>
         <Property name="LOG_EXCEPTION_CONVERSION_WORD">%.-${exMaxLength}xwEx</Property>
         <Property name="LOG_LEVEL_PATTERN">%5p</Property>

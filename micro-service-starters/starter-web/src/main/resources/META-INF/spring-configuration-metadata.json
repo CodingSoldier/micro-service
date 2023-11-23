@@ -24,6 +24,12 @@
             "defaultValue": true
         },
         {
+            "name": "micro-service.starter.web.basic-error-enabled",
+            "type": "java.lang.Boolean",
+            "description": "是否启用 CustomBasicErrorController，覆盖 http 404 处理逻辑",
+            "defaultValue": true
+        },
+        {
             "name": "micro-service.starter.web.enableWebMvcConfig",
             "type": "java.lang.Boolean",
             "description": "是否启用 WebMvcConfig 配置类",

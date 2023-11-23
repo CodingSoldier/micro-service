@@ -6,6 +6,7 @@ import com.alibaba.cloud.nacos.registry.NacosRegistration;
 import com.alibaba.nacos.api.exception.NacosException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Properties;
@@ -18,6 +19,10 @@ import java.util.Properties;
 @Slf4j
 @Component
 public class NacosGraceful {
+
+    @Value("${server.port}")
+    private int port;
+
     @Autowired
     private NacosServiceManager nacosServiceManager;
     @Autowired
@@ -37,9 +42,12 @@ public class NacosGraceful {
         String service = nacosDiscoveryProperties.getService();
         String group = nacosDiscoveryProperties.getGroup();
         String ip = nacosDiscoveryProperties.getIp();
-        int port = nacosDiscoveryProperties.getPort();
+        int discoveryPort = nacosDiscoveryProperties.getPort();
+        if (discoveryPort == -1) {
+            discoveryPort = port;
+        }
         String clusterName = nacosDiscoveryProperties.getClusterName();
-        nacosServiceManager.getNamingService(nacosProperties).registerInstance(service, group, ip, port, clusterName);
+        nacosServiceManager.getNamingService(nacosProperties).registerInstance(service, group, ip, discoveryPort, clusterName);
         log.info("nacos客户端实例启动成功");
     }
 
@@ -53,9 +61,12 @@ public class NacosGraceful {
         String service = nacosDiscoveryProperties.getService();
         String group = nacosDiscoveryProperties.getGroup();
         String ip = nacosDiscoveryProperties.getIp();
-        int port = nacosDiscoveryProperties.getPort();
+        int discoveryPort = nacosDiscoveryProperties.getPort();
+        if (discoveryPort == -1) {
+            discoveryPort = port;
+        }
         String clusterName = nacosDiscoveryProperties.getClusterName();
-        nacosServiceManager.getNamingService(nacosProperties).deregisterInstance(service, group, ip, port, clusterName);
+        nacosServiceManager.getNamingService(nacosProperties).deregisterInstance(service, group, ip, discoveryPort, clusterName);
         log.info("nacos客户端实例注销成功");
     }
 

@@ -1,10 +1,10 @@
-package com.github.codingsoldier.example.cloudweb02.springdoc;
+package com.github.codingsoldier.example.cloudweb02.openapi3;
 
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springdoc.api.annotations.ParameterObject;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.web.bind.annotation.*;
 
 

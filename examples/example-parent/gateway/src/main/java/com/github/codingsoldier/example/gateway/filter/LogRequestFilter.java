@@ -1,6 +1,5 @@
 package com.github.codingsoldier.example.gateway.filter;
 
-import com.github.codingsoldier.example.gateway.util.SleuthLogUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -33,7 +32,7 @@ public class LogRequestFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
         final ServerHttpRequest request = exchange.getRequest();
-        String methodValue = request.getMethodValue();
+        String methodValue = request.getMethod().name();
         String path = request.getURI().getPath();
         MultiValueMap<String, String> queryParams = request.getQueryParams();
         MediaType mediaType = request.getHeaders().getContentType();
@@ -106,7 +105,7 @@ public class LogRequestFilter implements GlobalFilter, Ordered {
             logData.put("requestBody", requestBody);
         }
         // 添加traceId，非常耗性能
-        SleuthLogUtil.log(exchange, () -> log.info("网关打印request数据。{}", logData));
+        //SleuthLogUtil.log(exchange, () -> log.info("网关打印request数据。{}", logData));
     }
 
 }

@@ -26,7 +26,6 @@ public class NacosRegisterRunner implements CommandLineRunner {
 
   /**
    * 手动上线
-   * @param args
    */
   @Override
   public void run(String... args) {

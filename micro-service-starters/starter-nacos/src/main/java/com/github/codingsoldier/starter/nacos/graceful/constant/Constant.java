@@ -1,5 +1,11 @@
 package com.github.codingsoldier.starter.nacos.graceful.constant;
 
+/**
+ * 常量
+ *
+ * @author cpq
+ * @since 2022-03-17 11:28:55
+ */
 public class Constant {
 
    private Constant() {

@@ -12,11 +12,9 @@ public class StartRunner implements CommandLineRunner {
     @Value("${test-nacos:null}")
     private String testNacos;
 
-
     @Override
     public void run(String... args) throws Exception {
         log.info("###################test-nacos={}", testNacos);
-        log.info("2222…");
     }
 
 }

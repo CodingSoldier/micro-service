@@ -10,7 +10,12 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+/**
+ * nacos接口
+ *
+ * @author cpq
+ * @since 2022-03-17 11:28:55
+ */
 @Slf4j
 @RefreshScope
 @RestController
