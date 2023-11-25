@@ -25,7 +25,6 @@ import java.nio.channels.Channels;
 import java.nio.charset.StandardCharsets;
 
 /**
- * https://stackoverflow.com/questions/76078243/spring-cloud-gateway-serverhttpresponsedecorator-writewith-not-called-on-receivi
  * 打印请求日志
  */
 @Slf4j
