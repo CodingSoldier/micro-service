@@ -16,8 +16,6 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestBodyAdvice;
 import java.lang.reflect.Type;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
-import java.util.Enumeration;
-import java.util.TreeMap;
 
 /**
  * Request日志
@@ -27,6 +25,11 @@ import java.util.TreeMap;
 @Slf4j
 @RestControllerAdvice
 public class LogRequestAdvice extends CommonsRequestLoggingFilter implements RequestBodyAdvice {
+
+    private String methodName;
+    private String requestUri;
+    private String decodeQueryString;
+    private boolean logPrinted = false;
 
     private LoggingProperties properties;
 
@@ -47,26 +50,15 @@ public class LogRequestAdvice extends CommonsRequestLoggingFilter implements Req
      */
     @Override
     protected void beforeRequest(HttpServletRequest request, String message) {
+        this.methodName = request.getMethod();
+        this.requestUri = request.getRequestURI();
         try {
-            if (properties.isRequestResponseLog() || properties.isRequestLog()) {
-                String queryString = request.getQueryString();
-                String decodeQueryString = StringUtils.isNotBlank(queryString)
-                        ? URLDecoder.decode(queryString, StandardCharsets.UTF_8.name()) : "";
-                log.info("打印请求，method = {}，url = {}，queryString解码：{}",
-                        request.getMethod(), request.getRequestURL().toString(), decodeQueryString);
-                if (properties.isIncludeHeaders()) {
-                    TreeMap<String, String> map = new TreeMap<>();
-                    Enumeration<String> headerNames = request.getHeaderNames();
-                    while (headerNames.hasMoreElements()){
-                        String headerName = headerNames.nextElement();
-                        map.put(headerName, request.getHeader(headerName));
-                    }
-                    log.info("打印请求headers = {}", map.toString());
-                }
-            }
+            this.decodeQueryString = StringUtils.isNotBlank(this.decodeQueryString)
+                    ? URLDecoder.decode(this.decodeQueryString, StandardCharsets.UTF_8.name()) : "";
         } catch (Exception e) {
-            log.error("打印request log 时，发生异常", e);
+            log.error("queryString编码异常", e);
         }
+        this.logPrinted = false;
     }
 
     /**
@@ -74,12 +66,12 @@ public class LogRequestAdvice extends CommonsRequestLoggingFilter implements Req
      */
     @Override
     protected void afterRequest(HttpServletRequest request, String message) {
-        // 不处理
+        if (!this.logPrinted) {
+            log.info("没有requestBody，在请求完成后打印，requestUri = {}，queryString解码 = {}，method = {}", this.requestUri, decodeQueryString, this.methodName);
+            this.logPrinted = true;
+        }
     }
 
-    /**
-     * RequestBodyAdvice 方法
-     */
     @Override
     public boolean supports(MethodParameter methodParameter,
             Type targetType,
@@ -99,7 +91,7 @@ public class LogRequestAdvice extends CommonsRequestLoggingFilter implements Req
     }
 
     /**
-     * 打印请求body
+     * 打印requestBody
      */
     @Override
     public Object afterBodyRead(Object body,
@@ -107,7 +99,9 @@ public class LogRequestAdvice extends CommonsRequestLoggingFilter implements Req
             MethodParameter parameter,
             Type targetType,
             Class<? extends HttpMessageConverter<?>> converterType) {
-        log.info("打印请求body = {}", ObjectMapperUtil.writeValueAsString(body));
+        String requestBody = ObjectMapperUtil.writeValueAsString(body);
+        log.info("打印请求，requestUri = {}，requestBody = {}，queryString解码={}，method = {}", this.requestUri, requestBody, decodeQueryString, this.methodName);
+        this.logPrinted = true;
         return body;
     }
 

@@ -4,6 +4,7 @@ import com.github.codingsoldier.starter.openfeign.advice.FeignExceptionHandlerAd
 import com.github.codingsoldier.starter.openfeign.annotation.ConditionalOnStarterOpenFeignEnabled;
 import com.github.codingsoldier.starter.openfeign.config.FeignConfig;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  * @author cpq
@@ -11,5 +12,6 @@ import org.springframework.context.annotation.Import;
  */
 @ConditionalOnStarterOpenFeignEnabled
 @Import({FeignConfig.class, FeignExceptionHandlerAdvice.class})
+@PropertySource("classpath:openfeign.properties")
 public class FeignAutoConfiguration {
 }
