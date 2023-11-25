@@ -3,6 +3,7 @@ package com.github.codingsoldier.common.resp;
 import com.github.codingsoldier.common.enums.ResultCodeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -14,11 +15,14 @@ import java.io.Serializable;
 @Schema(name = "HTTP响应体数据")
 public class Result<T> implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
-    @Schema(description = "1、code为具体的业务编码，code = 0 表示成功\n"
-            + "2、40000 <= code <= 49999，表示客户端错误，例如：参数错误\n"
-            + "3、50000 <= code <= 59999 , 表示服务端错误，例如：空指针异常\n")
+    @Schema(description = """
+            1、code为具体的业务编码，code = 20000 表示成功
+            2、40000 <= code <= 49999，表示客户端错误，例如：参数错误
+            3、50000 <= code <= 59999 , 表示服务端错误，例如：空指针异常
+            """)
     private int code;
 
     @Schema(description = "提示信息")

@@ -107,7 +107,7 @@
                 <version>${revision}</version>
             </dependency>
 
-            <!-- 引入swagger-annotations-jakarta依赖，是为了给micro-service-common使用@Schema注解-->
+            <!-- 引入swagger-annotations-jakarta依赖，是为了给micro-service-common使用@Schema等注解-->
             <dependency>
                 <groupId>io.swagger.core.v3</groupId>
                 <artifactId>swagger-annotations-jakarta</artifactId>

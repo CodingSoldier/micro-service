@@ -11,7 +11,7 @@ import java.util.List;
  * 树工具类
  *
  * @author chenpiqian
- * @date 2019-09-16
+ * @since 2022-02-09
  */
 public class TreeUtil {
 
@@ -21,15 +21,15 @@ public class TreeUtil {
     }
 
     /**
-     * 获取树结构集合
+     * 获取树结构集合，会删除entityList的元素
      *
      * @param parentId   最外层级的parentId
-     * @param entityList
-     * @return
+     * @param list list
+     * @return List
      */
-    public static <E extends TreeEntity<E>> List<E> treeWithDel(Object parentId, List<E> entityList) {
+    public static <E extends Tree<E>> List<E> treeWithDel(Object parentId, List<E> list) {
         List<E> treeList = new ArrayList<>();
-        Iterator<E> it = entityList.iterator();
+        Iterator<E> it = list.iterator();
         while (it.hasNext()) {
             E elem = it.next();
             if (CommonUtil.objToStr(parentId)
@@ -40,7 +40,7 @@ public class TreeUtil {
             }
         }
         for (E elem : treeList) {
-            elem.setChildren(treeWithDel(elem.getId(), entityList));
+            elem.setChildren(treeWithDel(elem.getId(), list));
         }
         return treeList;
     }
@@ -49,21 +49,21 @@ public class TreeUtil {
      * 获取树结构集合
      *
      * @param parentId   最外层级的parentId
-     * @param entityList
-     * @return
+     * @param list list
+     * @return List
      */
-    public static <E extends TreeEntity<E>> List<E> tree(Object parentId, List<E> entityList) {
-        if (CollectionUtils.isEmpty(entityList)) {
+    public static <E extends Tree<E>> List<E> tree(Object parentId, List<E> list) {
+        if (CollectionUtils.isEmpty(list)) {
             return new ArrayList<>();
         }
         List<E> treeList = new ArrayList<>();
-        for (E elem : entityList) {
+        for (E elem : list) {
             if (CommonUtil.objToStr(parentId).equals(CommonUtil.objToStr(elem.getParentId()))) {
                 treeList.add(elem);
             }
         }
         for (E elem : treeList) {
-            elem.setChildren(tree(elem.getId(), entityList));
+            elem.setChildren(tree(elem.getId(), list));
         }
         return treeList;
     }

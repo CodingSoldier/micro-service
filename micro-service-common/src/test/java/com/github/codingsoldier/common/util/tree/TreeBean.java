@@ -6,7 +6,7 @@ import java.util.List;
  * @author chenpq05
  * @since 2022/8/15 17:37
  */
-public class TreeBean implements TreeEntity<TreeBean>{
+public class TreeBean implements Tree<TreeBean> {
 
     private Long id;
 

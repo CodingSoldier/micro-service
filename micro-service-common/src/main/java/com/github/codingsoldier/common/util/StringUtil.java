@@ -27,7 +27,7 @@ public class StringUtil {
      *
      * @param str   字符串
      * @param regex 正则 例如： ".*[,.，。、]$"
-     * @return
+     * @return boolean
      */
     public static boolean isEndWith(String str, String regex) {
         if (StringUtils.isAnyBlank(str, regex)) {

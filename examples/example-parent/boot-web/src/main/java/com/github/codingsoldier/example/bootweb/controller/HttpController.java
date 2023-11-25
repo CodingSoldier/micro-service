@@ -1,9 +1,6 @@
 package com.github.codingsoldier.example.bootweb.controller;
 
-import com.github.codingsoldier.example.bootweb.dto.HttpTestDto;
-import com.github.codingsoldier.example.bootweb.dto.HttpTestTimeSlashDto;
-import com.github.codingsoldier.example.bootweb.dto.PageDto;
-import com.github.codingsoldier.example.bootweb.dto.UserUpdateDto;
+import com.github.codingsoldier.example.bootweb.dto.*;
 import com.github.codingsoldier.example.bootweb.vo.HttpTestTimeSlashVo;
 import com.github.codingsoldier.example.bootweb.vo.HttpTestVo;
 import com.github.codingsoldier.starter.web.annotation.NoWrapper;
@@ -57,36 +54,15 @@ public class HttpController {
         return resp;
     }
 
-    /**
-     * @PostMapping("/time/anno")
-     *     public CustomTimeTestAnnoVo timeAnno(@RequestBody HttpTestAnnoDto httpTestDto) {
-     *         log.info("###############进入方法：{}", httpTestDto);
-     *         CustomTimeTestAnnoVo resp = new CustomTimeTestAnnoVo();
-     *
-     *         resp.setDateMiddle(httpTestDto.getDate());
-     *         resp.setDateSlash(httpTestDto.getDate());
-     *         resp.setDateMiddleDay(httpTestDto.getDate());
-     *         resp.setDateSlashDay(httpTestDto.getDate());
-     *
-     *         resp.setLocalDateMiddle(httpTestDto.getLocalDate());
-     *         resp.setLocalDateSlash(httpTestDto.getLocalDate());
-     *         resp.setLocalDateMiddleDay(httpTestDto.getLocalDate());
-     *         resp.setLocalDateSlashDay(httpTestDto.getLocalDate());
-     *
-     *         resp.setLocalDateTimeMiddle(httpTestDto.getLocalDateTime());
-     *         resp.setLocalDateTimeSlash(httpTestDto.getLocalDateTime());
-     *         resp.setLocalDateTimeMiddleDay(httpTestDto.getLocalDateTime());
-     *         resp.setLocalDateTimeSlashDay(httpTestDto.getLocalDateTime());
-     *
-     *         resp.setOffsetDateTimeMiddle(httpTestDto.getOffsetDateTime());
-     *         resp.setOffsetDateTimeSlash(httpTestDto.getOffsetDateTime());
-     *         resp.setOffsetDateTimeMiddleDay(httpTestDto.getOffsetDateTime());
-     *         resp.setOffsetDateTimeSlashDay(httpTestDto.getOffsetDateTime());
-     *
-     *         log.info("@@@@@@@@@@@@@返回：{}", httpTestDto);
-     *         return resp;
-     *     }
-     */
+    @PostMapping("/time")
+    public HttpTestVo timeSlash(@RequestBody HttpTimeDto httpTimeDto) {
+        log.info("请求参数：{}", httpTimeDto);
+        HttpTestVo httpTestVo = new HttpTestVo();
+        BeanUtils.copyProperties(httpTimeDto, httpTestVo);
+        return httpTestVo;
+    }
+
+
 
     @GetMapping(value = "/no-wrapper")
     @NoWrapper

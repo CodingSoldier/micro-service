@@ -87,7 +87,7 @@ public class DingTalkUtil {
 
         textContent.put("content", StringUtils.substring(msg, 0, dingTalkProperties.getContentMaxLength()));
 
-        OkHttpUtil.asynPost(url, data, callback);
+        OkHttpUtil.asynchronousPost(url, data, callback);
     }
 
     /**

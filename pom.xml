@@ -80,8 +80,6 @@
                     <updatePomFile>true</updatePomFile>
                     <flattenMode>resolveCiFriendliesOnly</flattenMode>
                     <pomElements>
-                        <!-- 替换dependencyManagement中的占位符
-                         https://www.mojohaus.org/flatten-maven-plugin/plugin-info.html  -->
                         <dependencyManagement>resolve</dependencyManagement>
                         <parent>resolve</parent>
                     </pomElements>

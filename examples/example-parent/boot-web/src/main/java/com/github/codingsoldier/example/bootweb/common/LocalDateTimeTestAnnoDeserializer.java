@@ -3,7 +3,7 @@ package com.github.codingsoldier.example.bootweb.common;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.github.codingsoldier.common.util.DatePatternUtil;
+import com.github.codingsoldier.common.util.date.DatePatternUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;

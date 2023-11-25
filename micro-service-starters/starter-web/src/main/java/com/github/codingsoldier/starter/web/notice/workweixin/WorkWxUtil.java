@@ -75,7 +75,7 @@ public class WorkWxUtil {
     param.put("msgtype", "markdown");
     param.put("markdown", content);
     String url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=" + workWeiXinProperties.getKey();
-    OkHttpUtil.asynPost(url, param, callback);
+    OkHttpUtil.asynchronousPost(url, param, callback);
   }
 
   /**

@@ -1,4 +1,4 @@
-package com.github.codingsoldier.common.util;
+package com.github.codingsoldier.common.util.date;
 
 import org.junit.jupiter.api.Test;
 

@@ -2,8 +2,6 @@ package com.github.codingsoldier.common.constant;
 
 import com.github.codingsoldier.common.enums.ResultCodeEnum;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -14,10 +12,15 @@ import java.util.Set;
  */
 public class FeignConstant {
 
+    private FeignConstant() {
+        // sonar检测
+        throw new IllegalStateException("不允许实例化");
+    }
+
     /**
      * feign服务提供方，方法返回值
      */
-    public static final String PROVIDER_FUNTION_RETURN_TYPE = "x-pfry";
+    public static final String PROVIDER_FUNCTION_RETURN_TYPE = "x-pfry";
 
     /**
      * 是否 feign 请求
@@ -39,15 +42,8 @@ public class FeignConstant {
      * ResponseBodyWrapperAdvice#beforeBodyWrite 会设置 response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
      * Feign调用HTTP 状态码不以 2 开头的请求，被 FeignErrorDecoder#decode 捕获，并抛出 FeignResultErrorException
      */
-    @SuppressWarnings({"squid:S1171", "squid:S3599"})
-    public static final Set<ResultCodeEnum> NOT_CHANGE_RESPONSE_STATUS_CODE_SET = Collections.unmodifiableSet(new HashSet<ResultCodeEnum>() {{
-        add(ResultCodeEnum.SUCCESS);
-    }});
+    public static final Set<ResultCodeEnum> NOT_CHANGE_RESPONSE_STATUS_CODE_SET = Set.of(ResultCodeEnum.SUCCESS);
 
-    private FeignConstant() {
-        // sonar检测
-        throw new IllegalStateException("不允许实例化");
-    }
 
 
 }

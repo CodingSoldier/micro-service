@@ -40,7 +40,7 @@ public class ObjectMapperUtil {
   /**
    * 创建一个新的ObjectMapper
    *
-   * @return
+   * @return ObjectMapper
    */
   public static ObjectMapper newObjectMapper() {
 
@@ -99,10 +99,9 @@ public class ObjectMapperUtil {
   /**
    * 字节数组转对象
    *
-   * @param src
-   * @param valueType
-   * @param <T>
-   * @return
+   * @param src src
+   * @param valueType src
+   * @return T
    */
   public static <T> T readValue(byte[] src, Class<T> valueType) {
     if (Objects.isNull(src)) {
@@ -149,7 +148,7 @@ public class ObjectMapperUtil {
     if (Objects.isNull(value)) {
       return null;
     } else if (value instanceof String) {
-      return (String) value;
+      return value.toString();
     }
     try {
       return OBJECT_MAPPER.writeValueAsString(value);

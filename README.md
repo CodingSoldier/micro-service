@@ -2,9 +2,9 @@
 spring-cloud 微服务开发框架
 
 ## 环境依赖
-Java版本 = 1.8
+JDK版本 >= 17
 
-Maven版本 >= 3.8.4
+Maven版本 >= 3.9.5
 
 ## 项目介绍
 
@@ -14,14 +14,16 @@ Maven版本 >= 3.8.4
 ### micro-service-dependencies
 依赖模块，包含 micro-service-common、micro-service-starters 子模块
 
-所有的依赖都应该在本模块导入
+所有的依赖都应该在micro-service-dependencies声明
 
 [更多介绍](./micro-service-dependencies/README.md)
 
 ### micro-service-common
 公共模块
 
-公共模块不允许依赖其他子模块
+1、公共模块不允许依赖其他子模块
+
+2、不建议在micro-service-common引入spring之类的重型依赖
 
 [更多介绍](./micro-service-common/README.md)
 

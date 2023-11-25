@@ -3,8 +3,6 @@ package com.github.codingsoldier.common.util;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -47,9 +45,9 @@ public class CommonUtil {
 
     /**
      * 字符串不相等
-     * @param str1
-     * @param str2
-     * @return
+     * @param str1 str1
+     * @param str2 str2
+     * @return boolean
      */
     public static boolean strNotEqual(String str1, String str2) {
         return !StringUtils.equals(str1, str2);
@@ -66,17 +64,35 @@ public class CommonUtil {
         if (obj == null) {
             return "";
         } else if (obj instanceof String) {
-            return (String) obj;
+            return obj.toString();
         } else {
             return String.valueOf(obj);
         }
     }
 
     /**
+     * Object转long
+     * @param object object
+     * @param defaultValue 失败时返回默认值
+     * @return long
+     */
+    public static long parseLong(Object object, long defaultValue) {
+        String str = objToStr(object);
+        long num = defaultValue;
+        if (StringUtils.isNotBlank(str)) {
+            try {
+                num = Long.parseLong(str.trim());
+            } catch (Exception ex) {
+                log.warn("字符串转Long异常", ex);
+            }
+        }
+        return num;
+    }
+
+    /**
      * Object转Long
-     *
-     * @param object Object
-     * @return Long
+     * @param object object
+     * @return 可能为null
      */
     public static Long parseLong(Object object) {
         String str = objToStr(object);
@@ -92,10 +108,30 @@ public class CommonUtil {
     }
 
     /**
+     * Object转int
+     *
+     * @param object Object
+     * @param defaultValue 失败时返回默认值
+     * @return int
+     */
+    public static int parseInt(Object object, int defaultValue) {
+        String str = objToStr(object);
+        int num = defaultValue;
+        if (StringUtils.isNotBlank(str)) {
+            try {
+                num = Integer.parseInt(str.trim());
+            } catch (Exception ex) {
+                log.warn("字符串转Integer异常", ex);
+            }
+        }
+        return num;
+    }
+
+    /**
      * 字符串转Integer
      *
      * @param object Object
-     * @return Integer
+     * @return 返回值可能为null
      */
     public static Integer parseInteger(Object object) {
         String str = objToStr(object);
@@ -109,35 +145,6 @@ public class CommonUtil {
         }
         return num;
     }
-
-    /**
-     * 将字符串分割为List
-     *
-     * @param str           字符串
-     * @param separatorChar 分隔符
-     * @param clazz         集合元素类型
-     * @param <E>
-     * @return List
-     */
-    public static <E> List<E> split(String str, String separatorChar, Class<E> clazz) {
-        str = StringUtils.trim(str);
-        String[] arr = StringUtils.split(str, separatorChar);
-        if (arr == null || arr.length == 0) {
-            return new ArrayList<>();
-        }
-        List<E> result = new ArrayList<>();
-        for (int i = 0; i < arr.length; i++) {
-            if (clazz.isAssignableFrom(Integer.class)) {
-                result.add((E) parseInteger(arr[i]));
-            } else if (clazz.isAssignableFrom(Long.class)) {
-                result.add((E) parseLong(arr[i]));
-            } else if (clazz.isAssignableFrom(String.class)) {
-                result.add((E) StringUtils.trim(arr[i]));
-            }
-        }
-        return result;
-    }
-
 
 }
 

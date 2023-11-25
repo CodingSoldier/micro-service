@@ -1,10 +1,11 @@
-package com.github.codingsoldier.common.util;
+package com.github.codingsoldier.common.util.date;
 
+import com.github.codingsoldier.common.util.CommonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -70,18 +71,14 @@ public class DatePatternUtil {
         // 解决字符串被自动转码导致的问题，在此将转码后的字符串还原。
         char ch = '%';
         if (strDateValue.indexOf(ch) >= 0) {
-            try {
-                strDateValue = URLDecoder.decode(strDateValue, "UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                log.error("时间转换编码异常", e);
-            }
+            strDateValue = URLDecoder.decode(strDateValue, StandardCharsets.UTF_8);
         }
 
         LocalDateTime result = null;
         String format = getMatchFormat(strDateValue);
         if (format == null) {
             // 如果以上8种时间格式都无法匹配，校验是否是时间戳格式，如果是就直接转换为Date，否则直接抛出异常
-            String regex = "[-]?\\d+";
+            String regex = "\\d+";
             Matcher matcher = Pattern.compile(regex).matcher(strDateValue);
             boolean isMatch = matcher.matches();
             if (isMatch) {
@@ -120,9 +117,7 @@ public class DatePatternUtil {
      * @return 格式
      */
     private static String getMatchFormat(final String value) {
-        Pattern pattern;
-        for (Iterator<Pattern> iterator = PATTERN_LIST.iterator(); iterator.hasNext(); ) {
-            pattern = iterator.next();
+        for (Pattern pattern : PATTERN_LIST) {
             Matcher matcher = pattern.matcher(value);
             boolean isMatch = matcher.matches();
             if (isMatch) {

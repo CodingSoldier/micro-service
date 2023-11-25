@@ -3,7 +3,7 @@ package com.github.codingsoldier.common.util.objectmapper.serializer;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.github.codingsoldier.common.util.DateUtil;
+import com.github.codingsoldier.common.util.date.DateUtil;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -27,25 +27,25 @@ public class TimeToTimestampSerializer extends JsonSerializer<Object> {
         }
         if (value instanceof Date) {
             Date timeObj = (Date) value;
-            /**
-             * @JsonFormat 源码位置
-             * com.fasterxml.jackson.databind.ser.std.DateSerializer.serialize
-             * com.fasterxml.jackson.databind.ser.std.DateTimeSerializerBase#_serializeAsString()
-             * 太复杂，不实现
-             */
             gen.writeNumber(timeObj.getTime());
         } else if (value instanceof LocalDateTime) {
             LocalDateTime timeObj = (LocalDateTime) value;
             Long timestamp = DateUtil.toTimestamp(timeObj);
-            gen.writeNumber(timestamp);
+            if (timestamp != null) {
+                gen.writeNumber(timestamp);
+            }
         } else if (value instanceof OffsetDateTime) {
             OffsetDateTime timeObj = (OffsetDateTime) value;
             Long timestamp = DateUtil.toTimestamp(timeObj);
-            gen.writeNumber(timestamp);
+            if (timestamp != null) {
+                gen.writeNumber(timestamp);
+            }
         } else if (value instanceof LocalDate) {
             LocalDate timeObj = (LocalDate) value;
-            long timestamp = DateUtil.toTimestamp(timeObj);
-            gen.writeNumber(timestamp);
+            Long timestamp = DateUtil.toTimestamp(timeObj);
+            if (timestamp != null) {
+                gen.writeNumber(timestamp);
+            }
         }
     }
 

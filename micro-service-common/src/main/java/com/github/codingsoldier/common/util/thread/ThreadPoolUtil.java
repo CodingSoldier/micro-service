@@ -65,7 +65,7 @@ public class ThreadPoolUtil {
     /**
      * 返回 executor
      *
-     * @return
+     * @return ThreadPoolExecutor
      */
     public static ThreadPoolExecutor getExecutor() {
         return executor;
@@ -83,9 +83,8 @@ public class ThreadPoolUtil {
     /**
      * 提交任务
      *
-     * @param task
-     * @param <T>
-     * @return
+     * @param task task
+     * @return Future
      */
     public static <T> Future<T> submit(Callable<T> task) {
         return executor.submit(task);

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -19,6 +20,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class PageReq implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Parameter(description = "页码，从 1 开始", example = "1")

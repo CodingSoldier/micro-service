@@ -1,4 +1,4 @@
-package com.github.codingsoldier.common.util;
+package com.github.codingsoldier.common.util.date;
 
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DateUtilTest {
 
@@ -89,11 +90,43 @@ class DateUtilTest {
     void toDate() {
         OffsetDateTime t = OffsetDateTime.of(2022, 8, 13, 07, 10, 21, 0, DateUtil.ZONE_OFFSET_8);
         assertEquals(new Date(1660345821000L), DateUtil.toDate(t));
+
+        LocalDate localDate = LocalDate.of(2022, 8, 13);
+        assertEquals(new Date(1660320000000L), DateUtil.toDate(t.toLocalDate()));
     }
 
     @Test
-    void testToDate() {
+    void testToString() {
         LocalDateTime t = LocalDateTime.of(2022, 8, 13, 07, 10, 21);
-        assertEquals(new Date(1660345821000L), DateUtil.toDate(t));
+        assertEquals("2022-08-13 07:10:21", DateUtil.toPatternString(t, DateUtil.YMDHMS_FORMAT_STR));
+        assertEquals("2022-08-13", DateUtil.toYyyyMMdd(t));
+        assertEquals("2022-08-13", DateUtil.toYyyyMMdd(t.toLocalDate()));
+        assertEquals("2022-08-13 07:10:21", DateUtil.toYyyyMMddHHmmss(t));
+        Date date = DateUtil.toDate(t);
+        assertEquals("2022-08-13 07:10:21", DateUtil.toYyyyMmDdHmMmSs(date));
     }
+
+
+    @Test
+    void testDateTime() {
+
+        assertEquals("2022-03-14", DateUtil.toLocalDate(1647187261000L).toString());
+        assertEquals("2022-03-14T00:01:01", DateUtil.toLocalDateTime(1647187261000L).toString());
+        assertEquals("2022-03-14T00:01:01+08:00", DateUtil.toOffsetDateTime(1647187261000L).toString());
+
+        assertEquals("2022-03-14", DateUtil.toLocalDate(1647187261000L).toString());
+        assertEquals("2022-03-14T23:59:01", DateUtil.toLocalDateTime(1647273541000L).toString());
+        assertEquals("2022-03-14T23:59:01+08:00", DateUtil.toOffsetDateTime(1647273541000L).toString());
+
+        long currentTimeMillis = System.currentTimeMillis();
+        LocalDateTime localDateTime = LocalDateTime.now();
+        OffsetDateTime offsetDateTime = OffsetDateTime.now();
+        assertTrue(currentTimeMillis - 10L < DateUtil.toTimestamp(localDateTime));
+        assertTrue(currentTimeMillis + 10L > DateUtil.toTimestamp(localDateTime));
+        assertTrue(currentTimeMillis - 10L < DateUtil.toTimestamp(offsetDateTime));
+        assertTrue(currentTimeMillis + 10L > DateUtil.toTimestamp(offsetDateTime));
+
+    }
+
+
 }

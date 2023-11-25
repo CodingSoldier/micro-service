@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.github.codingsoldier.common.constant.FeignConstant.PROVIDER_FUNTION_RETURN_TYPE;
+import static com.github.codingsoldier.common.constant.FeignConstant.PROVIDER_FUNCTION_RETURN_TYPE;
 
 /**
  * 将controller返回值包装为Result对象，以及Response日志处理
@@ -129,7 +129,7 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
             boolean methodReturnTypeChange = false;
             RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
             if (requestAttributes != null) {
-                Object functionReturnType = requestAttributes.getAttribute(PROVIDER_FUNTION_RETURN_TYPE, 0);
+                Object functionReturnType = requestAttributes.getAttribute(PROVIDER_FUNCTION_RETURN_TYPE, 0);
                 // controller方法的返回值类型被异常处理器改变了
                 methodReturnTypeChange = !StringUtils.equals(body.getClass().getName(),
                         CommonUtil.objToStr(functionReturnType));

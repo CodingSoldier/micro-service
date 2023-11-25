@@ -27,7 +27,7 @@ class OkHttpUtilTest {
     void getString() {
         String url = "http://localhost:10001/boot-web/http/params/path/111?msg=账号不ddddddddd够长";
         String result = OkHttpUtil.getString(url, null, null);
-        assertEquals(true, result.contains("\"code\":0"));
+        assertEquals(true, result.contains("\"code\":20000"));
     }
 
     @Test
@@ -94,8 +94,8 @@ class OkHttpUtilTest {
     @Test
     void postString() {
         String url = "http://localhost:10001/boot-web/http/time";
-        String result = OkHttpUtil.postString(url, "{}", null);
-        assertEquals(true, result.contains("\"code\":0"));
+        String result = OkHttpUtil.postPutString(OkHttpUtil.HTTP_POST, url, "{}", null);
+        assertEquals(true, result.contains("\"code\":20000"));
     }
 
     @Test
@@ -103,7 +103,7 @@ class OkHttpUtilTest {
         String url = "http://localhost:10001/boot-web/http/time";
         HashMap<String, Object> bodyMap = new HashMap<>();
         bodyMap.put("id", 123456);
-        bodyMap.put("localDateTime", 1647187201000L);
+        bodyMap.put("localDateTime", "2023-01-01 01:01:01");
 
         Result r1 = OkHttpUtil.post(url, ObjectMapperUtil.writeValueAsString(bodyMap), null, Result.class);
         assertEquals(ResultCodeEnum.SUCCESS.getCode(), r1.getCode());
@@ -113,13 +113,13 @@ class OkHttpUtilTest {
 
         HashMap<String, String> headers = new HashMap<>();
         headers.put("xxxxxx", "val");
-        Result<Map<String, Object>> r33 = OkHttpUtil.post(url, bodyMap, headers, new TypeReference<Result<Map<String, Object>>>(){});
+        Result<Map<String, Object>> r33 = OkHttpUtil.post(url, bodyMap, headers, new TypeReference<>(){});
         assertEquals(ResultCodeEnum.SUCCESS.getCode(), r33.getCode());
-        assertEquals(1647187201000L, r33.getData().get("localDateTime"));
+        assertEquals("2023-01-01 01:01:01", r33.getData().get("localDateTime"));
 
-        Result<Map<String, Object>> r44 = OkHttpUtil.post(url, ObjectMapperUtil.writeValueAsString(bodyMap), headers, new TypeReference<Result<Map<String, Object>>>(){});
+        Result<Map<String, Object>> r44 = OkHttpUtil.post(url, ObjectMapperUtil.writeValueAsString(bodyMap), headers, new TypeReference<>(){});
         assertEquals(ResultCodeEnum.SUCCESS.getCode(), r44.getCode());
-        assertEquals(1647187201000L, r44.getData().get("localDateTime"));
+        assertEquals("2023-01-01 01:01:01", r44.getData().get("localDateTime"));
     }
 
     @Test
@@ -127,7 +127,7 @@ class OkHttpUtilTest {
         String url = "http://localhost:10001/boot-web/http/time";
         HashMap<String, Object> bodyMap = new HashMap<>();
         bodyMap.put("id", 123456);
-        bodyMap.put("localDateTime", 1647187201000L);
+        bodyMap.put("localDateTime", "2023-01-01 01:01:01");
 
         Result r1 = OkHttpUtil.post(url, ObjectMapperUtil.writeValueAsString(bodyMap), Result.class);
         assertEquals(ResultCodeEnum.SUCCESS.getCode(), r1.getCode());
@@ -136,13 +136,13 @@ class OkHttpUtilTest {
         assertEquals(ResultCodeEnum.SUCCESS.getCode(), r2.getCode());
 
 
-        Result<Map<String, Object>> r33 = OkHttpUtil.post(url, bodyMap, new TypeReference<Result<Map<String, Object>>>(){});
+        Result<Map<String, Object>> r33 = OkHttpUtil.post(url, bodyMap, new TypeReference<>(){});
         assertEquals(ResultCodeEnum.SUCCESS.getCode(), r33.getCode());
-        assertEquals(1647187201000L, r33.getData().get("localDateTime"));
+        assertEquals("2023-01-01 01:01:01", r33.getData().get("localDateTime"));
 
-        Result<Map<String, Object>> r44 = OkHttpUtil.post(url, ObjectMapperUtil.writeValueAsString(bodyMap), new TypeReference<Result<Map<String, Object>>>(){});
+        Result<Map<String, Object>> r44 = OkHttpUtil.post(url, ObjectMapperUtil.writeValueAsString(bodyMap), new TypeReference<>(){});
         assertEquals(ResultCodeEnum.SUCCESS.getCode(), r44.getCode());
-        assertEquals(1647187201000L, r44.getData().get("localDateTime"));
+        assertEquals("2023-01-01 01:01:01", r44.getData().get("localDateTime"));
     }
 
     @Test
@@ -150,9 +150,9 @@ class OkHttpUtilTest {
         String url = "http://localhost:10001/boot-web/http/time";
         HashMap<String, Object> bodyMap = new HashMap<>();
         bodyMap.put("id", 123456);
-        bodyMap.put("localDateTime", 1647187201000L);
+        bodyMap.put("localDateTime", "2023-01-01 01:01:01");
 
-        OkHttpUtil.asynPost(url, bodyMap, new Callback() {
+        OkHttpUtil.asynchronousPost(url, bodyMap, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 assertTrue(false, "请求失败");
@@ -166,7 +166,7 @@ class OkHttpUtilTest {
             }
         });
 
-        OkHttpUtil.asynPost(url, bodyMap, null, new Callback() {
+        OkHttpUtil.asynchronousPost(url, bodyMap, null, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 assertTrue(false, "请求失败");

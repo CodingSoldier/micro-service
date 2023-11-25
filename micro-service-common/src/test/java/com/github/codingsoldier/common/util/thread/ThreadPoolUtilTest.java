@@ -1,19 +1,22 @@
-package com.github.codingsoldier.common.util;
+package com.github.codingsoldier.common.util.thread;
 
 import com.github.codingsoldier.common.exception.BackendServicesException;
-import com.github.codingsoldier.common.util.thread.ThreadPoolUtil;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.Future;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ThreadPoolUtilTest {
 
     @Test
     void execute() {
         ThreadPoolUtil.execute(() -> assertTrue(true));
+    }
+
+    @Test
+    void getExecutor() {
+        assertNotNull(ThreadPoolUtil.getExecutor());
     }
 
     @Test
@@ -28,4 +31,5 @@ class ThreadPoolUtilTest {
         Future<String> resp = ThreadPoolUtil.submit(() -> "返回结果");
         assertEquals("返回结果", resp.get());
     }
+
 }

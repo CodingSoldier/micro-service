@@ -5,6 +5,7 @@ import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -13,6 +14,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * http工具类
+ *
+ * @author chenpq05
+ * @since 2022-02-09
+ */
 @Slf4j
 public class OkHttpUtil {
 
@@ -20,11 +27,14 @@ public class OkHttpUtil {
     //sonar
   }
 
+  public static final String HTTP_POST = "POST";
+  public static final String HTTP_PUT = "PUT";
+
   public static final int CONNECT_TIMEOUT = 10;
   public static final int READ_TIMEOUT = 120;
   public static final int WRITE_TIMEOUT = 60;
   public static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
-  private static OkHttpClient okHttpClient;
+  private static final OkHttpClient okHttpClient;
 
   static {
     OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
@@ -41,16 +51,20 @@ public class OkHttpUtil {
   /**
    * 执行请求
    *
-   * @param request
-   * @return
+   * @param request request
+   * @return byte[]
    */
   private static byte[] execute(Request request) {
-    try (Response response = okHttpClient.newCall(request).execute()){
-      if (response != null) {
-        if (!response.isSuccessful()) {
-          log.info("http返回code非2XX，code={}", response.code());
+    try (Response response = okHttpClient.newCall(request).execute()) {
+      if (!response.isSuccessful()) {
+        log.error("http返回code非2XX，code={}", response.code());
+      }
+      try (ResponseBody body = response.body()){
+        if (body == null) {
+          return new byte[0];
+        } else {
+          return body.bytes();
         }
-        return response.body().bytes();
       }
     } catch (IOException e) {
       log.error("OkHttp异常", e);
@@ -67,10 +81,14 @@ public class OkHttpUtil {
    */
   private static byte[] get(String url, Map<String, Object> params,
       Map<String, String> headers) {
+    if (StringUtils.isBlank(url)) {
+      log.error("OkHttpUtil异常，url不能为空");
+      return new byte[0];
+    }
     // 创建builder
     Request.Builder builder = new Request.Builder();
     // 设置请求头
-    if (headers != null && headers.size() > 0) {
+    if (headers != null && !headers.isEmpty()) {
       headers.forEach(builder::addHeader);
     }
     // 拼接请求参数
@@ -89,30 +107,30 @@ public class OkHttpUtil {
     // 构造Request
     Request request = builder.get().url(sb.toString()).build();
     // 执行请求
-    log.debug("发送GET请求，url：{}，header：{}", request.url(), headers);
+    log.info("OkHttpUtil发送GET请求，url：{}，header：{}", request.url(), headers);
     return execute(request);
   }
 
   /**
    * 下载
-   * @param url
-   * @return
+   * @param url url
+   * @return byte[]
    */
   public static byte[] download(String url) {
-    return OkHttpUtil.get(url, new HashMap<>(), new HashMap<>());
+    return OkHttpUtil.get(url, new HashMap<>(16), new HashMap<>(16));
   }
 
   /**
    * get请求，返回结果是String
-   * @param url
-   * @param params
-   * @param headers
-   * @return
+   * @param url url
+   * @param params params
+   * @param headers headers
+   * @return String
    */
   public static String getString(String url, Map<String, Object> params, Map<String, String> headers) {
     byte[] dataByte = get(url, params, headers);
     String respBody = new String(dataByte, StandardCharsets.UTF_8);
-    log.debug("HTTP返回结果={}", respBody);
+    log.info("OkHttpUtil发送GET请求，url={}，HTTP返回结果={}", url, respBody);
     return respBody;
   }
 
@@ -208,15 +226,18 @@ public class OkHttpUtil {
    * @param headers  请求头
    * @return 返回clazz类型实体
    */
-  public static String postString(String url, String jsonBody, Map<String, String> headers) {
-    if (jsonBody == null) {
-      log.error("http post 请求，body不能为null");
+  public static String postPutString(String postPut, String url, String jsonBody, Map<String, String> headers) {
+    if (jsonBody == null || StringUtils.isBlank(url)) {
+      log.error("http post/put 请求，body不能为null");
+      return "";
+    } else if (StringUtils.isBlank(url)) {
+      log.error("OkHttpUtil异常，url不能为空");
       return "";
     }
     // 创建builder
     Request.Builder builder = new Request.Builder();
     // 设置请求头
-    if (headers != null && headers.size() > 0) {
+    if (headers != null && !headers.isEmpty()) {
       for (Entry<String, String> entry:headers.entrySet()) {
         if (entry.getKey() != null && entry.getValue() != null) {
           builder.addHeader(entry.getKey(), entry.getValue());
@@ -224,14 +245,22 @@ public class OkHttpUtil {
       }
     }
     // 创建body
-    RequestBody requestBody = RequestBody.create(MEDIA_TYPE_JSON, jsonBody);
+    RequestBody requestBody = RequestBody.create(jsonBody, MEDIA_TYPE_JSON);
     // 构造Request
-    Request request = builder.post(requestBody).url(url).build();
-    // 执行请求
-    log.debug("发送POST请求，url：{}，header：{}，body: {}", request.url(), headers, jsonBody);
+    Request request = null;
+    if (HTTP_POST.equals(postPut)) {
+      request = builder.post(requestBody).url(url).build();
+      // 执行请求
+      log.info("OkHttpUtil发送发送POST请求，url：{}，header：{}，body: {}", request.url(), headers, jsonBody);
+    } else if (HTTP_PUT.equals(postPut)) {
+      request = builder.put(requestBody).url(url).build();
+      // 执行请求
+      log.info("OkHttpUtil发送发送POST请求，url：{}，header：{}，body: {}", request.url(), headers, jsonBody);
+    }
+
     byte[] dataByte = execute(request);
     String respBody = new String(dataByte, StandardCharsets.UTF_8);
-    log.debug("HTTP返回结果={}", respBody);
+    log.info("OkHttpUtil发送发送POST请求，url={}，HTTP返回结果={}", url, respBody);
     return respBody;
   }
 
@@ -246,7 +275,7 @@ public class OkHttpUtil {
    */
   public static <T> T post(String url, String jsonBody, Map<String, String> headers,
       Class<T> clazz) {
-    String data = postString(url, jsonBody, headers);
+    String data = postPutString(HTTP_POST, url, jsonBody, headers);
     return ObjectMapperUtil.readValue(data, clazz);
   }
 
@@ -261,7 +290,7 @@ public class OkHttpUtil {
    */
   public static <T> T post(String url, Map<String, Object> mapBody, Map<String, String> headers,
       Class<T> clazz) {
-    String data = postString(url, ObjectMapperUtil.writeValueAsString(mapBody), headers);
+    String data = postPutString(HTTP_POST, url, ObjectMapperUtil.writeValueAsString(mapBody), headers);
     return ObjectMapperUtil.readValue(data, clazz);
   }
 
@@ -275,8 +304,8 @@ public class OkHttpUtil {
    * @return 返回clazz类型实体
    */
   public static <T> T post(String url, String jsonBody, Map<String, String> headers,
-                           TypeReference<T> valueTypeRef) {
-    String data = postString(url, jsonBody, headers);
+      TypeReference<T> valueTypeRef) {
+    String data = postPutString(HTTP_POST, url, jsonBody, headers);
     return ObjectMapperUtil.readValue(data, valueTypeRef);
   }
 
@@ -292,7 +321,7 @@ public class OkHttpUtil {
    */
   public static <T> T post(String url, Map<String, Object> mapBody, Map<String, String> headers,
       TypeReference<T> valueTypeRef) {
-    String data = postString(url, ObjectMapperUtil.writeValueAsString(mapBody), headers);
+    String data = postPutString(HTTP_POST, url, ObjectMapperUtil.writeValueAsString(mapBody), headers);
     return ObjectMapperUtil.readValue(data, valueTypeRef);
   }
 
@@ -306,7 +335,7 @@ public class OkHttpUtil {
    * @return 返回clazz类型实体
    */
   public static <T> T post(String url, String jsonBody, Class<T> clazz) {
-    String data = postString(url, jsonBody, null);
+    String data = postPutString(HTTP_POST, url, jsonBody, null);
     return ObjectMapperUtil.readValue(data, clazz);
   }
 
@@ -321,10 +350,9 @@ public class OkHttpUtil {
    */
   public static <T> T post(String url, Map<String, Object> mapBody, Class<T> clazz) {
     String jsonBody = ObjectMapperUtil.writeValueAsString(mapBody);
-    String data = postString(url, jsonBody, null);
+    String data = postPutString(HTTP_POST, url, jsonBody, null);
     return ObjectMapperUtil.readValue(data, clazz);
   }
-
 
   /**
    * post请求
@@ -336,10 +364,9 @@ public class OkHttpUtil {
    * @return 返回clazz类型实体
    */
   public static <T> T post(String url, String jsonBody, TypeReference<T> valueTypeRef) {
-    String data = postString(url, jsonBody, null);
+    String data = postPutString(HTTP_POST, url, jsonBody, null);
     return ObjectMapperUtil.readValue(data, valueTypeRef);
   }
-
 
   /**
    * post请求
@@ -352,12 +379,9 @@ public class OkHttpUtil {
    */
   public static <T> T post(String url, Map<String, Object> mapBody, TypeReference<T> valueTypeRef) {
     String jsonBody = ObjectMapperUtil.writeValueAsString(mapBody);
-    String data = postString(url, jsonBody, null);
+    String data = postPutString(HTTP_POST, url, jsonBody, null);
     return ObjectMapperUtil.readValue(data, valueTypeRef);
   }
-
-
-
 
   /**
    * 异步发送post请求
@@ -366,7 +390,7 @@ public class OkHttpUtil {
    * @param headers       headers
    * @param callback      请求返回结果
    */
-  public static void asynPost(String url, String jsonBody, Map<String, String> headers, Callback callback) {
+  public static void asynchronousPost(String url, String jsonBody, Map<String, String> headers, Callback callback) {
     if (jsonBody == null) {
       log.error("http post 请求，body不能为null");
       return ;
@@ -374,11 +398,11 @@ public class OkHttpUtil {
     // 创建builder
     Request.Builder builder = new Request.Builder();
     // 设置请求头
-    if (headers != null && headers.size() > 0) {
+    if (headers != null && !headers.isEmpty()) {
       headers.forEach(builder::addHeader);
     }
     // 创建body
-    RequestBody requestBody = RequestBody.create(MEDIA_TYPE_JSON, jsonBody);
+    RequestBody requestBody = RequestBody.create(jsonBody, MEDIA_TYPE_JSON);
     // 构造Request
     Request request = builder.post(requestBody).url(url).build();
     // 执行请求
@@ -393,9 +417,9 @@ public class OkHttpUtil {
    * @param headers       headers
    * @param callback      请求返回结果
    */
-  public static void asynPost(String url, Map<String, Object> mapBody, Map<String, String> headers, Callback callback) {
+  public static void asynchronousPost(String url, Map<String, Object> mapBody, Map<String, String> headers, Callback callback) {
     String jsonBody = ObjectMapperUtil.writeValueAsString(mapBody);
-    asynPost(url, jsonBody, headers, callback);
+    asynchronousPost(url, jsonBody, headers, callback);
   }
 
   /**
@@ -404,9 +428,24 @@ public class OkHttpUtil {
    * @param mapBody      请求body
    * @param callback      请求返回结果
    */
-  public static void asynPost(String url, Map<String, Object> mapBody, Callback callback) {
+  public static void asynchronousPost(String url, Map<String, Object> mapBody, Callback callback) {
     String jsonBody = ObjectMapperUtil.writeValueAsString(mapBody);
-    asynPost(url, jsonBody, null, callback);
+    asynchronousPost(url, jsonBody, null, callback);
+  }
+
+  /**
+   * post请求
+   *
+   * @param url      url
+   * @param jsonBody 请求body
+   * @param clazz    返回结果类型
+   * @param <T>      泛型方法
+   * @return 返回clazz类型实体
+   */
+  public static <T> T put(String url, String jsonBody, Map<String, String> headers,
+      Class<T> clazz) {
+    String data = postPutString(HTTP_PUT, url, jsonBody, headers);
+    return ObjectMapperUtil.readValue(data, clazz);
   }
 
 }

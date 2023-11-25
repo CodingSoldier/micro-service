@@ -12,7 +12,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 
-import static com.github.codingsoldier.common.constant.FeignConstant.PROVIDER_FUNTION_RETURN_TYPE;
+import static com.github.codingsoldier.common.constant.FeignConstant.PROVIDER_FUNCTION_RETURN_TYPE;
 
 /**
  * feign拦截器
@@ -35,7 +35,7 @@ public class FeignInterceptor implements HandlerInterceptor {
         String returnTypeName = handlerMethod.getMethod().getReturnType().getName();
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         if (requestAttributes != null) {
-          requestAttributes.setAttribute(PROVIDER_FUNTION_RETURN_TYPE, returnTypeName, 0);
+          requestAttributes.setAttribute(PROVIDER_FUNCTION_RETURN_TYPE, returnTypeName, 0);
         }
         RequestContextHolder.setRequestAttributes(requestAttributes);
       }
