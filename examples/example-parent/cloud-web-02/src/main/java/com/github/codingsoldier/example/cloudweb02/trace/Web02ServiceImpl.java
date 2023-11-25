@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.concurrent.Future;
 
-import static com.github.codingsoldier.common.constant.SleuthConstant.X_REQ_TRACE_ID;
+import static com.github.codingsoldier.common.constant.TraceConstant.X_REQ_TRACE_ID;
 
 @Slf4j
 @Service

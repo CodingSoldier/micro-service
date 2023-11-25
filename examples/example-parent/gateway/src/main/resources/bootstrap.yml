@@ -8,7 +8,7 @@ spring:
     active: dev
   cloud:
     nacos:
-      server-addr: 10.39.176.47:8848
+      server-addr: 192.168.1.3:8848
       config:
         server-addr: ${spring.cloud.nacos.server-addr}
         namespace: namespace-example-dev
@@ -56,6 +56,17 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
+
+logging:
+  # logback-spring.xml 已在 starter-logback 中配置好了，无需新建
+  config: classpath:logback-spring.xml
+  #  config: classpath:log4j2-spring.xml
+  file:
+    # 日志根目录
+    path: /logs
+    name: ${spring.application.name}
+  level:
+    com.github.codingsoldier.example: DEBUG
 
 # knife4j服务发现模式所有的子服务必须统一规范，既要么都是swagger2，要么都是openapi3，不可混用
 #knife4j:

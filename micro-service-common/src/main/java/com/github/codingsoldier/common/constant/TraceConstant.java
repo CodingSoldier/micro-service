@@ -1,14 +1,14 @@
 package com.github.codingsoldier.common.constant;
 
 /**
- * sleuth常量
+ * 链路追踪常量
  *
  * @author chenpq
  * @since 2022/2/8 14:19
  */
-public class SleuthConstant {
+public class TraceConstant {
 
-    private SleuthConstant() {
+    private TraceConstant() {
         // sonar
     }
 

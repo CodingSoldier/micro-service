@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-import static com.github.codingsoldier.common.constant.SleuthConstant.X_REQ_TRACE_ID;
+import static com.github.codingsoldier.common.constant.TraceConstant.X_REQ_TRACE_ID;
 
 /**
  * 加上请求头 x-req-trace-id

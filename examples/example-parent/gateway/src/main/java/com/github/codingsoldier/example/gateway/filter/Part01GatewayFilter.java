@@ -16,10 +16,9 @@ public class Part01GatewayFilter implements GatewayFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-
         // 获取request
         ServerHttpRequest request = exchange.getRequest();
-        log.info("进入局部过滤器，request={}", request.toString());
+        log.info("进入局部过滤器，request={}", request);
 
         return chain.filter(exchange);
     }
