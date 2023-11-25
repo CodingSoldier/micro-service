@@ -7,8 +7,8 @@ import com.github.codingsoldier.common.util.StringUtil;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
 import org.apache.commons.collections4.CollectionUtils;
-
 
 import java.util.List;
 import java.util.Set;
@@ -20,7 +20,13 @@ import java.util.Set;
  */
 public class ValidationUtils {
 
-    private static Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+    private static final Validator validator;
+
+    static {
+        try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()){
+            validator = factory.getValidator();
+        }
+    }
 
     private ValidationUtils() {
         throw new IllegalStateException("不允许创建ValidatorUtils实例");
@@ -29,8 +35,8 @@ public class ValidationUtils {
     /**
      * 校验Bean，拼接提示信息
      *
-     * @param object
-     * @param groups
+     * @param object object to validate
+     * @param groups the group or list of groups targeted for validation (defaults to Default)
      */
     public static void validateEntity(Object object, Class<?>... groups) {
         Set<ConstraintViolation<Object>> constraintViolations = validator.validate(object, groups);
@@ -50,9 +56,9 @@ public class ValidationUtils {
     /**
      * 校验Bean，拼接提示信息
      *
-     * @param object
+     * @param object object to validate
      * @param excludeFieldList 忽略字段
-     * @param groups
+     * @param groups the group or list of groups targeted for validation (defaults to Default)
      */
     public static void validateEntity(Object object, final List<String> excludeFieldList, Class<?>... groups) {
         Set<ConstraintViolation<Object>> constraintViolations = validator.validate(object, groups);
@@ -71,7 +77,7 @@ public class ValidationUtils {
                 sb.append(message);
             }
             //有message抛出异常
-            if (sb.length() != 0) {
+            if (!sb.isEmpty()) {
                 throw new ClientException(ResultCodeEnum.PRECONDITION_FAILED.getCode(), sb.toString());
             }
         }

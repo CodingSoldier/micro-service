@@ -5,7 +5,6 @@ import com.github.codingsoldier.common.resp.Result;
 import com.github.codingsoldier.starter.nacos.graceful.config.NacosGraceful;
 import com.github.codingsoldier.starter.nacos.graceful.constant.Constant;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class NacosGracefulController {
 
-    @Autowired
-    private NacosGraceful nacosGraceful;
+    private final NacosGraceful nacosGraceful;
+
+    public NacosGracefulController(NacosGraceful nacosGraceful) {
+        this.nacosGraceful = nacosGraceful;
+    }
 
     /**
      * nacos客户端下线

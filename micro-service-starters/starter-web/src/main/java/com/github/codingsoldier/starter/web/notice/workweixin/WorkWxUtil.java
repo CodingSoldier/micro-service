@@ -17,9 +17,9 @@ import java.io.IOException;
 import java.util.HashMap;
 
 /**
- * @Description 企业微信webhook机器人 https://work.weixin.qq.com/api/doc/90000/90136/91770
- * @Date 2021/12/9 10:12
- * @Author chenpq
+ * 企业微信webhook机器人 <a href="https://work.weixin.qq.com/api/doc/90000/90136/91770">...</a>
+ * @author chenpq05
+ * @since 2022/2/11 11:58
  */
 @DependsOn("applicationContextHolder")
 @Configuration(proxyBeanMethods = false)
@@ -38,8 +38,8 @@ public class WorkWxUtil {
   /**
    * 是否发送信息
    *
-   * @param msg
-   * @return
+   * @param msg 信息
+   * @return 是否发送信息
    */
   private static boolean canSendMsg(String msg) {
     return workWeiXinProperties != null
@@ -52,7 +52,6 @@ public class WorkWxUtil {
    * 发送企业微信消息
    *
    * @param msg 消息
-   * @return String
    */
   private static void send(String msg, Callback callback) {
     if (!canSendMsg(msg)) {
@@ -65,7 +64,7 @@ public class WorkWxUtil {
             workWeiXinProperties.getTitle());
 
     String contentStr = String.format("# %s %n %s", titleMsg, msg);
-    Integer contentMaxLength = workWeiXinProperties.getContentMaxLength() < 4000
+    int contentMaxLength = workWeiXinProperties.getContentMaxLength() < 4000
             ? workWeiXinProperties.getContentMaxLength() : 4000;
     contentStr = StringUtils.substring(contentStr, 0, contentMaxLength);
     HashMap<String, String> content = new HashMap<>(16);
@@ -84,7 +83,7 @@ public class WorkWxUtil {
    * @param msg 消息
    */
   @SuppressWarnings("squid:S125")
-  public static void sendAsyn(String msg) {
+  public static void sendAsynchronous(String msg) {
     try {
       send(msg, new Callback(){
         @Override
@@ -93,9 +92,9 @@ public class WorkWxUtil {
         }
 
         @Override
-        public void onResponse(Call call, Response response) throws IOException {
+        public void onResponse(Call call, Response response) {
           if (!response.isSuccessful()) {
-            log.error("发送企业微信信息失败", response);
+            log.error("发送企业微信信息失败，response={}", response);
           } else {
             // String respBodyStr = response.body().string();
             // log.debug("发送企业微信信息返回结果，responseBodyStr={}", respBodyStr);
@@ -112,14 +111,9 @@ public class WorkWxUtil {
    *
    * @param throwable 异常
    */
-  /**
-   * 异步发送异常到企业微信
-   *
-   * @param throwable 异常
-   */
-  public static void sendAsyn(Throwable throwable) {
+  public static void sendAsynchronous(Throwable throwable) {
     try {
-      sendAsyn(ExceptionUtils.getStackTrace(throwable));
+      sendAsynchronous(ExceptionUtils.getStackTrace(throwable));
     } catch (Exception ex) {
       log.error("", ex);
     }

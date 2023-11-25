@@ -18,7 +18,7 @@ import java.util.Map;
 
 /**
  * 代码生成器
- * https://baomidou.com/pages/981406/#mapper-%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE
+ * <a href="https://baomidou.com/pages/981406/#mapper-%E7%AD%96%E7%95%A5%E9%85%8D%E7%BD%AE">...</a>
  *
  * @author cpq
  * @since 2022-03-17 11:28:55

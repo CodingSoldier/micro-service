@@ -39,16 +39,15 @@ import static com.github.codingsoldier.common.constant.FeignConstant.PROVIDER_FU
  */
 @Slf4j
 @RestControllerAdvice
-@Order()
+@Order
 public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
 
-    private LoggingProperties properties;
+    private final LoggingProperties properties;
 
     public ResponseBodyWrapperAdvice(LoggingProperties properties) {
         this.properties = properties;
     }
 
-    @SuppressWarnings("squid:S1126")
     @Override
     public boolean supports(MethodParameter returnType,
             Class<? extends HttpMessageConverter<?>> converterType) {
@@ -64,12 +63,8 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
 
         // springfox、springdoc 接口不包装返回值
         String name = returnType.getDeclaringClass().getName();
-        if (StringUtils.isNotBlank(name)
-                && StringUtils.containsAny(name,"springfox", "springdoc")) {
-            return false;
-        }
-
-        return true;
+        return !StringUtils.isNotBlank(name)
+                || !StringUtils.containsAny(name, "springfox", "springdoc");
     }
 
     @Override
@@ -81,11 +76,11 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
             ServerHttpRequest request,
             ServerHttpResponse response) {
         if (body == null) {
-            return body;
+            return null;
         }
 
         // 封装为一个方法仅是为了方便打印返回结果
-        Object bodyObj = handleBody(body, returnType, selectedContentType, selectedConverterType, request, response);
+        Object bodyObj = handleBody(body, returnType, selectedConverterType, request, response);
 
         // 打印responseBody
         try {
@@ -100,24 +95,12 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
         return bodyObj;
     }
 
-    @SuppressWarnings("squid:S1172")
     private Object handleBody(
             Object body,
             MethodParameter returnType,
-            MediaType selectedContentType,
             Class<? extends HttpMessageConverter<?>> selectedConverterType,
             ServerHttpRequest request,
             ServerHttpResponse response) {
-
-        /**
-         * // 404请求，不包装
-         *         if (response instanceof ServletServerHttpResponse) {
-         *             if (((ServletServerHttpResponse) response).getServletResponse().getStatus()
-         *                     == HttpStatus.NOT_FOUND.value()) {
-         *                 return body;
-         *             }
-         *         }
-         */
 
         // 如果是Feign请求不包装返回结果
         List<String> valList = request.getHeaders().get(FeignConstant.IS_FEIGN_REQUEST);
@@ -135,8 +118,7 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
                         CommonUtil.objToStr(functionReturnType));
             }
 
-            if (isExceptionHandler && methodReturnTypeChange && (body instanceof Result)) {
-                Result<?> result = (Result) body;
+            if (isExceptionHandler && methodReturnTypeChange && (body instanceof Result<?> result)) {
                 Set<Integer> notChangeCodes = FeignConstant.NOT_CHANGE_RESPONSE_STATUS_CODE_SET
                         .stream().map(ResultCodeEnum::getCode).collect(Collectors.toSet());
                 if (!notChangeCodes.contains(result.getCode())) {

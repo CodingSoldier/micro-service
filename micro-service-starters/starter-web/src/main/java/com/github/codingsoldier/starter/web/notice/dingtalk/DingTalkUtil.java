@@ -39,8 +39,8 @@ public class DingTalkUtil {
     /**
      * 是否发送信息
      *
-     * @param msg
-     * @return
+     * @param msg 信息
+     * @return 是否发送信息
      */
     private static boolean canSendMsg(String msg) {
         return dingTalkProperties != null
@@ -54,7 +54,6 @@ public class DingTalkUtil {
      * 发送企业微信消息
      *
      * @param msg 消息
-     * @return String
      */
     private static void send(String msg, Callback callback) throws Exception {
         if (!canSendMsg(msg)) {
@@ -75,7 +74,7 @@ public class DingTalkUtil {
         //新建一个Base64编码对象
         Base64.Encoder encoder = Base64.getEncoder();
         //把上面的字符串进行Base64加密后再进行URL编码
-        String sign = URLEncoder.encode(encoder.encodeToString(signData), StandardCharsets.UTF_8.name());
+        String sign = URLEncoder.encode(encoder.encodeToString(signData), StandardCharsets.UTF_8);
         String url = "https://oapi.dingtalk.com/robot/send?access_token="+dingTalkProperties.getAccessToken()+"&sign="+sign+"&timestamp="+timestamp;
         HashMap<String, Object> data = new HashMap<>();
         data.put("msgtype", "text");
@@ -96,7 +95,7 @@ public class DingTalkUtil {
      * @param msg 消息
      */
     @SuppressWarnings("squid:S125")
-    public static void sendAsyn(String msg) {
+    public static void sendAsynchronous(String msg) {
         try {
             send(msg, new Callback(){
                 @Override
@@ -105,9 +104,9 @@ public class DingTalkUtil {
                 }
 
                 @Override
-                public void onResponse(Call call, Response response) throws IOException {
+                public void onResponse(Call call, Response response) {
                     if (!response.isSuccessful()) {
-                        log.error("发送钉钉信息失败", response);
+                        log.error("发送钉钉信息失败，response={}", response);
                     } else {
                         // String respBodyStr = response.body().string();
                         // log.debug("发送钉钉信息返回结果，responseBodyStr={}", respBodyStr);
@@ -124,8 +123,8 @@ public class DingTalkUtil {
      *
      * @param throwable 异常
      */
-    public static void sendAsyn(Throwable throwable) {
-        sendAsyn(ExceptionUtils.getStackTrace(throwable));
+    public static void sendAsynchronous(Throwable throwable) {
+        sendAsynchronous(ExceptionUtils.getStackTrace(throwable));
     }
 
 

@@ -29,8 +29,8 @@ public class RedisConfig {
     /**
      * 配置序列化规则
      *
-     * @param redisConnectionFactory
-     * @return
+     * @param redisConnectionFactory redisConnectionFactory
+     * @return RedisTemplate
      */
     @Bean
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {

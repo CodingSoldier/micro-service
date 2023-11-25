@@ -24,7 +24,7 @@
 
 3、新建preStop.sh脚本，将preStop.sh添加到docker镜像中。
 
-以cloud-web-01为例子，脚本内容如下：
+以cloud-web-01为例子，preStop.sh内容如下：
 ```shell
 #!/bin/bash
 # nacos客户端实例下线
@@ -34,7 +34,7 @@ sleep 20
 ```
 详细使用方式可参考[cloud-web-01的cicd](../../examples/example-parent/cloud-web-01/cicd)
 
-3、k8s部署文件添加preStop指令，执行preStop.sh脚本。
+4、k8s部署文件添加preStop指令，执行preStop.sh脚本。
 
 以cloud-web-02为例，配置方式如下：
 ```yaml

@@ -5,7 +5,6 @@ import com.alibaba.cloud.nacos.NacosServiceManager;
 import com.alibaba.cloud.nacos.registry.NacosRegistration;
 import com.alibaba.nacos.api.exception.NacosException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -23,14 +22,17 @@ public class NacosGraceful {
     @Value("${server.port}")
     private int port;
 
-    @Autowired
-    private NacosServiceManager nacosServiceManager;
-    @Autowired
-    private NacosRegistration nacosRegistration;
+    private final NacosServiceManager nacosServiceManager;
+    private final NacosRegistration nacosRegistration;
+
+    public NacosGraceful(NacosServiceManager nacosServiceManager, NacosRegistration nacosRegistration) {
+        this.nacosServiceManager = nacosServiceManager;
+        this.nacosRegistration = nacosRegistration;
+    }
 
     /**
      * 启动nacos客户端，启动完成便可以接收请求流量
-     * @throws NacosException
+     * @throws NacosException NacosException
      */
     public void registerInstance() throws NacosException {
         NacosDiscoveryProperties nacosDiscoveryProperties = nacosRegistration.getNacosDiscoveryProperties();
@@ -53,7 +55,7 @@ public class NacosGraceful {
 
     /**
      * 注销nacos客户端
-     * @throws NacosException
+     * @throws NacosException NacosException
      */
     public void deregisterInstance() throws NacosException {
         NacosDiscoveryProperties nacosDiscoveryProperties = nacosRegistration.getNacosDiscoveryProperties();

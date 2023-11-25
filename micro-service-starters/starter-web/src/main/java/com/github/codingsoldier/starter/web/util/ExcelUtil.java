@@ -9,6 +9,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 
 /**
@@ -30,23 +31,22 @@ public class ExcelUtil {
      *
      * @param response response
      * @param fileName 文件名
-     * @throws IOException ex
      */
-    public static HttpServletResponse getExcelResp(HttpServletResponse response, String fileName) throws IOException {
+    public static HttpServletResponse getExcelResp(HttpServletResponse response, String fileName) {
         fileName = StringUtils.isBlank(fileName) ? "文件" : fileName;
 
         // 这里注意 有同学反应使用swagger 会导致各种问题，请直接用浏览器或者用postman
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf-8");
         // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
-        fileName = URLEncoder.encode(fileName, "UTF-8");
+        fileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8);
         response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
         return response;
     }
 
     /**
      * 导出excel
-     * https://www.yuque.com/easyexcel/doc/write#06e004ef-16
+     * <a href="https://www.yuque.com/easyexcel/doc/write#06e004ef-16">...</a>
      *
      * @param response  response
      * @param fileName  文件名
@@ -82,7 +82,7 @@ public class ExcelUtil {
                 log.error("servletRequestAttributes为空");
             }
         } catch (Exception e) {
-            log.error("导出Excel失败{}", e);
+            log.error("导出Excel失败", e);
         }
     }
 

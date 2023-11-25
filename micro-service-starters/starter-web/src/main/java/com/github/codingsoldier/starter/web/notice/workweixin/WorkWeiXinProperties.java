@@ -2,16 +2,18 @@ package com.github.codingsoldier.starter.web.notice.workweixin;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * @Description 企业微信webhook配置类
- * @Date 2021/12/9 10:12
- * @Author chenpq
+ * 企业微信webhook配置类
+ * @author chenpq05
+ * @since 2022/2/11 11:58
  */
 @ConfigurationProperties(prefix = "micro-service.starter.web.work-weixin")
 public class WorkWeiXinProperties implements Serializable {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   /**

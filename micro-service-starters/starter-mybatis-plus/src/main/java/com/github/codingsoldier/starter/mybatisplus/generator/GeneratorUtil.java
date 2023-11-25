@@ -13,26 +13,25 @@ public class GeneratorUtil {
 
     /**
      * 没有下划线且有firstIsUpperCase
-     * @param line
-     * @param firstIsUpperCase
-     * @return
+     * @param line 字符串
+     * @param firstIsUpperCase 第一个字母是否是大写
+     * @return String
      */
     private static String notUnderlineCase(String line, boolean... firstIsUpperCase) {
         StringBuilder sb = new StringBuilder();
-        String str = "";
+        String str;
         if (!firstIsUpperCase[0]) {
             sb.append(line.substring(0, 1).toLowerCase()).append(line.substring(1));
-            str = sb.toString();
         } else {
             sb.append(line.substring(0, 1).toUpperCase()).append(line.substring(1));
-            str = sb.toString();
         }
+        str = sb.toString();
         return str;
     }
 
     private static String notUnderlineNotCase(String line, String underLine) {
         StringBuilder sb = new StringBuilder();
-        String str = "";
+        String str;
         String[] strArr = line.split(underLine);
         for (String s : strArr) {
             sb.append(s.substring(0, 1).toUpperCase()).append(s.substring(1));
@@ -44,7 +43,7 @@ public class GeneratorUtil {
 
     private static String underlineCase(String line, String underLine, boolean... firstIsUpperCase) {
         StringBuilder sb = new StringBuilder();
-        String str = "";
+        String str;
         String[] strArr = line.split(underLine);
         for (String s : strArr) {
             sb.append(s.substring(0, 1).toUpperCase()).append(s.substring(1));
@@ -63,7 +62,7 @@ public class GeneratorUtil {
      *
      * @param line             下划线字符串
      * @param firstIsUpperCase 首字母是否转换为大写
-     * @return
+     * @return String
      */
     private static String underline2Camel(String line, boolean... firstIsUpperCase) {
         String str = "";
@@ -74,9 +73,7 @@ public class GeneratorUtil {
 
         // 不包含下划线，且第二个参数是空的
         if (!line.contains(underLine) && firstIsUpperCase.length == 0) {
-            StringBuilder sb = new StringBuilder();
-            sb.append(line.substring(0, 1).toLowerCase()).append(line.substring(1));
-            str = sb.toString();
+            str = line.substring(0, 1).toLowerCase() + line.substring(1);
         } else if (!line.contains(underLine) && firstIsUpperCase.length != 0) {
             str = notUnderlineCase(line, firstIsUpperCase);
         } else if (line.contains(underLine) && firstIsUpperCase.length == 0) {
@@ -97,16 +94,5 @@ public class GeneratorUtil {
     public static String tableJavaName(String tableName) {
         String notPrefixTableName = delPrefix(tableName, MybatisPlusCodeGenerator.TABLE_PREFIX);
         return underline2Camel(notPrefixTableName, true);
-    }
-
-    @SuppressWarnings("squid:S106")
-    public static void main(String[] args) {
-        String tableName = "t_user_copy1";
-        if (tableName.startsWith(MybatisPlusCodeGenerator.TABLE_PREFIX)) {
-            tableName = StringUtils.replaceOnce(tableName, MybatisPlusCodeGenerator.TABLE_PREFIX, "");
-        }
-        System.out.println(tableName);
-        String userCopy1 = underline2Camel(tableName, true);
-        System.out.println(userCopy1);
     }
 }

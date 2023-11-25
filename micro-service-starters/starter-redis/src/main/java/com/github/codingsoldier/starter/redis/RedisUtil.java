@@ -23,10 +23,9 @@ public class RedisUtil{
     /**
      * 初始化RedisUtil，已在 StarterRedisAutoConfiguration#init() 中初始化
      * @see com.github.codingsoldier.starter.redis.StarterRedisAutoConfiguration#StarterRedisAutoConfiguration(RedisTemplate)
-     * @param redisTemplate
+     * @param redisTemplate redisTemplate
      */
     public static synchronized void setOnceRedisTemplate(RedisTemplate redisTemplate) {
-
         if (RedisUtil.redisTemplate == null) {
             RedisUtil.redisTemplate = redisTemplate;
         }
@@ -44,8 +43,6 @@ public class RedisUtil{
     /**
      * 获取ValueOperations
      *
-     * @param <K>
-     * @param <V>
      * @return ValueOperations<K, V>
      */
     public static <K, V> ValueOperations<K, V> opsForValue() {
@@ -55,9 +52,7 @@ public class RedisUtil{
     /**
      * 获取ListOperations
      *
-     * @param <K>
-     * @param <V>
-     * @return
+     * @return ListOperations
      */
     public static <K, V> ListOperations<K, V> opsForList() {
         return redisTemplate.opsForList();
@@ -66,9 +61,7 @@ public class RedisUtil{
     /**
      * 获取SetOperations
      *
-     * @param <K>
-     * @param <V>
-     * @return
+     * @return SetOperations
      */
     public static <K, V> SetOperations<K, V> opsForSet() {
         return redisTemplate.opsForSet();
@@ -77,9 +70,7 @@ public class RedisUtil{
     /**
      * 获取SetOperations
      *
-     * @param <K>
-     * @param <V>
-     * @return
+     * @return ZSetOperations
      */
     public static <K, V> ZSetOperations<K, V> opsForZSet() {
         return redisTemplate.opsForZSet();
@@ -88,10 +79,7 @@ public class RedisUtil{
     /**
      * 获取HashOperations
      *
-     * @param <K>
-     * @param <HK>
-     * @param <HV>
-     * @return
+     * @return HashOperations
      */
     @SuppressWarnings("squid:S119")
     public static <K, HK, HV> HashOperations<K, HK, HV> opsForHash() {
@@ -101,8 +89,8 @@ public class RedisUtil{
     /**
      * key是否存在
      *
-     * @param key
-     * @return
+     * @param key key
+     * @return Boolean
      */
     public static Boolean hasKey(Object key) {
         return redisTemplate.hasKey(key);
@@ -134,8 +122,7 @@ public class RedisUtil{
      * 获取值
      *
      * @param key       键
-     * @param <V>
-     * @return
+     * @return V
      */
     public static <V> V get(Object key) {
         Object value = redisTemplate.opsForValue().get(key);

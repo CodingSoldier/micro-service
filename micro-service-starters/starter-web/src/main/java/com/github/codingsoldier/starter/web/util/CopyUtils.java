@@ -27,21 +27,19 @@ public class CopyUtils {
      *
      * @param sources     原集合
      * @param targetClazz 目标集合元素类型
-     * @param <T>
-     * @param <E>
      * @return 目标集合
-     * @throws BackendServicesException
+     * @throws BackendServicesException 后台异常
      */
     public static <T, E> List<T> listCopy(Collection<E> sources, Class<T> targetClazz) throws BackendServicesException {
         ArrayList<T> result = new ArrayList<>();
         for (E source : sources) {
             try {
-                T t = targetClazz.newInstance();
+                T t = targetClazz.getDeclaredConstructor().newInstance();
                 BeanUtils.copyProperties(source, t);
                 result.add(t);
-            } catch (InstantiationException | IllegalAccessException e) {
+            } catch (ReflectiveOperationException  | IllegalArgumentException | SecurityException e) {
                 log.error("异常", e);
-                throw new BackendServicesException(ResultCodeEnum.SERVER_ERROR.getCode(), "集合转换异常");
+                throw new BackendServicesException(ResultCodeEnum.BACKEND_SERVER_ERROR.getCode(), "集合转换异常");
             }
         }
         return result;

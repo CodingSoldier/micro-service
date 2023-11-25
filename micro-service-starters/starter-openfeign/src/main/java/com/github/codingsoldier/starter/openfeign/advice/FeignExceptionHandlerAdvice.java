@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * feign异常处理，@Order需要比 com.github.codingsoldier.starterweb.advice.ExceptionHandlerAdvice 小
+ * feign异常处理，@Order需要比 com.github.codingsoldier.starter.web.advice.ExceptionHandlerAdvice 小
  *
  * @author cpq
  * @since 2022-03-17 11:28:55

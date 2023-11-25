@@ -25,7 +25,7 @@ public class FeignErrorDecoder implements ErrorDecoder {
             Result<?> result = ObjectMapperUtil.newObjectMapper()
                     .readValue(response.body().asInputStream(), Result.class);
             if (result != null) {
-                log.warn("feign调用，下游服务未返回成功，http status 不是 200，result={}", result.toString());
+                log.warn("feign调用，下游服务未返回成功，http status 不是 200，result={}", result);
                 return new FeignResultErrorException(result.getCode(), result.getMessage());
             }
         } catch (IOException e) {

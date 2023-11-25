@@ -24,13 +24,11 @@ import static com.github.codingsoldier.common.constant.FeignConstant.PROVIDER_FU
 public class FeignInterceptor implements HandlerInterceptor {
 
   @Override
-  public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-      throws Exception {
+  public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
     try {
       String isFeignReqStr = request.getHeader(FeignConstant.IS_FEIGN_REQUEST);
       boolean isFeignReq = StringUtils.equalsIgnoreCase(Boolean.TRUE.toString(), isFeignReqStr);
-      if (isFeignReq && (handler instanceof HandlerMethod)) {
-        HandlerMethod handlerMethod = (HandlerMethod) handler;
+      if (isFeignReq && (handler instanceof HandlerMethod handlerMethod)) {
         // 将方法返回值类型存储到RequestContextHolder
         String returnTypeName = handlerMethod.getMethod().getReturnType().getName();
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();

@@ -3,6 +3,7 @@ package com.github.codingsoldier.starter.mybatisplus.resp;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 @Schema(name = "分页结果")
 public class PageResult<T> implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 8545996863226528111L;
 
     @Schema(description = "当前页")

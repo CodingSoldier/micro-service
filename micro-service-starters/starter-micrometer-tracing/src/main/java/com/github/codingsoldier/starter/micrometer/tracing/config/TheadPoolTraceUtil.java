@@ -16,7 +16,7 @@ import java.util.concurrent.*;
 
 public class TheadPoolTraceUtil {
 
-    private static ThreadPoolExecutor taskExecutor;
+    private static final ThreadPoolExecutor taskExecutor;
 
     private TheadPoolTraceUtil() {
         // sonar

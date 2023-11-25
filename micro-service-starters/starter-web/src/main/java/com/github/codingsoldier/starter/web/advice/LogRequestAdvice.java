@@ -31,7 +31,7 @@ public class LogRequestAdvice extends CommonsRequestLoggingFilter implements Req
     private String decodeQueryString;
     private boolean logPrinted = false;
 
-    private LoggingProperties properties;
+    private final LoggingProperties properties;
 
     public LogRequestAdvice(LoggingProperties properties) {
         this.properties = properties;
@@ -54,7 +54,7 @@ public class LogRequestAdvice extends CommonsRequestLoggingFilter implements Req
         this.requestUri = request.getRequestURI();
         try {
             this.decodeQueryString = StringUtils.isNotBlank(this.decodeQueryString)
-                    ? URLDecoder.decode(this.decodeQueryString, StandardCharsets.UTF_8.name()) : "";
+                    ? URLDecoder.decode(this.decodeQueryString, StandardCharsets.UTF_8) : "";
         } catch (Exception e) {
             log.error("queryString编码异常", e);
         }

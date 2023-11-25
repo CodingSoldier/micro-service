@@ -2,12 +2,12 @@ package com.github.codingsoldier.starter.nacos.graceful.runner;
 
 import com.github.codingsoldier.starter.nacos.graceful.config.NacosGraceful;
 import com.github.codingsoldier.starter.nacos.graceful.properties.NacosGracefulProperties;
-import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author chenpq05
@@ -17,12 +17,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class NacosRegisterRunner implements CommandLineRunner {
 
-  @Autowired
-  private NacosGraceful nacosGraceful;
-  @Autowired
-  private NacosGracefulProperties nacosGracefulProperties;
-  @Autowired
-  private ThreadPoolTaskExecutor threadPoolTaskExecutor;
+  private final NacosGraceful nacosGraceful;
+  private final NacosGracefulProperties nacosGracefulProperties;
+  private final ThreadPoolTaskExecutor threadPoolTaskExecutor;
+
+  public NacosRegisterRunner(NacosGraceful nacosGraceful, NacosGracefulProperties nacosGracefulProperties, ThreadPoolTaskExecutor threadPoolTaskExecutor) {
+    this.nacosGraceful = nacosGraceful;
+    this.nacosGracefulProperties = nacosGracefulProperties;
+    this.threadPoolTaskExecutor = threadPoolTaskExecutor;
+  }
 
   /**
    * 手动上线

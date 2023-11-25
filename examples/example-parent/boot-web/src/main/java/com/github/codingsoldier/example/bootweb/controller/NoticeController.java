@@ -19,7 +19,7 @@ public class NoticeController {
 
     @GetMapping(value = "wx", produces = MediaType.APPLICATION_JSON_VALUE)
     public String wx(HttpServletRequest request) {
-        WorkWxUtil.sendAsyn(new BackendServicesException("测试"));
+        WorkWxUtil.sendAsynchronous(new BackendServicesException("测试"));
         return "success";
     }
 

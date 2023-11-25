@@ -2,9 +2,7 @@ package com.github.codingsoldier.starter.nacos.graceful.config;
 
 import com.github.codingsoldier.starter.nacos.graceful.properties.NacosGracefulProperties;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -14,13 +12,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author chenpq05
  * @since 2022/2/11 12:02
  */
-@Order(Ordered.LOWEST_PRECEDENCE)
+@Order
 @Slf4j
 @Configuration(proxyBeanMethods = false)
 public class NacosApiWebMvcConfig implements WebMvcConfigurer {
 
-    @Autowired
-    private NacosGracefulProperties nacosGracefulProperties;
+    private final NacosGracefulProperties nacosGracefulProperties;
+
+    public NacosApiWebMvcConfig(NacosGracefulProperties nacosGracefulProperties) {
+        this.nacosGracefulProperties = nacosGracefulProperties;
+    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
