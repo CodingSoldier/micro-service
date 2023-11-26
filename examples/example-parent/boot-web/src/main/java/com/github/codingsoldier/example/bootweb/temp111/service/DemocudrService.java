@@ -2,10 +2,10 @@ package com.github.codingsoldier.example.bootweb.temp111.service;
 
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.github.codingsoldier.example.bootweb.temp111.entity.Democudr;
 import com.github.codingsoldier.example.bootweb.temp111.dto.DemoCUDRAddDTO;
 import com.github.codingsoldier.example.bootweb.temp111.dto.DemoCUDRPageQueryDTO;
 import com.github.codingsoldier.example.bootweb.temp111.dto.DemoCUDRUpdateDTO;
-import com.github.codingsoldier.example.bootweb.temp111.entity.Democudr;
 import com.github.codingsoldier.example.bootweb.temp111.vo.DemoCUDRDetailVO;
 import com.github.codingsoldier.example.bootweb.temp111.vo.DemoCUDRPageVO;
 import com.github.codingsoldier.starter.mybatisplus.resp.PageData;
@@ -16,7 +16,7 @@ import com.github.codingsoldier.starter.mybatisplus.resp.PageData;
  * </p>
  *
  * @author cpq
- * @since 2023-11-26 22:24:47
+ * @since 2023-11-26 22:30:13
  */
 public interface DemocudrService extends IService<Democudr> {
 

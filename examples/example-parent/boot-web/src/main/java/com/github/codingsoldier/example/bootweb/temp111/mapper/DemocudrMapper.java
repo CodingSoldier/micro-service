@@ -1,10 +1,10 @@
 package com.github.codingsoldier.example.bootweb.temp111.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.codingsoldier.example.bootweb.temp111.dto.DemoCUDRPageQueryDTO;
-import com.github.codingsoldier.example.bootweb.temp111.entity.Democudr;
 import com.github.codingsoldier.example.bootweb.temp111.vo.DemoCUDRPageVO;
+import com.github.codingsoldier.example.bootweb.temp111.entity.Democudr;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 /**
@@ -13,7 +13,7 @@ import org.apache.ibatis.annotations.Param;
  * </p>
  *
  * @author cpq
- * @since 2023-11-26 22:24:47
+ * @since 2023-11-26 22:30:13
  */
 @Mapper
 public interface DemocudrMapper extends BaseMapper<Democudr> {
