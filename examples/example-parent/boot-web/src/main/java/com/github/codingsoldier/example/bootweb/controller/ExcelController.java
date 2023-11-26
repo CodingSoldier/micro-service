@@ -14,11 +14,11 @@ import java.util.Date;
 import java.util.List;
 
 
-@Tag(name = "Excel-API")
+@Tag(name = "Excel")
 @Slf4j
 @RestController
 @RequestMapping("/excel")
-public class ExcelTestController {
+public class ExcelController {
 
     @GetMapping("/download")
     public void download() {

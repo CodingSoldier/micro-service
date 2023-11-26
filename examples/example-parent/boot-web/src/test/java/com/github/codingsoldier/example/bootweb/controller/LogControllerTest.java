@@ -13,11 +13,21 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
  * @author chenpq05
  * @since 2022/8/9 11:12
  */
-class LogTestControllerTest extends BaseTest {
+class LogControllerTest extends BaseTest {
 
     @Test
     void testPrint() throws Exception {
         MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/log/test/print?str=success");
+        super.mockMvc.perform(reqBuilder)
+            .andDo(MockMvcResultHandlers.print())
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.jsonPath("$.code",
+                    Matchers.equalTo(ResultCodeEnum.SUCCESS.getCode())));
+    }
+
+    @Test
+    void testPrintLimit() throws Exception {
+        MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/log/limit?p1=logEx");
         super.mockMvc.perform(reqBuilder)
             .andDo(MockMvcResultHandlers.print())
             .andExpect(MockMvcResultMatchers.status().isOk())

@@ -56,7 +56,7 @@ public class RedisTestController {
         String listVal = opsForList.leftPop("list");
         log.info("listVal: {}", listVal);
 
-        return "success";
+        return bean1.getName();
     }
 
 

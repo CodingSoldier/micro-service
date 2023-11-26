@@ -2,25 +2,19 @@ package com.github.codingsoldier.example.bootweb.dto;
 
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
-import java.util.List;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author cpq
  * @since 2022-03-17 04:10:40
  */
 @Data
-public class ValidationDTO implements Serializable {
+public class Validation implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -43,6 +37,6 @@ public class ValidationDTO implements Serializable {
                 @Pattern(regexp = "^(a|b|c|){1}$", message = "列表元素不正确（a-原始、b-续签、c-补充）")
                         String> strList;
     @Valid
-    private Validation2DTO validation2Dto;
+    private Validation2 validation2Dto;
 
 }

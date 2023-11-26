@@ -20,6 +20,8 @@ class RedisTestControllerTest extends BaseTest {
         super.mockMvc.perform(reqBuilder)
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code",
-                        Matchers.equalTo(ResultCodeEnum.SUCCESS.getCode())));
+                        Matchers.equalTo(ResultCodeEnum.SUCCESS.getCode())))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.data",
+                        Matchers.equalTo("名字")));
     }
 }
