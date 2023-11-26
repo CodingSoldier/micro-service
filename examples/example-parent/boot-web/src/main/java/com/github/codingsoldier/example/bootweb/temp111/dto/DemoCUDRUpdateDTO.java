@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,7 +14,7 @@ import java.io.Serial;
 
 /**
 * @author cpq
-* @since 2023-11-26 22:09:27
+* @since 2023-11-26 22:12:55
 */
 @Data
 @SuperBuilder
