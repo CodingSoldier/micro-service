@@ -13,7 +13,6 @@ import java.io.Serial;
     </#if>
 import ${pkg};
 </#list>
-import java.io.Serial;
 
 /**
 * @author ${author}
