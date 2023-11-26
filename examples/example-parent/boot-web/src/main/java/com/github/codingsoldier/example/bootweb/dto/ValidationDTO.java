@@ -20,7 +20,7 @@ import java.io.Serializable;
  * @since 2022-03-17 04:10:40
  */
 @Data
-public class ValidationDto implements Serializable {
+public class ValidationDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -43,6 +43,6 @@ public class ValidationDto implements Serializable {
                 @Pattern(regexp = "^(a|b|c|){1}$", message = "列表元素不正确（a-原始、b-续签、c-补充）")
                         String> strList;
     @Valid
-    private Validation2Dto validation2Dto;
+    private Validation2DTO validation2Dto;
 
 }

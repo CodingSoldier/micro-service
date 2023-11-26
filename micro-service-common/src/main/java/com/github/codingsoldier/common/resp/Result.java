@@ -12,23 +12,22 @@ import java.io.Serializable;
  * @author chenpq05
  * @since 2022/2/23 14:14
  */
-@Schema(name = "HTTP响应体数据")
 public class Result<T> implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
     @Schema(description = """
-            1、code为具体的业务编码，code = 20000 表示成功
-            2、40000 <= code <= 49999，表示客户端错误，例如：参数错误
-            3、50000 <= code <= 59999 , 表示服务端错误，例如：空指针异常
-            """)
+        1、code为具体的业务编码，code = 20000 表示成功。<br/>
+        2、40000 <= code <= 49999，客户端错误，例如：参数填写错误。<br/>
+        3、50000 <= code <= 59999 , 服务端错误，例如：空指针异常。
+        """, example = "20000")
     private int code;
 
     @Schema(description = "提示信息")
     private String message;
 
-    @Schema(description = "返回数据")
+    @Schema(description = "数据")
     @SuppressWarnings("squid:S1948")
     private T data;
 
@@ -40,7 +39,6 @@ public class Result<T> implements Serializable {
         this.message = message;
         this.data = data;
     }
-
 
     public static <T> Result<T> success() {
         return new Result<>(ResultCodeEnum.SUCCESS.getCode(), ResultCodeEnum.SUCCESS.getMessage(), null);

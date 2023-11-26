@@ -6,6 +6,11 @@
             "sourceType": "com.github.codingsoldier.starter.web.properties.LoggingProperties"
         },
         {
+            "name": "micro-service.starter.web.cors",
+            "type": "com.github.codingsoldier.starter.web.properties.CorsProperties",
+            "sourceType": "com.github.codingsoldier.starter.web.properties.CorsProperties"
+        },
+        {
             "name": "micro-service.starter.web.work-weixin",
             "type": "com.github.codingsoldier.starter.web.notice.workweixin.WorkWeiXinProperties",
             "sourceType": "com.github.codingsoldier.starter.web.notice.workweixin.WorkWeiXinProperties"
@@ -62,6 +67,37 @@
             "description": "是否包含请求头信息",
             "sourceType": "com.github.codingsoldier.starter.web.properties.LoggingProperties",
             "defaultValue": false
+        },
+        {
+          "name": "micro-service.starter.web.cors.allow-credentials",
+          "type": "java.lang.Boolean",
+          "description": "Whether credentials are supported. When not set, credentials are not supported.",
+          "sourceType": "com.github.codingsoldier.starter.web.properties.CorsProperties"
+        },
+        {
+          "name": "micro-service.starter.web.cors.allowed-origin-patterns",
+          "type": "java.util.List<java.lang.String>",
+          "description": "Comma-separated list of origin patterns to allow. Unlike allowed origins which only supports '*', origin patterns are more flexible (for example 'https:\/\/*.example.com') and can be used when credentials are allowed. When no allowed origin patterns or allowed origins are set, CORS support is disabled.",
+          "sourceType": "com.github.codingsoldier.starter.web.properties.CorsProperties"
+        },    
+        {
+          "name": "micro-service.starter.web.cors.allowed-headers",
+          "type": "java.util.List<java.lang.String>",
+          "description": "Comma-separated list of headers to allow in a request. '*' allows all headers.",
+          "sourceType": "com.github.codingsoldier.starter.web.properties.CorsProperties"
+        },
+        {
+          "name": "micro-service.starter.web.cors.allowed-methods",
+          "type": "java.util.List<java.lang.String>",
+          "description": "Comma-separated list of methods to allow. '*' allows all methods. When not set, defaults to GET.",
+          "sourceType": "com.github.codingsoldier.starter.web.properties.CorsProperties"
+        },
+        {
+          "name": "micro-service.starter.web.cors.max-age",
+          "type": "java.time.Duration",
+          "description": "How long the response from a pre-flight request can be cached by clients. If a duration suffix is not specified, seconds will be used.",
+          "sourceType": "com.github.codingsoldier.starter.web.properties.CorsProperties",
+          "defaultValue": "1800s"
         },
         {
             "name": "micro-service.starter.web.work-weixin.enable",

@@ -1,7 +1,6 @@
 package com.github.codingsoldier.example.bootweb.dto;
 
 import com.github.codingsoldier.common.req.PageReq;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,13 +17,12 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Schema(name = "用户分页vo")
-public class PageDto extends PageReq {
+public class UserDTO extends PageReq {
 
-    @Parameter(description = "姓名", example = "姓名01")
+    @Schema(description = "姓名", example = "姓名01", required = true)
     private String name;
 
-    @Parameter(description = "年龄", example = "10")
+    @Schema(description = "年龄", example = "10")
     private Integer age;
 
 }

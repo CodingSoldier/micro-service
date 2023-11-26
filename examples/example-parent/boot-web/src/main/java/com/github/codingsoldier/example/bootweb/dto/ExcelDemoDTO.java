@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class ExcelDemoDto {
+public class ExcelDemoDTO {
 
     @ExcelProperty("字符串标题")
     private String string;

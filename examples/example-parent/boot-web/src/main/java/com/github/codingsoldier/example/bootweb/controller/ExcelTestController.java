@@ -1,7 +1,7 @@
 package com.github.codingsoldier.example.bootweb.controller;
 
 
-import com.github.codingsoldier.example.bootweb.dto.ExcelDemoDto;
+import com.github.codingsoldier.example.bootweb.dto.ExcelDemoDTO;
 import com.github.codingsoldier.starter.web.util.ExcelUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -22,13 +22,13 @@ public class ExcelTestController {
 
     @GetMapping("/download")
     public void download() {
-        ExcelUtil.downloadCatchException("文件名称", "", ExcelDemoDto.class, data());
+        ExcelUtil.downloadCatchException("文件名称", "", ExcelDemoDTO.class, data());
     }
 
-    private List<ExcelDemoDto> data() {
-        List<ExcelDemoDto> list = new ArrayList<ExcelDemoDto>();
+    private List<ExcelDemoDTO> data() {
+        List<ExcelDemoDTO> list = new ArrayList<ExcelDemoDTO>();
         for (int i = 0; i < 10; i++) {
-            ExcelDemoDto data = new ExcelDemoDto();
+            ExcelDemoDTO data = new ExcelDemoDTO();
             data.setString("字符串" + i);
             data.setDate(new Date());
             data.setDoubleData(0.56);

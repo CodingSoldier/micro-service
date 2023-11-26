@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.bootweb.dto;
+package com.github.codingsoldier.example.bootweb.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class HttpTestTimeSlashDto implements Serializable {
+public class HttpTestVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -23,13 +23,13 @@ public class HttpTestTimeSlashDto implements Serializable {
     private Integer age;
     private String name;
 
-    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date date;
 
-    @JsonFormat(pattern="yyyy/MM/dd",timezone = "GMT+8")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private LocalDate localDate;
 
-    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private LocalDateTime localDateTime;
 
 }

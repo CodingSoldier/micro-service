@@ -6,15 +6,16 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.github.codingsoldier.example.bootweb.dto.PageDto;
-import com.github.codingsoldier.example.bootweb.dto.UserAddDto;
-import com.github.codingsoldier.example.bootweb.dto.UserUpdateDto;
-import com.github.codingsoldier.example.bootweb.entity.UserEntity;
+import com.github.codingsoldier.example.bootweb.dto.UserDTO;
+import com.github.codingsoldier.example.bootweb.dto.UserAddDTO;
+import com.github.codingsoldier.example.bootweb.dto.UserUpdateDTO;
+import com.github.codingsoldier.example.bootweb.entity.User;
 import com.github.codingsoldier.example.bootweb.service.UserService;
-import com.github.codingsoldier.example.bootweb.vo.UserDetailVo;
+import com.github.codingsoldier.example.bootweb.vo.UserDetailVO;
 import com.github.codingsoldier.common.resp.Result;
-import com.github.codingsoldier.starter.mybatisplus.resp.PageResult;
+import com.github.codingsoldier.starter.mybatisplus.resp.PageData;
 import com.github.codingsoldier.starter.web.util.CopyUtils;
+import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +35,7 @@ import java.util.Objects;
  * @author cpq
  * @since 2022-03-17 04:10:40
  */
+@ApiSupport(order = 1111111)
 @Tag(name = "用户CURD-API")
 @Slf4j
 @RestController
@@ -45,15 +47,15 @@ public class UserCrudController {
 
     @Operation(summary = "用户-新增")
     @PostMapping("/add")
-    public UserDetailVo addUser(@RequestBody UserAddDto userAddDto) {
+    public UserDetailVO addUser(@RequestBody UserAddDTO userAddDto) {
         log.info("请求参数：{}", userAddDto);
-        UserEntity userEntity = new UserEntity();
+        User userEntity = new User();
         BeanUtils.copyProperties(userAddDto, userEntity);
 
         userService.save(userEntity);
 
-        UserEntity userDb = userService.getById(userEntity.getId());
-        UserDetailVo userDetailVo = new UserDetailVo();
+        User userDb = userService.getById(userEntity.getId());
+        UserDetailVO userDetailVo = new UserDetailVO();
         BeanUtils.copyProperties(userDb, userDetailVo);
 
         return userDetailVo;
@@ -61,15 +63,15 @@ public class UserCrudController {
 
     @Operation(summary = "用户-更新")
     @PutMapping("/update")
-    public UserDetailVo updateUser(@RequestBody UserUpdateDto userUpdateDto) {
+    public UserDetailVO updateUser(@RequestBody UserUpdateDTO userUpdateDto) {
         log.info("请求参数：{}", userUpdateDto);
-        UserEntity userEntity = new UserEntity();
+        User userEntity = new User();
         BeanUtils.copyProperties(userUpdateDto, userEntity);
 
         userService.updateById(userEntity);
 
-        UserEntity userDb = userService.getById(userEntity.getId());
-        UserDetailVo userDetailVo = new UserDetailVo();
+        User userDb = userService.getById(userEntity.getId());
+        UserDetailVO userDetailVo = new UserDetailVO();
         BeanUtils.copyProperties(userDb, userDetailVo);
 
         return userDetailVo;
@@ -85,39 +87,39 @@ public class UserCrudController {
 
     @Operation(summary = "用户-分页")
     @GetMapping("/page")
-    public PageResult<UserDetailVo> page(@ModelAttribute @ParameterObject PageDto pageDto) {
+    public PageData<UserDetailVO> page(@ModelAttribute @ParameterObject UserDTO pageDto) {
         log.info("请求参数：{}", pageDto);
-        LambdaQueryWrapper<UserEntity> lqw = Wrappers.lambdaQuery();
-        lqw.like(StringUtils.isNotBlank(pageDto.getName()), UserEntity::getName, pageDto.getName());
-        lqw.like(Objects.nonNull(pageDto.getAge()), UserEntity::getAge, pageDto.getAge());
-        Page<UserEntity> p = new Page<>(pageDto.getCurrent(), pageDto.getSize());
+        LambdaQueryWrapper<User> lqw = Wrappers.lambdaQuery();
+        lqw.like(StringUtils.isNotBlank(pageDto.getName()), User::getName, pageDto.getName());
+        lqw.like(Objects.nonNull(pageDto.getAge()), User::getAge, pageDto.getAge());
+        Page<User> p = new Page<>(pageDto.getCurrent(), pageDto.getSize());
 
-        Page<UserEntity> result = userService.page(p, lqw);
+        Page<User> result = userService.page(p, lqw);
 
-        List<UserDetailVo> userDetailVoList = CopyUtils.listCopy(result.getRecords(), UserDetailVo.class);
+        List<UserDetailVO> userDetailVoList = CopyUtils.listCopy(result.getRecords(), UserDetailVO.class);
 
-        return PageResult.create(result, userDetailVoList);
+        return PageData.create(result, userDetailVoList);
     }
 
     @Operation(summary = "用户-分页-自己写")
     @GetMapping("/page/test")
-    public PageResult<UserDetailVo> pageMapper(@ModelAttribute PageDto pageDto) {
-        IPage<UserDetailVo> result = userService.pageQuery(pageDto);
-        return PageResult.create(result, result.getRecords());
+    public PageData<UserDetailVO> pageMapper(@ModelAttribute UserDTO pageDto) {
+        IPage<UserDetailVO> result = userService.pageQuery(pageDto);
+        return PageData.create(result, result.getRecords());
     }
 
     @Operation(summary = "用户-详情")
     @GetMapping("/detail/{id}")
-    public UserDetailVo page(@PathVariable("id") Long id) {
-        UserEntity userEntity = userService.getById(id);
-        UserDetailVo userDetailVo = new UserDetailVo();
+    public UserDetailVO page(@PathVariable("id") Long id) {
+        User userEntity = userService.getById(id);
+        UserDetailVO userDetailVo = new UserDetailVO();
         BeanUtils.copyProperties(userEntity, userDetailVo);
         return userDetailVo;
     }
 
     @Operation(summary = "swagger测试")
     @GetMapping("/test-swagger/{id}")
-    public Result<PageResult<UserDetailVo>> testSwagger(@PathVariable("id") Long id) {
+    public Result<PageData<UserDetailVO>> testSwagger(@PathVariable("id") Long id) {
         return null;
     }
 

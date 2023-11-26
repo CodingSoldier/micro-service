@@ -1,6 +1,6 @@
 package com.github.codingsoldier.example.bootweb.controller;
 
-import com.github.codingsoldier.example.bootweb.dto.RedisTestBeanDto;
+import com.github.codingsoldier.example.bootweb.dto.RedisTestBeanDTO;
 import com.github.codingsoldier.starter.redis.RedisUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -27,11 +27,11 @@ public class RedisTestController {
         String str = RedisUtil.<String, String>opsForValue().get("for-value:aa");
         log.info("for-value:aa {}", str);
 
-        RedisTestBeanDto redisTestBean = RedisTestBeanDto.builder()
+        RedisTestBeanDTO redisTestBean = RedisTestBeanDTO.builder()
                 .id(11L).age(18).name("名字").updateTime(LocalDateTime.now())
                 .build();
         RedisUtil.opsForValue().set("for-value:bean", redisTestBean);
-        RedisTestBeanDto bean1 = RedisUtil.<String, RedisTestBeanDto>template().opsForValue().get("for-value:bean");
+        RedisTestBeanDTO bean1 = RedisUtil.<String, RedisTestBeanDTO>template().opsForValue().get("for-value:bean");
         log.info("获取值 {}", bean1);
 
         // HashMap<String, Integer> map = new HashMap<>();

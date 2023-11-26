@@ -1,6 +1,7 @@
 package com.github.codingsoldier.starter.web.advice;
 
 
+import com.github.codingsoldier.common.constant.OrderConstant;
 import com.github.codingsoldier.common.enums.ResultCodeEnum;
 import com.github.codingsoldier.common.exception.BackendServicesException;
 import com.github.codingsoldier.common.exception.ClientException;
@@ -13,7 +14,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageConversionException;
@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
-
 
 import java.io.IOException;
 import java.util.Set;
@@ -43,7 +42,7 @@ import java.util.Set;
  */
 @Slf4j
 @RestControllerAdvice
-@Order(Ordered.HIGHEST_PRECEDENCE)
+@Order(OrderConstant.ADVICE_EXCEPTION)
 public class ExceptionHandlerAdvice {
 
     @ExceptionHandler(ClientException.class)

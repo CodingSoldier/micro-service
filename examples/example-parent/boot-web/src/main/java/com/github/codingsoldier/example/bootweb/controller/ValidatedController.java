@@ -1,7 +1,7 @@
 package com.github.codingsoldier.example.bootweb.controller;
 
 
-import com.github.codingsoldier.example.bootweb.dto.ValidationDto;
+import com.github.codingsoldier.example.bootweb.dto.ValidationDTO;
 import com.github.codingsoldier.starter.web.util.ValidationUtils;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -37,7 +37,7 @@ public class ValidatedController {
      * 使用 @Validated 注解，异常被 @ExceptionHandler(ConstraintViolationException.class) 捕获
      */
     @PostMapping("/bean")
-    public ValidationDto bean(@RequestBody @Validated ValidationDto validationDto) {
+    public ValidationDTO bean(@RequestBody @Validated ValidationDTO validationDto) {
         log.info("请求参数：{}", validationDto);
         return validationDto;
     }
@@ -46,7 +46,7 @@ public class ValidatedController {
      * 使用 @Valid 注解，异常被 @ExceptionHandler(MethodArgumentNotValidException.class) 捕获
      */
     @PostMapping("/valid/bean")
-    public ValidationDto validBean(@RequestBody @Valid ValidationDto validationDto) {
+    public ValidationDTO validBean(@RequestBody @Valid ValidationDTO validationDto) {
         log.info("请求参数：{}", validationDto);
         return validationDto;
     }
@@ -55,7 +55,7 @@ public class ValidatedController {
      * 使用方法校验bean
      */
     @PostMapping(value = "/bean-method", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String beanMethod(@RequestBody ValidationDto validationDto) {
+    public String beanMethod(@RequestBody ValidationDTO validationDto) {
         ValidationUtils.validateEntity(validationDto);
         log.info("请求参数：{}", validationDto);
         return "";

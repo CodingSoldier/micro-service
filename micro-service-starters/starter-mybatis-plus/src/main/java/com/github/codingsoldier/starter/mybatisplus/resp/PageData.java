@@ -12,32 +12,31 @@ import java.util.List;
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
-@Schema(name = "分页结果")
-public class PageResult<T> implements Serializable {
+public class PageData<T> implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 8545996863226528111L;
 
-    @Schema(description = "当前页")
+    @Schema(description = "当前页", example = "1")
     private long current = 1L;
 
-    @Schema(description = "每页显示条数")
+    @Schema(description = "每页显示条数", example = "10")
     private long size = 10L;
 
-    @Schema(description = "总数")
+    @Schema(description = "总数", example = "10")
     private long total = 0L;
 
-    @Schema(description = "当前分页总页数")
+    @Schema(description = "当前分页总页数", example = "1")
     private long pages = 0L;
 
     @Schema(description = "数据列表")
     @SuppressWarnings("squid:S1948")
     private List<T> records = Collections.emptyList();
 
-    public PageResult() {
+    public PageData() {
     }
 
-    public PageResult(long current, long size, long total, long pages, List<T> records) {
+    public PageData(long current, long size, long total, long pages, List<T> records) {
         this.current = current;
         this.size = size;
         this.total = total;
@@ -45,8 +44,8 @@ public class PageResult<T> implements Serializable {
         this.records = records;
     }
 
-    public static <T> PageResult<T> create(IPage<?> page, List<T> records) {
-        return new PageResult<>(page.getCurrent(), page.getSize(), page.getTotal(), page.getPages(), records);
+    public static <T> PageData<T> create(IPage<?> page, List<T> records) {
+        return new PageData<>(page.getCurrent(), page.getSize(), page.getTotal(), page.getPages(), records);
     }
 
     public long getCurrent() {
@@ -89,4 +88,14 @@ public class PageResult<T> implements Serializable {
         this.records = records;
     }
 
+    @Override
+    public String toString() {
+        return "PageData{" +
+                "current=" + current +
+                ", size=" + size +
+                ", total=" + total +
+                ", pages=" + pages +
+                ", records=" + records +
+                '}';
+    }
 }

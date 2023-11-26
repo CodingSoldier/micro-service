@@ -1,6 +1,5 @@
-package com.github.codingsoldier.example.bootweb.entity;
+package com.github.codingsoldier.example.bootweb.vo;
 
-import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,19 +14,17 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author cpq
- * @since 2022-03-17 01:28:55
+ * @since 2022-03-16 21:38:52
  */
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("user")
-@Schema(name = "UserEntity对象", description = "用户表")
-public class UserEntity implements Serializable {
+@Schema(name = "用户详情")
+public class UserDetailVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "id")
-    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     @Schema(description = "姓名")
@@ -43,24 +40,15 @@ public class UserEntity implements Serializable {
     private LocalDateTime dateOfBirth;
 
     @Schema(description = "创建人id")
-    @TableField(fill = FieldFill.INSERT)
     private Long createId;
 
     @Schema(description = "更新人id")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Long updateId;
 
     @Schema(description = "创建时间")
-    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
     @Schema(description = "更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-
-    @Schema(description = "是否已删除，0-未删除，1-删除")
-    @TableLogic
-    private Integer deleted;
-
 
 }

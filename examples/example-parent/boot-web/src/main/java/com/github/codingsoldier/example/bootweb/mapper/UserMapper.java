@@ -2,9 +2,9 @@ package com.github.codingsoldier.example.bootweb.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.github.codingsoldier.example.bootweb.dto.PageDto;
-import com.github.codingsoldier.example.bootweb.entity.UserEntity;
-import com.github.codingsoldier.example.bootweb.vo.UserDetailVo;
+import com.github.codingsoldier.example.bootweb.dto.UserDTO;
+import com.github.codingsoldier.example.bootweb.entity.User;
+import com.github.codingsoldier.example.bootweb.vo.UserDetailVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,7 +17,7 @@ import org.apache.ibatis.annotations.Param;
  * @since 2022-03-17 01:28:55
  */
 @Mapper
-public interface UserMapper extends BaseMapper<UserEntity> {
+public interface UserMapper extends BaseMapper<User> {
 
     /**
      * 分页
@@ -26,6 +26,6 @@ public interface UserMapper extends BaseMapper<UserEntity> {
      * @param pageDto 查询参数
      * @return 分页结果
      */
-    IPage<UserDetailVo> pageQuery(IPage<?> page, @Param("pageDto") PageDto pageDto);
+    IPage<UserDetailVO> pageQuery(IPage<?> page, @Param("pageDto") UserDTO pageDto);
 
 }

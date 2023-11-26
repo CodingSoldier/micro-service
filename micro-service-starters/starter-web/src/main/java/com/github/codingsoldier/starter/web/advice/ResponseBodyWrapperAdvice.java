@@ -1,5 +1,6 @@
 package com.github.codingsoldier.starter.web.advice;
 
+import com.github.codingsoldier.common.constant.OrderConstant;
 import com.github.codingsoldier.common.enums.ResultCodeEnum;
 import com.github.codingsoldier.common.constant.FeignConstant;
 import com.github.codingsoldier.common.resp.Result;
@@ -38,8 +39,8 @@ import static com.github.codingsoldier.common.constant.FeignConstant.PROVIDER_FU
  * @since 2022-03-17 11:28:55
  */
 @Slf4j
+@Order(OrderConstant.ADVICE_WRAPPER)
 @RestControllerAdvice
-@Order
 public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
 
     private final LoggingProperties properties;

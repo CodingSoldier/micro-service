@@ -3,7 +3,7 @@
 <mapper namespace="com.github.codingsoldier.example.bootweb.mapper.UserMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.github.codingsoldier.example.bootweb.entity.UserEntity">
+    <resultMap id="BaseResultMap" type="com.github.codingsoldier.example.bootweb.entity.User">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="age" property="age"/>
@@ -21,7 +21,7 @@
         id, name, age, phone, date_of_birth, create_id, update_id, create_time, update_time, deleted
     </sql>
 
-    <select id="pageQuery" resultType="com.github.codingsoldier.example.bootweb.vo.UserDetailVo">
+    <select id="pageQuery" resultType="com.github.codingsoldier.example.bootweb.vo.UserDetailVO">
         select *
         from user
         <where>

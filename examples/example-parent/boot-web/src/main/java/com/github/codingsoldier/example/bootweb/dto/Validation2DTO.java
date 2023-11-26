@@ -13,7 +13,7 @@ import java.io.Serializable;
  * @since 2022-03-17 04:10:40
  */
 @Data
-public class Validation2Dto implements Serializable {
+public class Validation2DTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

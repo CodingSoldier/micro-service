@@ -1,11 +1,13 @@
 package com.github.codingsoldier.starter.web.advice;
 
+import com.github.codingsoldier.common.constant.OrderConstant;
 import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
 import com.github.codingsoldier.starter.web.properties.LoggingProperties;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.lang.Nullable;
@@ -23,6 +25,7 @@ import java.nio.charset.StandardCharsets;
  * @since 2022-03-17 11:28:55
  */
 @Slf4j
+@Order(OrderConstant.ADVICE_LOG_REQUEST)
 @RestControllerAdvice
 public class LogRequestAdvice extends CommonsRequestLoggingFilter implements RequestBodyAdvice {
 

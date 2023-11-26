@@ -1,22 +1,22 @@
-package com.github.codingsoldier.example.bootweb.vo;
+package com.github.codingsoldier.example.bootweb.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class HttpTestVo implements Serializable {
+public class HttpTimeDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,7 +24,6 @@ public class HttpTestVo implements Serializable {
     private Integer age;
     private String name;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date date;
 
     @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
@@ -32,5 +31,8 @@ public class HttpTestVo implements Serializable {
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private LocalDateTime localDateTime;
+
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private OffsetDateTime offsetDateTime;
 
 }

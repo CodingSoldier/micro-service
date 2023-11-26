@@ -20,8 +20,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Schema(name = "用户更新")
-public class UserUpdateDto implements Serializable {
+@Schema(name = "用户更新数据", description = "用户更新数据")
+public class UserUpdateDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
