@@ -8,7 +8,6 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * <p>
@@ -21,8 +20,8 @@ import java.util.List;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Schema(name = "用户更新请求数据", description = "用户更新请求数据")
-public class UserUpdateDTO implements Serializable {
+@Schema(name = "用户2请求参数", description = "用户2请求参数")
+public class UserUpdate2DTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -42,10 +41,5 @@ public class UserUpdateDTO implements Serializable {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private LocalDateTime dateOfBirth;
 
-    @Schema(description = "内部实体2")
-    private UserUpdate2DTO userUpdate2;
-
-    @Schema(description = "内部实体列表")
-    private List<UserUpdate2DTO> list;
 
 }

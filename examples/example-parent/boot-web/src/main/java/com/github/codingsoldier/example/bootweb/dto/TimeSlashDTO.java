@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.bootweb.vo;
+package com.github.codingsoldier.example.bootweb.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class HttpTestTimeSlashVO implements Serializable {
+public class TimeSlashDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

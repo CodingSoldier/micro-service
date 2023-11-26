@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.bootweb.dto;
+package com.github.codingsoldier.example.bootweb.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -21,8 +21,8 @@ import java.util.List;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Schema(name = "用户更新请求数据", description = "用户更新请求数据")
-public class UserUpdateDTO implements Serializable {
+@Schema(name = "更新响应参数", description = "更新响应参数")
+public class UserUpdateVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -43,9 +43,10 @@ public class UserUpdateDTO implements Serializable {
     private LocalDateTime dateOfBirth;
 
     @Schema(description = "内部实体2")
-    private UserUpdate2DTO userUpdate2;
+    private UserUpdate2VO userUpdate2;
 
     @Schema(description = "内部实体列表")
-    private List<UserUpdate2DTO> list;
+    private List<UserUpdate2VO> list;
+
 
 }

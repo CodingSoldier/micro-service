@@ -16,7 +16,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Schema(name = "用户分页响应数据")
+@Schema(name = "用户分页响应参数", description = "用户分页响应参数")
 public class UserPageVO {
 
     @Schema(description = "姓名", example = "姓名01")
