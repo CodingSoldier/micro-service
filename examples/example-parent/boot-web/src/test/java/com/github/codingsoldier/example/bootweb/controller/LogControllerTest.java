@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
  * @author chenpq05
  * @since 2022/8/9 11:12
  */
-class LogControllerTest extends BaseTest {
+public class LogControllerTest extends BaseTest {
 
     @Test
     void testPrint() throws Exception {

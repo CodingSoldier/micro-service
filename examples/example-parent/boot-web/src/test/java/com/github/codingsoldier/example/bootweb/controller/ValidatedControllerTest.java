@@ -11,8 +11,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-
-class ValidatedControllerTest extends BaseTest {
+public class ValidatedControllerTest extends BaseTest {
 
     @Test
     void bean() throws Exception {

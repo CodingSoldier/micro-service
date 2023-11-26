@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.bootweb.temp111.service.impl;
+package com.github.codingsoldier.example.bootweb.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -7,15 +7,15 @@ import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.codingsoldier.common.enums.ResultCodeEnum;
 import com.github.codingsoldier.common.exception.ClientException;
-import com.github.codingsoldier.example.bootweb.temp111.entity.Democudr;
-import com.github.codingsoldier.example.bootweb.temp111.mapper.DemocudrMapper;
-import com.github.codingsoldier.example.bootweb.temp111.service.DemocudrService;
+import com.github.codingsoldier.example.bootweb.entity.Democudr;
+import com.github.codingsoldier.example.bootweb.mapper.DemocudrMapper;
+import com.github.codingsoldier.example.bootweb.service.DemocudrService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.github.codingsoldier.example.bootweb.temp111.dto.DemoCUDRAddDTO;
-import com.github.codingsoldier.example.bootweb.temp111.dto.DemoCUDRPageQueryDTO;
-import com.github.codingsoldier.example.bootweb.temp111.dto.DemoCUDRUpdateDTO;
-import com.github.codingsoldier.example.bootweb.temp111.vo.DemoCUDRDetailVO;
-import com.github.codingsoldier.example.bootweb.temp111.vo.DemoCUDRPageVO;
+import com.github.codingsoldier.example.bootweb.dto.DemoCUDRAddDTO;
+import com.github.codingsoldier.example.bootweb.dto.DemoCUDRPageQueryDTO;
+import com.github.codingsoldier.example.bootweb.dto.DemoCUDRUpdateDTO;
+import com.github.codingsoldier.example.bootweb.vo.DemoCUDRDetailVO;
+import com.github.codingsoldier.example.bootweb.vo.DemoCUDRPageVO;
 import com.github.codingsoldier.starter.mybatisplus.resp.PageData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -32,7 +32,7 @@ import java.util.Objects;
  * </p>
  *
  * @author cpq
- * @since 2023-11-26 22:30:13
+ * @since 2023-11-26 22:32:54
  */
 @Slf4j
 @Service
@@ -44,9 +44,9 @@ public class DemocudrServiceImpl extends ServiceImpl<DemocudrMapper, Democudr> i
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Long add(DemoCUDRAddDTO addDTO) {
-        //if (isRepeat(null, Democudr::getName, addDTO.getName())){
-        //    throw new ClientException(ResultCodeEnum.PRECONDITION_FAILED, "新增失败，XX已存在。请修改XX。");
-        //}
+        if (isRepeat(null, Democudr::getName, addDTO.getName())){
+           throw new ClientException(ResultCodeEnum.PRECONDITION_FAILED, "新增失败，名称已存在。请修改名称。");
+        }
         Democudr democudr = new Democudr();
         BeanUtils.copyProperties(addDTO, democudr);
         super.save(democudr);
@@ -56,9 +56,9 @@ public class DemocudrServiceImpl extends ServiceImpl<DemocudrMapper, Democudr> i
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void update(DemoCUDRUpdateDTO updateDTO) {
-        //if (isRepeat(updateDTO.getId(), Democudr::getName, updateDTO.getName())){
-        //    throw new ClientException(ResultCodeEnum.PRECONDITION_FAILED, "修改失败，XX已存在。请修改XX。");
-        //}
+        if (isRepeat(updateDTO.getId(), Democudr::getName, updateDTO.getName())){
+           throw new ClientException(ResultCodeEnum.PRECONDITION_FAILED, "修改失败，XX已存在。请修改XX。");
+        }
         Democudr democudr = new Democudr();
         BeanUtils.copyProperties(updateDTO, democudr);
         super.updateById(democudr);

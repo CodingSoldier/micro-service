@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
  * @author chenpq05
  * @since 2022/8/9 16:49
  */
-class ExcelControllerTest extends BaseTest {
+public class ExcelControllerTest extends BaseTest {
 
     @Autowired
     protected MockMvc mockMvc;

@@ -10,8 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class WebHandlerInterceptor implements HandlerInterceptor {
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-            throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         log.info("请求URI:{}", request.getRequestURI());
         return true;
     }

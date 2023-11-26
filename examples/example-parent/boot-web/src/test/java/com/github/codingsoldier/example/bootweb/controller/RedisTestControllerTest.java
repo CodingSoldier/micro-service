@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
  * @author chenpq05
  * @since 2022/8/9 17:05
  */
-class RedisTestControllerTest extends BaseTest {
+public class RedisTestControllerTest extends BaseTest {
 
     @Test
     void test1() throws Exception {

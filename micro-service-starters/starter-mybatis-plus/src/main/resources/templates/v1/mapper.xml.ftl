@@ -34,7 +34,6 @@
 </#list>
         ${table.fieldNames}
     </sql>
-
 </#if>
 
     <select id="pageQuery" resultType="${packageVO}.${pageVOClassName}">
@@ -42,7 +41,7 @@
         FROM ${table.name}
         <where>
             deleted = 0
-            <if test="pageQueryVO != null">
+            <if test="pageQueryDTO != null">
             </if>
             ORDER BY id DESC
         </where>

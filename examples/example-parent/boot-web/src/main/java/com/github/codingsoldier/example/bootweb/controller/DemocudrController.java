@@ -1,12 +1,12 @@
-package com.github.codingsoldier.example.bootweb.temp111.controller;
+package com.github.codingsoldier.example.bootweb.controller;
 
 import com.github.codingsoldier.common.resp.Result;
-import com.github.codingsoldier.example.bootweb.temp111.dto.DemoCUDRAddDTO;
-import com.github.codingsoldier.example.bootweb.temp111.dto.DemoCUDRPageQueryDTO;
-import com.github.codingsoldier.example.bootweb.temp111.dto.DemoCUDRUpdateDTO;
-import com.github.codingsoldier.example.bootweb.temp111.service.DemocudrService;
-import com.github.codingsoldier.example.bootweb.temp111.vo.DemoCUDRDetailVO;
-import com.github.codingsoldier.example.bootweb.temp111.vo.DemoCUDRPageVO;
+import com.github.codingsoldier.example.bootweb.dto.DemoCUDRAddDTO;
+import com.github.codingsoldier.example.bootweb.dto.DemoCUDRPageQueryDTO;
+import com.github.codingsoldier.example.bootweb.dto.DemoCUDRUpdateDTO;
+import com.github.codingsoldier.example.bootweb.service.DemocudrService;
+import com.github.codingsoldier.example.bootweb.vo.DemoCUDRDetailVO;
+import com.github.codingsoldier.example.bootweb.vo.DemoCUDRPageVO;
 import com.github.codingsoldier.starter.mybatisplus.resp.PageData;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
  * </p>
  *
  * @author cpq
- * @since 2023-11-26 22:30:13
+ * @since 2023-11-26 22:32:54
  */
 @ApiSupport(order = 100)
 @Tag(name = "demoCUDR表-API")

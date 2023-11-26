@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
  * @author chenpq05
  * @since 2022/8/9 17:38
  */
-class BasicControllerTest extends BaseTest {
+public class BasicControllerTest extends BaseTest {
 
     @Test
     void paramsPath() throws Exception {

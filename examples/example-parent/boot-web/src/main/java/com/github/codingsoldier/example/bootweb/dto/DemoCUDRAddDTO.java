@@ -1,6 +1,8 @@
-package com.github.codingsoldier.example.bootweb.temp111.dto;
+package com.github.codingsoldier.example.bootweb.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +15,7 @@ import java.time.LocalDateTime;
 
 /**
  * @author cpq
- * @since 2023-11-26 22:30:13
+ * @since 2023-11-26 22:32:54
  */
 @Data
 @SuperBuilder
@@ -25,7 +27,8 @@ public class DemoCUDRAddDTO implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @Schema(description = "姓名")
+    @NotEmpty(message = "姓名不能为空")
+    @Schema(description = "姓名", example = "姓名01", requiredMode = Schema.RequiredMode.REQUIRED)
     private String name;
 
     @Schema(description = "年龄")
@@ -40,25 +43,13 @@ public class DemoCUDRAddDTO implements Serializable {
     @Schema(description = "日赚")
     private Double dayMoney;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @Schema(description = "生日")
     private LocalDateTime dateOfBirth;
 
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     @Schema(description = "幸运日")
     private LocalDate luckDay;
 
-    @Schema(description = "创建人id")
-    private Long createdBy;
-
-    @Schema(description = "更新人id")
-    private Long updatedBy;
-
-    @Schema(description = "创建时间")
-    private LocalDateTime createdTime;
-
-    @Schema(description = "更新时间")
-    private LocalDateTime updatedTime;
-
-    @Schema(description = "是否已删除，0-未删除，1-删除")
-    private Byte deleted;
 
 }

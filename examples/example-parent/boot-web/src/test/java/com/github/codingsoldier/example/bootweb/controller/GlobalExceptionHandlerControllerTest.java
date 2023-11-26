@@ -14,7 +14,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
  * @author chenpq05
  * @since 2022/8/10 10:07
  */
-class GlobalExceptionHandlerControllerTest extends BaseTest {
+public class GlobalExceptionHandlerControllerTest extends BaseTest {
 
     @Test
     void testMicroServiceException() throws Exception{

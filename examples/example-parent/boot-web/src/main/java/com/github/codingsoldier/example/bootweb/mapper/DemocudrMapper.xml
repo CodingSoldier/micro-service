@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.github.codingsoldier.example.bootweb.temp111.mapper.DemocudrMapper">
+<mapper namespace="com.github.codingsoldier.example.bootweb.mapper.DemocudrMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.github.codingsoldier.example.bootweb.temp111.entity.Democudr">
+    <resultMap id="BaseResultMap" type="com.github.codingsoldier.example.bootweb.entity.Democudr">
         <id column="id" property="id" />
         <result column="name" property="name" />
         <result column="age" property="age" />
@@ -25,12 +25,18 @@
     </sql>
 
 
-    <select id="pageQuery" resultType="com.github.codingsoldier.example.bootweb.temp111.vo.DemoCUDRPageVO">
+    <select id="pageQuery" resultType="com.github.codingsoldier.example.bootweb.vo.DemoCUDRPageVO">
         SELECT *
         FROM democudr
         <where>
             deleted = 0
-            <if test="pageQueryVO != null">
+            <if test="pageQueryDTO != null">
+                <if test="pageQueryDTO.name != null and pageQueryDTO.name != ''">
+                    AND name LIKE CONCAT('%',#{pageQueryDTO.name},'%')
+                </if>
+                <if test="pageQueryDTO.age != null">
+                    AND age=#{pageQueryDTO.age}
+                </if>
             </if>
             ORDER BY id DESC
         </where>

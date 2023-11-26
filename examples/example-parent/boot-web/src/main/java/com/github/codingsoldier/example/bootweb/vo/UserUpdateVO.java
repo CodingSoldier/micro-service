@@ -26,10 +26,10 @@ public class UserUpdateVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Schema(description = "id", example = "7", required = true)
+    @Schema(description = "id", example = "7")
     private Long id;
 
-    @Schema(description = "姓名", example = "姓名01", required = true)
+    @Schema(description = "姓名", example = "姓名01")
     private String name;
 
     @Schema(description = "年龄", example = "10")

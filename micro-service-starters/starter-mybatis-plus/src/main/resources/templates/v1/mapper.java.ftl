@@ -28,10 +28,10 @@ public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
     /**
      * 分页
      * @param page page
-     * @param pageQueryVO 查询参数
+     * @param pageQueryDTO 查询参数
      * @return 分页数据
      */
-    IPage<${pageVOClassName}> pageQuery(IPage<?> page, @Param("pageQueryVO") ${pageQueryDTOClassName} pageQueryVO);
+    IPage<${pageVOClassName}> pageQuery(IPage<?> page, @Param("pageQueryDTO") ${pageQueryDTOClassName} pageQueryDTO);
 
 }
 </#if>
