@@ -14,7 +14,7 @@ import org.apache.ibatis.annotations.Param;
  * </p>
  *
  * @author cpq
- * @since 2023-11-26 22:19:39
+ * @since 2023-11-26 22:22:24
  */
 @Mapper
 public interface DemocudrMapper extends BaseMapper<Democudr> {

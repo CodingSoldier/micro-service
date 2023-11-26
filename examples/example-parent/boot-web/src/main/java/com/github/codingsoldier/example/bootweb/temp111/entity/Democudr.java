@@ -1,6 +1,5 @@
 package com.github.codingsoldier.example.bootweb.temp111.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,7 +22,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author cpq
- * @since 2023-11-26 22:19:39
+ * @since 2023-11-26 22:22:24
  */
 @Data
 @SuperBuilder
