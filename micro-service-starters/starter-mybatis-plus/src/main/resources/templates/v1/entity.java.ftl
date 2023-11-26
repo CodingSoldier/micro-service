@@ -1,16 +1,16 @@
 package ${package.Entity};
 
-<#if springdoc>
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.v3.oas.annotations.media.Schema;
-</#if>
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
+import java.io.Serial;
 <#list table.importPackages as pkg>
 import ${pkg};
 </#list>
-import java.io.Serial;
 
 /**
  * <p>

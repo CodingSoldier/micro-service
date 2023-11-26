@@ -1,10 +1,11 @@
 package ${package.Mapper};
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import ${packageDTO}.${pageQueryDTOClassName};
+import ${packageVO}.${pageVOClassName};
 import ${package.Entity}.${entity};
 import ${superMapperClassPackage};
-import ${packageVO}.${pageVOClassName};
-import ${packageDTO}.${pageQueryDTOClassName};
-import com.baomidou.mybatisplus.core.metadata.IPage;
 <#if mapperAnnotation>
 import org.apache.ibatis.annotations.Mapper;
 </#if>
