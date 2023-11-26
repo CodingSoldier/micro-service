@@ -16,7 +16,7 @@ import ${packageDTO}.${updateDTOClassName};
 import ${packageDTO}.${pageQueryDTOClassName};
 import ${packageVO}.${detailVOClassName};
 import ${packageVO}.${pageVOClassName};
-import com.github.codingsoldier.starter.mybatisplus.resp.PageResult;
+import com.github.codingsoldier.starter.mybatisplus.resp.PageData;
 import java.util.List;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
@@ -87,11 +87,11 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     }
 
     @Override
-    public PageResult<${pageVOClassName}> pageQuery(${pageQueryDTOClassName} queryDTO) {
+    public PageData<${pageVOClassName}> pageQuery(${pageQueryDTOClassName} queryDTO) {
         Page<${pageVOClassName}> p = new Page<>(queryDTO.getCurrent(), queryDTO.getSize());
         IPage<${pageVOClassName}> pageData = ${uncapFirstMapper}.pageQuery(p, queryDTO);
         List<${pageVOClassName}> listData = pageData.getRecords();
-        return PageResult.create(pageData, listData);
+        return PageData.create(pageData, listData);
     }
 
     @Override

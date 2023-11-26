@@ -1,12 +1,12 @@
-package ${package.Controller};
+package com.github.codingsoldier.example.bootweb.temp111.controller;
 
 import com.github.codingsoldier.common.resp.Result;
-import ${package.Service}.${table.serviceName};
-import ${packageDTO}.${addDTOClassName};
-import ${packageDTO}.${updateDTOClassName};
-import ${packageDTO}.${pageQueryDTOClassName};
-import ${packageVO}.${detailVOClassName};
-import ${packageVO}.${pageVOClassName};
+import com.github.codingsoldier.example.bootweb.temp111.service.DemocudrService;
+import com.github.codingsoldier.example.bootweb.temp111.dto.DemoCUDRAddDTO;
+import com.github.codingsoldier.example.bootweb.temp111.dto.DemoCUDRUpdateDTO;
+import com.github.codingsoldier.example.bootweb.temp111.dto.DemoCUDRPageQueryDTO;
+import com.github.codingsoldier.example.bootweb.temp111.vo.DemoCUDRDetailVO;
+import com.github.codingsoldier.example.bootweb.temp111.vo.DemoCUDRPageVO;
 import com.github.codingsoldier.starter.mybatisplus.resp.PageData;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
@@ -25,56 +25,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-<#if superControllerClassPackage??>
-import ${superControllerClassPackage};
-</#if>
 
 /**
  * <p>
- * ${table.comment!} 前端控制器
+ * demoCUDR表 前端控制器
  * </p>
  *
- * @author ${author}
- * @since ${date}
+ * @author cpq
+ * @since 2023-11-26 21:51:37
  */
 @ApiSupport(order = 100)
-@Tag(name = "${table.comment!}-API")
+@Tag(name = "demoCUDR表-API")
 @Slf4j
-<#if restControllerStyle>
 @RestController
-<#else>
-@Controller
-</#if>
-@RequestMapping("<#if package.ModuleName?? && package.ModuleName != "">/${package.ModuleName}</#if>/<#if controllerMappingHyphenStyle??>${controllerMappingHyphen}<#else>${table.entityPath}</#if>")
-<#if kotlin>
-class ${table.controllerName}<#if superControllerClass??> : ${superControllerClass}()</#if>
-<#else>
-<#if superControllerClass??>
-public class ${table.controllerName} extends ${superControllerClass} {
-<#else>
-public class ${table.controllerName} {
-</#if>
-    <#assign uncapFirstServerName="${table.serviceName}"? uncap_first/>
+@RequestMapping("/democudr")
+public class DemocudrController {
 
-    private final ${table.serviceName} ${uncapFirstServerName};
+    private final DemocudrService democudrService;
 
-    public ${table.controllerName}(${table.serviceName} ${uncapFirstServerName}) {
-        this.${uncapFirstServerName} = ${uncapFirstServerName};
+    public DemocudrController(DemocudrService democudrService) {
+        this.democudrService = democudrService;
     }
 
     @ApiOperationSupport(order = 10)
     @Operation(summary = "新增", description = "返回id")
     @PostMapping("/add")
-    public Result<Long> add(@RequestBody @Valid ${addDTOClassName} addDTO) {
-        Long id = ${uncapFirstServerName}.add(addDTO);
+    public Result<Long> add(@RequestBody @Valid DemoCUDRAddDTO addDTO) {
+        Long id = democudrService.add(addDTO);
         return Result.success(id);
     }
 
     @ApiOperationSupport(order = 20)
     @Operation(summary = "修改")
     @PutMapping("/update")
-    public Result<?> update(@RequestBody @Valid ${updateDTOClassName} updateDTO) {
-        ${uncapFirstServerName}.update(updateDTO);
+    public Result<?> update(@RequestBody @Valid DemoCUDRUpdateDTO updateDTO) {
+        democudrService.update(updateDTO);
         return Result.success();
     }
 
@@ -85,7 +70,7 @@ public class ${table.controllerName} {
     })
     @DeleteMapping("/delete")
     public Result<Boolean> delete(@RequestParam("id") Long id) {
-        boolean delete = ${uncapFirstServerName}.delete(id);
+        boolean delete = democudrService.delete(id);
         return Result.success(delete);
     }
 
@@ -95,18 +80,17 @@ public class ${table.controllerName} {
         @Parameter(name = "id",description = "id"),
     })
     @GetMapping("/detail")
-    public Result<${detailVOClassName}> detail(@RequestParam("id") Long id) {
-        ${detailVOClassName} detail = ${uncapFirstServerName}.detail(id);
+    public Result<DemoCUDRDetailVO> detail(@RequestParam("id") Long id) {
+        DemoCUDRDetailVO detail = democudrService.detail(id);
         return Result.success(detail);
     }
 
     @ApiOperationSupport(order = 50)
     @Operation(summary = "分页")
     @PostMapping("/page")
-    public Result<PageData<${pageVOClassName}>> pageQuery(@RequestBody ${pageQueryDTOClassName} queryDTO) {
-        PageData<${pageVOClassName}> pageData = ${uncapFirstServerName}.pageQuery(queryDTO);
+    public Result<PageData<DemoCUDRPageVO>> pageQuery(@RequestBody DemoCUDRPageQueryDTO queryDTO) {
+        PageData<DemoCUDRPageVO> pageData = democudrService.pageQuery(queryDTO);
         return Result.success(pageData);
     }
 
 }
-</#if>

@@ -8,7 +8,7 @@ import ${packageDTO}.${updateDTOClassName};
 import ${packageDTO}.${pageQueryDTOClassName};
 import ${packageVO}.${detailVOClassName};
 import ${packageVO}.${pageVOClassName};
-import com.github.codingsoldier.starter.mybatisplus.resp.PageResult;
+import com.github.codingsoldier.starter.mybatisplus.resp.PageData;
 
 /**
  * <p>
@@ -33,7 +33,6 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
     /**
      * 修改
      * @param updateDTO 修改参数
-     * @return id
      */
     void update(${updateDTOClassName} updateDTO);
 
@@ -56,7 +55,7 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
      * @param queryDTO 查询参数
      * @return 分页结果
      */
-    PageResult<${pageVOClassName}> pageQuery(${pageQueryDTOClassName} queryDTO);
+    PageData<${pageVOClassName}> pageQuery(${pageQueryDTOClassName} queryDTO);
 
     /**
      * 是否重复

@@ -27,7 +27,7 @@ import ${pkg};
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Schema(name = "${table.comment!}-分页查询参数")
+@Schema(name = "${table.comment!}-分页查询参数", description = "${table.comment!}-分页查询参数")
 public class ${pageQueryDTOClassName} extends PageReq {
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>

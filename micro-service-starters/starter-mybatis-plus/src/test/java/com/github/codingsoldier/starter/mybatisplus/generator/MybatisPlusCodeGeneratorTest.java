@@ -20,14 +20,14 @@ class MybatisPlusCodeGeneratorTest {
         MybatisPlusCodeGenerator.dbPassword = "cpq..123";
 
         // 项目 main 目录的绝对路径
-        MybatisPlusCodeGenerator.srcMainAbsolutePath = "D:\\mycode\\micro-service\\examples\\example-parent\\boot-web\\src\\main";
+        MybatisPlusCodeGenerator.srcMainAbsolutePath = "E:\\github\\micro-service\\examples\\example-parent\\boot-web\\src\\main";
         // 项目包名
         MybatisPlusCodeGenerator.parent = "com.github.codingsoldier.example.bootweb.temp111";
 
         // 作者
         MybatisPlusCodeGenerator.author = "cpq";
         // 表名
-        MybatisPlusCodeGenerator.tableName = "smartpark_collect_company";
+        MybatisPlusCodeGenerator.tableName = "demoCUDR";
 
         // 生成代码
         MybatisPlusCodeGenerator.generate();

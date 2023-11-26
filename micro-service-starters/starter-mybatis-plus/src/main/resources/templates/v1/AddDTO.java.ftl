@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import java.io.Serial;
 
 /**
  * @author ${author}
@@ -20,9 +21,10 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(name = "${table.comment!}-新增DTO")
+@Schema(name = "${table.comment!}-新增请求参数", description = "${table.comment!}-新增请求参数")
 public class ${addDTOClassName} implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>

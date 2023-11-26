@@ -11,6 +11,7 @@ import lombok.experimental.SuperBuilder;
     </#if>
 import ${pkg};
 </#list>
+import java.io.Serial;
 
 /**
 * @author ${author}
@@ -20,9 +21,10 @@ import ${pkg};
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(name = "${table.comment!}-详情VO")
+@Schema(name = "${table.comment!}-详情响应数据", description = "${table.comment!}-详情响应数据")
 public class ${detailVOClassName} implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>

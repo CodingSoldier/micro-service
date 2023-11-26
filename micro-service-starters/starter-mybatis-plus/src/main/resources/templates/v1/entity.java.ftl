@@ -10,6 +10,7 @@ import lombok.experimental.SuperBuilder;
 <#list table.importPackages as pkg>
 import ${pkg};
 </#list>
+import java.io.Serial;
 
 /**
  * <p>
@@ -27,7 +28,7 @@ import ${pkg};
 @TableName("${schemaName}${table.name}")
 </#if>
 <#if springdoc>
-@Schema(name = "${table.comment!}-对象", description = "${table.comment!}")
+@Schema(name = "${table.comment!}", description = "${table.comment!}")
 </#if>
 <#if superEntityClass??>
 public class ${entity} extends ${superEntityClass}<#if activeRecord><${entity}></#if> {
@@ -40,6 +41,7 @@ public class ${entity} {
 </#if>
 <#if entitySerialVersionUID>
 
+    @Serial
     private static final long serialVersionUID = 1L;
 </#if>
 <#-- ----------  BEGIN 字段循环遍历  ---------->
