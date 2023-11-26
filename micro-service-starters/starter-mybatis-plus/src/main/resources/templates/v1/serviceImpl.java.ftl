@@ -73,9 +73,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean delete(Long id) {
-        // 删除
-        boolean r = super.removeById(id);
-        return r;
+        return super.removeById(id);
     }
 
     @Override

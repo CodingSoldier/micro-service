@@ -12,11 +12,9 @@ import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -73,29 +71,23 @@ public class ${table.controllerName} {
     @ApiOperationSupport(order = 20)
     @Operation(summary = "修改")
     @PutMapping("/update")
-    public Result<?> update(@RequestBody @Valid ${updateDTOClassName} updateDTO) {
+    public Result<Void> update(@RequestBody @Valid ${updateDTOClassName} updateDTO) {
         ${uncapFirstServerName}.update(updateDTO);
         return Result.success();
     }
 
     @ApiOperationSupport(order = 30)
     @Operation(summary = "删除", description = "返回是否成功")
-    @Parameters({
-        @Parameter(name = "id",description = "id"),
-    })
     @DeleteMapping("/delete")
-    public Result<Boolean> delete(@RequestParam("id") Long id) {
+    public Result<Boolean> delete(@RequestParam("id") @Parameter(description = "主键") Long id) {
         boolean delete = ${uncapFirstServerName}.delete(id);
         return Result.success(delete);
     }
 
     @ApiOperationSupport(order = 40)
     @Operation(summary = "详情")
-    @Parameters({
-        @Parameter(name = "id",description = "id"),
-    })
     @GetMapping("/detail")
-    public Result<${detailVOClassName}> detail(@RequestParam("id") Long id) {
+    public Result<${detailVOClassName}> detail(@RequestParam("id") @Parameter(description = "主键") Long id) {
         ${detailVOClassName} detail = ${uncapFirstServerName}.detail(id);
         return Result.success(detail);
     }
