@@ -5,25 +5,26 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.codingsoldier.common.enums.ResultCodeEnum;
 import com.github.codingsoldier.common.exception.ClientException;
+import com.github.codingsoldier.example.bootweb.temp111.dto.DemoCUDRAddDTO;
+import com.github.codingsoldier.example.bootweb.temp111.dto.DemoCUDRPageQueryDTO;
+import com.github.codingsoldier.example.bootweb.temp111.dto.DemoCUDRUpdateDTO;
 import com.github.codingsoldier.example.bootweb.temp111.entity.Democudr;
 import com.github.codingsoldier.example.bootweb.temp111.mapper.DemocudrMapper;
 import com.github.codingsoldier.example.bootweb.temp111.service.DemocudrService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.github.codingsoldier.example.bootweb.temp111.dto.DemoCUDRAddDTO;
-import com.github.codingsoldier.example.bootweb.temp111.dto.DemoCUDRUpdateDTO;
-import com.github.codingsoldier.example.bootweb.temp111.dto.DemoCUDRPageQueryDTO;
 import com.github.codingsoldier.example.bootweb.temp111.vo.DemoCUDRDetailVO;
 import com.github.codingsoldier.example.bootweb.temp111.vo.DemoCUDRPageVO;
 import com.github.codingsoldier.starter.mybatisplus.resp.PageData;
-import java.util.List;
-import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>
@@ -43,9 +44,9 @@ public class DemocudrServiceImpl extends ServiceImpl<DemocudrMapper, Democudr> i
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Long add(DemoCUDRAddDTO addDTO) {
-        //if (isRepeat(null, Democudr::getName, addDTO.getName())){
-        //    throw new ClientException(ResultCodeEnum.PRECONDITION_FAILED, "新增失败，XX已存在。请修改XX。");
-        //}
+        if (isRepeat(null, Democudr::getName, addDTO.getName())){
+           throw new ClientException(ResultCodeEnum.PRECONDITION_FAILED, "新增失败，XX已存在。请修改XX。");
+        }
         Democudr democudr = new Democudr();
         BeanUtils.copyProperties(addDTO, democudr);
         super.save(democudr);
