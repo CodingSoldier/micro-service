@@ -1,6 +1,5 @@
 package ${package.Mapper};
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import ${packageDTO}.${pageQueryDTOClassName};
 import ${packageVO}.${pageVOClassName};
