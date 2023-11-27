@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.cloudweb02.openapi3;
+package com.github.codingsoldier.example.cloudweb02.knife4j;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -19,8 +19,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Accessors(chain = true)
-@Schema(name = "02详情")
-public class Detail02Vo implements Serializable {
+@Schema(name = "02详情", description = "02详情")
+public class Detail02VO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

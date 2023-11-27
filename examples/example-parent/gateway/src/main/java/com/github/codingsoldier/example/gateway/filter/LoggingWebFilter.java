@@ -61,7 +61,10 @@ public class LoggingWebFilter implements WebFilter {
         return new ServerHttpResponseDecorator(response) {
             @Override
             public Mono<Void> writeWith(final Publisher<? extends DataBuffer> body) {
-                if (body instanceof Flux<? extends DataBuffer> fluxBody) {
+                String contentType = this.getDelegate().getHeaders().getContentType().toString();
+                if (contentType.contains("excel")) {
+                    return super.writeWith(body);
+                } else if (body instanceof Flux<? extends DataBuffer> fluxBody) {
                     return super.writeWith(fluxBody.buffer().map(dataBuffers -> {
                         DefaultDataBuffer joinedBuffers = new DefaultDataBufferFactory().join(dataBuffers);
                         byte[] content = new byte[joinedBuffers.readableByteCount()];

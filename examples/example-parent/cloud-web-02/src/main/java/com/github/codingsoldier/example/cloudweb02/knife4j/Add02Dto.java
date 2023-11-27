@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.cloudweb02.openapi3;
+package com.github.codingsoldier.example.cloudweb02.knife4j;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -15,12 +15,12 @@ import java.time.LocalDateTime;
  * @since 2022-03-16 21:38:52
  */
 @Data
-@Schema(name = "02新增")
-public class Add02Dto implements Serializable {
+@Schema(name = "02新增", description = "02新增")
+public class Add02DTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Schema(description = "姓名222", example = "姓名01", required = true)
+    @Schema(description = "姓名", example = "姓名01", requiredMode = Schema.RequiredMode.REQUIRED)
     private String name;
 
     @Schema(description = "年龄", example = "10")

@@ -33,4 +33,16 @@ class C01TraceControllerTest extends BaseTest {
                 .jsonPath("$.data").isEqualTo("web01-header-43325268ff7aaaaa-mdc-43325268ff7aaaaa-web02-header-43325268ff7aaaaa-mdc-43325268ff7aaaaa");
     }
 
+    @Test
+    void getMcdReq() {
+        webClient.get()
+                .uri("/cloud-web-01/trace/get/mcd/req")
+                .header("x-req-trace-id", "43325123aaa")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$.code").isEqualTo(ResultCodeEnum.SUCCESS.getCode())
+                .jsonPath("$.data").isEqualTo("43325123aaa");
+    }
+
 }

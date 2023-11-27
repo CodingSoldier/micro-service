@@ -126,39 +126,5 @@ dataId = gateway-flow-rule-api-sentinel
 
 6、有 bug ,网关限流后会导致微服务的sentinel规则失效。
 
-## gateway 整合 springdoc
-1、导入依赖
-
-```xml
-    <dependency>
-        <groupId>org.springdoc</groupId>
-        <artifactId>springdoc-openapi-webflux-ui</artifactId>
-        <version>1.6.9</version>
-    </dependency>
-```
-
-2、配置文件
-
-```yaml
-# springdoc配置
-springdoc:
-  # 预加载
-  pre-loading-enabled: true
-  swagger-ui:
-    # 折叠接口
-    doc-expansion: none
-    urls:
-      - name: 服务01
-        url: /cloud-web-01/v3/api-docs
-      - name: 服务02
-        url: /cloud-web-02/v3/api-docs
-
-```
-3、新建 SpringDocConfig.java
-
-4、访问地址
-
-http://localhost:8000/webjars/swagger-ui/index.html
-
 ## 执行测试用例
 启动 cloud-web-01 、cloud-web-02 后，再运行测试用例

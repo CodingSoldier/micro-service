@@ -30,7 +30,7 @@ class C01SentinelControllerTest extends BaseTest {
         webClient.get()
                 .uri(uri)
                 .exchange()
-                .expectStatus().isOk()
+                .expectStatus().isEqualTo(400)
                 .expectBody()
                 .jsonPath("$.code").isEqualTo(ResultCodeEnum.BAD_REQUEST.getCode())
                 .jsonPath("$.message").isEqualTo("访问太频繁，请稍后重试。");

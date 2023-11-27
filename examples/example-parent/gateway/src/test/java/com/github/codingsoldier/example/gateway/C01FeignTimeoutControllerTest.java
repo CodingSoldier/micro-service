@@ -22,6 +22,9 @@ class C01FeignTimeoutControllerTest{
     void timeout01FallbackFactory() {
         /**
          * 1、cloud-web-01 的feign超时时间设置为5000
+         * 2、Web02FeignTimeoutClient 使用 fallback= TimeoutFallback.class
+         *
+         * 1、cloud-web-01 的feign超时时间设置为5000
          * 2、Web02FeignTimeoutClient 使用 fallbackFactory = TimeoutFallbackFactory.class
           */
         webClient.get()
@@ -32,20 +35,5 @@ class C01FeignTimeoutControllerTest{
                 .jsonPath("$.code").isEqualTo(ResultCodeEnum.SUCCESS.getCode())
                 .jsonPath("$.data").isEqualTo("调用web02出错，fallbackFactory降级处理。");
     }
-
-    // @Test
-    // void timeout01Fallback() {
-    //     /**
-    //      * 1、cloud-web-01 的feign超时时间设置为5000
-    //      * 2、Web02FeignTimeoutClient 使用 fallback= TimeoutFallback.class
-    //       */
-    //     webClient.get()
-    //             .uri("/cloud-web-01/feign01/test/timeout01?timeout=10")
-    //             .exchange()
-    //             .expectStatus().isOk()
-    //             .expectBody()
-    //             .jsonPath("$.code").isEqualTo(ResponseCodeEnum.SUCCESS.getCode())
-    //             .jsonPath("$.data").isEqualTo("调用web02出错，fallback降级处理。");
-    // }
 
 }

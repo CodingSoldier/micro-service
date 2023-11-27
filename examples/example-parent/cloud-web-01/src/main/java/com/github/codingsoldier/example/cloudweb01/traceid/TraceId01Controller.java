@@ -50,7 +50,7 @@ public class TraceId01Controller {
     public String getMcdReq(@RequestHeader Map<String, String> headers, String name) {
         String id = MDC.get("x-req-trace-id");
         log.info("###x-req-trace-id###{}", id);
-        return "success";
+        return id;
     }
 
 
