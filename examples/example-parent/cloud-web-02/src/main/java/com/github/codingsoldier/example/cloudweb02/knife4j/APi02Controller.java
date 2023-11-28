@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/s02")
 public class APi02Controller {
-
     @ApiOperationSupport(order = 10)
     @Operation(summary = "测试02-新增")
     @PostMapping("/add")
