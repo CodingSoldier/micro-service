@@ -1,4 +1,4 @@
-FROM openjdk:8
+FROM openjdk:17-jdk-slim
 ADD *.jar /app/app.jar
 ADD entrypoint.sh /app/
 ADD preStop.sh /app/
@@ -8,4 +8,3 @@ RUN chmod +x /app/entrypoint.sh /app/preStop.sh \
 ENTRYPOINT  ["/app/entrypoint.sh"]
 EXPOSE 8001
 STOPSIGNAL SIGTERM
-
