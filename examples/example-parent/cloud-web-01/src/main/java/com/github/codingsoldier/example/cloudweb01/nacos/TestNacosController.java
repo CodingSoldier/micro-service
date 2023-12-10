@@ -6,8 +6,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @RefreshScope
@@ -28,6 +32,13 @@ public class TestNacosController {
     public Result<String> testNacos() {
         log.info("##########{}", testNacos);
         return Result.success(testNacos);
+    }
+
+    @PostMapping(value = "/graceful")
+    public Result<String> graceful() throws Exception {
+        int i = new Random().nextInt(1000, 5000);
+        TimeUnit.MILLISECONDS.sleep(i);
+        return Result.success(""+i);
     }
 
 }
