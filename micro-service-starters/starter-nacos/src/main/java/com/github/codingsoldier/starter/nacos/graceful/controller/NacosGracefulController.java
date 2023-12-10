@@ -32,6 +32,7 @@ public class NacosGracefulController {
     @GetMapping(value = Constant.URI_DEREGISTER_INSTANCE)
     public Result<String> deregisterInstance() throws NacosException {
         nacosGraceful.deregisterInstance();
+        log.info("nacos客户端下线成功");
         return Result.success("");
     }
 
