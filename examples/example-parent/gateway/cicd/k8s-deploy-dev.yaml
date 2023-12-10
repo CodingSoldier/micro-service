@@ -91,6 +91,8 @@ kind: Service
 metadata:
   name: gateway
 spec:
+  selector:
+    app: gateway
   type: NodePort
   ports:
     - name: http
