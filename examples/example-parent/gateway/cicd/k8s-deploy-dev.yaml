@@ -1,0 +1,139 @@
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway
+spec:
+#  # pod数量
+#  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      # 超过期望的可用pod个数。
+      maxSurge: 1
+      # 在升级过程中不可用Pod的最大数量
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: gateway
+  template:
+    metadata:
+      labels:
+        app: gateway
+    spec:
+      # k8s将会给应用发送SIGTERM信号，可以用来正确、优雅地关闭应用，默认为30秒
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: gateway
+        # 镜像版本，可配置为 {{DOCKER_IMAGE}} 取jenkins上配置的镜像
+        image: {{DOCKER_IMAGE}}
+        #image: 192.168.1.239/example/gateway:d2022-09-07t00-04-30
+        # 容器端口
+        ports:
+        - name: http
+          containerPort: 8000
+        # 配置环境变量
+        env:
+        - name: JVM_OPTIONS
+          value: -XX:+UseZGC
+        - name: PROJECT_ARGUMENTS
+          value: --spring.cloud.nacos.server-addr=192.168.1.3:8848
+        # 资源限制
+        resources:
+          requests:
+            memory: "700Mi"
+            cpu: "900m"
+          limits:
+            memory: "800Mi"
+            cpu: "1000m"
+        lifecycle:
+          # 在容器被终止前睡眠一段时间，以便kube-proxy更新service的endpoint
+          preStop:
+            exec:
+              command: ["/bin/bash", "-c", "/app/preStop.sh"]
+        # 就绪探针。
+        # docker容器启动成功，并不代表容器中的服务就能处理外部的请求，例如java应用启动需要一定时间
+        # Kubernetes提供了readinessProbe来检测pod中的容器是否可以接受外部流量
+        readinessProbe:
+          httpGet:
+            # 连接使用的schema，默认HTTP。
+            scheme: HTTP
+            # 访问的容器的端口名字或者端口号。端口号必须介于1和65525之间
+            port: 8000
+            # 访问的HTTP server的path
+            path: /actuator/info
+          # 探测成功后，最少连续探测失败多少次才被认定为失败。默认是3。最小值是1。
+          failureThreshold: 3
+          # 容器启动后第一次执行探测是需要等待多少秒。
+          initialDelaySeconds: 40
+          # 执行探测的频率。默认是10秒，最小1秒。
+          periodSeconds: 10
+          # 探测失败后，最少连续探测成功多少次才被认定为成功。默认是1。对于liveness必须是1。最小值是1。
+          successThreshold: 1
+          # 探测超时时间。默认1秒，最小1秒。
+          timeoutSeconds: 2
+        # 存活探针，用于判断容器是否存活。配置参数跟就绪探针相同
+        livenessProbe:
+          httpGet:
+            scheme: HTTP
+            port: 8000
+            path: /actuator/info
+          failureThreshold: 3
+          initialDelaySeconds: 40
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 2
+
+---
+#Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 8000
+      targetPort: 8000
+      protocol: TCP
+      # 绑定裸机端口
+      nodePort: 30800
+---
+# 弹性伸缩
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: gateway
+spec:
+  # 指定缩放的对象是gateway Deployment
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: gateway
+  minReplicas: 1
+  maxReplicas: 2
+  behavior:
+    scaleDown:
+      # 稳定窗口时间
+      stabilizationWindowSeconds: 60
+    scaleUp:
+      # 稳定窗口时间
+      stabilizationWindowSeconds: 60
+  metrics:
+  # 每个 Pod 的 CPU 利用率在 80% 以内
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 95
+  # 每个 Pod 的内存利用率在 80% 以内
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 95
+
+### 测试信息k8s-deploy-dev.yaml
