@@ -30,7 +30,7 @@
 # nacos客户端实例下线
 curl --location --request GET 'http://127.0.0.1:8001/cloud-web-01/nacos/graceful/deregister/instance'
 # 睡眠一段时间，等待gateway网关将微服务剔除，不再接收流量
-sleep 20
+sleep 50
 ```
 详细使用方式可参考[cloud-web-01的cicd](../../examples/example-parent/cloud-web-01/cicd)
 
