@@ -38,7 +38,7 @@ public class TestNacosController {
     public Result<String> graceful() throws Exception {
         int i = new Random().nextInt(1000, 5000);
         TimeUnit.MILLISECONDS.sleep(i);
-        return Result.success("Vaaaaa-"+i);
+        return Result.success("Vbbbbbbbbb-"+i);
     }
 
     @PostMapping(value = "/graceful2")
