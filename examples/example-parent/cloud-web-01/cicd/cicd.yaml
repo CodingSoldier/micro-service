@@ -50,21 +50,21 @@ dev:
 #    # 项目参数
     projectArguments: --spring.cloud.nacos.server-addr=192.168.1.3:8848
 #    # 请求的内存。非必填，默认512Mi
-#    requestsMemory: 512Mi
+    requestsMemory: 400Mi
 #    # 请求的CPU。非必填，默认500m
-#    requestsCpu: 500m
+    requestsCpu: 500m
 #    # 内存限制。非必填，默认1Gi
-#    limitsMemory: 700Mi
+    limitsMemory: 512Mi
 #    # CPU限制。非必填，默认1000m
-#    limitsCpu: 1000m
+    limitsCpu: 700m
 #    # 初始话延迟检测时间，非必填，默认60，单位秒
-#    initialDelaySeconds: 20
+    initialDelaySeconds: 60
     # 健康检查URI，必填
     probePath: /cloud-web-01/actuator/info
 #    # 水平伸缩，最小副本。非必填，默认1
-#    minReplicas: 1
+    minReplicas: 1
 #    # 水平伸缩，最大副本。非必填，默认3
-#    maxReplicas: 3
+    maxReplicas: 1
 #    # 水平伸缩，稳定窗口时间，单位秒。非必填，默认60
 #    stabilizationWindowSeconds: 60
 
