@@ -43,6 +43,7 @@ public class TestNacosController {
 
     @PostMapping(value = "/graceful2")
     public Result<String> graceful2() {
+
         int i = new Random().nextInt(1000);
         return Result.success("graceful2-"+i);
     }
