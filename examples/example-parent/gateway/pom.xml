@@ -110,6 +110,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- 推荐使用caffeineBasedLoadBalancerCacheManager替换DefaultLoadBalancerCacheManager
+         https://github.com/spring-cloud/spring-cloud-commons/issues/1050 -->
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
