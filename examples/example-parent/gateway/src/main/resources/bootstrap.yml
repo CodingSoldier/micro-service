@@ -13,7 +13,7 @@ spring:
         clients: cloud-web-01,cloud-web-02
       cache:
         enabled: true
-        ttl: 5
+        ttl: 5s
     nacos:
       server-addr: 192.168.1.3:8848
       config:
