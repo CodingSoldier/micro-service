@@ -11,9 +11,6 @@ spring:
       enabled: true
       eager-load:
         clients: cloud-web-01,cloud-web-02
-      cache:
-        enabled: true
-        ttl: 5s
     nacos:
       server-addr: 10.39.176.47:8848
       config:
