@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk-slim
+FROM codingsoldier/openjdk-17-jdk-slim-enhance:1.0
 ADD *.jar /app/app.jar
 ADD entrypoint.sh /app/
 ADD preStop.sh /app/

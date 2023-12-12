@@ -5,7 +5,7 @@ metadata:
   name: gateway
 spec:
 #  # pod数量
-#  replicas: 1
+  replicas: 1
   strategy:
     type: RollingUpdate
     rollingUpdate:

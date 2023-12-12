@@ -11,7 +11,7 @@ spring:
     active: dev
   lifecycle:
     # 停机缓冲时间，默认：30秒
-    timeout-per-shutdown-phase: 30s
+    timeout-per-shutdown-phase: 10s
   cloud:
     # 禁用ribbon。 Spring Cloud Loadbalancer 将替代 ribbon
     loadbalancer:
