@@ -7,6 +7,7 @@ import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.core.io.buffer.DefaultDataBuffer;
 import org.springframework.core.io.buffer.DefaultDataBufferFactory;
+import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpRequestDecorator;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -61,8 +62,9 @@ public class LoggingWebFilter implements WebFilter {
         return new ServerHttpResponseDecorator(response) {
             @Override
             public Mono<Void> writeWith(final Publisher<? extends DataBuffer> body) {
-                String contentType = this.getDelegate().getHeaders().getContentType().toString();
-                if (contentType.contains("excel")) {
+                MediaType contentType = this.getDelegate().getHeaders().getContentType();
+                boolean isExcel = contentType != null && contentType.toString().contains("excel");
+                if (isExcel) {
                     return super.writeWith(body);
                 } else if (body instanceof Flux<? extends DataBuffer> fluxBody) {
                     return super.writeWith(fluxBody.buffer().map(dataBuffers -> {

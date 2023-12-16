@@ -19,13 +19,6 @@ micro-service:
       enabled: true
       # 是否启用 WebMvcConfig 配置类，默认true
       enableWebMvcConfig: true
-      # cors配置，默认值如下
-      cors:
-        allow-credentials: true
-        allowed-headers: '*'
-        allowed-methods: '*'
-        allowed-origin-patterns: '*'
-        max-age: 1800s      
       logging:
         # 是否打印request、responseBody日志。默认false
         requestResponseLog: true
