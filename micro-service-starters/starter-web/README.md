@@ -17,8 +17,8 @@ micro-service:
     web:
       # 是否启用 starter-web，默认true     
       enabled: true
-      # 是否启用 WebMvcConfig 配置类，默认true
-      enableWebMvcConfig: true
+      # 是否启用 DefaultWebMvcConfigurer 配置类，默认true
+      enableDefaultWebMvcConfigurer: true
       logging:
         # 是否打印request、responseBody日志。默认false
         requestResponseLog: true

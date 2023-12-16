@@ -14,10 +14,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @since 2022/2/11 12:02
  */
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnProperty(value = "micro-service.starter.web.enableWebMvcConfig", matchIfMissing = true)
-public class WebMvcConfig implements WebMvcConfigurer {
+@ConditionalOnProperty(value = "micro-service.starter.web.enableDefaultWebMvcConfigurer", matchIfMissing = true)
+public class DefaultWebMvcConfigurer implements WebMvcConfigurer {
 
-    private static final Logger logger = LoggerFactory.getLogger(WebMvcConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(DefaultWebMvcConfigurer.class);
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
