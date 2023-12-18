@@ -90,15 +90,7 @@ ResponseBodyWrapperAdvice#handleBody()
 
 （1）、FeignInterceptor.preHandle() 拦截请求，如果是feign请求，将 Controller 接口的返回值类型添加到 RequestAttributes 中
 
-（2）、服务提供方处理返回值时，满足如下条件：
-```
-    1、请求是feign请求
-    2、Controller返回值被全局异常捕获器处理过
-    3、Controller 方法定义的返回值类型与实际返回值不一致
-```
-则设置 Response Status Code = HttpStatus.INTERNAL_SERVER_ERROR
-
-代码位置 ResponseBodyWrapperAdvice#handleBody()
+（2）、全局异常捕获器的返回的 http status 必须是大于等于400，或者小于等于500 
 
 （3）、FeignErrorDecoder 实现了 ErrorDecoder 接口，当 Response Status Code 不在 200 ~ 299 范围内，抛出异常
 ```java
@@ -112,12 +104,6 @@ new FeignResultErrorException(result.getCode(), result.getMessage());
 
 建议使用 fallbackFactory，并判断异常是否为 FeignResultErrorException、如果是，则直接抛出异常即可。代码例子：ExceptionFallbackFactory.create()
 
-（6）、整个流程处理逻辑较为复杂，建议把服务提供方的 Controller 方法返回值定义为 Result。
-```
-ResponseBodyWrapperAdvice 会判断，如果返回值类型是Result，则不会再包装返回值；
-并且全局异常捕获器返回的结果也是 Result。
-```
-就避免了（1）~（5）一大堆复杂处理逻辑。
 
 
 
