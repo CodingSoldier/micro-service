@@ -1,7 +1,7 @@
 package com.github.codingsoldier.starter.web.util;
 
 import com.github.codingsoldier.common.enums.ResultCodeEnum;
-import com.github.codingsoldier.common.exception.BackendServicesException;
+import com.github.codingsoldier.common.exception.HttpStatus5xxException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 
@@ -28,9 +28,9 @@ public class CopyUtils {
      * @param sources     原集合
      * @param targetClazz 目标集合元素类型
      * @return 目标集合
-     * @throws BackendServicesException 后台异常
+     * @throws HttpStatus5xxException 后台异常
      */
-    public static <T, E> List<T> listCopy(Collection<E> sources, Class<T> targetClazz) throws BackendServicesException {
+    public static <T, E> List<T> listCopy(Collection<E> sources, Class<T> targetClazz) throws HttpStatus5xxException {
         ArrayList<T> result = new ArrayList<>();
         for (E source : sources) {
             try {
@@ -39,7 +39,7 @@ public class CopyUtils {
                 result.add(t);
             } catch (ReflectiveOperationException  | IllegalArgumentException | SecurityException e) {
                 log.error("异常", e);
-                throw new BackendServicesException(ResultCodeEnum.BACKEND_SERVER_ERROR.getCode(), "集合转换异常");
+                throw new HttpStatus5xxException(ResultCodeEnum.BACKEND_SERVER_ERROR.getCode(), "集合转换异常");
             }
         }
         return result;

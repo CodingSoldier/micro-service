@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.codingsoldier.common.enums.ResultCodeEnum;
-import com.github.codingsoldier.common.exception.ClientException;
+import com.github.codingsoldier.common.exception.HttpStatus4xxException;
 import com.github.codingsoldier.example.bootweb.entity.Democudr;
 import com.github.codingsoldier.example.bootweb.mapper.DemocudrMapper;
 import com.github.codingsoldier.example.bootweb.service.DemocudrService;
@@ -45,7 +45,7 @@ public class DemocudrServiceImpl extends ServiceImpl<DemocudrMapper, Democudr> i
     @Transactional(rollbackFor = Exception.class)
     public Long add(DemoCUDRAddDTO addDTO) {
         if (isRepeat(null, Democudr::getName, addDTO.getName())){
-           throw new ClientException(ResultCodeEnum.PRECONDITION_FAILED, "新增失败，名称已存在。请修改名称。");
+           throw new HttpStatus4xxException(ResultCodeEnum.PRECONDITION_FAILED, "新增失败，名称已存在。请修改名称。");
         }
         Democudr democudr = new Democudr();
         BeanUtils.copyProperties(addDTO, democudr);
@@ -57,7 +57,7 @@ public class DemocudrServiceImpl extends ServiceImpl<DemocudrMapper, Democudr> i
     @Transactional(rollbackFor = Exception.class)
     public void update(DemoCUDRUpdateDTO updateDTO) {
         if (isRepeat(updateDTO.getId(), Democudr::getName, updateDTO.getName())){
-           throw new ClientException(ResultCodeEnum.PRECONDITION_FAILED, "修改失败，XX已存在。请修改XX。");
+           throw new HttpStatus4xxException(ResultCodeEnum.PRECONDITION_FAILED, "修改失败，XX已存在。请修改XX。");
         }
         Democudr democudr = new Democudr();
         BeanUtils.copyProperties(updateDTO, democudr);

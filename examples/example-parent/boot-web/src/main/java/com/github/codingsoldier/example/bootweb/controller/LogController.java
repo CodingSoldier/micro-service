@@ -1,6 +1,6 @@
 package com.github.codingsoldier.example.bootweb.controller;
 
-import com.github.codingsoldier.common.exception.ClientException;
+import com.github.codingsoldier.common.exception.HttpStatus4xxException;
 import com.github.codingsoldier.starter.micrometer.tracing.config.TheadPoolTraceUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -73,7 +73,7 @@ public class LogController {
         String stackTrace = ExceptionUtils.getStackTrace(new RuntimeException("测试信息长度限制"));
         stackTrace = stackTrace.replaceAll("\r\n\t", "");
         log.info(stackTrace);
-        ClientException ex = new ClientException("测试异常长度限制");
+        HttpStatus4xxException ex = new HttpStatus4xxException("测试异常长度限制");
         if ("logEx".equals(p1)) {
             log.error("", ex);
         }

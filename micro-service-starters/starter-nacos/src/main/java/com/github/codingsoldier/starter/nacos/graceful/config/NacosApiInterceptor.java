@@ -1,6 +1,6 @@
 package com.github.codingsoldier.starter.nacos.graceful.config;
 
-import com.github.codingsoldier.common.exception.ClientException;
+import com.github.codingsoldier.common.exception.HttpStatus4xxException;
 import com.github.codingsoldier.starter.nacos.graceful.constant.Constant;
 import com.github.codingsoldier.starter.nacos.graceful.properties.NacosGracefulProperties;
 import com.github.codingsoldier.starter.nacos.util.IpUtil;
@@ -48,7 +48,7 @@ public class NacosApiInterceptor implements HandlerInterceptor {
             }
         }
         if (!isWhiteIp) {
-            throw new ClientException("ip不在白名单内，无权访问此API。");
+            throw new HttpStatus4xxException("ip不在白名单内，无权访问此API。");
         }
         return true;
     }

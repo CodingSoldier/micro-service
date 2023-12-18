@@ -1,6 +1,6 @@
 package com.github.codingsoldier.common.util.thread;
 
-import com.github.codingsoldier.common.exception.BackendServicesException;
+import com.github.codingsoldier.common.exception.HttpStatus5xxException;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.Future;
@@ -22,7 +22,7 @@ class ThreadPoolUtilTest {
     @Test
     void executeException() {
         ThreadPoolUtil.execute(() -> {
-            throw new BackendServicesException("线程池中抛出异常");
+            throw new HttpStatus5xxException("线程池中抛出异常");
         });
     }
 

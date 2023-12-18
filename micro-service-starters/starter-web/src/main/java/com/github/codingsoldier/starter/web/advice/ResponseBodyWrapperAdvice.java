@@ -1,36 +1,27 @@
 package com.github.codingsoldier.starter.web.advice;
 
-import com.github.codingsoldier.common.constant.OrderConstant;
-import com.github.codingsoldier.common.enums.ResultCodeEnum;
 import com.github.codingsoldier.common.constant.FeignConstant;
+import com.github.codingsoldier.common.constant.OrderConstant;
 import com.github.codingsoldier.common.resp.Result;
 import com.github.codingsoldier.common.util.CommonUtil;
 import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
 import com.github.codingsoldier.starter.web.annotation.NoWrapper;
 import com.github.codingsoldier.starter.web.properties.LoggingProperties;
+import java.lang.reflect.Method;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
-
-import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import static com.github.codingsoldier.common.constant.FeignConstant.PROVIDER_FUNCTION_RETURN_TYPE;
 
 /**
  * 将controller返回值包装为Result对象，以及Response日志处理
@@ -108,25 +99,6 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
         boolean isFeignRequest = CollectionUtils.isNotEmpty(valList)
                 && valList.contains(Boolean.TRUE.toString());
         if (isFeignRequest) {
-            // 返回结果是否已被 ExceptionHandler 处理过
-            boolean isExceptionHandler = returnType.hasMethodAnnotation(ExceptionHandler.class);
-            boolean methodReturnTypeChange = false;
-            RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-            if (requestAttributes != null) {
-                Object functionReturnType = requestAttributes.getAttribute(PROVIDER_FUNCTION_RETURN_TYPE, 0);
-                // controller方法的返回值类型被异常处理器改变了
-                methodReturnTypeChange = !StringUtils.equals(body.getClass().getName(),
-                        CommonUtil.objToStr(functionReturnType));
-            }
-
-            if (isExceptionHandler && methodReturnTypeChange && (body instanceof Result<?> result)) {
-                Set<Integer> notChangeCodes = FeignConstant.NOT_CHANGE_RESPONSE_STATUS_CODE_SET
-                        .stream().map(ResultCodeEnum::getCode).collect(Collectors.toSet());
-                if (!notChangeCodes.contains(result.getCode())) {
-                    log.info("feign调用，返回结果被@ExceptionHandler改变了，Result.code不在NOT_CHANGE_RESPONSE_STATUS_CODE_SET集合中，设置Response.StatusCode=HttpStatus.INTERNAL_SERVER_ERROR");
-                    response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
-                }
-            }
             log.debug("feign请求，不对返回结果进行包装。");
             return body;
         } else if (body instanceof Result) {
@@ -139,6 +111,12 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
 
         // 其他类型进行统一包装
         return Result.success(body);
+    }
+
+    public static void main(String[] args) {
+        int statusCode = CommonUtil.getResponseStatus(123);
+        HttpStatusCode httpStatusCode = HttpStatusCode.valueOf(statusCode);
+        System.out.println(httpStatusCode);
     }
 
 }

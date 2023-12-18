@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.codingsoldier.common.enums.ResultCodeEnum;
-import com.github.codingsoldier.common.exception.ClientException;
+import com.github.codingsoldier.common.exception.HttpStatus4xxException;
 import ${package.Entity}.${entity};
 import ${package.Mapper}.${table.mapperName};
 import ${package.Service}.${table.serviceName};
@@ -52,7 +52,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     @Transactional(rollbackFor = Exception.class)
     public Long add(${addDTOClassName} addDTO) {
         //if (isRepeat(null, ${entity}::getName, addDTO.getName())){
-        //    throw new ClientException(ResultCodeEnum.PRECONDITION_FAILED, "新增失败，XX已存在。请修改XX。");
+        //    throw new HttpStatus4xxException(ResultCodeEnum.PRECONDITION_FAILED, "新增失败，XX已存在。请修改XX。");
         //}
         ${entity} ${uncapFirstEntity} = new ${entity}();
         BeanUtils.copyProperties(addDTO, ${uncapFirstEntity});
@@ -64,7 +64,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     @Transactional(rollbackFor = Exception.class)
     public void update(${updateDTOClassName} updateDTO) {
         //if (isRepeat(updateDTO.getId(), ${entity}::getName, updateDTO.getName())){
-        //    throw new ClientException(ResultCodeEnum.PRECONDITION_FAILED, "修改失败，XX已存在。请修改XX。");
+        //    throw new HttpStatus4xxException(ResultCodeEnum.PRECONDITION_FAILED, "修改失败，XX已存在。请修改XX。");
         //}
         ${entity} ${uncapFirstEntity} = new ${entity}();
         BeanUtils.copyProperties(updateDTO, ${uncapFirstEntity});

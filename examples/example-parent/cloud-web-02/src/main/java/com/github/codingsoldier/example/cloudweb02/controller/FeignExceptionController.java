@@ -1,5 +1,7 @@
 package com.github.codingsoldier.example.cloudweb02.controller;
 
+import com.github.codingsoldier.common.exception.HttpStatus4xxException;
+import com.github.codingsoldier.common.exception.HttpStatus5xxException;
 import com.github.codingsoldier.common.exception.MicroServiceException;
 import com.github.codingsoldier.common.resp.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -29,11 +31,15 @@ public class FeignExceptionController {
             int i = 1 / a;
             log.info("{}", i);
         } else if (StringUtils.equals("RuntimeException", name)) {
-            throw new RuntimeException("RuntimeException");
+            throw new RuntimeException("resultTypeNotChange-RuntimeException");
+        } else if (StringUtils.equals("HttpStatus4xxException", name)) {
+            throw new HttpStatus4xxException("resultTypeNotChange-测试HttpStatus4xxException异常");
+        } else if (StringUtils.equals("HttpStatus5xxException", name)) {
+            throw new HttpStatus5xxException("resultTypeNotChange-测试HttpStatus5xxException异常");
         } else if (StringUtils.equals("MicroServiceException", name)) {
-            throw new MicroServiceException("测试MicroServiceException异常");
+            throw new MicroServiceException(40020, "resultTypeNotChange-测试MicroServiceException异常");
         } else if (StringUtils.equals("Exception", name)) {
-            throw new Exception("测试Exception");
+            throw new Exception("resultTypeNotChange-测试Exception");
         }
         HashMap<String, Object> resp = new HashMap<>();
         resp.put("key", "执行完了");
@@ -50,6 +56,10 @@ public class FeignExceptionController {
             log.info("{}", i);
         } else if (StringUtils.equals("RuntimeException", name)) {
             throw new RuntimeException("resultTypeNotChange-RuntimeException");
+        } else if (StringUtils.equals("HttpStatus4xxException", name)) {
+            throw new HttpStatus4xxException("resultTypeNotChange-测试HttpStatus4xxException异常");
+        } else if (StringUtils.equals("HttpStatus5xxException", name)) {
+            throw new HttpStatus5xxException("resultTypeNotChange-测试HttpStatus5xxException异常");
         } else if (StringUtils.equals("MicroServiceException", name)) {
             throw new MicroServiceException(40020, "resultTypeNotChange-测试MicroServiceException异常");
         } else if (StringUtils.equals("Exception", name)) {

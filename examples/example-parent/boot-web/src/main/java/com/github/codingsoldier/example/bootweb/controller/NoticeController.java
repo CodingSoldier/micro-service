@@ -1,6 +1,6 @@
 package com.github.codingsoldier.example.bootweb.controller;
 
-import com.github.codingsoldier.common.exception.BackendServicesException;
+import com.github.codingsoldier.common.exception.HttpStatus5xxException;
 import com.github.codingsoldier.starter.web.notice.workweixin.WorkWxUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,7 @@ public class NoticeController {
 
     @GetMapping(value = "wx", produces = MediaType.APPLICATION_JSON_VALUE)
     public String wx(HttpServletRequest request) {
-        WorkWxUtil.sendAsynchronous(new BackendServicesException("测试"));
+        WorkWxUtil.sendAsynchronous(new HttpStatus5xxException("测试"));
         return "success";
     }
 

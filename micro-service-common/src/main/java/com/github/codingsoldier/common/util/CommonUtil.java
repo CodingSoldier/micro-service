@@ -24,10 +24,10 @@ public class CommonUtil {
      */
     public static int getResponseStatus(int resultCode) {
         String codeStr = String.valueOf(resultCode);
-        boolean startWith300 = codeStr.startsWith("3") && codeStr.length() >= 3 && resultCode >= 300;
-        boolean startWith400 = codeStr.startsWith("4") && codeStr.length() >= 3 && resultCode >= 400;
-        boolean startWith500 = codeStr.startsWith("5") && codeStr.length() >= 3 && resultCode >= 500;
-        if (startWith300 || startWith400 || startWith500) {
+        boolean startWith3xx = codeStr.startsWith("3") && codeStr.length() >= 3 && resultCode >= 300;
+        boolean startWith4xx = codeStr.startsWith("4") && codeStr.length() >= 3 && resultCode >= 400;
+        boolean startWith5xx = codeStr.startsWith("5") && codeStr.length() >= 3 && resultCode >= 500;
+        if (startWith3xx || startWith4xx || startWith5xx) {
             String prefix3 = codeStr.substring(0, 3);
             return Integer.parseInt(prefix3);
         }

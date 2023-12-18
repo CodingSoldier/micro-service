@@ -4,7 +4,7 @@ package com.github.codingsoldier.common.exception;
 import com.github.codingsoldier.common.enums.ResultCodeEnum;
 
 /**
- * 基础异常类，建议不要直接使用此类，建议使用ClientException或者BackendServicesException
+ * 基础异常类，建议不要直接使用此类，建议使用HttpStatus4xxException、HttpStatus5xxException
  *
  * @author cpq
  * @since 2022-03-17 11:28:55

@@ -3,8 +3,8 @@ package com.github.codingsoldier.starter.web.advice;
 
 import com.github.codingsoldier.common.constant.OrderConstant;
 import com.github.codingsoldier.common.enums.ResultCodeEnum;
-import com.github.codingsoldier.common.exception.BackendServicesException;
-import com.github.codingsoldier.common.exception.ClientException;
+import com.github.codingsoldier.common.exception.HttpStatus5xxException;
+import com.github.codingsoldier.common.exception.HttpStatus4xxException;
 import com.github.codingsoldier.common.exception.MicroServiceException;
 import com.github.codingsoldier.common.exception.feign.FeignResultErrorException;
 import com.github.codingsoldier.common.resp.Result;
@@ -45,16 +45,16 @@ import java.util.Set;
 @Order(OrderConstant.ADVICE_EXCEPTION)
 public class ExceptionHandlerAdvice {
 
-    @ExceptionHandler(ClientException.class)
-    public Result<Object> clientException(final ClientException ex, HttpServletResponse response) {
-        log.error("捕获ClientException", ex);
+    @ExceptionHandler(HttpStatus4xxException.class)
+    public Result<Object> httpStatus4xxException(final HttpStatus4xxException ex, HttpServletResponse response) {
+        log.error("捕获HttpStatus4xxException", ex);
         response.setStatus(CommonUtil.getResponseStatus(ex.getCode()));
         return Result.fail(ex.getCode(), ex.getMessage());
     }
 
-    @ExceptionHandler(BackendServicesException.class)
-    public Result<Object> backendServicesException(final BackendServicesException ex, HttpServletResponse response) {
-        log.error("捕获BackendServicesException", ex);
+    @ExceptionHandler(HttpStatus5xxException.class)
+    public Result<Object> httpStatus5xxException(final HttpStatus5xxException ex, HttpServletResponse response) {
+        log.error("捕获HttpStatus5xxException", ex);
         response.setStatus(CommonUtil.getResponseStatus(ex.getCode()));
         return Result.fail(ex.getCode(), ex.getMessage());
     }
