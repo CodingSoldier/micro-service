@@ -20,6 +20,8 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.BeanUtils;
@@ -34,6 +36,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/basic")
 public class BasicController {
+
+    @GetMapping(value = "/timeout", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String timeout(@RequestParam("time")Long time) throws Exception {
+        TimeUnit.SECONDS.sleep(time);
+        return UUID.randomUUID().toString();
+    }
 
     /**
      * knife4j-openapi3“是否必须”是由 @RequestParam(required = )决定，而不是@Parameters()

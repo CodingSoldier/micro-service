@@ -3,7 +3,6 @@ package com.github.codingsoldier.starter.web.advice;
 import com.github.codingsoldier.common.constant.FeignConstant;
 import com.github.codingsoldier.common.constant.OrderConstant;
 import com.github.codingsoldier.common.resp.Result;
-import com.github.codingsoldier.common.util.CommonUtil;
 import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
 import com.github.codingsoldier.starter.web.annotation.NoWrapper;
 import com.github.codingsoldier.starter.web.properties.LoggingProperties;
@@ -12,9 +11,9 @@ import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -33,6 +32,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 @Order(OrderConstant.ADVICE_WRAPPER)
 @RestControllerAdvice
 public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
+
+    @Value("${server.servlet.context-path:}")
+    private String contextPath;
 
     private final LoggingProperties properties;
 
@@ -71,6 +73,12 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
             return null;
         }
 
+        String actuatorPrefix = contextPath + "/actuator";
+        String uriPath = request.getURI().getPath();
+        if (uriPath.startsWith(actuatorPrefix)) {
+            return body;
+        }
+
         // 封装为一个方法仅是为了方便打印返回结果
         Object bodyObj = handleBody(body, returnType, selectedConverterType, request, response);
 
@@ -99,7 +107,7 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
         boolean isFeignRequest = CollectionUtils.isNotEmpty(valList)
                 && valList.contains(Boolean.TRUE.toString());
         if (isFeignRequest) {
-            log.debug("feign请求，不对返回结果进行包装。");
+            log.debug("feign请求，不对返回结果进行包装。path={}", request.getURI().getPath());
             return body;
         } else if (body instanceof Result) {
             return body;
@@ -113,10 +121,5 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
         return Result.success(body);
     }
 
-    public static void main(String[] args) {
-        int statusCode = CommonUtil.getResponseStatus(123);
-        HttpStatusCode httpStatusCode = HttpStatusCode.valueOf(statusCode);
-        System.out.println(httpStatusCode);
-    }
 
 }

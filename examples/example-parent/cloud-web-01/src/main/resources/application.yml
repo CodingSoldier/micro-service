@@ -24,10 +24,17 @@ management:
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: health,info,prometheus,metrics,metrics-requiredMetricName
+        exclude:
+    # 自定义端点的启用和关闭
+    enabled-by-default: true
   endpoint:
     health:
       show-details: ALWAYS
+  # 对外暴露tag
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
 # mybatis-plus 配置
 mybatis-plus:
