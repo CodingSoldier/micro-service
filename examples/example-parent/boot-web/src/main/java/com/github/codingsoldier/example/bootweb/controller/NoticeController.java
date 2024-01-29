@@ -1,7 +1,7 @@
 package com.github.codingsoldier.example.bootweb.controller;
 
 import com.github.codingsoldier.common.exception.HttpStatus5xxException;
-import com.github.codingsoldier.starter.web.notice.workweixin.WorkWxUtil;
+import com.github.codingsoldier.starter.web.notice.WorkWxUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;

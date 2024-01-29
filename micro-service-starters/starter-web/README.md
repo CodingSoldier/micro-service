@@ -28,6 +28,8 @@ micro-service:
         responseBodyLog: true
         # 是否包含请求头信息。默认false
         includeHeaders: true
+        # 排除URI路径，使用PathPatternParser匹配
+        excludeURIPath: /actuator/**,/*/actuator/**
       # 企业微信消息
       work-weixin:
         # 是否启用企业微信

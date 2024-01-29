@@ -84,7 +84,10 @@ public class ResponseBodyWrapperAdvice implements ResponseBodyAdvice<Object> {
 
         // 打印responseBody
         try {
-            if (properties.isRequestResponseLog() || properties.isResponseBodyLog()) {
+            boolean isExcludeLog = LogRequestAdvice.isExclude(request.getURI().getPath(),
+                properties.getExcludeURIPath());
+            if (!isExcludeLog && properties.isRequestResponseLog()
+                || !isExcludeLog && properties.isResponseBodyLog()) {
                 String bodyStr = ObjectMapperUtil.writeValueAsString(bodyObj);
                 log.info("打印ResponseBody信息 = {}", bodyStr);
             }

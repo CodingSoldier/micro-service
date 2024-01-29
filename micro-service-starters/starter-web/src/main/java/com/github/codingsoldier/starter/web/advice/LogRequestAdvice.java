@@ -4,13 +4,17 @@ import com.github.codingsoldier.common.constant.OrderConstant;
 import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
 import com.github.codingsoldier.starter.web.properties.LoggingProperties;
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.server.PathContainer;
 import org.springframework.lang.Nullable;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestBodyAdvice;
@@ -18,6 +22,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestBodyAdvice;
 import java.lang.reflect.Type;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import org.springframework.web.util.pattern.PathPatternParser;
 
 /**
  * Request日志
@@ -45,6 +50,10 @@ public class LogRequestAdvice extends CommonsRequestLoggingFilter implements Req
      */
     @Override
     protected boolean shouldLog(HttpServletRequest request) {
+        boolean isExclude = isExclude(request.getRequestURI(), properties.getExcludeURIPath());
+        if (isExclude) {
+            return false;
+        }
         return properties.isRequestResponseLog() || properties.isRequestLog();
     }
 
@@ -70,7 +79,7 @@ public class LogRequestAdvice extends CommonsRequestLoggingFilter implements Req
     @Override
     protected void afterRequest(HttpServletRequest request, String message) {
         if (!this.logPrinted) {
-            log.info("没有requestBody，在请求完成后打印，requestUri = {}，queryString解码 = {}，method = {}", this.requestUri, decodeQueryString, this.methodName);
+            log.info("在请求完成后打印，requestUri = {}，requestBody为空，queryString解码 = {}，method = {}", this.requestUri, decodeQueryString, this.methodName);
             this.logPrinted = true;
         }
     }
@@ -119,6 +128,27 @@ public class LogRequestAdvice extends CommonsRequestLoggingFilter implements Req
             Type targetType,
             Class<? extends HttpMessageConverter<?>> converterType) {
         return body;
+    }
+
+    /**
+     * 是否排除uri
+     * @param requestURI requestURI
+     * @param excludeURIPath excludeURIPath
+     * @return 是否排除uri
+     */
+    public static boolean isExclude(String requestURI, List<String> excludeURIPath) {
+        PathPatternParser pathPatternParser = new PathPatternParser();
+        boolean isExclude = false;
+        if (CollectionUtils.isNotEmpty(excludeURIPath)) {
+            for (String exclude : excludeURIPath) {
+                isExclude = pathPatternParser.parse(exclude)
+                    .matches(PathContainer.parsePath(requestURI));
+                if (isExclude) {
+                    break;
+                }
+            }
+        }
+        return isExclude;
     }
 
 }

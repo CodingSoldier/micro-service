@@ -1,4 +1,4 @@
-package com.github.codingsoldier.starter.web.notice.workweixin;
+package com.github.codingsoldier.starter.web.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

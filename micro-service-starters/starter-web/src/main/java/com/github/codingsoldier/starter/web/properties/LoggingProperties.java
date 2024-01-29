@@ -1,5 +1,6 @@
 package com.github.codingsoldier.starter.web.properties;
 
+import java.util.List;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -33,6 +34,11 @@ public class LoggingProperties {
      */
     private boolean includeHeaders = false;
 
+    /**
+     * 排除URI路径，使用PathPatternParser匹配
+     */
+    private List<String> excludeURIPath = List.of("/actuator/**", "/*/actuator/**");
+
     public boolean isRequestResponseLog() {
         return requestResponseLog;
     }
@@ -64,4 +70,13 @@ public class LoggingProperties {
     public void setIncludeHeaders(boolean includeHeaders) {
         this.includeHeaders = includeHeaders;
     }
+
+    public List<String> getExcludeURIPath() {
+        return excludeURIPath;
+    }
+
+    public void setExcludeURIPath(List<String> excludeURIPath) {
+        this.excludeURIPath = excludeURIPath;
+    }
+
 }

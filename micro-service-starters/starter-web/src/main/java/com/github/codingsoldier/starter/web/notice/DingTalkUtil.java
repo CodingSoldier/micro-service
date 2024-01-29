@@ -1,7 +1,8 @@
-package com.github.codingsoldier.starter.web.notice.dingtalk;
+package com.github.codingsoldier.starter.web.notice;
 
 import com.github.codingsoldier.common.util.OkHttpUtil;
 import com.github.codingsoldier.starter.web.context.ApplicationContextHolder;
+import com.github.codingsoldier.starter.web.properties.DingTalkProperties;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.Call;

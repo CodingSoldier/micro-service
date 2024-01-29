@@ -7,13 +7,13 @@
         },
         {
             "name": "micro-service.starter.web.work-weixin",
-            "type": "com.github.codingsoldier.starter.web.notice.workweixin.WorkWeiXinProperties",
-            "sourceType": "com.github.codingsoldier.starter.web.notice.workweixin.WorkWeiXinProperties"
+            "type": "com.github.codingsoldier.starter.web.properties.WorkWeiXinProperties",
+            "sourceType": "com.github.codingsoldier.starter.web.properties.WorkWeiXinProperties"
         },
         {
             "name": "micro-service.starter.web.ding-talk",
-            "type": "com.github.codingsoldier.starter.web.notice.dingtalk.DingTalkProperties",
-            "sourceType": "com.github.codingsoldier.starter.web.notice.dingtalk.DingTalkProperties"
+            "type": "com.github.codingsoldier.starter.web.properties.DingTalkProperties",
+            "sourceType": "com.github.codingsoldier.starter.web.properties.DingTalkProperties"
         }
     ],
     "properties": [
@@ -64,73 +64,80 @@
             "defaultValue": false
         },
         {
+            "name": "micro-service.starter.web.logging.excludeURIPath",
+            "type": "java.util.List",
+            "description": "排除URI路径，使用PathPatternParser匹配，默认值：/actuator/**, /*/actuator/**",
+            "sourceType": "com.github.codingsoldier.starter.web.properties.LoggingProperties",
+            "defaultValue": "/actuator/**,/*/actuator/**"
+        },
+        {
             "name": "micro-service.starter.web.work-weixin.enable",
             "type": "java.lang.Boolean",
             "description": "是否启用企业微信",
-            "sourceType": "com.github.codingsoldier.starter.web.notice.workweixin.WorkWeiXinProperties",
+            "sourceType": "com.github.codingsoldier.starter.web.properties.WorkWeiXinProperties",
             "defaultValue": false
         },
         {
             "name": "micro-service.starter.web.work-weixin.key",
             "type": "java.lang.String",
             "description": "企业微信机器人webhook-url key",
-            "sourceType": "com.github.codingsoldier.starter.web.notice.workweixin.WorkWeiXinProperties",
+            "sourceType": "com.github.codingsoldier.starter.web.properties.WorkWeiXinProperties",
             "defaultValue": ""
         },
         {
             "name": "micro-service.starter.web.work-weixin.contentMaxLength",
             "type": "java.lang.Integer",
             "description": "信息最大长度，最多4000个字符",
-            "sourceType": "com.github.codingsoldier.starter.web.notice.workweixin.WorkWeiXinProperties",
+            "sourceType": "com.github.codingsoldier.starter.web.properties.WorkWeiXinProperties",
             "defaultValue": 1200
         },
         {
             "name": "micro-service.starter.web.work-weixin.title",
             "type": "java.lang.String",
             "description": "标题",
-            "sourceType": "com.github.codingsoldier.starter.web.notice.workweixin.WorkWeiXinProperties",
+            "sourceType": "com.github.codingsoldier.starter.web.properties.WorkWeiXinProperties",
             "defaultValue": "标题"
         },
         {
             "name": "micro-service.starter.web.work-weixin.titleColor",
             "type": "java.lang.String",
             "description": "标题颜色（只支持3种内置颜色） info 绿色 comment 灰色 warning 橙红色",
-            "sourceType": "com.github.codingsoldier.starter.web.notice.workweixin.WorkWeiXinProperties",
+            "sourceType": "com.github.codingsoldier.starter.web.properties.WorkWeiXinProperties",
             "defaultValue": ""
         },
         {
             "name": "micro-service.starter.web.ding-talk.enable",
             "type": "java.lang.Boolean",
             "description": "是否启用钉钉机器人",
-            "sourceType": "com.github.codingsoldier.starter.web.notice.dingtalk.DingTalkProperties",
+            "sourceType": "com.github.codingsoldier.starter.web.properties.DingTalkProperties",
             "defaultValue": false
         },
         {
             "name": "micro-service.starter.web.ding-talk.contentMaxLength",
             "type": "java.lang.Integer",
             "description": "信息最大长度",
-            "sourceType": "com.github.codingsoldier.starter.web.notice.dingtalk.DingTalkProperties",
+            "sourceType": "com.github.codingsoldier.starter.web.properties.DingTalkProperties",
             "defaultValue": 5000
         },
         {
             "name": "micro-service.starter.web.ding-talk.title",
             "type": "java.lang.String",
             "description": "标题",
-            "sourceType": "com.github.codingsoldier.starter.web.notice.dingtalk.DingTalkProperties",
+            "sourceType": "com.github.codingsoldier.starter.web.properties.DingTalkProperties",
             "defaultValue": "标题"
         },
         {
             "name": "micro-service.starter.web.ding-talk.secret",
             "type": "java.lang.String",
             "description": "加签",
-            "sourceType": "com.github.codingsoldier.starter.web.notice.dingtalk.DingTalkProperties",
+            "sourceType": "com.github.codingsoldier.starter.web.properties.DingTalkProperties",
             "defaultValue": ""
         },
         {
             "name": "micro-service.starter.web.ding-talk.accessToken",
             "type": "java.lang.String",
             "description": "access_token",
-            "sourceType": "com.github.codingsoldier.starter.web.notice.dingtalk.DingTalkProperties",
+            "sourceType": "com.github.codingsoldier.starter.web.properties.DingTalkProperties",
             "defaultValue": ""
         }
     ],
