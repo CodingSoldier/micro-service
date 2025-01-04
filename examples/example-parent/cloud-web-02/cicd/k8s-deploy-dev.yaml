@@ -37,7 +37,7 @@ spec:
         - name: JVM_OPTIONS
           value: -XX:+UseZGC
         - name: PROJECT_ARGUMENTS
-          value: --spring.cloud.nacos.server-addr=192.168.1.3:8848
+          value: --spring.cloud.nacos.server-addr=127.0.0.1:8848
         # 资源限制
         resources:
           requests:

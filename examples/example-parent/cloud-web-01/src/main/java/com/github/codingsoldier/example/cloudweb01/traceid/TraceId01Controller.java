@@ -53,5 +53,11 @@ public class TraceId01Controller {
         return id;
     }
 
+    @GetMapping(value = "/thread/ex", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String threadEx(String name) {
+        web02TraceidClient.threadEx(name);
+        return web02TraceidClient.threadEx(name);
+    }
+
 
 }

@@ -16,4 +16,7 @@ public interface Web02TraceidClient {
 
     @GetMapping(value = "/throw/ex", produces = MediaType.APPLICATION_JSON_VALUE)
     String throwEx(@RequestParam("name") String name);
+
+    @GetMapping(value = "/thread/ex", produces = MediaType.APPLICATION_JSON_VALUE)
+    String threadEx(@RequestParam("name") String name);
 }

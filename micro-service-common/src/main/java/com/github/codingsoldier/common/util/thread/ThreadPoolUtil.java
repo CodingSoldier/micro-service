@@ -40,7 +40,7 @@ public class ThreadPoolUtil {
 
         ThreadFactory customThreadFactory = new CustomThreadFactory("ThreadPoolUtil-");
 
-        LinkedBlockingQueue<Runnable> linkedBlockingQueue = new LinkedBlockingQueue<>(5000000);
+        LinkedBlockingQueue<Runnable> linkedBlockingQueue = new LinkedBlockingQueue<>(1000);
         executor = new ThreadPoolExecutor(cpuCores, maxPool,
                 60L, TimeUnit.SECONDS,
                 linkedBlockingQueue,

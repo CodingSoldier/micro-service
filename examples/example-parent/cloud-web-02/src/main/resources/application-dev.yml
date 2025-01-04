@@ -3,7 +3,7 @@ spring:
     sentinel:
       transport:
         # 配置 sentinel dashboard 地址
-        dashboard: 192.168.1.3:10102
+        dashboard: 127.0.0.1:10102
         # 配置端口，启动一个 Http Server, 该 Server 会与 Sentinel 控制台做交互
         port: 10112
       # 服务启动直接建立心跳连接
@@ -34,6 +34,12 @@ spring:
       type: WEB
     # 指定 zipkin 的地址
     base-url: http://127.0.0.1:10103
+
+# Feign 的相关配置
+feign:
+  # 打开 Sentinel 对 Feign 的支持
+  sentinel:
+    enabled: true
 
 logging:
   # logback-spring.xml 已在 starter-logback 中配置好了，无需新建

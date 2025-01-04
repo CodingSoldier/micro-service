@@ -1,8 +1,9 @@
 package com.github.codingsoldier.starter.web.properties;
 
-import java.util.List;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
 
 /**
  * 打印日志配置

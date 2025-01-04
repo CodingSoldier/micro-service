@@ -108,26 +108,42 @@ spring:
 2、添加配置
 
 ```yxml
-# Feign 的相关配置
-feign:
-  # feign 开启 gzip 压缩
-  compression:
-    # 对请求进行压缩
-    request:
-      enabled: true
-      # 针对以下类型的数据进行压缩
-      mime-types: text/xml,application/xml,application/json
-      # 大于1M的数据才进行压缩
-      min-request-size: 1024
-    # 响应时进行压缩
-    response:
-      enabled: true
-  # 禁用默认的 http
-  httpclient:
-    enabled: false
-  # 启用 okhttp
-  okhttp:
-    enabled: true
+spring:
+  cloud:
+    # 禁用ribbon。 Spring Cloud Loadbalancer 将替代 ribbon
+    loadbalancer:
+      ribbon:
+        enable: false
+    # openfeign 的相关配置
+    openfeign:
+      # feign 开启 gzip 压缩
+      compression:
+        # 对请求进行压缩
+        request:
+          enabled: true
+          # 针对以下类型的数据进行压缩
+          mime-types: text/xml,application/xml,application/json
+          # 大于1M的数据才进行压缩
+          min-request-size: 1024
+        # 响应时进行压缩
+        response:
+          enabled: true
+      client:
+        config:
+          default:
+            # 日志级别，取值：NONE、BASIC、HEADERS、FULL，源码位置 feign.Logger.Level
+            loggerLevel: BASIC
+      #        # feign默认超时时间
+      #        connectTimeout: 2000
+      #        readTimeout: 5000
+      #        writeTimeout: 5000
+      # 禁用默认的 http
+      httpclient:
+        enabled: false
+      # 启用 okhttp。
+      # feign.okhttp.OkHttpClient.execute打断点查看是否启用okhttp
+      okhttp:
+        enabled: true
 ```
 
 3、启动类添加 @EnableFeignClients("com.github.codingsoldier.example")
