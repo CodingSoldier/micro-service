@@ -39,12 +39,12 @@ spring:
 #      # https://docs.spring.io/spring-cloud-sleuth/docs/current/reference/html/integrations.html#sleuth-reactor-integration
 #      # 使用 SleuthLog.log 打印日志
 #      instrumentation-type: MANUAL
-  zipkin:
-    sender:
-      # 指定通过什么类型发送消息 默认是 web
-      type: WEB
-    # 指定 zipkin 的地址
-    base-url: http://192.168.1.4:10103
+#  zipkin:
+#    sender:
+#      # 指定通过什么类型发送消息 默认是 web
+#      type: WEB
+#    # 指定 zipkin 的地址
+#    base-url: http://192.168.1.4:10103
 
 
 #starter:
