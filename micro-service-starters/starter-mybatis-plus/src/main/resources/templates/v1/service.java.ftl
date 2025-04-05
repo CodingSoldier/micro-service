@@ -7,11 +7,11 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import ${package.Entity}.${entity};
 import ${package.Mapper}.${table.mapperName};
 import ${superServiceImplClassPackage};
-import ${packageDTO}.${addDTOClassName};
-import ${packageDTO}.${pageQueryDTOClassName};
-import ${packageDTO}.${updateDTOClassName};
-import ${packageVO}.${detailVOClassName};
-import ${packageVO}.${pageVOClassName};
+import ${customParam.packageDTO}.${customParam.addDTOClassName};
+import ${customParam.packageDTO}.${customParam.pageQueryDTOClassName};
+import ${customParam.packageDTO}.${customParam.updateDTOClassName};
+import ${customParam.packageVO}.${customParam.detailVOClassName};
+import ${customParam.packageVO}.${customParam.pageVOClassName};
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
   private ${table.mapperName} ${uncapFirstMapper};
 
   @Transactional(rollbackFor = Exception.class)
-  public Long add(${addDTOClassName} addDTO) {
+  public Long add(${customParam.addDTOClassName} addDTO) {
     //if (isRepeat(null, ${entity}::getName, addDTO.getName())){
     //    throw new HttpStatus4xxException(ResultCodeEnum.PRECONDITION_FAILED, "新增失败，XX已存在。请修改XX。");
     //}
@@ -54,7 +54,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
   }
 
   @Transactional(rollbackFor = Exception.class)
-  public void update(${updateDTOClassName} updateDTO) {
+  public void update(${customParam.updateDTOClassName} updateDTO) {
     //if (isRepeat(updateDTO.getId(), ${entity}::getName, updateDTO.getName())){
     //    throw new HttpStatus4xxException(ResultCodeEnum.PRECONDITION_FAILED, "修改失败，XX已存在。请修改XX。");
     //}
@@ -68,16 +68,16 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     return super.removeById(id);
   }
 
-  public ${detailVOClassName} detail(Long id) {
+  public ${customParam.detailVOClassName} detail(Long id) {
     ${entity} ${uncapFirstEntity} = super.getById(id);
-    ${detailVOClassName} detailVO = new ${detailVOClassName}();
+    ${customParam.detailVOClassName} detailVO = new ${customParam.detailVOClassName}();
     BeanUtils.copyProperties(${uncapFirstEntity}, detailVO);
     return detailVO;
   }
 
-  public Page<${pageVOClassName}> pageQuery(${pageQueryDTOClassName} queryDTO) {
-    Page<${pageVOClassName}> p = new Page<>(queryDTO.getCurrent(), queryDTO.getSize());
-    Page<${pageVOClassName}> pageData = ${uncapFirstMapper}.pageQuery(p, queryDTO);
+  public Page<${customParam.pageVOClassName}> pageQuery(${customParam.pageQueryDTOClassName} queryDTO) {
+    Page<${customParam.pageVOClassName}> p = new Page<>(queryDTO.getCurrent(), queryDTO.getSize());
+    Page<${customParam.pageVOClassName}> pageData = ${uncapFirstMapper}.pageQuery(p, queryDTO);
     return pageData;
   }
 

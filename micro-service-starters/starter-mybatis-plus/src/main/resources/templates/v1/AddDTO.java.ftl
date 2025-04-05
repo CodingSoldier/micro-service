@@ -1,4 +1,4 @@
-package ${packageDTO};
+package ${customParam.packageDTO};
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -22,7 +22,7 @@ import ${pkg};
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(name = "${table.comment!}-新增请求参数", description = "${table.comment!}-新增请求参数")
-public class ${addDTOClassName} implements Serializable {
+public class ${customParam.addDTOClassName} implements Serializable {
 
   @Serial
   private static final long serialVersionUID = 1L;

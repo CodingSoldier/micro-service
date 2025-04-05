@@ -1,4 +1,4 @@
-package ${packageDTO};
+package ${customParam.packageDTO};
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
@@ -22,7 +22,7 @@ import ${pkg};
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(name = "${table.comment!}-修改请求参数", description = "${table.comment!}-修改请求参数")
-public class ${updateDTOClassName} implements Serializable {
+public class ${customParam.updateDTOClassName} implements Serializable {
 
   @Serial
 	private static final long serialVersionUID = 1L;

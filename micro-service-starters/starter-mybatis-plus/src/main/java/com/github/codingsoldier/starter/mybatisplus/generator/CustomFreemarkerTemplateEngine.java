@@ -19,13 +19,12 @@ import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.config.builder.CustomFile;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
-import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.File;
 import java.util.List;
 import java.util.Map;
+import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Freemarker 模板引擎实现文件输出
@@ -36,26 +35,35 @@ import java.util.Map;
 
 public class CustomFreemarkerTemplateEngine extends FreemarkerTemplateEngine {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CustomFreemarkerTemplateEngine.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(
+      CustomFreemarkerTemplateEngine.class);
 
-    private final String dtoFtl = "DTO.java.ftl";
-    private final String voFtl = "VO.java.ftl";
+  private final String dtoFtl = "DTO.java.ftl";
+  private final String voFtl = "VO.java.ftl";
 
-    @Override
-    protected void outputCustomFile(@NotNull List<CustomFile> customFiles, @NotNull TableInfo tableInfo, @NotNull Map<String, Object> objectMap) {
-        String parentPath = getPathInfo(OutputFile.parent);
-        customFiles.forEach(file -> {
-            LOGGER.debug("file = {}", file);
-            String filePath = parentPath;
-            if (file.getTemplatePath().endsWith(dtoFtl)) {
-                // dto的输出目录
-                filePath = filePath + File.separator + "dto";
-            } else if (file.getTemplatePath().endsWith(voFtl)) {
-                filePath = filePath + File.separator + "vo";
-            }
-            String fileName = filePath + File.separator + file.getFileName() + ".java";
-            outputFile(new File(fileName), objectMap, file.getTemplatePath(), file.isFileOverride());
-        });
-    }
+  /**
+   * dto、vo文件输出
+   *
+   * @param customFiles 自定义模板文件列表
+   * @param tableInfo   表信息
+   * @param objectMap   渲染数据
+   */
+  @Override
+  protected void outputCustomFile(@NotNull List<CustomFile> customFiles,
+      @NotNull TableInfo tableInfo, @NotNull Map<String, Object> objectMap) {
+    String parentPath = getPathInfo(OutputFile.parent);
+    customFiles.forEach(file -> {
+      LOGGER.debug("file = {}", file);
+      String filePath = parentPath;
+      if (file.getTemplatePath().endsWith(dtoFtl)) {
+        // dto的输出目录
+        filePath = filePath + File.separator + "dto";
+      } else if (file.getTemplatePath().endsWith(voFtl)) {
+        filePath = filePath + File.separator + "vo";
+      }
+      String fileName = filePath + File.separator + file.getFileName() + ".java";
+      outputFile(new File(fileName), objectMap, file.getTemplatePath(), file.isFileOverride());
+    });
+  }
 
 }

@@ -11,9 +11,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 /**
- * @Import 的作用：当CpqRedisAutoConfiguration注入IOC容器时，将CustomMetaObjectHandler也注入IOC容器
- * proxyBeanMethods = false 的作用：每次从 IOC 容器获取 MybatisAutoConfiguration 实例，创建一个新的bean
  * @author cpq
+ * @Import 的作用：当CpqRedisAutoConfiguration注入IOC容器时，将CustomMetaObjectHandler也注入IOC容器 proxyBeanMethods
+ * = false 的作用：每次从 IOC 容器获取 MybatisAutoConfiguration 实例，创建一个新的bean
  * @since 2022-03-17 11:28:55
  */
 @Import({CustomMetaObjectHandler.class})
@@ -21,18 +21,19 @@ import org.springframework.context.annotation.Import;
 @ConditionalOnStarterMybatisPlusEnabled
 public class StarterMybatisPlusAutoConfiguration {
 
-    private static final Logger logger = LoggerFactory.getLogger(StarterMybatisPlusAutoConfiguration.class);
+  private static final Logger logger = LoggerFactory.getLogger(
+      StarterMybatisPlusAutoConfiguration.class);
 
-    @Bean
-    public MybatisPlusInterceptor mybatisPlusInterceptor() {
-        if (logger.isDebugEnabled()) {
-            logger.debug("创建 IOC Bean mybatisPlusInterceptor");
-        }
-        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
-        // 新的分页插件
-        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
-        return interceptor;
+  @Bean
+  public MybatisPlusInterceptor mybatisPlusInterceptor() {
+    if (logger.isDebugEnabled()) {
+      logger.debug("创建 IOC Bean mybatisPlusInterceptor");
     }
+    MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+    // 新的分页插件
+    interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
+    return interceptor;
+  }
 
 
 }

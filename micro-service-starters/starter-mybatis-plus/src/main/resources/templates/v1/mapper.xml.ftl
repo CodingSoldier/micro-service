@@ -36,7 +36,7 @@
     </sql>
 </#if>
 
-    <select id="pageQuery" resultType="${packageVO}.${pageVOClassName}">
+    <select id="pageQuery" resultType="${customParam.packageVO}.${customParam.pageVOClassName}">
         SELECT *
         FROM ${table.name}
         <where>

@@ -2,12 +2,12 @@ package ${package.Controller};
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.codingsoldier.common.resp.Result;
-import ${packageDTO}.${addDTOClassName};
-import ${packageDTO}.${pageQueryDTOClassName};
-import ${packageDTO}.${updateDTOClassName};
+import ${customParam.packageDTO}.${customParam.addDTOClassName};
+import ${customParam.packageDTO}.${customParam.pageQueryDTOClassName};
+import ${customParam.packageDTO}.${customParam.updateDTOClassName};
 import ${package.Service}.${table.serviceImplName};
-import ${packageVO}.${detailVOClassName};
-import ${packageVO}.${pageVOClassName};
+import ${customParam.packageVO}.${customParam.detailVOClassName};
+import ${customParam.packageVO}.${customParam.pageVOClassName};
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import io.swagger.v3.oas.annotations.Operation;
@@ -52,7 +52,7 @@ public class ${table.controllerName} {
   @ApiOperationSupport(order = 10)
   @Operation(summary = "新增", description = "返回id")
   @PostMapping("/add")
-  public Result<Long> add(@RequestBody @Valid ${addDTOClassName} addDTO) {
+  public Result<Long> add(@RequestBody @Valid ${customParam.addDTOClassName} addDTO) {
     Long id = ${uncapFirstServerName}.add(addDTO);
     return Result.success(id);
   }
@@ -60,14 +60,14 @@ public class ${table.controllerName} {
   @ApiOperationSupport(order = 20)
   @Operation(summary = "修改")
   @PostMapping("/update")
-  public Result<Void> update(@RequestBody @Valid ${updateDTOClassName} updateDTO) {
+  public Result<Void> update(@RequestBody @Valid ${customParam.updateDTOClassName} updateDTO) {
     ${uncapFirstServerName}.update(updateDTO);
     return Result.success();
   }
 
   @ApiOperationSupport(order = 30)
   @Operation(summary = "删除", description = "返回是否成功")
-  @PostMapping("/delete")
+  @DeleteMapping("/delete")
   public Result<Boolean> delete(@RequestParam("id") @Parameter(description = "主键") Long id) {
     boolean delete = ${uncapFirstServerName}.delete(id);
     return Result.success(delete);
@@ -76,16 +76,16 @@ public class ${table.controllerName} {
   @ApiOperationSupport(order = 40)
   @Operation(summary = "详情")
   @GetMapping("/detail")
-  public Result<${detailVOClassName}> detail(@RequestParam("id") @Parameter(description = "主键") Long id) {
-    ${detailVOClassName} detail = ${uncapFirstServerName}.detail(id);
+  public Result<${customParam.detailVOClassName}> detail(@RequestParam("id") @Parameter(description = "主键") Long id) {
+    ${customParam.detailVOClassName} detail = ${uncapFirstServerName}.detail(id);
     return Result.success(detail);
   }
 
   @ApiOperationSupport(order = 50)
   @Operation(summary = "分页")
   @PostMapping("/page")
-  public Result<Page<${pageVOClassName}>> pageQuery(@RequestBody ${pageQueryDTOClassName} queryDTO) {
-    Page<${pageVOClassName}> pageData = ${uncapFirstServerName}.pageQuery(queryDTO);
+  public Result<Page<${customParam.pageVOClassName}>> pageQuery(@RequestBody ${customParam.pageQueryDTOClassName} queryDTO) {
+    Page<${customParam.pageVOClassName}> pageData = ${uncapFirstServerName}.pageQuery(queryDTO);
     return Result.success(pageData);
   }
 

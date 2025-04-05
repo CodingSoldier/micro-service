@@ -1,4 +1,4 @@
-package ${packageVO};
+package ${customParam.packageVO};
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serial;
@@ -22,7 +22,7 @@ import ${pkg};
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(name = "${table.comment!}-分页响应数据", description = "${table.comment!}-分页响应数据")
-public class ${pageVOClassName} implements Serializable {
+public class ${customParam.pageVOClassName} implements Serializable {
 
   @Serial
   private static final long serialVersionUID = 1L;

@@ -1,4 +1,4 @@
-package ${packageDTO};
+package ${customParam.packageDTO};
 
 import com.github.codingsoldier.common.req.PageReq;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -28,7 +28,7 @@ import ${pkg};
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Schema(name = "${table.comment!}-分页查询参数", description = "${table.comment!}-分页查询参数")
-public class ${pageQueryDTOClassName} extends PageReq {
+public class ${customParam.pageQueryDTOClassName} extends PageReq {
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>
   <#if field.propertyName == "id">
