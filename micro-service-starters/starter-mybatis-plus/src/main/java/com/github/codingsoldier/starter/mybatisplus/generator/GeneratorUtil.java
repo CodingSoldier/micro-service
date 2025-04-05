@@ -12,6 +12,9 @@ import org.apache.commons.lang3.StringUtils;
 @Slf4j
 public class GeneratorUtil {
 
+  private GeneratorUtil() {
+  }
+
   /**
    * 没有下划线且有firstIsUpperCase
    *

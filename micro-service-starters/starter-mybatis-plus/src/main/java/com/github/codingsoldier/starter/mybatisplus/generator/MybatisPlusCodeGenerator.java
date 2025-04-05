@@ -20,8 +20,6 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import org.apache.ibatis.annotations.Mapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 代码生成器
@@ -37,7 +35,6 @@ public class MybatisPlusCodeGenerator {
   }
 
   public static final String TABLE_PREFIX = "t_";
-  private static final Logger LOGGER = LoggerFactory.getLogger(MybatisPlusCodeGenerator.class);
   public static String dbUrl;
   public static String dbUsername;
   public static String dbPassword;
@@ -53,7 +50,7 @@ public class MybatisPlusCodeGenerator {
    */
   public static void generate() {
 
-    BiConsumer<Function<String, String>, GlobalConfig.Builder> globalConfig = (scanner, builder) -> {
+    BiConsumer<Function<String, String>, GlobalConfig.Builder> globalConfig = (scanner, builder) ->
       builder.disableOpenDir()
           .outputDir(srcMainAbsolutePath + "/java")
           .author(author)
@@ -61,7 +58,6 @@ public class MybatisPlusCodeGenerator {
           .dateType(DateType.TIME_PACK)
           .commentDate("yyyy-MM-dd HH:mm:ss")
           .build();
-    };
 
     BiConsumer<Function<String, String>, PackageConfig.Builder> packageConfig = (scanner, builder) -> {
       EnumMap<OutputFile, String> pathInfo = new EnumMap<>(OutputFile.class);
@@ -74,7 +70,7 @@ public class MybatisPlusCodeGenerator {
           .build();
     };
 
-    BiConsumer<Function<String, String>, StrategyConfig.Builder> strategyConfig = (scanner, builder) -> {
+    BiConsumer<Function<String, String>, StrategyConfig.Builder> strategyConfig = (scanner, builder) ->
       builder.addInclude(tableName)
           .addTablePrefix(TABLE_PREFIX)
           .entityBuilder()
@@ -95,10 +91,7 @@ public class MybatisPlusCodeGenerator {
           .build()
           .serviceBuilder()
           .serviceImplTemplate(templatesDir + "/service.java")
-          .convertServiceImplFileName(tableInfo -> {
-            System.out.println(tableInfo);
-            return tableInfo + "Service";
-          })
+          .convertServiceImplFileName(tableInfo -> tableInfo + "Service")
           .disableService()
           .build()
           .controllerBuilder()
@@ -106,7 +99,6 @@ public class MybatisPlusCodeGenerator {
           .enableHyphenStyle()
           .enableRestStyle()
           .build();
-    };
 
     BiConsumer<Function<String, String>, InjectionConfig.Builder> injectionConfig = (scanner, builder) -> {
       String tableJavaName = GeneratorUtil.tableJavaName(tableName);
@@ -117,8 +109,8 @@ public class MybatisPlusCodeGenerator {
       String pageVOClassName = tableJavaName + "PageVO";
 
       // 自定义参数
-      Map<String, Object> customMap = new HashMap<>(16);
-      Map<String, Object> customParam = new HashMap<>(128);
+      Map<String, Object> customMap = HashMap.newHashMap(16);
+      Map<String, Object> customParam = HashMap.newHashMap(64);
       customMap.put("customParam", customParam);
       customParam.put("packageDTO", parent + ".dto");
       customParam.put("packageVO", parent + ".vo");

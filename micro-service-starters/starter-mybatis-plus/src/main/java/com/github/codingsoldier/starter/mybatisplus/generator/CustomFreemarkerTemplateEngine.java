@@ -23,8 +23,6 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Freemarker 模板引擎实现文件输出
@@ -35,11 +33,8 @@ import org.slf4j.LoggerFactory;
 
 public class CustomFreemarkerTemplateEngine extends FreemarkerTemplateEngine {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(
-      CustomFreemarkerTemplateEngine.class);
-
-  private final String dtoFtl = "DTO.java.ftl";
-  private final String voFtl = "VO.java.ftl";
+  private static final String DTO_FTL = "DTO.java.ftl";
+  private static final String VO_FTL = "VO.java.ftl";
 
   /**
    * dto、vo文件输出
@@ -55,10 +50,10 @@ public class CustomFreemarkerTemplateEngine extends FreemarkerTemplateEngine {
     customFiles.forEach(file -> {
       LOGGER.debug("file = {}", file);
       String filePath = parentPath;
-      if (file.getTemplatePath().endsWith(dtoFtl)) {
+      if (file.getTemplatePath().endsWith(DTO_FTL)) {
         // dto的输出目录
         filePath = filePath + File.separator + "dto";
-      } else if (file.getTemplatePath().endsWith(voFtl)) {
+      } else if (file.getTemplatePath().endsWith(VO_FTL)) {
         filePath = filePath + File.separator + "vo";
       }
       String fileName = filePath + File.separator + file.getFileName() + ".java";
