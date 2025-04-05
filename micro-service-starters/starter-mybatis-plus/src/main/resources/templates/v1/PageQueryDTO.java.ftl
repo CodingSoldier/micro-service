@@ -8,7 +8,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-
 <#list table.importPackages as pkg>
     <#if pkg ? starts_with("com.baomidou.mybatisplus.annotation")>
         <#continue>
@@ -32,14 +31,14 @@ import ${pkg};
 public class ${pageQueryDTOClassName} extends PageReq {
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>
-    <#if field.propertyName == "id">
-        <#continue>
-    </#if>
+  <#if field.propertyName == "id">
+    <#continue>
+  </#if>
 
-    <#if field.comment!?length gt 0>
-    @Parameter(description = "${field.comment}")
-    </#if>
-    private ${field.propertyType} ${field.propertyName};
+  <#if field.comment!?length gt 0>
+  @Parameter(description = "${field.comment}")
+  </#if>
+  private ${field.propertyType} ${field.propertyName};
 </#list>
 <#------------  END 字段循环遍历  ---------->
 

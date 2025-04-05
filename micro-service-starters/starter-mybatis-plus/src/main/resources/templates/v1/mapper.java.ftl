@@ -1,6 +1,7 @@
 package ${package.Mapper};
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import ${packageDTO}.${pageQueryDTOClassName};
 import ${packageVO}.${pageVOClassName};
 import ${package.Entity}.${entity};
@@ -25,13 +26,13 @@ interface ${table.mapperName} : ${superMapperClass}<${entity}>
 <#else>
 public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
 
-    /**
-     * 分页
-     * @param page page
-     * @param pageQueryDTO 查询参数
-     * @return 分页数据
-     */
-    IPage<${pageVOClassName}> pageQuery(IPage<?> page, @Param("pageQueryDTO") ${pageQueryDTOClassName} pageQueryDTO);
+  /**
+   * 分页
+   * @param page page
+   * @param pageQueryDTO 查询参数
+   * @return 分页数据
+   */
+  Page<${pageVOClassName}> pageQuery(IPage<?> page, @Param("pageQueryDTO") ${pageQueryDTOClassName} pageQueryDTO);
 
 }
 </#if>

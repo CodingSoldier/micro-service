@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.fill.Column;
+import org.apache.ibatis.annotations.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,139 +28,141 @@ import java.util.function.Function;
 @SuppressWarnings({"squid:S1104", "squid:S1444"})
 public class MybatisPlusCodeGenerator {
 
-    private MybatisPlusCodeGenerator() {
-    }
+  private MybatisPlusCodeGenerator() {
+  }
 
-    public static final String TABLE_PREFIX = "t_";
-    private static final Logger LOGGER = LoggerFactory.getLogger(MybatisPlusCodeGenerator.class);
-    public static String dbUrl;
-    public static String dbUsername;
-    public static String dbPassword;
-    public static String srcMainAbsolutePath;
-    public static String parent;
-    public static String author;
-    public static String tableName;
-    public static String templatesDir = "/templates/v1";
-
-
-    /**
-     * 生成文件
-     * 注意：旧文件不会被覆盖
-     */
-    public static void generate() {
-
-        String tableJavaName = GeneratorUtil.tableJavaName(tableName);
-
-        Map<String, Object> map = new HashMap<>(128);
-        Map<String, String> files = new HashMap<>(128);
-        map.put("packageDTO", parent + ".dto");
-        map.put("packageVO", parent + ".vo");
-
-        String addDTOClassName = tableJavaName + "AddDTO";
-        map.put("addDTOClassName", addDTOClassName);
-        files.put(addDTOClassName, templatesDir + "/AddDTO.java.ftl");
-
-        String updateDTOClassName = tableJavaName + "UpdateDTO";
-        map.put("updateDTOClassName", updateDTOClassName);
-        files.put(updateDTOClassName, templatesDir + "/UpdateDTO.java.ftl");
-
-        String pageQueryDTOClassName = tableJavaName + "PageQueryDTO";
-        map.put("pageQueryDTOClassName", pageQueryDTOClassName);
-        files.put(pageQueryDTOClassName, templatesDir + "/PageQueryDTO.java.ftl");
+  public static final String TABLE_PREFIX = "t_";
+  private static final Logger LOGGER = LoggerFactory.getLogger(MybatisPlusCodeGenerator.class);
+  public static String dbUrl;
+  public static String dbUsername;
+  public static String dbPassword;
+  public static String srcMainAbsolutePath;
+  public static String parent;
+  public static String author;
+  public static String tableName;
+  public static String templatesDir = "/templates/v1";
 
 
-        String detailVOClassName = tableJavaName + "DetailVO";
-        map.put("detailVOClassName", detailVOClassName);
-        files.put(detailVOClassName, templatesDir + "/DetailVO.java.ftl");
+  /**
+   * 生成文件 注意：旧文件不会被覆盖
+   */
+  public static void generate() {
 
-        String pageVOClassName = tableJavaName + "PageVO";
-        map.put("pageVOClassName", pageVOClassName);
-        files.put(pageVOClassName, templatesDir + "/PageVO.java.ftl");
+    String tableJavaName = GeneratorUtil.tableJavaName(tableName);
 
-        BiConsumer<Function<String, String>, GlobalConfig.Builder> globalConfig = (scanner, builder) -> {
-            builder.disableOpenDir()
-                    .outputDir(srcMainAbsolutePath + "/java")
-                    .author(author)
-                    .enableSpringdoc()
-                    .dateType(DateType.TIME_PACK)
-                    .commentDate("yyyy-MM-dd HH:mm:ss")
-                    .build();
-        };
+    Map<String, Object> map = new HashMap<>(128);
+    Map<String, String> files = new HashMap<>(128);
+    map.put("packageDTO", parent + ".dto");
+    map.put("packageVO", parent + ".vo");
 
-        BiConsumer<Function<String, String>, PackageConfig.Builder> packageConfig = (scanner, builder) -> {
-            EnumMap<OutputFile, String> pathInfo = new EnumMap<>(OutputFile.class);
-            builder.parent(parent)
-                    .serviceImpl("service")
-                    .mapper("mapper")
-                    .xml("mapper")
-                    .controller("controller")
-                    .pathInfo(pathInfo)
-                    .build();
-        };
+    String addDTOClassName = tableJavaName + "AddDTO";
+    map.put("addDTOClassName", addDTOClassName);
+    files.put(addDTOClassName, templatesDir + "/AddDTO.java.ftl");
 
-        BiConsumer<Function<String, String>, StrategyConfig.Builder> createTime = (scanner, builder) -> {
-            builder.addInclude(tableName)
-                    .addTablePrefix(TABLE_PREFIX)
-                    .entityBuilder()
-                    .idType(IdType.AUTO)
-                    .enableChainModel()
-                    .enableLombok()
-                    .logicDeleteColumnName("deleted")
-                    .logicDeletePropertyName("deleted")
-                    .naming(NamingStrategy.underline_to_camel)
-                    .javaTemplate(templatesDir + "/entity.java")
-                    .addTableFills(new Column("created_by", FieldFill.INSERT),
-                            new Column("created_time", FieldFill.INSERT),
-                            new Column("updated_by", FieldFill.INSERT_UPDATE),
-                            new Column("updated_time", FieldFill.INSERT_UPDATE))
-                    .build()
-                    .mapperBuilder()
-                    .mapperAnnotation(org.apache.ibatis.annotations.Mapper.class)
-                    .mapperTemplate(templatesDir + "/mapper.java")
-                    .mapperXmlTemplate(templatesDir + "/mapper.xml")
-                    .build()
-                    .serviceBuilder()
-                    .serviceImplTemplate(templatesDir + "/serviceImpl.java")
-                    .disableService()
-                    .build()
-                    .controllerBuilder()
-                    .template(templatesDir + "/controller.java")
-                    .enableHyphenStyle()
-                    .enableRestStyle()
-                    .build();
-        };
+    String updateDTOClassName = tableJavaName + "UpdateDTO";
+    map.put("updateDTOClassName", updateDTOClassName);
+    files.put(updateDTOClassName, templatesDir + "/UpdateDTO.java.ftl");
 
-        BiConsumer<Function<String, String>, InjectionConfig.Builder> injectionConfig = (scanner, builder) -> {
-            // CustomFile build = new CustomFile.Builder().fileName("Dto.java").templatePath("/template/dto.java.vm")
+    String pageQueryDTOClassName = tableJavaName + "PageQueryDTO";
+    map.put("pageQueryDTOClassName", pageQueryDTOClassName);
+    files.put(pageQueryDTOClassName, templatesDir + "/PageQueryDTO.java.ftl");
 
-            //         .packageName(modelPackagePrefix + "dto").enableFileOverride().build();
-            // consumer.customFile(
-            //         Arrays.asList(
-            //                 build,
-            //                 new CustomFile.Builder().fileName("QueryDto.java").templatePath("/template/queryDto.java.vm")
-            //                         .packageName(modelPackagePrefix + "dto").enableFileOverride().build(),
-            //                 new CustomFile.Builder().fileName("Vo.java").templatePath("/template/vo.java.vm")
-            //                         .packageName(modelPackagePrefix + "vo").enableFileOverride().build()
-            //         ));
+    String detailVOClassName = tableJavaName + "DetailVO";
+    map.put("detailVOClassName", detailVOClassName);
+    files.put(detailVOClassName, templatesDir + "/DetailVO.java.ftl");
 
-            builder.beforeOutputFile((tableInfo, objectMap) -> {
-                        LOGGER.debug("tableInfo = {}", tableInfo);
-                        LOGGER.debug("objectMap = {}", objectMap);
-                    })
-                    .customMap(map)
-                    .customFile(files)
-                    .build();
-        };
+    String pageVOClassName = tableJavaName + "PageVO";
+    map.put("pageVOClassName", pageVOClassName);
+    files.put(pageVOClassName, templatesDir + "/PageVO.java.ftl");
 
-        FastAutoGenerator.create(dbUrl, dbUsername, dbPassword)
-                .globalConfig(globalConfig)
-                .packageConfig(packageConfig)
-                .strategyConfig(createTime)
-                .injectionConfig(injectionConfig)
-                .templateEngine(new CustomFreemarkerTemplateEngine())
-                .execute();
+    BiConsumer<Function<String, String>, GlobalConfig.Builder> globalConfig = (scanner, builder) -> {
+      builder.disableOpenDir()
+          .outputDir(srcMainAbsolutePath + "/java")
+          .author(author)
+          .enableSpringdoc()
+          .dateType(DateType.TIME_PACK)
+          .commentDate("yyyy-MM-dd HH:mm:ss")
+          .build();
+    };
 
-    }
+    BiConsumer<Function<String, String>, PackageConfig.Builder> packageConfig = (scanner, builder) -> {
+      EnumMap<OutputFile, String> pathInfo = new EnumMap<>(OutputFile.class);
+      builder.parent(parent)
+          .serviceImpl("service")
+          .mapper("mapper")
+          .xml("mapper")
+          .controller("controller")
+          .pathInfo(pathInfo)
+          .build();
+    };
+
+    BiConsumer<Function<String, String>, StrategyConfig.Builder> createTime = (scanner, builder) -> {
+      builder.addInclude(tableName)
+          .addTablePrefix(TABLE_PREFIX)
+          .entityBuilder()
+          .idType(IdType.AUTO)
+          .enableChainModel()
+          .enableLombok()
+          .logicDeleteColumnName("deleted")
+          .logicDeletePropertyName("deleted")
+          .naming(NamingStrategy.underline_to_camel)
+          .javaTemplate(templatesDir + "/entity.java")
+          .addTableFills(new Column("created_by", FieldFill.INSERT),
+              new Column("created_time", FieldFill.INSERT),
+              new Column("updated_by", FieldFill.INSERT_UPDATE),
+              new Column("updated_time", FieldFill.INSERT_UPDATE))
+          .build()
+          .mapperBuilder()
+          .mapperAnnotation(Mapper.class)
+          .mapperTemplate(templatesDir + "/mapper.java")
+          .mapperXmlTemplate(templatesDir + "/mapper.xml")
+          .build()
+          .serviceBuilder()
+          .serviceImplTemplate(templatesDir + "/service.java")
+          .convertServiceImplFileName(tableInfo -> {
+            System.out.println(tableInfo);
+            return tableInfo + "Service";
+          })
+          .disableService()
+          .build()
+          .controllerBuilder()
+          .template(templatesDir + "/controller.java")
+          .enableHyphenStyle()
+          .enableRestStyle()
+          .build();
+    };
+
+    BiConsumer<Function<String, String>, InjectionConfig.Builder> injectionConfig = (scanner, builder) -> {
+      // CustomFile build = new CustomFile.Builder().fileName("Dto.java").templatePath("/template/dto.java.vm")
+
+      //         .packageName(modelPackagePrefix + "dto").enableFileOverride().build();
+      // consumer.customFile(
+      //         Arrays.asList(
+      //                 build,
+      //                 new CustomFile.Builder().fileName("QueryDto.java").templatePath("/template/queryDto.java.vm")
+      //                         .packageName(modelPackagePrefix + "dto").enableFileOverride().build(),
+      //                 new CustomFile.Builder().fileName("Vo.java").templatePath("/template/vo.java.vm")
+      //                         .packageName(modelPackagePrefix + "vo").enableFileOverride().build()
+      //         ));
+
+      builder.beforeOutputFile((tableInfo, objectMap) -> {
+            LOGGER.debug("tableInfo = {}", tableInfo);
+            LOGGER.debug("objectMap = {}", objectMap);
+          })
+          .customMap(map)
+          .customFile(files)
+          .build();
+    };
+
+    FastAutoGenerator.create(dbUrl, dbUsername, dbPassword)
+        .globalConfig(globalConfig)
+        .packageConfig(packageConfig)
+        .strategyConfig(createTime)
+        .injectionConfig(injectionConfig)
+        .templateEngine(new CustomFreemarkerTemplateEngine())
+        .execute();
+
+  }
 
 
 }
