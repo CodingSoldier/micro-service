@@ -13,11 +13,11 @@ class MybatisPlusCodeGeneratorTest {
      */
     public static void main(String[] args) {
         // 数据库url
-        MybatisPlusCodeGenerator.dbUrl = "jdbc:mysql://localhost:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true";
+        MybatisPlusCodeGenerator.dbUrl = "jdbc:mysql://localhost:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false";
         // 数据库账号
         MybatisPlusCodeGenerator.dbUsername = "root";
         // 数据库密码
-        MybatisPlusCodeGenerator.dbPassword = "cpq..123";
+        MybatisPlusCodeGenerator.dbPassword = "123456";
 
         // 项目 main 目录的绝对路径
         MybatisPlusCodeGenerator.srcMainAbsolutePath = "E:\\github\\micro-service\\examples\\example-parent\\boot-web\\src\\main";
@@ -27,7 +27,7 @@ class MybatisPlusCodeGeneratorTest {
         // 作者
         MybatisPlusCodeGenerator.author = "cpq";
         // 表名
-        MybatisPlusCodeGenerator.tableName = "demoCUDR";
+        MybatisPlusCodeGenerator.tableName = "mybatis_puls_table_test";
 
         // 生成代码
         MybatisPlusCodeGenerator.generate();
