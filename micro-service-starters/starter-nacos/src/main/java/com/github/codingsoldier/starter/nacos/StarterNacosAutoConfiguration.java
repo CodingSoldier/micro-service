@@ -13,4 +13,5 @@ import org.springframework.context.annotation.PropertySource;
 @ConditionalOnStarterNacosGracefulEnabled
 @PropertySource("classpath:nacos.properties")
 public class StarterNacosAutoConfiguration {
+
 }

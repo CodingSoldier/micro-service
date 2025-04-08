@@ -20,20 +20,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class NacosGracefulController {
 
-    private final NacosGraceful nacosGraceful;
+  private final NacosGraceful nacosGraceful;
 
-    public NacosGracefulController(NacosGraceful nacosGraceful) {
-        this.nacosGraceful = nacosGraceful;
-    }
+  public NacosGracefulController(NacosGraceful nacosGraceful) {
+    this.nacosGraceful = nacosGraceful;
+  }
 
-    /**
-     * nacos客户端下线
-     */
-    @GetMapping(value = Constant.URI_DEREGISTER_INSTANCE)
-    public Result<String> deregisterInstance() throws NacosException {
-        nacosGraceful.deregisterInstance();
-        log.info("nacos客户端下线成功");
-        return Result.success("");
-    }
+  /**
+   * nacos客户端下线
+   */
+  @GetMapping(value = Constant.URI_DEREGISTER_INSTANCE)
+  public Result<String> deregisterInstance() throws NacosException {
+    nacosGraceful.deregisterInstance();
+    log.info("nacos客户端下线成功");
+    return Result.success("");
+  }
 
 }
