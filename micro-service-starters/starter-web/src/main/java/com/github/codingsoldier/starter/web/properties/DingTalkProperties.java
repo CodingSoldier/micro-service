@@ -1,12 +1,12 @@
 package com.github.codingsoldier.starter.web.properties;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import java.io.Serial;
 import java.io.Serializable;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * 企业微信webhook配置类
+ *
  * @author chenpq05
  * @since 2022/2/11 11:58
  */
@@ -40,7 +40,6 @@ public class DingTalkProperties implements Serializable {
    * access_token
    */
   private String accessToken;
-
 
 
   public boolean isEnable() {

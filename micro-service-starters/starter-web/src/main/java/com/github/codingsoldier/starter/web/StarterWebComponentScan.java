@@ -12,4 +12,5 @@ import org.springframework.context.annotation.PropertySource;
 @ConditionalOnStarterWebEnabled
 @PropertySource("classpath:web.properties")
 public class StarterWebComponentScan {
+
 }

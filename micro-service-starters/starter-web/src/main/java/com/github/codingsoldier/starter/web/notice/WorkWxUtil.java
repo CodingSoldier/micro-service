@@ -4,6 +4,8 @@ import com.github.codingsoldier.common.util.OkHttpUtil;
 import com.github.codingsoldier.starter.web.context.ApplicationContextHolder;
 import com.github.codingsoldier.starter.web.properties.WorkWeiXinProperties;
 import jakarta.annotation.PostConstruct;
+import java.io.IOException;
+import java.util.HashMap;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -14,11 +16,9 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
-import java.io.IOException;
-import java.util.HashMap;
-
 /**
  * 企业微信webhook机器人 <a href="https://work.weixin.qq.com/api/doc/90000/90136/91770">...</a>
+ *
  * @author chenpq05
  * @since 2022/2/11 11:58
  */
@@ -29,12 +29,6 @@ import java.util.HashMap;
 public class WorkWxUtil {
 
   private static WorkWeiXinProperties workWeiXinProperties;
-
-  @SuppressWarnings("squid:S2696")
-  @PostConstruct
-  public void init() {
-    WorkWxUtil.workWeiXinProperties = ApplicationContextHolder.getBean(WorkWeiXinProperties.class);
-  }
 
   /**
    * 是否发送信息
@@ -57,7 +51,7 @@ public class WorkWxUtil {
   private static void send(String msg, Callback callback) {
     if (!canSendMsg(msg)) {
       log.debug("不发送企业微信消息");
-      return ;
+      return;
     }
     String titleMsg = StringUtils.isBlank(workWeiXinProperties.getTitleColor())
         ? workWeiXinProperties.getTitle()
@@ -66,15 +60,16 @@ public class WorkWxUtil {
 
     String contentStr = String.format("# %s %n %s", titleMsg, msg);
     int contentMaxLength = workWeiXinProperties.getContentMaxLength() < 4000
-            ? workWeiXinProperties.getContentMaxLength() : 4000;
+        ? workWeiXinProperties.getContentMaxLength() : 4000;
     contentStr = StringUtils.substring(contentStr, 0, contentMaxLength);
-    HashMap<String, String> content = new HashMap<>(16);
+    HashMap<String, String> content = HashMap.newHashMap(16);
     content.put("content", contentStr);
 
-    HashMap<String, Object> param = new HashMap<>(16);
+    HashMap<String, Object> param = HashMap.newHashMap(16);
     param.put("msgtype", "markdown");
     param.put("markdown", content);
-    String url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=" + workWeiXinProperties.getKey();
+    String url =
+        "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=" + workWeiXinProperties.getKey();
     OkHttpUtil.asynchronousPost(url, param, callback);
   }
 
@@ -86,7 +81,7 @@ public class WorkWxUtil {
   @SuppressWarnings("squid:S125")
   public static void sendAsynchronous(String msg) {
     try {
-      send(msg, new Callback(){
+      send(msg, new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
           log.error("", e);
@@ -118,6 +113,12 @@ public class WorkWxUtil {
     } catch (Exception ex) {
       log.error("", ex);
     }
+  }
+
+  @SuppressWarnings("squid:S2696")
+  @PostConstruct
+  public void init() {
+    WorkWxUtil.workWeiXinProperties = ApplicationContextHolder.getBean(WorkWeiXinProperties.class);
   }
 
 }

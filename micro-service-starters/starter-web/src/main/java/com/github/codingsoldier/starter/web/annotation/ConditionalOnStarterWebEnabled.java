@@ -16,15 +16,15 @@
 
 package com.github.codingsoldier.starter.web.annotation;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
 /**
  * 是否启用 starter-web
+ *
  * @author cpq
  * @since 2022-03-17 11:28:55
  */

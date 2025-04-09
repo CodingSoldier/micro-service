@@ -1,13 +1,10 @@
 package com.github.codingsoldier.starter.web.util;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.scheduling.support.SimpleTriggerContext;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author chenpq05
