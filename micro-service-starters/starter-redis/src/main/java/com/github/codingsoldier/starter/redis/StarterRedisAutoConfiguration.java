@@ -12,8 +12,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 @ConditionalOnStarterRedisEnabled
 public class StarterRedisAutoConfiguration {
 
-    public StarterRedisAutoConfiguration(RedisTemplate<?, ?> redisTemplate) {
-        RedisUtil.setOnceRedisTemplate(redisTemplate);
-    }
+  public StarterRedisAutoConfiguration(RedisTemplate<?, ?> redisTemplate) {
+    RedisUtil.setOnceRedisTemplate(redisTemplate);
+  }
 
 }

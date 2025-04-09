@@ -36,10 +36,12 @@
             <groupId>com.github.codingsoldier</groupId>
             <artifactId>starter-log4j2</artifactId>
         </dependency>-->
-        <!--<dependency>-->
-        <!--    <groupId>com.github.codingsoldier</groupId>-->
-        <!--    <artifactId>starter-redis</artifactId>-->
-        <!--</dependency>-->
+
+        <dependency>
+            <groupId>com.github.codingsoldier</groupId>
+            <artifactId>starter-redis</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.github.codingsoldier</groupId>
             <artifactId>starter-mybatis-plus</artifactId>
