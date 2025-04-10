@@ -21,31 +21,31 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FeignErrorDecoder implements ErrorDecoder {
 
-    @SuppressWarnings("squid:S1141")
-    @Override
-    public Exception decode(String methodKey, Response response) {
-        try (InputStream inputStream = response.body().asInputStream()){
-            String bodyStr = new String(inputStream.readAllBytes(), UTF_8);
-            // 获取数据
-            Result<?> result;
-            try {
-                result = ObjectMapperUtil.newObjectMapper()
-                    .readValue(bodyStr, Result.class);
-            } catch (JsonProcessingException e) {
-                log.error("微服务调用，将body转换为Result异常，body为{}", bodyStr, e);
-                return new FeignResultErrorException(bodyStr);
-            }
+  @SuppressWarnings("squid:S1141")
+  @Override
+  public Exception decode(String methodKey, Response response) {
+    try (InputStream inputStream = response.body().asInputStream()) {
+      String bodyStr = new String(inputStream.readAllBytes(), UTF_8);
+      // 获取数据
+      Result<?> result;
+      try {
+        result = ObjectMapperUtil.newObjectMapper()
+            .readValue(bodyStr, Result.class);
+      } catch (JsonProcessingException e) {
+        log.error("微服务调用，将body转换为Result异常，body为{}", bodyStr, e);
+        return new FeignResultErrorException(bodyStr);
+      }
 
-            log.warn("feign调用，下游服务未返回成功，response.status() = {}，result={}",
-                    response.status(), result);
-            if (result != null) {
-                return new FeignResultErrorException(result.getCode(), result.getMessage());
-            }
-        } catch (IOException e) {
-            log.error("微服务调用，异常编码实现类发生IOException", e);
-            return new FeignResultErrorException(e.getMessage());
-        }
-        return new FeignResultErrorException("微服务调用异常。");
+      log.warn("feign调用，下游服务未返回成功，response.status() = {}，result={}",
+          response.status(), result);
+      if (result != null) {
+        return new FeignResultErrorException(result.getCode(), result.getMessage());
+      }
+    } catch (IOException e) {
+      log.error("微服务调用，异常编码实现类发生IOException", e);
+      return new FeignResultErrorException(e.getMessage());
     }
+    return new FeignResultErrorException("微服务调用异常。");
+  }
 
 }

@@ -16,17 +16,18 @@ import org.springframework.context.annotation.Configuration;
 @Configuration(proxyBeanMethods = false)
 public class FeignConfig {
 
-    /**
-     * 拦截器，feign请求加上请求头
-     */
-    @Bean
-    public RequestInterceptor requestInterceptor() {
-        return requestTemplate -> requestTemplate.header(FeignConstant.IS_FEIGN_REQUEST, Boolean.TRUE.toString());
-    }
+  /**
+   * 拦截器，feign请求加上请求头
+   */
+  @Bean
+  public RequestInterceptor requestInterceptor() {
+    return requestTemplate -> requestTemplate.header(FeignConstant.IS_FEIGN_REQUEST,
+        Boolean.TRUE.toString());
+  }
 
-    @Bean
-    public ErrorDecoder errorDecoder() {
-        return new FeignErrorDecoder();
-    }
+  @Bean
+  public ErrorDecoder errorDecoder() {
+    return new FeignErrorDecoder();
+  }
 
 }

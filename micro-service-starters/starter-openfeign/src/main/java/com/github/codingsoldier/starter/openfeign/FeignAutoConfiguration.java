@@ -14,4 +14,5 @@ import org.springframework.context.annotation.PropertySource;
 @Import({FeignConfig.class, FeignExceptionHandlerAdvice.class})
 @PropertySource("classpath:openfeign.properties")
 public class FeignAutoConfiguration {
+
 }
