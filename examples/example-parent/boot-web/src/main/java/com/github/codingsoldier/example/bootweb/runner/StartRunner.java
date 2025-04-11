@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class StartRunner implements CommandLineRunner {
 
-    @Value("${profile-val:未配置}")
-    private String profileVal;
+  @Value("${profile-val:未配置}")
+  private String profileVal;
 
-    @Override
-    public void run(String... args) throws Exception {
-        log.info("###################profile-val={}", profileVal);
-    }
+  @Override
+  public void run(String... args) throws Exception {
+    log.info("###################profile-val={}", profileVal);
+  }
 
 }

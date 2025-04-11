@@ -2,16 +2,15 @@ package com.github.codingsoldier.example.bootweb.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Data
 @NoArgsConstructor
@@ -20,28 +19,28 @@ import java.util.Date;
 @Schema(name = "时间VO", description = "时间VO")
 public class TimeVO implements Serializable {
 
-    @Serial
-    private static final long serialVersionUID = 1L;
+  @Serial
+  private static final long serialVersionUID = 1L;
 
-    @Schema(description = "id", example = "7")
-    private Long id;
+  @Schema(description = "id", example = "7")
+  private Long id;
 
-    @Schema(description = "姓名", example = "姓名01")
-    private String name;
+  @Schema(description = "姓名", example = "姓名01")
+  private String name;
 
-    @Schema(description = "年龄", example = "10")
-    private Integer age;
+  @Schema(description = "年龄", example = "10")
+  private Integer age;
 
-    @Schema(description = "date时间", example = "2021-01-01 01:01:01")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private Date date;
+  @Schema(description = "date时间", example = "2021-01-01 01:01:01")
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+  private Date date;
 
-    @Schema(description = "localDate时间", example = "2021-01-01")
-    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
-    private LocalDate localDate;
+  @Schema(description = "localDate时间", example = "2021-01-01")
+  @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+  private LocalDate localDate;
 
-    @Schema(description = "localDateTime时间", example = "2021-01-01 01:01:01")
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private LocalDateTime localDateTime;
+  @Schema(description = "localDateTime时间", example = "2021-01-01 01:01:01")
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+  private LocalDateTime localDateTime;
 
 }

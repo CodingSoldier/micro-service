@@ -12,25 +12,25 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration(proxyBeanMethods = false)
 public class BootWebMvcConfig implements WebMvcConfigurer {
 
-    /**
-     * 拦截器配置
-     *
-     * @param registry registry
-     */
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        //定义排除访问的路径配置
-        String[] excludePaths = new String[]{"/swagger-ui.html", "/swagger-ui/**",
-            "/doc.html", "/v3/api-docs/**",
-            "/error",
-            "/actuator/**",
-            "/open/api/**"
-        };
+  /**
+   * 拦截器配置
+   *
+   * @param registry registry
+   */
+  @Override
+  public void addInterceptors(InterceptorRegistry registry) {
+    //定义排除访问的路径配置
+    String[] excludePaths = new String[]{"/swagger-ui.html", "/swagger-ui/**",
+        "/doc.html", "/v3/api-docs/**",
+        "/error",
+        "/actuator/**",
+        "/open/api/**"
+    };
 
-        registry.addInterceptor(new WebHandlerInterceptor())
-                .addPathPatterns("/**")
-                .excludePathPatterns(excludePaths);
-    }
+    registry.addInterceptor(new WebHandlerInterceptor())
+        .addPathPatterns("/**")
+        .excludePathPatterns(excludePaths);
+  }
 
 
 }

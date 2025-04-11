@@ -19,10 +19,10 @@ import lombok.experimental.Accessors;
 @Schema(name = "用户分页响应参数", description = "用户分页响应参数")
 public class UserPageVO {
 
-    @Schema(description = "姓名", example = "姓名01")
-    private String name;
+  @Schema(description = "姓名", example = "姓名01")
+  private String name;
 
-    @Schema(description = "年龄", example = "10")
-    private Integer age;
+  @Schema(description = "年龄", example = "10")
+  private Integer age;
 
 }

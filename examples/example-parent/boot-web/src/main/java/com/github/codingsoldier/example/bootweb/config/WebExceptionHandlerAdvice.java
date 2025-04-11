@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * 使用 @Order 排序值，覆盖 micro-service 默认异常处理
+ *
  * @author cpq
  * @since 2022-03-17 11:28:55
  */
@@ -22,12 +23,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class WebExceptionHandlerAdvice {
 
-    @ExceptionHandler(HttpStatus4xxException.class)
-    public Result<Object> httpStatus4xxException(final HttpStatus4xxException ex, HttpServletResponse response) {
-        log.error("#############捕获HttpStatus4xxException", ex);
-        response.setStatus(CommonUtil.getResponseStatus(ex.getCode()));
-        return Result.fail(ex.getCode(), ex.getMessage());
-    }
+  @ExceptionHandler(HttpStatus4xxException.class)
+  public Result<Object> httpStatus4xxException(final HttpStatus4xxException ex,
+      HttpServletResponse response) {
+    log.error("#############捕获HttpStatus4xxException", ex);
+    response.setStatus(CommonUtil.getResponseStatus(ex.getCode()));
+    return Result.fail(ex.getCode(), ex.getMessage());
+  }
 
 
 }

@@ -8,8 +8,9 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class ApplicationClosedEvent implements ApplicationListener<ContextClosedEvent> {
-    @Override
-    public void onApplicationEvent(ContextClosedEvent event) {
-        log.info("监听到ContextClosedEvent");
-    }
+
+  @Override
+  public void onApplicationEvent(ContextClosedEvent event) {
+    log.info("监听到ContextClosedEvent");
+  }
 }

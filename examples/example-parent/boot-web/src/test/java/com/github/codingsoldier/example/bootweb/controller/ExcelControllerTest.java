@@ -15,14 +15,14 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
  */
 public class ExcelControllerTest extends BaseTest {
 
-    @Autowired
-    protected MockMvc mockMvc;
+  @Autowired
+  protected MockMvc mockMvc;
 
-    @Test
-    void download() throws Exception {
-        MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/excel/download");
-        mockMvc.perform(reqBuilder)
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk());
-    }
+  @Test
+  void download() throws Exception {
+    MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/excel/download");
+    mockMvc.perform(reqBuilder)
+        .andDo(MockMvcResultHandlers.print())
+        .andExpect(MockMvcResultMatchers.status().isOk());
+  }
 }

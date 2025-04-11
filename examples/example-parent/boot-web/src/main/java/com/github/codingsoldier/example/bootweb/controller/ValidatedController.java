@@ -11,9 +11,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @Tag(name = "参数校验-API")
@@ -33,51 +37,52 @@ public class ValidatedController {
     嵌套校验	         支持	                     不支持
      */
 
-    /**
-     * 使用 @Validated 注解，异常被 @ExceptionHandler(ConstraintViolationException.class) 捕获
-     */
-    @PostMapping("/bean")
-    public Validation bean(@RequestBody @Validated Validation validation) {
-        log.info("请求参数：{}", validation);
-        return validation;
-    }
+  /**
+   * 使用 @Validated 注解，异常被 @ExceptionHandler(ConstraintViolationException.class) 捕获
+   */
+  @PostMapping("/bean")
+  public Validation bean(@RequestBody @Validated Validation validation) {
+    log.info("请求参数：{}", validation);
+    return validation;
+  }
 
-    /**
-     * 使用 @Valid 注解，异常被 @ExceptionHandler(MethodArgumentNotValidException.class) 捕获
-     */
-    @PostMapping("/valid/bean")
-    public Validation validBean(@RequestBody @Valid Validation validation) {
-        log.info("请求参数：{}", validation);
-        return validation;
-    }
+  /**
+   * 使用 @Valid 注解，异常被 @ExceptionHandler(MethodArgumentNotValidException.class) 捕获
+   */
+  @PostMapping("/valid/bean")
+  public Validation validBean(@RequestBody @Valid Validation validation) {
+    log.info("请求参数：{}", validation);
+    return validation;
+  }
 
-    /**
-     * 使用方法校验bean
-     */
-    @PostMapping(value = "/bean-method", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String beanMethod(@RequestBody Validation validation) {
-        ValidationUtils.validateEntity(validation);
-        log.info("请求参数：{}", validation);
-        return "";
-    }
+  /**
+   * 使用方法校验bean
+   */
+  @PostMapping(value = "/bean-method", produces = MediaType.APPLICATION_JSON_VALUE)
+  public String beanMethod(@RequestBody Validation validation) {
+    ValidationUtils.validateEntity(validation);
+    log.info("请求参数：{}", validation);
+    return "";
+  }
 
-    /**
-     * 必须在类上加 @Validated ，get请求参数的校验才生效
-     */
-    @GetMapping(value = "/param-validate", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String paramValidate(@Min(value = 10L, message = "用户id必须大于等于10") Long userId,
-                             @Length(min = 6, max = 20, message = "账号长度必须是6~20位。")
-                             @NotEmpty(message = "账号不能为空。") String account) {
-        log.debug("debug请求参数：{}", userId);
-        log.info("请求参数：{}", userId);
-        log.info("请求参数：{}", account);
-        return "success";
-    }
+  /**
+   * 必须在类上加 @Validated ，get请求参数的校验才生效
+   */
+  @GetMapping(value = "/param-validate", produces = MediaType.APPLICATION_JSON_VALUE)
+  public String paramValidate(
+      @RequestParam("userId") @Min(value = 10L, message = "用户id必须大于等于10") Long userId,
+      @RequestParam("account") @Length(min = 6, max = 20, message = "账号长度必须是6~20位。") @NotEmpty(message = "账号不能为空。") String account) {
+    log.debug("debug请求参数：{}", userId);
+    log.info("请求参数：{}", userId);
+    log.info("请求参数：{}", account);
+    return "success";
+  }
 
-    @GetMapping(value = "/path/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Long pathValidate(@PathVariable("id") @Min(value = 10L, message = "id必须大于等于10") Long id) {
-        log.info("请求参数：{}", id);
-        return id;
-    }
+  @GetMapping(value = "/path/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Long pathValidate(
+      @PathVariable("id") @Min(value = 10L, message = "id必须大于等于10") Long id) {
+    log.info("请求参数：{}", id);
+    return id;
+  }
 
 }

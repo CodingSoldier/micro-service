@@ -1,7 +1,7 @@
 package com.github.codingsoldier.example.bootweb.controller;
 
-import com.github.codingsoldier.example.bootweb.BaseTest;
 import com.github.codingsoldier.common.enums.ResultCodeEnum;
+import com.github.codingsoldier.example.bootweb.BaseTest;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -15,24 +15,25 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
  */
 public class LogControllerTest extends BaseTest {
 
-    @Test
-    void testPrint() throws Exception {
-        MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/log/test/print?str=success");
-        super.mockMvc.perform(reqBuilder)
-            .andDo(MockMvcResultHandlers.print())
-            .andExpect(MockMvcResultMatchers.status().isOk())
-            .andExpect(MockMvcResultMatchers.jsonPath("$.code",
-                    Matchers.equalTo(ResultCodeEnum.SUCCESS.getCode())));
-    }
+  @Test
+  void testPrint() throws Exception {
+    MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get(
+        "/log/test/print?str=success");
+    super.mockMvc.perform(reqBuilder)
+        .andDo(MockMvcResultHandlers.print())
+        .andExpect(MockMvcResultMatchers.status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.code",
+            Matchers.equalTo(ResultCodeEnum.SUCCESS.getCode())));
+  }
 
-    @Test
-    void testPrintLimit() throws Exception {
-        MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/log/limit?p1=logEx");
-        super.mockMvc.perform(reqBuilder)
-            .andDo(MockMvcResultHandlers.print())
-            .andExpect(MockMvcResultMatchers.status().isOk())
-            .andExpect(MockMvcResultMatchers.jsonPath("$.code",
-                    Matchers.equalTo(ResultCodeEnum.SUCCESS.getCode())));
-    }
+  @Test
+  void testPrintLimit() throws Exception {
+    MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders.get("/log/limit?p1=logEx");
+    super.mockMvc.perform(reqBuilder)
+        .andDo(MockMvcResultHandlers.print())
+        .andExpect(MockMvcResultMatchers.status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.code",
+            Matchers.equalTo(ResultCodeEnum.SUCCESS.getCode())));
+  }
 
 }
