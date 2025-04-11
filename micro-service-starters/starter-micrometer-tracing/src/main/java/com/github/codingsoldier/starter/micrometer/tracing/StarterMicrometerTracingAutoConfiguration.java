@@ -10,4 +10,5 @@ import org.springframework.context.annotation.PropertySource;
 @ConditionalOnStarterMicrometerTracingEnabled
 @PropertySource("classpath:micrometer-tracing.properties")
 public class StarterMicrometerTracingAutoConfiguration {
+
 }
