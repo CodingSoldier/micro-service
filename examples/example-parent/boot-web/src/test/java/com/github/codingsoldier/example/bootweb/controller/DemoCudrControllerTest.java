@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-public class DemocudrControllerTest extends BaseTest {
+public class DemoCudrControllerTest extends BaseTest {
 
   @Test
   void add() throws Exception {
@@ -31,7 +31,7 @@ public class DemocudrControllerTest extends BaseTest {
     body.put("luckDay", LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
     String bodyJson = ObjectMapperUtil.writeValueAsString(body);
     MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders
-        .post("/democudr/add")
+        .post("/demo-cudr/add")
         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
         .content(bodyJson);
     super.mockMvc.perform(reqBuilder)
@@ -52,13 +52,13 @@ public class DemocudrControllerTest extends BaseTest {
     body.put("luckDay", LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
     String bodyJson = ObjectMapperUtil.writeValueAsString(body);
     MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders
-        .post("/democudr/add")
+        .post("/demo-cudr/add")
         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
         .content(bodyJson);
     super.mockMvc.perform(reqBuilder)
         .andExpect(MockMvcResultMatchers.status().is(400))
         .andExpect(MockMvcResultMatchers.jsonPath("$.message",
-            Matchers.containsString("姓名不能为空")));
+            Matchers.containsString("名称不能为空")));
   }
 
   @Test
@@ -75,7 +75,7 @@ public class DemocudrControllerTest extends BaseTest {
     body.put("luckDay", LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
     String bodyJson = ObjectMapperUtil.writeValueAsString(body);
     MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders
-        .put("/democudr/update")
+        .post("/demo-cudr/update")
         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
         .content(bodyJson);
     super.mockMvc.perform(reqBuilder)
@@ -87,7 +87,7 @@ public class DemocudrControllerTest extends BaseTest {
   @Test
   void delete() throws Exception {
     MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders
-        .delete("/democudr/delete?id=16")
+        .delete("/demo-cudr/delete?id=16")
         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
     super.mockMvc.perform(reqBuilder)
         .andExpect(MockMvcResultMatchers.status().isOk())
@@ -98,7 +98,7 @@ public class DemocudrControllerTest extends BaseTest {
   @Test
   void detail() throws Exception {
     MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders
-        .get("/democudr/detail?id=1")
+        .get("/demo-cudr/detail?id=1")
         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
     super.mockMvc.perform(reqBuilder)
         .andExpect(MockMvcResultMatchers.status().isOk())
@@ -112,7 +112,7 @@ public class DemocudrControllerTest extends BaseTest {
     body.put("name", "name");
     String bodyJson = ObjectMapperUtil.writeValueAsString(body);
     MockHttpServletRequestBuilder reqBuilder = MockMvcRequestBuilders
-        .post("/democudr/page")
+        .post("/demo-cudr/page")
         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
         .content(bodyJson);
     super.mockMvc.perform(reqBuilder)

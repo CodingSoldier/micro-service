@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.codingsoldier.example.bootweb.mapper.DemoCudrMapper">
+
+
+    <select id="pageQuery" resultType="com.github.codingsoldier.example.bootweb.vo.DemoCudrPageVO">
+        SELECT *
+        FROM demo_cudr
+        <where>
+            deleted = 0
+            <if test="pageQueryDTO != null">
+            </if>
+            ORDER BY id DESC
+        </where>
+    </select>
+
+</mapper>

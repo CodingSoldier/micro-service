@@ -10,21 +10,21 @@ public class GeneratorCode {
    */
   public static void main(String[] args) {
     // 数据库url
-    MybatisPlusCodeGenerator.dbUrl = "jdbc:mysql://10.39.174.41:3306/ioc_smartpark?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&tinyInt1isBit=false&allowMultiQueries=true&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true";
+    MybatisPlusCodeGenerator.dbUrl = "jdbc:mysql://127.0.0.1:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false";
     // 数据库账号
     MybatisPlusCodeGenerator.dbUsername = "root";
     // 数据库密码
     MybatisPlusCodeGenerator.dbPassword = "123456";
 
     // 项目 main 目录的绝对路径
-    MybatisPlusCodeGenerator.srcMainAbsolutePath = "D:\\mycode\\micro-service\\examples\\example-parent\\boot-web\\src\\main";
+    MybatisPlusCodeGenerator.srcMainAbsolutePath = "E:\\github\\micro-service\\examples\\example-parent\\boot-web\\src\\main";
     // 项目包名
-    MybatisPlusCodeGenerator.parent = "com.github.codingsoldier.example.bootweb.temp";
+    MybatisPlusCodeGenerator.parent = "com.github.codingsoldier.example.bootweb";
 
     // 作者
     MybatisPlusCodeGenerator.author = "cpq";
     // 表名
-    MybatisPlusCodeGenerator.tableName = "smartpark_collect_company";
+    MybatisPlusCodeGenerator.tableName = "demo_cudr";
 
     // 生成代码
     MybatisPlusCodeGenerator.generate();
