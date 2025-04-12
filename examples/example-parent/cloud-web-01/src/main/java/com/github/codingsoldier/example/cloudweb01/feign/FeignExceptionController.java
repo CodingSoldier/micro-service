@@ -29,7 +29,8 @@ public class FeignExceptionController {
         /**
          * feign客户端不加fallback
          */
-        return web02FeignExceptionClient.name(name);
+        Map<String, Object> m = web02FeignExceptionClient.name(name);
+        return m;
     }
 
     @GetMapping(value = "/has/fallback/name")
@@ -37,7 +38,8 @@ public class FeignExceptionController {
         /**
          * feign客户端加fallback
          */
-        return web02FeignExceptionFallbackClient.name(name);
+        Map<String, Object> m = web02FeignExceptionFallbackClient.name(name);
+        return m;
     }
 
     @GetMapping(value = "/result/type/not/change")

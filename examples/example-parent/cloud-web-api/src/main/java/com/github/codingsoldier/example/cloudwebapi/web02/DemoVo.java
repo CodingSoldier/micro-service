@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.cloudwebapi;
+package com.github.codingsoldier.example.cloudwebapi.web02;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

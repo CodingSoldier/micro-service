@@ -2,6 +2,7 @@ package com.github.codingsoldier.example.cloudweb01.traceid;
 
 import static com.github.codingsoldier.common.constant.TraceConstant.X_REQ_TRACE_ID;
 
+import com.github.codingsoldier.example.cloudwebapi.web02.Web02TraceIdClient;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TraceId01Controller {
 
     @Autowired
-    private Web02TraceidClient web02TraceidClient;
+    private Web02TraceIdClient web02TraceidClient;
 
     @GetMapping(value = "/testTraceId", produces = MediaType.APPLICATION_JSON_VALUE)
     public String testTraceId(@RequestHeader Map<String, String> headers, @RequestParam("name") String name) {
@@ -47,7 +48,8 @@ public class TraceId01Controller {
     }
 
     @GetMapping(value = "/get/mcd/req", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getMcdReq(@RequestHeader Map<String, String> headers,  @RequestParam("name") String name) {
+    public String getMcdReq(@RequestHeader Map<String, String> headers,
+        @RequestParam(value = "name", required = false) String name) {
         String id = MDC.get("x-req-trace-id");
         log.info("###x-req-trace-id###{}", id);
         return id;

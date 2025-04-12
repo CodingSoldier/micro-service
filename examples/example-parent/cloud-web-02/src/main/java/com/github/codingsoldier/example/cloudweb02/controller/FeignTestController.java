@@ -1,18 +1,23 @@
 package com.github.codingsoldier.example.cloudweb02.controller;
 
 import com.github.codingsoldier.common.resp.Result;
-import com.github.codingsoldier.example.cloudwebapi.DemoVo;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
-
+import com.github.codingsoldier.example.cloudwebapi.web02.DemoVo;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RefreshScope

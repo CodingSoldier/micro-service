@@ -12,7 +12,7 @@ class C01TraceControllerTest extends BaseTest {
     @Test
     void testTraceId() {
         webClient.get()
-                .uri("/cloud-web-01/trace/testTraceId")
+                .uri("/cloud-web-01/trace/testTraceId?name=aaa")
                 .header("x-req-trace-id", "43325268ff7aaaaa")
                 .exchange()
                 .expectStatus().isOk()
@@ -24,7 +24,7 @@ class C01TraceControllerTest extends BaseTest {
     @Test
     void reqPath() {
         webClient.get()
-                .uri("/cloud-web-01/trace/asyncAnno")
+                .uri("/cloud-web-01/trace/asyncAnno?name=aaa")
                 .header("x-req-trace-id", "43325268ff7aaaaa")
                 .exchange()
                 .expectStatus().isOk()

@@ -2,16 +2,21 @@ package com.github.codingsoldier.example.cloudweb01.feign;
 
 import com.github.codingsoldier.common.resp.Result;
 import com.github.codingsoldier.example.cloudweb01.feign.timeout.Web02FeignTimeoutClient;
-import com.github.codingsoldier.example.cloudwebapi.DemoVo;
-import com.github.codingsoldier.example.cloudwebapi.Web02FeignTestClient;
+import com.github.codingsoldier.example.cloudwebapi.web02.DemoVo;
+import com.github.codingsoldier.example.cloudwebapi.web02.Web02FeignTestClient;
+import java.util.List;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RefreshScope

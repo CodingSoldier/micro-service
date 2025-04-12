@@ -1,4 +1,4 @@
-package com.github.codingsoldier.example.cloudweb01.traceid;
+package com.github.codingsoldier.example.cloudwebapi.web02;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(value = "cloud-web-02", contextId = "web02TraceidClient", path = "/cloud-web-02/trace")
-public interface Web02TraceidClient {
+public interface Web02TraceIdClient {
 
     @GetMapping(value = "/testTraceId", produces = MediaType.APPLICATION_JSON_VALUE)
     String testTraceId(@RequestParam("name") String name);
