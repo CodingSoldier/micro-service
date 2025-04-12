@@ -11,20 +11,20 @@ import com.github.codingsoldier.common.enums.ResultCodeEnum;
  */
 public class HttpStatus5xxException extends MicroServiceException {
 
-    public HttpStatus5xxException(String message) {
-        super(ResultCodeEnum.SERVER_ERROR.getCode(), message);
-    }
+  public HttpStatus5xxException(String message) {
+    super(ResultCodeEnum.SERVER_ERROR.getCode(), message);
+  }
 
-    public HttpStatus5xxException(int code, String message) {
-        super(code, message);
-    }
+  public HttpStatus5xxException(int code, String message) {
+    super(code, message);
+  }
 
-    public HttpStatus5xxException(ResultCodeEnum responseCodeEnum) {
-        super(responseCodeEnum);
-    }
+  public HttpStatus5xxException(ResultCodeEnum responseCodeEnum) {
+    super(responseCodeEnum);
+  }
 
-    public HttpStatus5xxException(ResultCodeEnum responseCodeEnum, String message) {
-        super(responseCodeEnum, message);
-    }
+  public HttpStatus5xxException(ResultCodeEnum responseCodeEnum, String message) {
+    super(responseCodeEnum, message);
+  }
 
 }

@@ -8,36 +8,36 @@ import java.util.List;
  */
 public class TreeBean implements Tree<TreeBean> {
 
-    private Long id;
+  private Long id;
 
-    private Long parentId;
+  private Long parentId;
 
-    private List<TreeBean> children;
+  private List<TreeBean> children;
 
-    @Override
-    public Long getId() {
-        return id;
-    }
+  @Override
+  public Long getId() {
+    return id;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    @Override
-    public Long getParentId() {
-        return parentId;
-    }
+  @Override
+  public Long getParentId() {
+    return parentId;
+  }
 
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
+  public void setParentId(Long parentId) {
+    this.parentId = parentId;
+  }
 
-    public List<TreeBean> getChildren() {
-        return children;
-    }
+  public List<TreeBean> getChildren() {
+    return children;
+  }
 
-    @Override
-    public void setChildren(List<TreeBean> children) {
-        this.children = children;
-    }
+  @Override
+  public void setChildren(List<TreeBean> children) {
+    this.children = children;
+  }
 }

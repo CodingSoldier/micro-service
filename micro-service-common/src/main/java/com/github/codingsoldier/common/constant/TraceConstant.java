@@ -8,15 +8,14 @@ package com.github.codingsoldier.common.constant;
  */
 public class TraceConstant {
 
-    private TraceConstant() {
-        // sonar
-    }
+  /**
+   * 自定义链路追踪请求头
+   */
+  public static final String X_REQ_TRACE_ID = "x-req-trace-id";
+  public static final String TRACE_ID = "traceId";
 
-    /**
-     * 自定义链路追踪请求头
-     */
-    public static final String X_REQ_TRACE_ID = "x-req-trace-id";
-
-    public static final String TRACE_ID = "traceId";
+  private TraceConstant() {
+    // sonar
+  }
 
 }

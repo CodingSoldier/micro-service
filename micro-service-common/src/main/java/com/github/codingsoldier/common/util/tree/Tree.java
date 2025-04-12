@@ -11,25 +11,25 @@ import java.util.List;
  */
 public interface Tree<E> {
 
-    /**
-     * 获取ID
-     *
-     * @return id
-     */
-    Serializable getId();
+  /**
+   * 获取ID
+   *
+   * @return id
+   */
+  Serializable getId();
 
-    /**
-     * 获取父级ID
-     *
-     * @return parentId
-     */
-    Serializable getParentId();
+  /**
+   * 获取父级ID
+   *
+   * @return parentId
+   */
+  Serializable getParentId();
 
-    /**
-     * 赋值子类
-     *
-     * @param children children
-     */
-    void setChildren(List<E> children);
+  /**
+   * 赋值子类
+   *
+   * @param children children
+   */
+  void setChildren(List<E> children);
 
 }

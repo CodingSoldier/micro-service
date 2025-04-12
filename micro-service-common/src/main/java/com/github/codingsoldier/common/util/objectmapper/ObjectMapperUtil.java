@@ -14,28 +14,28 @@ import com.github.codingsoldier.common.util.objectmapper.deserializer.LocalDateD
 import com.github.codingsoldier.common.util.objectmapper.deserializer.LocalDateTimeDeserializer;
 import com.github.codingsoldier.common.util.objectmapper.deserializer.OffsetDateTimeDeserializer;
 import com.github.codingsoldier.common.util.objectmapper.serializer.TimeToTimestampSerializer;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.Date;
 import java.util.Objects;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * ObjectMapper工具类
+ *
  * @author chenpq05
  * @since 2022/2/21 15:02
  */
 @Slf4j
 public class ObjectMapperUtil {
 
+  private static final ObjectMapper OBJECT_MAPPER = newObjectMapper();
+
   private ObjectMapperUtil() {
   }
-
-  private static final ObjectMapper OBJECT_MAPPER = newObjectMapper();
 
   /**
    * 创建一个新的ObjectMapper
@@ -99,7 +99,7 @@ public class ObjectMapperUtil {
   /**
    * 字节数组转对象
    *
-   * @param src src
+   * @param src       src
    * @param valueType src
    * @return T
    */
@@ -157,8 +157,6 @@ public class ObjectMapperUtil {
     }
     return "";
   }
-
-
 
 
 }

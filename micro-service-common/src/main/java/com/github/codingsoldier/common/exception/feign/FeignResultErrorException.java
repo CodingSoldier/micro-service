@@ -10,28 +10,28 @@ import com.github.codingsoldier.common.enums.ResultCodeEnum;
  */
 public class FeignResultErrorException extends RuntimeException {
 
-    private final Integer code;
-    private final String message;
+  private final Integer code;
+  private final String message;
 
-    public FeignResultErrorException(String message) {
-        super(message);
-        this.code = ResultCodeEnum.FEIGN_RESULT_ERROR_EX.getCode();
-        this.message = message;
-    }
+  public FeignResultErrorException(String message) {
+    super(message);
+    this.code = ResultCodeEnum.FEIGN_RESULT_ERROR_EX.getCode();
+    this.message = message;
+  }
 
-    public FeignResultErrorException(Integer code, String message) {
-        super(message);
-        this.code = code;
-        this.message = message;
-    }
+  public FeignResultErrorException(Integer code, String message) {
+    super(message);
+    this.code = code;
+    this.message = message;
+  }
 
-    public Integer getCode() {
-        return code;
-    }
+  public Integer getCode() {
+    return code;
+  }
 
-    @Override
-    public String getMessage() {
-        return message;
-    }
+  @Override
+  public String getMessage() {
+    return message;
+  }
 
 }

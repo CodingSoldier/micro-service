@@ -8,14 +8,14 @@ package com.github.codingsoldier.common.constant;
  */
 public class FeignConstant {
 
-    private FeignConstant() {
-        // sonar检测
-        throw new IllegalStateException("不允许实例化");
-    }
+  /**
+   * 是否 feign 请求
+   */
+  public static final String IS_FEIGN_REQUEST = "is-feign-request";
 
-    /**
-     * 是否 feign 请求
-     */
-    public static final String IS_FEIGN_REQUEST = "is-feign-request";
+  private FeignConstant() {
+    // sonar检测
+    throw new IllegalStateException("不允许实例化");
+  }
 
 }

@@ -1,29 +1,24 @@
 package com.github.codingsoldier.common.util.thread;
 
-import org.apache.commons.lang3.ClassUtils;
-import org.jetbrains.annotations.Nullable;
-
 import java.io.Serializable;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.apache.commons.lang3.ClassUtils;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * 自定义线程池
- * 模仿 org.springframework.scheduling.concurrent.CustomizableThreadFactory
+ * 自定义线程池 模仿 org.springframework.scheduling.concurrent.CustomizableThreadFactory
+ *
  * @author chenpq05
  * @since 2023/2/17 15:44
  */
 public class CustomThreadFactory implements Serializable, ThreadFactory {
 
-  private String threadNamePrefix;
-
-  private int threadPriority = Thread.NORM_PRIORITY;
-
-  private boolean daemon = false;
-
-  private ThreadGroup threadGroup;
-
   private final AtomicInteger threadCount = new AtomicInteger(0);
+  private String threadNamePrefix;
+  private int threadPriority = Thread.NORM_PRIORITY;
+  private boolean daemon = false;
+  private ThreadGroup threadGroup;
 
 
   /**
@@ -35,36 +30,28 @@ public class CustomThreadFactory implements Serializable, ThreadFactory {
 
   /**
    * Create a new CustomizableThreadCreator with the given thread name prefix.
+   *
    * @param threadNamePrefix the prefix to use for the names of newly created threads
    */
   public CustomThreadFactory(String threadNamePrefix) {
-    this.threadNamePrefix = (threadNamePrefix != null ? threadNamePrefix : getDefaultThreadNamePrefix());
-  }
-
-
-  /**
-   * Specify the prefix to use for the names of newly created threads.
-   * Default is "SimpleAsyncTaskExecutor-".
-   */
-  public void setThreadNamePrefix(String threadNamePrefix) {
-    this.threadNamePrefix = (threadNamePrefix != null ? threadNamePrefix : getDefaultThreadNamePrefix());
+    this.threadNamePrefix = (threadNamePrefix != null ? threadNamePrefix
+        : getDefaultThreadNamePrefix());
   }
 
   /**
-   * Return the thread name prefix to use for the names of newly
-   * created threads.
+   * Return the thread name prefix to use for the names of newly created threads.
    */
   public String getThreadNamePrefix() {
     return this.threadNamePrefix;
   }
 
   /**
-   * Set the priority of the threads that this factory creates.
-   * Default is 5.
-   * @see java.lang.Thread#NORM_PRIORITY
+   * Specify the prefix to use for the names of newly created threads. Default is
+   * "SimpleAsyncTaskExecutor-".
    */
-  public void setThreadPriority(int threadPriority) {
-    this.threadPriority = threadPriority;
+  public void setThreadNamePrefix(String threadNamePrefix) {
+    this.threadNamePrefix = (threadNamePrefix != null ? threadNamePrefix
+        : getDefaultThreadNamePrefix());
   }
 
   /**
@@ -75,17 +62,12 @@ public class CustomThreadFactory implements Serializable, ThreadFactory {
   }
 
   /**
-   * Set whether this factory is supposed to create daemon threads,
-   * just executing as long as the application itself is running.
-   * <p>Default is "false": Concrete factories usually support explicit cancelling.
-   * Hence, if the application shuts down, Runnables will by default finish their
-   * execution.
-   * <p>Specify "true" for eager shutdown of threads which still actively execute
-   * a {@link Runnable} at the time that the application itself shuts down.
-   * @see java.lang.Thread#setDaemon
+   * Set the priority of the threads that this factory creates. Default is 5.
+   *
+   * @see java.lang.Thread#NORM_PRIORITY
    */
-  public void setDaemon(boolean daemon) {
-    this.daemon = daemon;
+  public void setThreadPriority(int threadPriority) {
+    this.threadPriority = threadPriority;
   }
 
   /**
@@ -96,7 +78,22 @@ public class CustomThreadFactory implements Serializable, ThreadFactory {
   }
 
   /**
+   * Set whether this factory is supposed to create daemon threads, just executing as long as the
+   * application itself is running.
+   * <p>Default is "false": Concrete factories usually support explicit cancelling.
+   * Hence, if the application shuts down, Runnables will by default finish their execution.
+   * <p>Specify "true" for eager shutdown of threads which still actively execute
+   * a {@link Runnable} at the time that the application itself shuts down.
+   *
+   * @see java.lang.Thread#setDaemon
+   */
+  public void setDaemon(boolean daemon) {
+    this.daemon = daemon;
+  }
+
+  /**
    * Specify the name of the thread group that threads should be created in.
+   *
    * @see #setThreadGroup
    */
   public void setThreadGroupName(String name) {
@@ -104,7 +101,17 @@ public class CustomThreadFactory implements Serializable, ThreadFactory {
   }
 
   /**
+   * Return the thread group that threads should be created in (or {@code null} for the default
+   * group).
+   */
+  @Nullable
+  public ThreadGroup getThreadGroup() {
+    return this.threadGroup;
+  }
+
+  /**
    * Specify the thread group that threads should be created in.
+   *
    * @see #setThreadGroupName
    */
   public void setThreadGroup(ThreadGroup threadGroup) {
@@ -112,19 +119,10 @@ public class CustomThreadFactory implements Serializable, ThreadFactory {
   }
 
   /**
-   * Return the thread group that threads should be created in
-   * (or {@code null} for the default group).
-   */
-  @Nullable
-  public ThreadGroup getThreadGroup() {
-    return this.threadGroup;
-  }
-
-
-  /**
    * Template method for the creation of a new {@link Thread}.
    * <p>The default implementation creates a new Thread for the given
    * {@link Runnable}, applying an appropriate thread name.
+   *
    * @param runnable the Runnable to execute
    * @see #nextThreadName()
    */
@@ -139,6 +137,7 @@ public class CustomThreadFactory implements Serializable, ThreadFactory {
    * Return the thread name to use for a newly created {@link Thread}.
    * <p>The default implementation returns the specified thread name prefix
    * with an increasing thread count appended: e.g. "SimpleAsyncTaskExecutor-0".
+   *
    * @see #getThreadNamePrefix()
    */
   protected String nextThreadName() {
@@ -147,6 +146,7 @@ public class CustomThreadFactory implements Serializable, ThreadFactory {
 
   /**
    * Build the default thread name prefix for this factory.
+   *
    * @return the default thread name prefix (never {@code null})
    */
   protected String getDefaultThreadNamePrefix() {

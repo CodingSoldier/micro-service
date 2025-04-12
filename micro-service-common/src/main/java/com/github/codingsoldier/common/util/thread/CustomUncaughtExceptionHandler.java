@@ -11,7 +11,7 @@ public class CustomUncaughtExceptionHandler implements Thread.UncaughtExceptionH
 
   @Override
   public void uncaughtException(Thread t, Throwable e) {
-    log.error("线程池线程异常，ThreadName={}", t.getName() , e);
+    log.error("线程池线程异常，ThreadName={}", t.getName(), e);
   }
 
 }

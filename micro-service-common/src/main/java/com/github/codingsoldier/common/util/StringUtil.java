@@ -1,8 +1,7 @@
 package com.github.codingsoldier.common.util;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.regex.Pattern;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 字符串工具类
@@ -12,28 +11,28 @@ import java.util.regex.Pattern;
  */
 public class StringUtil {
 
-    /**
-     * 结尾符号
-     */
-    public static final String END_CHAR = ".*[,.，。、]$";
+  /**
+   * 结尾符号
+   */
+  public static final String END_CHAR = ".*[,.，。、]$";
 
-    private StringUtil() {
-        // sonar检测
-        throw new IllegalStateException("不允许实例化");
-    }
+  private StringUtil() {
+    // sonar检测
+    throw new IllegalStateException("不允许实例化");
+  }
 
-    /**
-     * 字符串结尾是否符合正则表达式
-     *
-     * @param str   字符串
-     * @param regex 正则 例如： ".*[,.，。、]$"
-     * @return boolean
-     */
-    public static boolean isEndWith(String str, String regex) {
-        if (StringUtils.isAnyBlank(str, regex)) {
-            return false;
-        }
-        return Pattern.matches(regex, str);
+  /**
+   * 字符串结尾是否符合正则表达式
+   *
+   * @param str   字符串
+   * @param regex 正则 例如： ".*[,.，。、]$"
+   * @return boolean
+   */
+  public static boolean isEndWith(String str, String regex) {
+    if (StringUtils.isAnyBlank(str, regex)) {
+      return false;
     }
+    return Pattern.matches(regex, str);
+  }
 
 }

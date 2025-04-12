@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.github.codingsoldier.common.util.date.DatePatternUtil;
 import com.github.codingsoldier.common.util.date.DateUtil;
-
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -18,12 +17,12 @@ import java.util.Date;
  */
 public class DateDeserializer extends JsonDeserializer<Date> {
 
-    @Override
-    public Date deserialize(JsonParser p, DeserializationContext ctxt)
-            throws IOException {
-        String timestamp = p.getValueAsString();
-        LocalDateTime localDateTime = DatePatternUtil.strToLocalDateTime(timestamp);
-        return DateUtil.toDate(localDateTime);
-    }
+  @Override
+  public Date deserialize(JsonParser p, DeserializationContext ctxt)
+      throws IOException {
+    String timestamp = p.getValueAsString();
+    LocalDateTime localDateTime = DatePatternUtil.strToLocalDateTime(timestamp);
+    return DateUtil.toDate(localDateTime);
+  }
 
 }
