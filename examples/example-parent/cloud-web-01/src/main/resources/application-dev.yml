@@ -64,6 +64,7 @@ feign:
 #  等待5秒后，CircuitBreaker 将自动从开启OPEN状态过渡到半开HALF_OPEN状态，允许一些请求通过以测试服务是否恢复正常。
 #  如还是异常CircuitBreaker 将重新进入开启OPEN状态；如正常将进入关闭CLOSE闭合状态恢复正常处理请求。
 resilience4j:
+  # 熔断器
   circuitbreaker:
     configs:
       default:
@@ -86,6 +87,50 @@ resilience4j:
     instances:
       cloud-web-02:
         baseConfig: default
+  # 修改默认时间限制，保证舱壁隔离能演示出效果
+  timelimiter:
+    configs:
+      default:
+        timeout-duration: 30s
+  # 舱壁隔离，Bulkhead.Type.SEMAPHORE 配置
+  bulkhead:
+    configs:
+      # 设置默认配置
+      default:
+        # 隔离允许并发线程执行的最大数量
+        maxConcurrentCalls: 2
+        # 当达到并发调用数量时，新的线程的阻塞时间，我只愿意等待1秒，过时不候进舱壁兜底fallback
+        maxWaitDuration: 1s
+    instances:
+      # cloud-web-02使用默认配置
+      cloud-web-02:
+        baseConfig: default
+  # 舱壁隔离，Bulkhead.Type.THREADPOOL 配置
+  # 需要配置spring.cloud.openfeign.circuitbreaker.group.enabled 请设置为false 新启线程和原来主线程脱离
+#  thread-pool-bulkhead:
+#    configs:
+#      default:
+#        # 配置线程池只有一个线程，队列大小为1
+#        core-thread-pool-size: 1
+#        max-thread-pool-size: 1
+#        queue-capacity: 1
+#    instances:
+#      cloud-web-02:
+#        baseConfig: default
+  # 限流
+  ratelimiter:
+    configs:
+      default:
+        # 在一次刷新周期内，允许执行的最大请求数
+        limitForPeriod: 2
+        # 限流器每隔limitRefreshPeriod刷新一次，将允许处理的最大请求数量重置为limitForPeriod
+        limitRefreshPeriod: 1s
+        # 线程等待权限的默认等待时间
+        timeout-duration: 1
+    instances:
+      cloud-payment-service:
+        baseConfig: default
+
 
 logging:
   # logback-spring.xml 已在 starter-logback 中配置好了，无需新建

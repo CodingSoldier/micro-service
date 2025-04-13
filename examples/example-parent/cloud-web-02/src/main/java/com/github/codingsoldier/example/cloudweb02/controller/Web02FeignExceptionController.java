@@ -74,7 +74,9 @@ public class Web02FeignExceptionController {
     @GetMapping(value = "/timeout01", produces = MediaType.APPLICATION_JSON_VALUE)
     public String timeout01(@RequestParam(value = "timeout") Long timeout) {
         try {
-            TimeUnit.MINUTES.sleep(timeout);
+            if (timeout > 0) {
+                TimeUnit.SECONDS.sleep(timeout);
+            }
         } catch (Exception e) {
             log.error("异常", e);
         }
