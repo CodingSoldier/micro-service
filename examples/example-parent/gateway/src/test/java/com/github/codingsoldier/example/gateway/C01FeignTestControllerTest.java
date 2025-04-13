@@ -127,7 +127,20 @@ class C01FeignTestControllerTest extends BaseTest {
                 .expectStatus().isOk()
                 .expectBody()
                 .jsonPath("$.code").isEqualTo(ResultCodeEnum.SUCCESS.getCode())
-                .jsonPath("$.data.localDateTime").isEqualTo("2010-10-10 01:02:10");
+                .jsonPath("$.data.localDateTime").isEqualTo("2010-10-10 01:02:10")
+                .jsonPath("$.data.name").isEqualTo("#########中文");
+    }
+
+    @Test
+    void respResultNotName() {
+        webClient.get()
+                .uri("/cloud-web-01/feign01/test/resp/result")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$.code").isEqualTo(ResultCodeEnum.SUCCESS.getCode())
+                .jsonPath("$.data.localDateTime").isEqualTo("2010-10-10 01:02:10")
+                .jsonPath("$.data.name").isEqualTo("#########null");
     }
 
 }
