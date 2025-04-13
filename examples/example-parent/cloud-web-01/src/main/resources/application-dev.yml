@@ -1,6 +1,23 @@
 spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      # 连接池最大连接数
+      maximum-pool-size: 200
+      # 空闲时保持最小连接数
+      minimum-idle: 20
+      # 空闲连接存活时间
+      idle-timeout: 300000
+      # 连接超时时间
+      connection-timeout: 20000
+      # 测试sql
+      connection-test-query: select 1
   cloud:
     sentinel:
+      enabled: false
       transport:
         # 配置 sentinel dashboard 地址
         dashboard: 127.0.0.1:10102
@@ -24,22 +41,11 @@ spring:
             # FlowRule 就是限流规则
             rule-type: flow
 
-  datasource:
-    username: root
-    password: 123456
-    url: jdbc:mysql://127.0.0.1:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    hikari:
-      # 连接池最大连接数
-      maximum-pool-size: 200
-      # 空闲时保持最小连接数
-      minimum-idle: 20
-      # 空闲连接存活时间
-      idle-timeout: 300000
-      # 连接超时时间
-      connection-timeout: 20000
-      # 测试sql
-      connection-test-query: select 1
+    # Spring Cloud Loadbalancer 将替代 ribbon
+    loadbalancer:
+      eager-load:
+        clients: cloud-web-02
+
 #  zipkin:
 #    sender:
 #      # 指定通过什么类型发送消息 默认是 web
@@ -51,7 +57,35 @@ spring:
 feign:
   # 打开 Sentinel 对 Feign 的支持
   sentinel:
-    enabled: true
+    enabled: false
+
+# Resilience4j CircuitBreaker 按照次数：COUNT_BASED 的例子
+#  6次访问中当执行方法的失败率达到50%时CircuitBreaker将进入开启OPEN状态(保险丝跳闸断电)拒绝所有请求。
+#  等待5秒后，CircuitBreaker 将自动从开启OPEN状态过渡到半开HALF_OPEN状态，允许一些请求通过以测试服务是否恢复正常。
+#  如还是异常CircuitBreaker 将重新进入开启OPEN状态；如正常将进入关闭CLOSE闭合状态恢复正常处理请求。
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        # 设置50%的调用失败时打开断路器，超过失败请求百分⽐CircuitBreaker变为OPEN状态。
+        failureRateThreshold: 50
+        # 滑动窗口的类型，按数量统计
+        slidingWindowType: COUNT_BASED
+        # 滑动窗⼝的⼤⼩配置COUNT_BASED表示6个请求，配置TIME_BASED表示6秒
+        slidingWindowSize: 4
+        # 断路器计算失败率或慢调用率之前所需的最小样本(每个滑动窗口周期)。如果minimumNumberOfCalls为10，则必须最少记录10个样本，然后才能计算失败率。如果只记录了9次调用，即使所有9次调用都失败，断路器也不会开启。
+        minimumNumberOfCalls: 4
+        # 是否启用自动从开启状态过渡到半开状态，默认值为true。如果启用，CircuitBreaker将自动从开启状态过渡到半开状态，并允许一些请求通过以测试服务是否恢复正常
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        # 从OPEN到HALF_OPEN状态需要等待的时间
+        waitDurationInOpenState: 10s
+        # 半开状态允许的最大请求数，默认值为10。在半开状态下，CircuitBreaker将允许最多permittedNumberOfCallsInHalfOpenState个请求通过，如果其中有任何一个请求失败，CircuitBreaker将重新进入开启状态。
+        permittedNumberOfCallsInHalfOpenState: 2
+        recordExceptions:
+          - java.lang.Exception
+    instances:
+      cloud-web-02:
+        baseConfig: default
 
 logging:
   # logback-spring.xml 已在 starter-logback 中配置好了，无需新建
@@ -60,8 +94,8 @@ logging:
     # 日志根目录
     path: /logs
     name: ${spring.application.name}
-#  level:
-#    com.github.codingsoldier.example: DEBUG
+  level:
+    com.github.codingsoldier.example: DEBUG
 
 
 #starter:

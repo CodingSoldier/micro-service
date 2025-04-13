@@ -21,6 +21,25 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <!--            <exclusions>-->
+            <!--                <exclusion>-->
+            <!--                    <groupId>org.springframework.boot</groupId>-->
+            <!--                    <artifactId>spring-boot-starter-logging</artifactId>-->
+            <!--                </exclusion>-->
+            <!--            </exclusions>-->
+        </dependency>
+
+        <!--  SpringCloud2020版本默认不启用bootstrap配置，
+        需要加入依赖 spring-cloud-starter-bootstrap -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.github.codingsoldier</groupId>
             <artifactId>micro-service-common</artifactId>
         </dependency>
@@ -45,36 +64,17 @@
             <artifactId>starter-micrometer-tracing</artifactId>
         </dependency>
         <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.github.codingsoldier</groupId>
             <artifactId>starter-openfeign</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.github.codingsoldier</groupId>
-            <artifactId>starter-mybatis-plus</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.codingsoldier.example</groupId>
-            <artifactId>cloud-web-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-            <!--            <exclusions>-->
-            <!--                <exclusion>-->
-            <!--                    <groupId>org.springframework.boot</groupId>-->
-            <!--                    <artifactId>spring-boot-starter-logging</artifactId>-->
-            <!--                </exclusion>-->
-            <!--            </exclusions>-->
-        </dependency>
-
-        <!--  SpringCloud2020版本默认不启用bootstrap配置，
-        需要加入依赖 spring-cloud-starter-bootstrap -->
+        <!-- spring cloud 服务降级、熔断 使用 circuitbreaker-resilience4j 替代 hystrix -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+            <artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
         </dependency>
 
         <!-- spring-cloud-sentinel 和 sentinel-nacos -->
@@ -85,6 +85,16 @@
         <dependency>
             <groupId>com.alibaba.csp</groupId>
             <artifactId>sentinel-datasource-nacos</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.codingsoldier</groupId>
+            <artifactId>starter-mybatis-plus</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.codingsoldier.example</groupId>
+            <artifactId>cloud-web-api</artifactId>
         </dependency>
 
         <dependency>
@@ -101,11 +111,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-registry-prometheus</artifactId>
         </dependency>
 
     </dependencies>

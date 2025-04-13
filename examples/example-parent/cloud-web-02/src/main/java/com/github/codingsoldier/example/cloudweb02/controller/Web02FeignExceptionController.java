@@ -4,9 +4,11 @@ import com.github.codingsoldier.common.exception.HttpStatus4xxException;
 import com.github.codingsoldier.common.exception.HttpStatus5xxException;
 import com.github.codingsoldier.common.exception.MicroServiceException;
 import com.github.codingsoldier.common.resp.Result;
+import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +22,7 @@ import java.util.Map;
 @RefreshScope
 @RestController
 @RequestMapping("/feign02/exception")
-public class FeignExceptionController {
+public class Web02FeignExceptionController {
 
     @GetMapping(value = "/name")
     public Map<String, Object> name(@RequestParam(value = "name") String name) throws Exception{
@@ -47,7 +49,7 @@ public class FeignExceptionController {
     }
 
     @GetMapping(value = "/result/type/not/change")
-    public Result resultTypeNotChange(@RequestParam(value = "name") String name) throws Exception{
+    public Result<String> resultTypeNotChange(@RequestParam(value = "name") String name) throws Exception{
         if (StringUtils.equals("IOException", name)) {
             throw new IOException("resultTypeNotChange测试IO异常");
         } else if (StringUtils.equals("NullPointerException", name)) {
@@ -67,6 +69,17 @@ public class FeignExceptionController {
         }
 
         return Result.success("resultTypeNotChange，返回值也是Result");
+    }
+
+    @GetMapping(value = "/timeout01", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String timeout01(@RequestParam(value = "timeout") Long timeout) {
+        try {
+            TimeUnit.MINUTES.sleep(timeout);
+        } catch (Exception e) {
+            log.error("异常", e);
+        }
+        log.info("############{}", timeout);
+        return "超时时间" + timeout;
     }
 
 }

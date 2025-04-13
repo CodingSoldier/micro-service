@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.MediaType;
@@ -23,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RefreshScope
 @RestController
 @RequestMapping("/feign02/test")
-public class FeignTestController {
+public class Web02FeignTestController {
 
     @GetMapping(value = "/req/resp/void")
     public void respVoid() {
@@ -81,17 +80,6 @@ public class FeignTestController {
     }
 
 
-
-    @GetMapping(value = "/timeout01", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String timeout01(@RequestParam(value = "timeout") Long timeout) {
-        try {
-            TimeUnit.MINUTES.sleep(timeout);
-        } catch (Exception e) {
-            log.error("异常", e);
-        }
-        log.info("############{}", timeout);
-        return "超时时间" + timeout;
-    }
 
 
 }

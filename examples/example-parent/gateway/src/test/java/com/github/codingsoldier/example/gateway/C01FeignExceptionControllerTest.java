@@ -1,5 +1,6 @@
 package com.github.codingsoldier.example.gateway;
 
+import java.time.Duration;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -13,32 +14,10 @@ class C01FeignExceptionControllerTest extends BaseTest {
         webClient.get()
                 .uri("/cloud-web-01/feign01/exception/name?name=MicroServiceException")
                 .exchange()
-                .expectStatus().isEqualTo(400)
+                .expectStatus().isEqualTo(200)
                 .expectBody()
-                .jsonPath("$.code").isEqualTo(40020)
-                .jsonPath("$.message").isEqualTo("resultTypeNotChange-测试MicroServiceException异常");
-    }
-
-    @Test
-    void hasFallbackName() {
-        webClient.get()
-                .uri("/cloud-web-01/feign01/exception/has/fallback/name?name=MicroServiceException")
-                .exchange()
-                .expectStatus().isEqualTo(400)
-                .expectBody()
-                .jsonPath("$.code").isEqualTo(40020)
-                .jsonPath("$.message").isEqualTo("resultTypeNotChange-测试MicroServiceException异常");
-    }
-
-    @Test
-    void resultTypeNotChangeFallback() {
-        webClient.get()
-                .uri("/cloud-web-01/feign01/exception/result/type/not/change/fallback?name=MicroServiceException")
-                .exchange()
-                .expectStatus().isEqualTo(400)
-                .expectBody()
-                .jsonPath("$.code").isEqualTo(40020)
-                .jsonPath("$.message").isEqualTo("resultTypeNotChange-测试MicroServiceException异常");
+                .jsonPath("$.code").isEqualTo(20000)
+                .jsonPath("$.data.value").isEqualTo("name进行降级");
     }
 
     @Test
@@ -46,10 +25,25 @@ class C01FeignExceptionControllerTest extends BaseTest {
         webClient.get()
                 .uri("/cloud-web-01/feign01/exception/result/type/not/change?name=MicroServiceException")
                 .exchange()
-                .expectStatus().isEqualTo(400)
+                .expectStatus().isEqualTo(200)
                 .expectBody()
-                .jsonPath("$.code").isEqualTo(40020)
-                .jsonPath("$.message").isEqualTo("resultTypeNotChange-测试MicroServiceException异常");
+                .jsonPath("$.code").isEqualTo(40000)
+                .jsonPath("$.message").isEqualTo("resultTypeNotChange进行降级");
+    }
+
+    @Test
+    void timeout01() {
+        // 显式设置超时（覆盖全局配置）
+        webClient.mutate()
+            .responseTimeout(Duration.ofSeconds(300))
+            .build()
+            .get()
+            .uri("http://localhost:8000/cloud-web-01/feign01/exception/timeout01?timeout=10")
+            .exchange()
+            .expectStatus().isEqualTo(500)
+            .expectBody()
+            .jsonPath("$.code").isEqualTo(50000)
+            .jsonPath("$.message").isEqualTo("timeout01服务降级超时");
     }
 
 }

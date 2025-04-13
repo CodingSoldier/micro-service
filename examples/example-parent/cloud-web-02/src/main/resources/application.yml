@@ -13,10 +13,9 @@ spring:
     # 停机缓冲时间，默认：30秒
     timeout-per-shutdown-phase: 10s
   cloud:
-    # 禁用ribbon。 Spring Cloud Loadbalancer 将替代 ribbon
+    # Spring Cloud Loadbalancer 将替代 ribbon
     loadbalancer:
-      ribbon:
-        enable: false
+      enabled: true
     # openfeign 的相关配置
     openfeign:
       # feign 开启 gzip 压缩
@@ -34,6 +33,8 @@ spring:
       client:
         config:
           default:
+            read-timeout: 30000
+            connect-timeout: 5000
             # 日志级别，取值：NONE、BASIC、HEADERS、FULL，源码位置 feign.Logger.Level
             loggerLevel: BASIC
       #        # feign默认超时时间
@@ -47,6 +48,12 @@ spring:
       # feign.okhttp.OkHttpClient.execute打断点查看是否启用okhttp
       okhttp:
         enabled: true
+      #开启circuitbreaker和分组激活
+      circuitbreaker:
+        enabled: true
+        group:
+          #没开分组永远不用分组的配置。精确优先、分组次之(开了分组)、默认最后
+          enabled: true
 
 # 暴露 actuator 端点
 # 还需要在拦截器中排除 /actuator/**
