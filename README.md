@@ -12,11 +12,7 @@ Maven版本 >= 3.9.9
 父工程
 
 ### micro-service-dependencies
-依赖模块，包含 micro-service-common、micro-service-starters 子模块
-
-所有的依赖都应该在micro-service-dependencies声明
-
-[更多介绍](./micro-service-dependencies/README.md)
+作为子模块继承了父工程micro-service的dependencyManagement，用于给第三方导入依赖
 
 ### micro-service-common
 公共模块
@@ -46,7 +42,7 @@ mvn clean deploy -D maven.test.skip=true
 3、如果 pom.xml 的 <version>${revision}</version> 为红色，则刷新 maven 导入即可
 
 ## 使用 micro-service
-
+### 方式一
 1、新建 xx-parent 工程。pom.xml 配置 parent 为 micro-service
 ```xml
     <parent>
@@ -77,6 +73,25 @@ mvn clean deploy -D maven.test.skip=true
 同时 micro-service 在 pluginManagement 指定了 spring-boot-maven-plugin
 的版本
 
+### 方式二
+1、新建 xx-parent 工程，在 dependencyManagement 中导入依赖
+```xml
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.github.codingsoldier</groupId>
+                <artifactId>micro-service-dependencies</artifactId>
+                <!-- 改为最新版本 -->
+                <version>1.0.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+```
+
+2、配置 xx-parent 的 build ，使 xx-parent 能打包成功
+
 3、demo地址 [example-parent](./examples/example-parent)
 
 ## 使用jenkins打包、部署
@@ -86,7 +101,4 @@ mvn clean deploy -D maven.test.skip=true
 
 [examples](./examples) 目录是使用例子
 
-[middlewares-server](./middlewares-server) 目录是常用的中间件服务
-
 spring-cloud-alibaba、spring-cloud版本关系 https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E
-

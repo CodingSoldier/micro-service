@@ -10,4 +10,4 @@
 
 3、micro-service-starters 的 pom.xml 的 modules 加入 starter-a 模块
 
-4、starter-a 开发完成后，将 starter-a 加入到 micro-service-dependencies 的 dependencyManagement 中
+4、starter-a 开发完成后，将 starter-a 加入到 micro-service 的 dependencyManagement 中

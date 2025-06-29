@@ -3,7 +3,23 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <parent>
+    <artifactId>micro-service</artifactId>
+    <groupId>com.github.codingsoldier</groupId>
+    <version>${revision}</version>
+  </parent>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+
+  <name>micro-service-common</name>
   <artifactId>micro-service-common</artifactId>
+
+  <modelVersion>4.0.0</modelVersion>
+
 
   <dependencies>
 
@@ -53,19 +69,5 @@
     </dependency>
 
   </dependencies>
-
-  <modelVersion>4.0.0</modelVersion>
-
-  <parent>
-    <artifactId>micro-service-dependencies</artifactId>
-    <groupId>com.github.codingsoldier</groupId>
-    <relativePath>../micro-service-dependencies/pom.xml</relativePath>
-    <version>${revision}</version>
-  </parent>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-  </properties>
 
 </project>
