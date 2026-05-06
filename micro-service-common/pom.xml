@@ -6,9 +6,8 @@
 
     <parent>
         <groupId>com.github.codingsoldier</groupId>
-        <artifactId>micro-service-dependencies</artifactId>
+        <artifactId>micro-service</artifactId>
         <version>${revision}</version>
-        <relativePath>../micro-service-dependencies/pom.xml</relativePath>
     </parent>
 
     <artifactId>micro-service-common</artifactId>

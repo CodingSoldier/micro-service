@@ -3,10 +3,10 @@ spring:
     nacos:
       # 服务注册发现
       discovery:
-        server-addr: localhost:8848
+        server-addr: 127.0.0.1:8848
         namespace: namespace-example-dev
         # 实例是否能够接受请求。 默认值是true。
-        instance-enabled: false
+        instance-enabled: true
         # 指定actuator端点的访问路径，因为我们上面配置了服务的前缀 context-path ，所以我们需要将它拼接上，不然路径不对会报错
         # spring-boot-admin配置
         metadata:
@@ -38,7 +38,7 @@ spring:
 
 #  datasource:
 #    username: root
-#    password: cpq..123
+#    password: 123456
 #    url: jdbc:mysql://127.0.0.1:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true
 #    driver-class-name: com.mysql.jdbc.Driver
 #    hikari:
@@ -104,6 +104,9 @@ logging:
 #starter:
 micro-service:
   starter:
+    nacos:
+      graceful:
+        enabled: false
     mybatis-plus:
       enabled: false
     # starter-web 配置

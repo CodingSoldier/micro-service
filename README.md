@@ -12,9 +12,9 @@ Maven版本 >= 3.8.4
 父工程
 
 ### micro-service-dependencies
-依赖模块，包含 micro-service-common、micro-service-starters 子模块
+作为子模块继承了父工程 micro-service 的 dependencyManagement，用于给第三方导入依赖
 
-所有的依赖都应该在本模块导入
+所有公共依赖版本都由父工程 micro-service 统一管理
 
 [更多介绍](./micro-service-dependencies/README.md)
 

@@ -1,8 +1,8 @@
 spring:
   datasource:
     username: root
-    password: cpq..123
-    url: jdbc:mysql://192.168.1.4:3306/cpq?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/cpq?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
     driver-class-name: com.mysql.jdbc.Driver
     hikari:
       # 连接池最大连接数

@@ -3,7 +3,7 @@ spring:
     nacos:
       # 服务注册发现
       discovery:
-        server-addr: 192.168.1.4:8848
+        server-addr: 127.0.0.1:8848
         # server-addr: 127.0.0.1:8848,127.0.0.1:8849,127.0.0.1:8850 # Nacos 集群服务器地址
         namespace: namespace-example-dev
     sentinel:
@@ -62,6 +62,9 @@ logging:
 #starter:
 micro-service:
   starter:
+    nacos:
+      graceful:
+        enabled: false
     # starter-spring-doc 配置
     spring-doc:
       title: 服务222的API
