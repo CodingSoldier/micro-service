@@ -16,8 +16,8 @@ class C01FeignExceptionControllerTest extends BaseTest {
                 .exchange()
                 .expectStatus().isEqualTo(400)
                 .expectBody()
-                .jsonPath("$.code").isEqualTo(ResultCodeEnum.BAD_REQUEST.getCode())
-                .jsonPath("$.message").isEqualTo("测试MicroServiceException异常");
+                .jsonPath("$.code").isEqualTo(40020)
+                .jsonPath("$.message").isEqualTo("resultTypeNotChange-测试MicroServiceException异常");
     }
 
     @Test
@@ -27,8 +27,8 @@ class C01FeignExceptionControllerTest extends BaseTest {
                 .exchange()
                 .expectStatus().isEqualTo(400)
                 .expectBody()
-                .jsonPath("$.code").isEqualTo(ResultCodeEnum.BAD_REQUEST.getCode())
-                .jsonPath("$.message").isEqualTo("测试MicroServiceException异常");
+                .jsonPath("$.code").isEqualTo(40020)
+                .jsonPath("$.message").isEqualTo("resultTypeNotChange-测试MicroServiceException异常");
     }
 
     @Test

@@ -12,9 +12,9 @@ Maven版本 >= 3.9.5
 父工程
 
 ### micro-service-dependencies
-依赖模块，包含 micro-service-common、micro-service-starters 子模块
+依赖模块，作为子模块继承了父工程 micro-service 的 dependencyManagement，用于给第三方导入依赖
 
-所有的依赖都应该在micro-service-dependencies声明
+所有公共依赖版本都由父工程 micro-service 统一管理
 
 [更多介绍](./micro-service-dependencies/README.md)
 
@@ -85,8 +85,6 @@ mvn clean deploy -D maven.test.skip=true
 ## 其他说明
 
 [examples](./examples) 目录是使用例子
-
-[middlewares-server](./middlewares-server) 目录是常用的中间件服务
 
 spring-cloud-alibaba、spring-cloud版本关系 https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E
 
