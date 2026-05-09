@@ -13,6 +13,8 @@ spring:
     active: dev
   config:
     import:
+      - optional:nacos:${spring.application.name}?data-type=yaml
+      - optional:nacos:${spring.application.name}-${spring.profiles.active}?data-type=yaml
       - optional:nacos:${spring.application.name}.yaml
       - optional:nacos:${spring.application.name}-${spring.profiles.active}.yaml
   lifecycle:

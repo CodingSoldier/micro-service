@@ -5,7 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.web.ErrorProperties;
+import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.boot.webmvc.autoconfigure.error.BasicErrorController;
 import org.springframework.boot.webmvc.error.DefaultErrorAttributes;
 import org.springframework.http.HttpStatus;
@@ -26,8 +26,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @RequestMapping("${spring.web.error.path:${error.path:/error}}")
 public class CustomBasicErrorController extends BasicErrorController {
 
-  public CustomBasicErrorController(ErrorProperties errorProperties) {
-    super(new DefaultErrorAttributes(), errorProperties);
+  public CustomBasicErrorController(WebProperties webProperties) {
+    super(new DefaultErrorAttributes(), webProperties.getError());
   }
 
   /**
