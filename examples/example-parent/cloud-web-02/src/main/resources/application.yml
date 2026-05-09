@@ -7,12 +7,33 @@ server:
     context-path: /cloud-web-02
 
 spring:
+  application:
+    name: cloud-web-02
   profiles:
     active: dev
+  config:
+    import:
+      - optional:nacos:${spring.application.name}.yaml
+      - optional:nacos:${spring.application.name}-${spring.profiles.active}.yaml
   lifecycle:
     # 停机缓冲时间，默认：30秒
     timeout-per-shutdown-phase: 10s
   cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      config:
+        server-addr: ${spring.cloud.nacos.server-addr}
+        namespace: namespace-example-dev
+      discovery:
+        server-addr: ${spring.cloud.nacos.server-addr}
+        namespace: namespace-example-dev
+        # 实例是否能够接受请求。 默认值是true。
+        instance-enabled: false
+        # 指定actuator端点的访问路径，因为我们上面配置了服务的前缀 context-path ，所以我们需要将它拼接上，不然路径不对会报错
+        # spring-boot-admin配置
+        metadata:
+          management:
+            context-path: ${server.servlet.context-path}/actuator
     # Spring Cloud Loadbalancer 将替代 ribbon
     loadbalancer:
       enabled: true

@@ -2,7 +2,7 @@
 spring-cloud 微服务开发框架
 
 ## 环境依赖
-JDK版本 >= 21
+ JDK版本 >= 25
 
 Maven版本 >= 3.9.9
 
@@ -100,5 +100,12 @@ mvn clean deploy -D maven.test.skip=true
 ## 其他说明
 
 [examples](./examples) 目录是使用例子
+
+当前主干版本链：
+
+- JDK 25
+- Spring Boot 4.0.x
+- Spring Cloud 2025.1.x
+- Spring Cloud Alibaba 2025.1.0.0
 
 spring-cloud-alibaba、spring-cloud版本关系 https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E

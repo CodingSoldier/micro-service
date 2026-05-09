@@ -7,12 +7,6 @@ spring-cloud工程使用例子
 1、添加依赖
 
 ```xml
-        <!--  SpringCloud2020版本默认不启用bootstrap配置，
-        需要加入依赖 spring-cloud-starter-bootstrap -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bootstrap</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
@@ -23,7 +17,15 @@ spring-cloud工程使用例子
         </dependency>
 ```
 
-2、nacos-config 、logging 配置必须写在 bootstrap.yaml 中
+2、在 `application.yaml` 中增加 `spring.config.import`，例如：
+
+```yaml
+spring:
+  config:
+    import:
+      - optional:nacos:${spring.application.name}.yaml
+      - optional:nacos:${spring.application.name}-${spring.profiles.active}.yaml
+```
 
 3、nacos-discovery 配置写在 application.yaml 中
 

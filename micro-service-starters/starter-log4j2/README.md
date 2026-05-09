@@ -26,7 +26,7 @@ spring-boot-starter-test 默认使用了 logback ，要使用log4j2，spring-boo
 2、指定 logging.config 为 classpath:log4j2-spring.xml
 
 
-注意：如果使用了nacos作为配置中心，必须将此配置放到 <font color=red>bootstrap.yml</font> 中
+注意：如果使用了nacos作为配置中心，请将此配置放到 <font color=red>application.yml</font> 中，并结合 `spring.config.import` 加载远端配置
 ```yaml
 logging:
   # classpath:log4j2-spring.xml 已在 starter-log4j2 中配置好了，无需新建

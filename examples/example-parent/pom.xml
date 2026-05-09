@@ -10,11 +10,17 @@
     <packaging>pom</packaging>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>25</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <revision>1.1.1</revision>
+        <micro-service.version>25.0.0</micro-service.version>
+        <spring-boot.version>4.0.6</spring-boot.version>
+        <spring-boot-admin.version>4.0.4</spring-boot-admin.version>
+        <spring-cloud-gateway.version>5.0.0</spring-cloud-gateway.version>
+        <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+        <lombok.version>1.18.46</lombok.version>
     </properties>
 
     <modules>
@@ -35,7 +41,14 @@
             <dependency>
                 <groupId>com.github.codingsoldier</groupId>
                 <artifactId>micro-service-dependencies</artifactId>
-                <version>10.0.0</version>
+                <version>${micro-service.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-gateway-dependencies</artifactId>
+                <version>${spring-cloud-gateway.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -55,7 +68,7 @@
             <dependency>
                 <groupId>de.codecentric</groupId>
                 <artifactId>spring-boot-admin-starter-client</artifactId>
-                <version>3.0.2</version>
+                <version>${spring-boot-admin.version}</version>
             </dependency>
 
         </dependencies>
@@ -69,7 +82,7 @@
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>3.2.4</version>
+                    <version>${spring-boot.version}</version>
                     <executions>
                         <execution>
                             <id>repackage</id>
@@ -87,11 +100,17 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.12.1</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <source>21</source>
-                    <target>21</target>
+                    <release>${java.version}</release>
                     <encoding>UTF-8</encoding>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
 

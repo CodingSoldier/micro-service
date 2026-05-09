@@ -5,9 +5,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.web.ServerProperties;
-import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
-import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
+import org.springframework.boot.autoconfigure.web.ErrorProperties;
+import org.springframework.boot.webmvc.autoconfigure.error.BasicErrorController;
+import org.springframework.boot.webmvc.error.DefaultErrorAttributes;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,14 +23,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ConditionalOnProperty(value = "micro-service.starter.web.basic-error-enabled", matchIfMissing = true)
 @Controller
-@RequestMapping("${server.error.path:${error.path:/error}}")
+@RequestMapping("${spring.web.error.path:${error.path:/error}}")
 public class CustomBasicErrorController extends BasicErrorController {
 
-  /**
-   * import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
-   */
-  public CustomBasicErrorController(ServerProperties serverProperties) {
-    super(new DefaultErrorAttributes(), serverProperties.getError());
+  public CustomBasicErrorController(ErrorProperties errorProperties) {
+    super(new DefaultErrorAttributes(), errorProperties);
   }
 
   /**

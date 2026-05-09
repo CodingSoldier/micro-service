@@ -32,13 +32,6 @@
             <!--            </exclusions>-->
         </dependency>
 
-        <!--  SpringCloud2020版本默认不启用bootstrap配置，
-        需要加入依赖 spring-cloud-starter-bootstrap -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bootstrap</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>com.github.codingsoldier</groupId>
             <artifactId>micro-service-common</artifactId>

@@ -26,11 +26,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-bootstrap</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.github.codingsoldier</groupId>
             <artifactId>starter-web</artifactId>
         </dependency>
