@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LogController {
 
   @Autowired
-  AsyncTaskExecutor scheduler;
+  AsyncTaskExecutor microServiceExecutor;
 
   @GetMapping(value = "/test/print", produces = MediaType.APPLICATION_JSON_VALUE)
   public String testPrint(@RequestParam(value = "str", required = false) String str) {
@@ -32,12 +32,12 @@ public class LogController {
 
     log.error("异常", new RuntimeException(str));
 
-    scheduler.execute(() -> {
+    microServiceExecutor.execute(() -> {
       log.info("@@@@@@ TheadPoolTraceUtil.execute 新线程中打印日志 @@@@@@@");
       throw new RuntimeException("异常TheadPoolTraceUtil.execute");
     });
 
-    scheduler.submit(() -> {
+    microServiceExecutor.submit(() -> {
       log.info("@@@@@@ TheadPoolTraceUtil.submit 新线程中打印日志 @@@@@@@");
       return 1;
     });

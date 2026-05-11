@@ -11,6 +11,9 @@ spring:
     name: cloud-web-02
   profiles:
     active: dev
+  threads:
+    virtual:
+      enabled: true
   config:
     import:
       - optional:nacos:${spring.application.name}?data-type=yaml
@@ -88,6 +91,14 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
+  tracing:
+    sampling:
+      probability: 1.0
+    baggage:
+      remote-fields: x-req-trace-id
+      correlation:
+        fields: x-req-trace-id
+        enabled: true
 
 
 # springdoc-openapi项目配置

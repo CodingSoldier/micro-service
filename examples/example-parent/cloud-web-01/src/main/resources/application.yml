@@ -11,6 +11,9 @@ spring:
     name: cloud-web-01
   profiles:
     active: dev
+  threads:
+    virtual:
+      enabled: true
   config:
     import:
       - optional:nacos:${spring.application.name}?data-type=yaml
@@ -95,6 +98,14 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
+  tracing:
+    sampling:
+      probability: 1.0
+    baggage:
+      remote-fields: x-req-trace-id
+      correlation:
+        fields: x-req-trace-id
+        enabled: true
 
 # mybatis-plus 配置
 mybatis-plus:

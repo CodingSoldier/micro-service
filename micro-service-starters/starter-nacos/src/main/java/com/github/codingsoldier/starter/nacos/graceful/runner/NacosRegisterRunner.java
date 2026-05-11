@@ -18,14 +18,14 @@ public class NacosRegisterRunner implements CommandLineRunner {
 
   private final NacosGraceful nacosGraceful;
   private final NacosGracefulProperties nacosGracefulProperties;
-  private final TaskExecutor taskExecutor;
+  private final TaskExecutor microServiceExecutor;
 
   public NacosRegisterRunner(NacosGraceful nacosGraceful,
       NacosGracefulProperties nacosGracefulProperties,
-      TaskExecutor taskExecutor) {
+      TaskExecutor microServiceExecutor) {
     this.nacosGraceful = nacosGraceful;
     this.nacosGracefulProperties = nacosGracefulProperties;
-    this.taskExecutor = taskExecutor;
+    this.microServiceExecutor = microServiceExecutor;
   }
 
   /**
@@ -33,7 +33,7 @@ public class NacosRegisterRunner implements CommandLineRunner {
    */
   @Override
   public void run(String... args) {
-    taskExecutor.execute(() -> {
+    microServiceExecutor.execute(() -> {
       try {
         long delayRegisterMilliseconds = nacosGracefulProperties.getDelayRegisterMilliseconds();
         if (delayRegisterMilliseconds > 0) {

@@ -1,27 +1,25 @@
 package com.github.codingsoldier.example.gateway.filter;
 
 import lombok.extern.slf4j.Slf4j;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.gateway.config.GlobalCorsProperties;
+import org.springframework.cloud.gateway.filter.GatewayFilterChain;
+import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.stereotype.Component;
-import org.springframework.web.filter.OncePerRequestFilter;
-
-import java.io.IOException;
+import org.springframework.web.server.ServerWebExchange;
+import reactor.core.publisher.Mono;
 
 @Slf4j
 @Component
-@Order(Ordered.HIGHEST_PRECEDENCE + 20)
-public class Global01Filter extends OncePerRequestFilter {
+public class Global01Filter implements GlobalFilter {
+
+    @Autowired
+    private GlobalCorsProperties corsProperties;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-        FilterChain filterChain) throws ServletException, IOException {
+    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         log.info("全局过滤器");
-        log.info("###################requestUri={}", request.getRequestURI());
-        filterChain.doFilter(request, response);
+        log.info("###################corsProperties={}", corsProperties);
+        return chain.filter(exchange);
     }
 }

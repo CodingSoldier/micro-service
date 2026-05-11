@@ -24,7 +24,7 @@ public class TraceId02Controller {
     @Autowired
     private Web02Service web02Service;
     @Autowired
-    private AsyncTaskExecutor taskExecutor;
+    private AsyncTaskExecutor microServiceExecutor;
 
     @GetMapping(value = "/testTraceId", produces = MediaType.APPLICATION_JSON_VALUE)
     public String testTraceId(@RequestHeader Map<String, String> headers, @RequestParam("name") String name) {
@@ -46,7 +46,7 @@ public class TraceId02Controller {
 
     @GetMapping(value = "/thread/ex", produces = MediaType.APPLICATION_JSON_VALUE)
     public String threadEx(@RequestParam("name") String name) {
-        taskExecutor.execute(() -> {
+        microServiceExecutor.execute(() -> {
             log.info("###有traceid--ThreadPoolTraceUtil线程池中打印日志");
             throw new HttpStatus5xxException("WWWWWWWWWWWWWWWW");
         });

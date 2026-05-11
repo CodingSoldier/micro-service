@@ -22,8 +22,8 @@ public class ObservationTaskExecutionConfiguration {
   }
 
   @Primary
-  @Bean(name = {"taskExecutor", "applicationTaskExecutor"})
-  public AsyncTaskExecutor taskExecutor(TaskDecorator taskDecorator) {
+  @Bean(name = {"microServiceExecutor"})
+  public AsyncTaskExecutor microServiceExecutor(TaskDecorator taskDecorator) {
     SimpleAsyncTaskExecutor executor = new SimpleAsyncTaskExecutor("micro-service-");
     executor.setVirtualThreads(true);
     executor.setTaskDecorator(taskDecorator);
