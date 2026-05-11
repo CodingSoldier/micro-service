@@ -1,6 +1,5 @@
 package com.github.codingsoldier.common.util;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -18,6 +17,7 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import tools.jackson.core.type.TypeReference;
 
 /**
  * http工具类

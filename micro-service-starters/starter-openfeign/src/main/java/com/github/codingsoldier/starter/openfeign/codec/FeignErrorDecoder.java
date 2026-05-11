@@ -2,7 +2,6 @@ package com.github.codingsoldier.starter.openfeign.codec;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.codingsoldier.common.exception.feign.FeignResultErrorException;
 import com.github.codingsoldier.common.resp.Result;
 import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
@@ -11,6 +10,7 @@ import feign.codec.ErrorDecoder;
 import java.io.IOException;
 import java.io.InputStream;
 import lombok.extern.slf4j.Slf4j;
+import tools.jackson.core.JacksonException;
 
 /**
  * feign调用，http status 不是 200，ErrorDecoder 实现类处理返回结果
@@ -31,7 +31,7 @@ public class FeignErrorDecoder implements ErrorDecoder {
       try {
         result = ObjectMapperUtil.newObjectMapper()
             .readValue(bodyStr, Result.class);
-      } catch (JsonProcessingException e) {
+      } catch (JacksonException e) {
         log.error("微服务调用，将body转换为Result异常，body为{}", bodyStr, e);
         return new FeignResultErrorException(bodyStr);
       }

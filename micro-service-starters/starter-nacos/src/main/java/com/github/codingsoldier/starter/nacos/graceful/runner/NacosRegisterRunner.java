@@ -5,7 +5,7 @@ import com.github.codingsoldier.starter.nacos.graceful.properties.NacosGracefulP
 import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,14 +18,14 @@ public class NacosRegisterRunner implements CommandLineRunner {
 
   private final NacosGraceful nacosGraceful;
   private final NacosGracefulProperties nacosGracefulProperties;
-  private final ThreadPoolTaskExecutor threadPoolTaskExecutor;
+  private final TaskExecutor taskExecutor;
 
   public NacosRegisterRunner(NacosGraceful nacosGraceful,
       NacosGracefulProperties nacosGracefulProperties,
-      ThreadPoolTaskExecutor threadPoolTaskExecutor) {
+      TaskExecutor taskExecutor) {
     this.nacosGraceful = nacosGraceful;
     this.nacosGracefulProperties = nacosGracefulProperties;
-    this.threadPoolTaskExecutor = threadPoolTaskExecutor;
+    this.taskExecutor = taskExecutor;
   }
 
   /**
@@ -33,7 +33,7 @@ public class NacosRegisterRunner implements CommandLineRunner {
    */
   @Override
   public void run(String... args) {
-    threadPoolTaskExecutor.execute(() -> {
+    taskExecutor.execute(() -> {
       try {
         long delayRegisterMilliseconds = nacosGracefulProperties.getDelayRegisterMilliseconds();
         if (delayRegisterMilliseconds > 0) {

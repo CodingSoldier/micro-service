@@ -4,7 +4,6 @@ import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.ConfigService;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.github.codingsoldier.common.util.objectmapper.ObjectMapperUtil;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +16,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.Executor;
+import tools.jackson.core.type.TypeReference;
 
 /**
  * <h1>通过 nacos 下发动态路由配置, 监听 Nacos 中路由配置变更</h1>

@@ -1,15 +1,14 @@
 package com.github.codingsoldier.example.bootweb.controller;
 
 import com.github.codingsoldier.common.exception.HttpStatus4xxException;
-import com.github.codingsoldier.starter.micrometer.tracing.config.TheadPoolTraceUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.http.MediaType;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LogController {
 
   @Autowired
-  ThreadPoolTaskExecutor scheduler;
+  AsyncTaskExecutor scheduler;
 
   @GetMapping(value = "/test/print", produces = MediaType.APPLICATION_JSON_VALUE)
   public String testPrint(@RequestParam(value = "str", required = false) String str) {
@@ -33,12 +32,12 @@ public class LogController {
 
     log.error("异常", new RuntimeException(str));
 
-    TheadPoolTraceUtil.execute(() -> {
+    scheduler.execute(() -> {
       log.info("@@@@@@ TheadPoolTraceUtil.execute 新线程中打印日志 @@@@@@@");
       throw new RuntimeException("异常TheadPoolTraceUtil.execute");
     });
 
-    TheadPoolTraceUtil.submit(() -> {
+    scheduler.submit(() -> {
       log.info("@@@@@@ TheadPoolTraceUtil.submit 新线程中打印日志 @@@@@@@");
       return 1;
     });

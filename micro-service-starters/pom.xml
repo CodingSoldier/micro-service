@@ -25,7 +25,6 @@
         <module>starter-redis</module>
         <module>starter-nacos</module>
         <module>starter-openfeign</module>
-        <module>starter-micrometer-tracing</module>
         <module>starter-web</module>
     </modules>
 

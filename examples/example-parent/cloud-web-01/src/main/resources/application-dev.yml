@@ -16,31 +16,6 @@ spring:
       # 测试sql
       connection-test-query: select 1
   cloud:
-    sentinel:
-      enabled: false
-      transport:
-        # 配置 sentinel dashboard 地址
-        dashboard: 127.0.0.1:10102
-        # 配置端口，启动一个 Http Server, 该 Server 会与 Sentinel 控制台做交互
-        port: 10111
-      # 服务启动直接建立心跳连接
-      eager: true
-      datasource:
-        # 名称任意, 代表数据源
-        ds:
-          nacos:
-            # sentinel 整合 nacos 实现规则持久化
-            server-addr: ${spring.cloud.nacos.discovery.server-addr}
-#            username: nacos
-#            password: nacos
-            dataId: ${spring.application.name}-sentinel
-            namespace: ${spring.cloud.nacos.discovery.namespace}
-            groupId: DEFAULT_GROUP
-            data-type: json
-            # 规则类型: com.alibaba.cloud.sentinel.datasource.RuleType
-            # FlowRule 就是限流规则
-            rule-type: flow
-
     # Spring Cloud Loadbalancer 将替代 ribbon
     loadbalancer:
       eager-load:
@@ -52,12 +27,6 @@ spring:
 #      type: WEB
 #    # 指定 zipkin 的地址
 #    base-url: http://192.168.1.101:10103
-
-# Feign 的相关配置
-feign:
-  # 打开 Sentinel 对 Feign 的支持
-  sentinel:
-    enabled: false
 
 # Resilience4j CircuitBreaker 按照次数：COUNT_BASED 的例子
 #  6次访问中当执行方法的失败率达到50%时CircuitBreaker将进入开启OPEN状态(保险丝跳闸断电)拒绝所有请求。

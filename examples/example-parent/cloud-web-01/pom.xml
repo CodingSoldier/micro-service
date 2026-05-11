@@ -53,10 +53,6 @@
 <!--            <artifactId>starter-log4j2</artifactId>-->
 <!--        </dependency>-->
         <dependency>
-            <groupId>com.github.codingsoldier</groupId>
-            <artifactId>starter-micrometer-tracing</artifactId>
-        </dependency>
-        <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
         </dependency>
@@ -78,16 +74,6 @@
         <dependency>
             <groupId>io.github.resilience4j</groupId>
             <artifactId>resilience4j-ratelimiter</artifactId>
-        </dependency>
-
-        <!-- spring-cloud-sentinel 和 sentinel-nacos -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.csp</groupId>
-            <artifactId>sentinel-datasource-nacos</artifactId>
         </dependency>
 
         <dependency>

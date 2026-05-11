@@ -1,10 +1,10 @@
 package com.github.codingsoldier.example.cloudweb02.trace;
 
 import com.github.codingsoldier.common.util.thread.ThreadPoolUtil;
-import com.github.codingsoldier.starter.micrometer.tracing.config.TheadPoolTraceUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
-import org.springframework.scheduling.annotation.Async;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.Future;
@@ -15,6 +15,9 @@ import static com.github.codingsoldier.common.constant.TraceConstant.X_REQ_TRACE
 @Service
 public class Web02ServiceImpl implements Web02Service {
 
+    @Autowired
+    private AsyncTaskExecutor taskExecutor;
+
     @Override
     public String testTraceId(String name) {
 
@@ -24,11 +27,11 @@ public class Web02ServiceImpl implements Web02Service {
             log.info("！！！没有traceid--普通线程池中打印日志");
         });
 
-        TheadPoolTraceUtil.execute(() -> {
+        taskExecutor.execute(() -> {
             log.info("###有traceid--ThreadPoolTraceUtil线程池中打印日志");
         });
 
-        Future<String> submit = TheadPoolTraceUtil.submit(() -> {
+        Future<String> submit = taskExecutor.submit(() -> {
             log.info("###有traceid--TaskTraceUtil提交Callable");
             return MDC.get(X_REQ_TRACE_ID);
         });
@@ -41,16 +44,15 @@ public class Web02ServiceImpl implements Web02Service {
     }
 
     @Override
-    @Async
     public String asyncAnno(String name) {
 
         log.info("####@Async注解的方法有traceid不不不在在线程池中打印日志");
 
-        TheadPoolTraceUtil.execute(() -> {
+        taskExecutor.execute(() -> {
             log.info("####@Async注解使用ThreadPoolTraceUtil，有traceid，线程池中打印日志");
         });
 
-        Future<String> submit = TheadPoolTraceUtil.submit(() -> {
+        Future<String> submit = taskExecutor.submit(() -> {
             log.info("###有traceid--TaskTraceUtil提交Callable");
             return MDC.get(X_REQ_TRACE_ID);
         });

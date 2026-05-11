@@ -47,11 +47,6 @@
             <artifactId>starter-mybatis-plus</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.codingsoldier</groupId>
-            <artifactId>starter-micrometer-tracing</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.github.codingsoldier.example</groupId>
             <artifactId>example-common</artifactId>
         </dependency>

@@ -2,6 +2,9 @@ server:
   port: 8000
 
 spring:
+  threads:
+    virtual:
+      enabled: true
   application:
     name: gateway
   profiles:
@@ -26,28 +29,26 @@ spring:
         server-addr: ${spring.cloud.nacos.server-addr}
         namespace: namespace-example-dev
     gateway:
-      # 默认已开启跨域
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            allowed-origin-patterns: "*"
-            allow-credentials: true
-            allowed-headers: "*"
-            allowed-methods: "*"
-            max-age: 3600
-      routes:
+      mvc:
+        routes:
         - id: cloud-web-01
           uri: lb://cloud-web-01
           predicates:
-            - name: Path
+            - Path=/cloud-web-01/**
+          filters:
+            - name: CircuitBreaker
               args:
-                pattern: /cloud-web-01/**
+                name: gateway-cloud-web-01
+                fallbackUri: forward:/fallback/cloud-web-01
         - id: cloud-web-02
           uri: lb://cloud-web-02
           predicates:
-            - name: Path
+            - Path=/cloud-web-02/**
+          filters:
+            - name: CircuitBreaker
               args:
-                pattern: /cloud-web-02/**
+                name: gateway-cloud-web-02
+                fallbackUri: forward:/fallback/cloud-web-02
 
 # 单独配置路由json的 data-id、group，使用NacosGatewayConfig承载配置
 nacos:

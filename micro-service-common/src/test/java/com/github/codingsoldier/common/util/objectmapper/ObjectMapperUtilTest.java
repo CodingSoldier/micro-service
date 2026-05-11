@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,6 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.ObjectMapper;
 
 /**
  * @author chenpq05
@@ -120,9 +120,16 @@ class ObjectMapperUtilTest {
         .build();
     String beanStr = ObjectMapperUtil.writeValueAsString(bean01);
     log.info("序列化结果: {}", beanStr);
-    assertEquals(
-        "{\"id\":111,\"age\":232,\"name\":\"名字\",\"beanDate\":1660011886928,\"beanLocalDateTime\":1640970062000,\"beanLocalDate\":1640966400000,\"offsetDateTime\":1640970062000}",
-        beanStr);
+    Map<String, Object> serializedMap = ObjectMapperUtil.readValue(beanStr,
+        new TypeReference<Map<String, Object>>() {
+        });
+    assertEquals(111L, ((Number) serializedMap.get("id")).longValue());
+    assertEquals(232, ((Number) serializedMap.get("age")).intValue());
+    assertEquals("名字", serializedMap.get("name"));
+    assertEquals(1660011886928L, ((Number) serializedMap.get("beanDate")).longValue());
+    assertEquals(1640970062000L, ((Number) serializedMap.get("beanLocalDateTime")).longValue());
+    assertEquals(1640966400000L, ((Number) serializedMap.get("beanLocalDate")).longValue());
+    assertEquals(1640970062000L, ((Number) serializedMap.get("offsetDateTime")).longValue());
 
     TestDateTimeBean readBean = ObjectMapperUtil.readValue(beanStr, TestDateTimeBean.class);
     assertEquals(date, readBean.getBeanDate());

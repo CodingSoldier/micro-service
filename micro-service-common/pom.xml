@@ -44,14 +44,9 @@
     </dependency>
 
     <dependency>
-      <artifactId>jackson-datatype-jdk8</artifactId>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <groupId>tools.jackson.core</groupId>
     </dependency>
-    <dependency>
-      <artifactId>jackson-datatype-jsr310</artifactId>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
-    </dependency>
-
     <dependency>
       <artifactId>okhttp</artifactId>
       <groupId>com.squareup.okhttp3</groupId>
