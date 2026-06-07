@@ -12,7 +12,6 @@ public class TraceConstant {
    * 自定义链路追踪请求头
    */
   public static final String X_REQ_TRACE_ID = "x-req-trace-id";
-  public static final String TRACE_ID = "traceId";
 
   private TraceConstant() {
     // sonar

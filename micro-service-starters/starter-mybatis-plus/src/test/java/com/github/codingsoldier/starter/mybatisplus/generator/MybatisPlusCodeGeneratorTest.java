@@ -28,7 +28,7 @@ class MybatisPlusCodeGeneratorTest {
     // 作者
     MybatisPlusCodeGenerator.author = "cpq";
     // 表名
-    MybatisPlusCodeGenerator.tableName = "mybatis_plus_table_test";
+    MybatisPlusCodeGenerator.tableName = "product";
 
     // 生成代码
     MybatisPlusCodeGenerator.generate();

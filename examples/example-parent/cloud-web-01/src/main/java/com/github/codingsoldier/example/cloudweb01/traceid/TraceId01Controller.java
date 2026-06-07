@@ -30,20 +30,23 @@ public class TraceId01Controller {
     @GetMapping(value = "/testTraceId", produces = MediaType.APPLICATION_JSON_VALUE)
     public String testTraceId(@RequestHeader Map<String, String> headers, @RequestParam("name") String name) {
         String mdcReqTrace = MDC.get("x-req-trace-id");
-        String resp = web02TraceidClient.testTraceId(name);
-        return String.format("web01-header-%s-mdc-%s-%s", headers.get(X_REQ_TRACE_ID), mdcReqTrace, resp);
+        String traceId = headers.get(X_REQ_TRACE_ID);
+        String resp = web02TraceidClient.testTraceId(traceId, name);
+        return String.format("web01-header-%s-mdc-%s-%s", traceId, mdcReqTrace, resp);
     }
 
     @GetMapping(value = "/asyncAnno", produces = MediaType.APPLICATION_JSON_VALUE)
     public String asyncAnno(@RequestHeader Map<String, String> headers, @RequestParam("name") String name) {
         String mdcReqTrace = MDC.get("x-req-trace-id");
-        String resp = web02TraceidClient.asyncAnno(name);
-        return String.format("web01-header-%s-mdc-%s-%s", headers.get(X_REQ_TRACE_ID), mdcReqTrace, resp);
+        String traceId = headers.get(X_REQ_TRACE_ID);
+        String resp = web02TraceidClient.asyncAnno(traceId, name);
+        return String.format("web01-header-%s-mdc-%s-%s", traceId, mdcReqTrace, resp);
     }
 
     @GetMapping(value = "/throw/ex", produces = MediaType.APPLICATION_JSON_VALUE)
     public String throwEx(@RequestHeader Map<String, String> headers, @RequestParam("name")  String name) {
-        web02TraceidClient.throwEx(name);
+        String traceId = headers.get(X_REQ_TRACE_ID);
+        web02TraceidClient.throwEx(traceId, name);
         return "aaa";
     }
 
@@ -56,9 +59,10 @@ public class TraceId01Controller {
     }
 
     @GetMapping(value = "/thread/ex", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String threadEx(@RequestParam("name") String name) {
-        web02TraceidClient.threadEx(name);
-        return web02TraceidClient.threadEx(name);
+    public String threadEx(@RequestHeader Map<String, String> headers, @RequestParam("name") String name) {
+        String traceId = headers.get(X_REQ_TRACE_ID);
+        web02TraceidClient.threadEx(traceId, name);
+        return web02TraceidClient.threadEx(traceId, name);
     }
 
 }

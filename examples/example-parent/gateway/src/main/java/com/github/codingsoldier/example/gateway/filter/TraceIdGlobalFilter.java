@@ -1,5 +1,6 @@
 package com.github.codingsoldier.example.gateway.filter;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.MDC;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -16,7 +17,7 @@ public class TraceIdGlobalFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String traceId = exchange.getRequest().getHeaders().getFirst(X_REQ_TRACE_ID);
-        if (traceId != null && !traceId.isEmpty()) {
+        if (StringUtils.isNotBlank(traceId)) {
             MDC.put(X_REQ_TRACE_ID, traceId);
         }
         return chain.filter(exchange)

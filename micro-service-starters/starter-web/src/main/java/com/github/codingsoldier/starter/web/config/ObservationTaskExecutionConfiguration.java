@@ -1,5 +1,7 @@
 package com.github.codingsoldier.starter.web.config;
 
+import java.util.Map;
+import org.slf4j.MDC;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -18,13 +20,27 @@ public class ObservationTaskExecutionConfiguration {
 
   @Bean
   public TaskDecorator taskDecorator() {
-    return new ContextPropagatingTaskDecorator();
+    TaskDecorator contextDecorator = new ContextPropagatingTaskDecorator();
+    return runnable -> {
+      Map<String, String> contextMap = MDC.getCopyOfContextMap();
+      Runnable decorated = contextDecorator.decorate(runnable);
+      return () -> {
+        if (contextMap != null) {
+          MDC.setContextMap(contextMap);
+        }
+        try {
+          decorated.run();
+        } finally {
+          MDC.clear();
+        }
+      };
+    };
   }
 
   @Primary
   @Bean(name = {"microServiceExecutor"})
   public AsyncTaskExecutor microServiceExecutor(TaskDecorator taskDecorator) {
-    SimpleAsyncTaskExecutor executor = new SimpleAsyncTaskExecutor("micro-service-");
+    SimpleAsyncTaskExecutor executor = new SimpleAsyncTaskExecutor("micro-service-virtual");
     executor.setVirtualThreads(true);
     executor.setTaskDecorator(taskDecorator);
     return executor;

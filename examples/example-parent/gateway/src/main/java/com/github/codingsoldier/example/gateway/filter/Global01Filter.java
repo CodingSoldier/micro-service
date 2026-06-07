@@ -1,8 +1,9 @@
 package com.github.codingsoldier.example.gateway.filter;
 
+import com.github.codingsoldier.common.constant.TraceConstant;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.gateway.config.GlobalCorsProperties;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.MDC;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.stereotype.Component;
@@ -13,13 +14,17 @@ import reactor.core.publisher.Mono;
 @Component
 public class Global01Filter implements GlobalFilter {
 
-    @Autowired
-    private GlobalCorsProperties corsProperties;
-
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        log.info("全局过滤器");
-        log.info("###################corsProperties={}", corsProperties);
+        String traceId = exchange.getRequest().getHeaders().getFirst(TraceConstant.X_REQ_TRACE_ID);
+        if (StringUtils.isNotBlank(traceId)) {
+            MDC.put(TraceConstant.X_REQ_TRACE_ID, traceId);
+        }
+        try {
+            log.info("全局过滤器");
+        } finally {
+            MDC.remove(TraceConstant.X_REQ_TRACE_ID);
+        }
         return chain.filter(exchange);
     }
 }

@@ -1,15 +1,13 @@
 package com.github.codingsoldier.example.cloudweb02.trace;
 
-import com.github.codingsoldier.common.util.thread.ThreadPoolUtil;
+import static com.github.codingsoldier.common.constant.TraceConstant.X_REQ_TRACE_ID;
+
+import java.util.concurrent.Future;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.stereotype.Service;
-
-import java.util.concurrent.Future;
-
-import static com.github.codingsoldier.common.constant.TraceConstant.X_REQ_TRACE_ID;
 
 @Slf4j
 @Service
@@ -23,7 +21,7 @@ public class Web02ServiceImpl implements Web02Service {
 
         log.info("###有traceid--不不不在在线程池中打印日志");
 
-        ThreadPoolUtil.execute(() -> {
+        microServiceExecutor.execute(() -> {
             log.info("！！！没有traceid--普通线程池中打印日志");
         });
 
