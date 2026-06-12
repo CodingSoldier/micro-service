@@ -1,10 +1,16 @@
 package com.github.codingsoldier.example.gateway.filter;
 
 import com.github.codingsoldier.common.constant.TraceConstant;
+import com.github.codingsoldier.common.util.TraceUtil;
+import java.io.ByteArrayOutputStream;
+import java.nio.channels.Channels;
+import java.nio.charset.StandardCharsets;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.reactivestreams.Publisher;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.core.io.buffer.DefaultDataBuffer;
@@ -24,15 +30,12 @@ import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 import org.slf4j.MDC;
 
-import java.io.ByteArrayOutputStream;
-import java.nio.channels.Channels;
-import java.nio.charset.StandardCharsets;
-
 /**
  * 打印请求日志
  */
 @Slf4j
 @Component
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class LoggingWebFilter implements WebFilter {
 
     @Value("${custom.logging.requestResponseLog:true}")
@@ -45,7 +48,9 @@ public class LoggingWebFilter implements WebFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         ServerHttpResponse response = exchange.getResponse();
-        ServerHttpRequest request = exchange.getRequest();
+        ServerHttpRequest request = withTraceId(exchange.getRequest());
+        response.getHeaders().set(TraceConstant.X_REQ_TRACE_ID,
+            request.getHeaders().getFirst(TraceConstant.X_REQ_TRACE_ID));
         DataBufferFactory dataBufferFactory = response.bufferFactory();
         if (requestResponseLog || requestLog) {
             // 打印请求
@@ -56,6 +61,14 @@ public class LoggingWebFilter implements WebFilter {
             response = getDecoratedResponse(response, request, dataBufferFactory);
         }
         return chain.filter(exchange.mutate().request(request).response(response).build());
+    }
+
+    private ServerHttpRequest withTraceId(ServerHttpRequest request) {
+        String traceId = TraceUtil.getOrCreateTraceId(request.getHeaders()
+            .getFirst(TraceConstant.X_REQ_TRACE_ID));
+        return request.mutate()
+            .headers(headers -> headers.set(TraceConstant.X_REQ_TRACE_ID, traceId))
+            .build();
     }
 
     private ServerHttpResponseDecorator getDecoratedResponse(ServerHttpResponse response,

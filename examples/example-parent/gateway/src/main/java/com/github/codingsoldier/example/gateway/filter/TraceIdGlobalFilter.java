@@ -1,6 +1,7 @@
 package com.github.codingsoldier.example.gateway.filter;
 
-import org.apache.commons.lang3.StringUtils;
+import com.github.codingsoldier.common.constant.TraceConstant;
+import com.github.codingsoldier.common.util.TraceUtil;
 import org.slf4j.MDC;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -9,19 +10,22 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+/**
+ * 网关链路追踪过滤器。
+ */
 @Component
 public class TraceIdGlobalFilter implements GlobalFilter, Ordered {
 
-    private static final String X_REQ_TRACE_ID = "x-req-trace-id";
-
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        String traceId = exchange.getRequest().getHeaders().getFirst(X_REQ_TRACE_ID);
-        if (StringUtils.isNotBlank(traceId)) {
-            MDC.put(X_REQ_TRACE_ID, traceId);
-        }
-        return chain.filter(exchange)
-                .doFinally(signalType -> MDC.remove(X_REQ_TRACE_ID));
+        String traceId = TraceUtil.putMdcTraceId(exchange.getRequest().getHeaders()
+                .getFirst(TraceConstant.X_REQ_TRACE_ID));
+        exchange.getResponse().getHeaders().set(TraceConstant.X_REQ_TRACE_ID, traceId);
+        ServerWebExchange tracedExchange = exchange.mutate()
+                .request(builder -> builder.headers(headers -> headers.set(TraceConstant.X_REQ_TRACE_ID, traceId)))
+                .build();
+        return chain.filter(tracedExchange)
+                .doFinally(signalType -> MDC.remove(TraceConstant.X_REQ_TRACE_ID));
     }
 
     @Override

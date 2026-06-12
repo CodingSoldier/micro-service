@@ -1,16 +1,13 @@
 package com.github.codingsoldier.example.cloudweb02.trace;
 
-import static com.github.codingsoldier.common.constant.TraceConstant.X_REQ_TRACE_ID;
-
 import com.github.codingsoldier.common.exception.HttpStatus5xxException;
-import java.util.Map;
+import com.github.codingsoldier.common.util.TraceUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,20 +24,22 @@ public class TraceId02Controller {
     private AsyncTaskExecutor microServiceExecutor;
 
     @GetMapping(value = "/testTraceId", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String testTraceId(@RequestHeader Map<String, String> headers, @RequestParam("name") String name) {
-        log.info("#####headers###{}", headers);
+    public String testTraceId(@RequestParam("name") String name) {
+        String traceId = TraceUtil.getMdcTraceId();
+        log.info("#####traceId###{}", traceId);
         String mdcReqTrace = web02Service.testTraceId(name);
-        return String.format("web02-header-%s-mdc-%s", headers.get(X_REQ_TRACE_ID), mdcReqTrace);
+        return String.format("web02-header-%s-mdc-%s", traceId, mdcReqTrace);
     }
 
     @GetMapping(value = "/asyncAnno", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String asyncAnno(@RequestHeader Map<String, String> headers, @RequestParam("name") String name) {
+    public String asyncAnno(@RequestParam("name") String name) {
+        String traceId = TraceUtil.getMdcTraceId();
         String mdcReqTrace = web02Service.asyncAnno(name);
-        return String.format("web02-header-%s-mdc-%s", headers.get(X_REQ_TRACE_ID), mdcReqTrace);
+        return String.format("web02-header-%s-mdc-%s", traceId, mdcReqTrace);
     }
 
     @GetMapping(value = "/throw/ex", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String throwEx(@RequestHeader Map<String, String> headers, @RequestParam("name") String name) {
+    public String throwEx(@RequestParam("name") String name) {
         throw new HttpStatus5xxException("测试异常traceid");
     }
 

@@ -38,7 +38,7 @@ public class Web02ServiceImpl implements Web02Service {
         } catch (Exception e) {
             log.error("异常", e);
         }
-        return null;
+        return "";
     }
 
     @Override
@@ -59,6 +59,6 @@ public class Web02ServiceImpl implements Web02Service {
         } catch (Exception e) {
             log.error("异常", e);
         }
-        return null;
+        return "";
     }
 }

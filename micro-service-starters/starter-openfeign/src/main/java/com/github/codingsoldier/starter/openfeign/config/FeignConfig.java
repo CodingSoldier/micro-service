@@ -1,9 +1,12 @@
 package com.github.codingsoldier.starter.openfeign.config;
 
 import com.github.codingsoldier.common.constant.FeignConstant;
+import com.github.codingsoldier.common.constant.TraceConstant;
+import com.github.codingsoldier.common.util.TraceUtil;
 import com.github.codingsoldier.starter.openfeign.codec.FeignErrorDecoder;
 import feign.RequestInterceptor;
 import feign.codec.ErrorDecoder;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -21,10 +24,26 @@ public class FeignConfig {
    */
   @Bean
   public RequestInterceptor requestInterceptor() {
-    return requestTemplate -> requestTemplate.header(FeignConstant.IS_FEIGN_REQUEST,
-        Boolean.TRUE.toString());
+    return requestTemplate -> {
+      requestTemplate.header(FeignConstant.IS_FEIGN_REQUEST, Boolean.TRUE.toString());
+      String traceId = getTraceId();
+      requestTemplate.header(TraceConstant.X_REQ_TRACE_ID, traceId);
+    };
   }
 
+  private String getTraceId() {
+    String traceId = TraceUtil.getMdcTraceId();
+    if (StringUtils.isBlank(traceId)) {
+      traceId = TraceUtil.getOrCreateTraceId(traceId);
+    }
+    return TraceUtil.putMdcTraceId(traceId);
+  }
+
+  /**
+   * Feign异常解码器。
+   *
+   * @return Feign异常解码器
+   */
   @Bean
   public ErrorDecoder errorDecoder() {
     return new FeignErrorDecoder();

@@ -1,8 +1,8 @@
 package com.github.codingsoldier.example.gateway.filter;
 
 import com.github.codingsoldier.common.constant.TraceConstant;
+import com.github.codingsoldier.common.util.TraceUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.MDC;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -16,10 +16,7 @@ public class Global01Filter implements GlobalFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        String traceId = exchange.getRequest().getHeaders().getFirst(TraceConstant.X_REQ_TRACE_ID);
-        if (StringUtils.isNotBlank(traceId)) {
-            MDC.put(TraceConstant.X_REQ_TRACE_ID, traceId);
-        }
+        TraceUtil.putMdcTraceId(exchange.getRequest().getHeaders().getFirst(TraceConstant.X_REQ_TRACE_ID));
         try {
             log.info("全局过滤器");
         } finally {
