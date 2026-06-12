@@ -34,8 +34,8 @@ public class TraceId02Controller {
     @GetMapping(value = "/asyncAnno", produces = MediaType.APPLICATION_JSON_VALUE)
     public String asyncAnno(@RequestParam("name") String name) {
         String traceId = TraceUtil.getMdcTraceId();
-        String mdcReqTrace = web02Service.asyncAnno(name);
-        return String.format("web02-header-%s-mdc-%s", traceId, mdcReqTrace);
+        web02Service.asyncAnno(name);
+        return String.format("web02-header-%s", traceId);
     }
 
     @GetMapping(value = "/throw/ex", produces = MediaType.APPLICATION_JSON_VALUE)
